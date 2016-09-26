@@ -20,10 +20,10 @@ import java.util.Map;
 @Controller
 public class CompanyController extends BaseController {
 
-    @RequestMapping("index")
+    @RequestMapping("index/:typ")
     public String companyIndex() {
 
-        return "";
+        return "business/company";
     }
 
 

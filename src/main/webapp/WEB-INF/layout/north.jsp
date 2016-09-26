@@ -99,6 +99,9 @@
             <li><a href="javascript:;" id="15" class="menus"><img src="style/images/icons/icon_user.png"
                                                                   style="width: 19px;height: 19px;vertical-align: -5px;">用户管理</a>
             </li>
+            <li><a href="javascript:;" id="18" class="menus"><img src="style/images/icons/icon_report.png"
+                                                                  style="width: 19px;height: 19px;vertical-align: -5px;">基础信息</a>
+            </li>
 
             <li><a href="javascript:;" id="6" class="menus"><img src="style/images/icons/icon_config.png"
                                                                  style="width: 19px;height: 19px;vertical-align: -5px;">平台设置</a>
