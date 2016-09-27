@@ -18,17 +18,12 @@
     <facet type="Spring" name="Spring">
       <configuration>
         <fileset id="fileset" name="Spring Application Context" removed="false">
-          <file>file://$MODULE_DIR$/.idea/libraries/Maven__org_thymeleaf_extras_thymeleaf_extras_springsecurity4_3_0_0_RELEASE.xml</file>
-          <file>file://$MODULE_DIR$/.idea/libraries/Maven__org_thymeleaf_thymeleaf_3_0_0_RELEASE.xml</file>
-          <file>file://$MODULE_DIR$/.idea/libraries/Maven__org_thymeleaf_thymeleaf_spring4_3_0_0_RELEASE.xml</file>
-          <file>file://$MODULE_DIR$/.idea/libraries/Maven__org_unbescape_unbescape_1_1_3_RELEASE.xml</file>
-          <file>file://$MODULE_DIR$/.idea/libraries/Maven__xml_apis_xml_apis_1_0_b2.xml</file>
-          <file>file://$MODULE_DIR$/src/main/resources/spring-tasks.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/spring-mvc.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/spring-hibernate.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/spring-ehcache.xml</file>
-          <file>file://$MODULE_DIR$/src/main/resources/spring-druid.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/spring.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring-tasks.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring-druid.xml</file>
         </fileset>
       </configuration>
     </facet>
@@ -40,12 +35,10 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="laser-core-1.0" level="application" />
     <orderEntry type="library" name="Maven: org.apache.mina:mina-core:2.0.13" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.21" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:4.3.2.RELEASE" level="project" />
