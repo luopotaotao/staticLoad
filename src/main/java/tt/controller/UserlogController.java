@@ -3,6 +3,7 @@ package tt.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -34,11 +35,14 @@ public class UserlogController extends BaseController
     @RequestMapping(value = "/manager")
     public String manager()
     {
-        this.getSessionInfo().getResourceList().add("/userlogController/datagrid.action");
-        this.getSessionInfo().getResourceMap().put("/userlogController/datagrid.action", "系统日志表格");
-        this.getSessionInfo().getResourceList().add("/userlogController/combobox.action");
-        this.getSessionInfo().getResourceMap().put("/userlogController/combobox.action",
-            "系统日志-管理员下拉列表");
+        String datagridUrl ="/userlogController/datagrid.action";
+        String comboboxUrl ="/userlogController/datagrid.action";
+        Pattern datagridRegex = Pattern.compile(datagridUrl);
+        Pattern comboboxRegex = Pattern.compile(comboboxUrl);
+        this.getSessionInfo().getResourceList().add(datagridRegex);
+        this.getSessionInfo().getResourceMap().put(datagridUrl, "系统日志表格");
+        this.getSessionInfo().getResourceList().add(comboboxRegex);
+        this.getSessionInfo().getResourceMap().put(comboboxUrl,"系统日志-管理员下拉列表");
         return "/admin/userlog/userlog";
     }
 

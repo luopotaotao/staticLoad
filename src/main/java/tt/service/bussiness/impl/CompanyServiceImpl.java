@@ -25,7 +25,7 @@ public class CompanyServiceImpl implements CompanyServiceI {
 
     @Override
     public List<Company> list(Map<String, Object> params, int page, int PageSize) {
-        String hql = "from Company where typ=:typ";
+        String hql = "from Company where typ in (:typ)";
         List<Company> ret = companyDao.find(hql, params, page, PageSize);
         return ret;
     }

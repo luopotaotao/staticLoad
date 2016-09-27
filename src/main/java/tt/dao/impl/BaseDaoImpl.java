@@ -137,7 +137,11 @@ public class BaseDaoImpl<T> implements BaseDaoI<T>
         {
             for (String key : params.keySet())
             {
-                q.setParameter(key, params.get(key));
+                if(params.get(key) instanceof List){
+                    q.setParameterList(key,(List)params.get(key));
+                }else{
+                    q.setParameter(key, params.get(key));
+                }
             }
         }
         return q.setFirstResult((page - 1) * rows).setMaxResults(rows).list();

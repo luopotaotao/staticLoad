@@ -2,10 +2,9 @@ package tt.interceptors;
 
 
 import java.lang.reflect.Method;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -184,7 +183,14 @@ public class SecurityInterceptor implements HandlerInterceptor
                     return true;
                 }
 
-                if (!sessionInfo.getResourceList().contains(url))
+//                for(Pattern regex:sessionInfo.getResourceList()){
+//                    if(regex.matcher(url).matches()){
+//                        break;
+//                    }
+//                }
+                Object[] stream = sessionInfo.getResourceList().stream().filter(regex->regex.matcher(url).matches()).toArray();
+
+                if (stream==null||stream.length<1)
                 {// 如果当前用户没有访问此资源的权限
                     request.setAttribute("msg", "您没有访问此资源的权限！<br/>请联系超管赋予您<br/>[" + url
                                                 + "]<br/>的资源访问权限！");
@@ -192,8 +198,8 @@ public class SecurityInterceptor implements HandlerInterceptor
                         response);
                     return false;
                 }
-
-                logger.info("开始[" + sessionInfo.getResourceMap().get(url) + "]功能");
+                String resource =((Pattern)stream[0]).pattern();
+                logger.info("开始[" + sessionInfo.getResourceMap().get(resource) + "]功能");
                 sessionInfo.setAction_time(new Date().getTime());
 
                 // add by zhangxiaohui 2014-11-26 09:35:55记录用户操作时间
@@ -219,7 +225,7 @@ public class SecurityInterceptor implements HandlerInterceptor
                 userlog.setUserLogId(UUID.randomUUID().toString());
                 userlog.setUserIp(sessionInfo.getIp());
                 userlog.setAdminName(sessionInfo.getName());
-                userlog.setText(sessionInfo.getResourceMap().get(url));
+                userlog.setText(sessionInfo.getResourceMap().get(resource));
                 userlog.setUrl(url);
                 userlog.setCreateTime(new Date());
                 userlog.setFormContentStr(sb.toString());

@@ -42,20 +42,7 @@
             "children": [{
                 "id": 11,
                 "text": "单位管理",
-                "state": "closed",
-                "children": [{
-                    "id": 111,
-                    "text": "建设单位",
-                    "url": "/moduleBasicCompanyController/index.action"
-                }, {
-                    "id": 112,
-                    "text": "施工单位",
-                    "url": "/moduleBasicCompanyController/index.action"
-                }, {
-                    "id": 113,
-                    "text": "监理单位",
-                    "url": "/moduleBasicCompanyController/index.action"
-                }]
+                "url": "/moduleBasicCompanyController/index.action"
             }, {
                 "id": 12,
                 "text": "检测信息",

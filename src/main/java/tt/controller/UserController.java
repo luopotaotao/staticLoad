@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -311,8 +312,9 @@ public class UserController extends BaseController
     @RequestMapping(value = "/manager")
     public String manager()
     {
-        this.getSessionInfo().getResourceList().add("/userController/dataGrid.action");
-        this.getSessionInfo().getResourceMap().put("/userController/dataGrid.action", "用户表格");
+        String url="/userController/dataGrid.action";Pattern regex = Pattern.compile(url );
+        this.getSessionInfo().getResourceList().add(regex);
+        this.getSessionInfo().getResourceMap().put(url, "用户表格");
         return "/admin/user/user";
     }
 
@@ -348,8 +350,9 @@ public class UserController extends BaseController
     @RequestMapping(value = "/addPage", method = RequestMethod.POST)
     public String addPage(HttpServletRequest request)
     {
-        this.getSessionInfo().getResourceList().add("/userController/add.action");
-        this.getSessionInfo().getResourceMap().put("/userController/add.action", "添加用户功能");
+        String url="/userController/add.action";Pattern regex = Pattern.compile(url );
+        this.getSessionInfo().getResourceList().add(regex);
+        this.getSessionInfo().getResourceMap().put(url, "添加用户功能");
         User u = new User();
         u.setId(UUID.randomUUID().toString());
         request.setAttribute("user", u);
@@ -554,11 +557,15 @@ public class UserController extends BaseController
             logger.error("该管理员信息不存在，请刷新页面！");
             return "/error/noInfo";
         }
-        this.getSessionInfo().getResourceList().add("/userController/edit.action");
-        this.getSessionInfo().getResourceMap().put("/userController/edit.action", "用户修改功能");
-        this.getSessionInfo().getResourceList().add("/roleController/grantRoleTree.action");
-        this.getSessionInfo().getResourceMap().put("/roleController/grantRoleTree.action",
-            "用户修改-角色下拉列表");
+        String editUrl = "/userController/edit.action";
+        String grantUrl = "/roleController/grantRoleTree.action";
+        Pattern editRegex = Pattern.compile(editUrl);
+        Pattern grantRegex = Pattern.compile(grantUrl);
+
+        this.getSessionInfo().getResourceList().add(editRegex);
+        this.getSessionInfo().getResourceMap().put(editUrl, "用户修改功能");
+        this.getSessionInfo().getResourceList().add(grantRegex);
+        this.getSessionInfo().getResourceMap().put(grantUrl,"用户修改-角色下拉列表");
         request.setAttribute("user", u);
         return "/admin/user/userEdit";
     }

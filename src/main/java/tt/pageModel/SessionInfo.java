@@ -1,8 +1,10 @@
 package tt.pageModel;
 
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 
 /**
@@ -36,18 +38,24 @@ public class SessionInfo implements java.io.Serializable
 
     private String userAucName;
 
-    private List<String> resourceList;// 用户可以访问的资源地址列表
+    private List<Pattern> resourceList;// 用户可以访问的资源地址列表
 
     private Map<String, String> resourceMap;
 
-    public List<String> getResourceList()
+    public List<Pattern> getResourceList()
     {
         return resourceList;
     }
 
     public void setResourceList(List<String> resourceList)
     {
-        this.resourceList = resourceList;
+        if(this.resourceList==null){
+            this.resourceList = new LinkedList<Pattern>();
+        }
+        for(String item:resourceList){
+            this.resourceList.add(Pattern.compile(item));
+        }
+//        this.resourceList = resourceList;
     }
 
     public String getName()

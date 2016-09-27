@@ -20,10 +20,9 @@
 
 </head>
 <body>
-
 <table id="dg"></table>
 <div id="dlg_edit" style="width:100%;max-width:400px;padding:30px 60px;">
-    <form id="ff" class="easyui-form" method="post" data-options="novalidate:true">
+    <form id="ff" class="easyui-form" method="post" data-options="novalidate:true" action="${baseUrl}/post.action">
         <div style="margin-bottom:20px">
             <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'企业编号:',required:true">
         </div>
@@ -46,8 +45,9 @@
 </div>
 <script type="text/javascript">
     $(function () {
+        var baseUrl = '/';
         $('#dg').datagrid({
-            url: 'company.json',
+            url: '${baseUrl}/query',
             method: 'get',
             title: '公司管理',
             iconCls: 'icon-save',
@@ -196,7 +196,7 @@
 //                        "success": true,
 //                            "message": "Message sent successfully."
 //                    }
-
+                    data = $.parseJSON(data);
                     if (data.flag) {
                         $.messager.alert('提示', '保存成功!');
                         closeEditDialog();
@@ -214,7 +214,7 @@
 
         function remove(ids) {
             $.ajax({
-                url: '',//TODO url
+                url: '${baseUrl}/delete',
                 data: ids,
                 type: 'post',
                 dataType: 'json'
