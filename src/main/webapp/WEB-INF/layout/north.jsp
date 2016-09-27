@@ -5,9 +5,9 @@
     $(function () {
 
         $('#bannerbg').css('background-color', '#b6c6f5');
-        $('#bannerbg').css('background-image', 'url(style/themes/default.jpg)');
+        $('#bannerbg').css('background-image', 'url(${pageContext.request.contextPath}/style/themes/default.jpg)');
         $('#bannerbg').css('background-repeat', 'repeat-y');
-        $('#logoimg').attr("src", "style/themes/opentsm_logo_d.png");
+        $('#logoimg').attr("src", "${pageContext.request.contextPath}/style/themes/opentsm_logo_d.png");
         $('#bannerbg').css('background-position', '50% 0%');
     });
 
@@ -82,32 +82,32 @@
 
 <div style="background: rgb(38,150,203); height: 79px">
     <div style="float: left;width: 36%;height: 79px;min-width: 460px;">
-        <img src="style/images/icons/txt_logo.png" style="margin:18px 0px 0px 5px">
+        <img src="${pageContext.request.contextPath}/style/images/icons/txt_logo.png" style="margin:18px 0px 0px 5px">
     </div>
     <div style="float: left;width: 38%;height: 79px;min-width: 500px;">
 
         <ul class="topul">
 
-            <li><a href="javascript:;" id="16" class="menus"><img src="style/images/icons/icon_monitor.png"
+            <li><a href="javascript:;" id="16" class="menus"><img src="${pageContext.request.contextPath}/style/images/icons/icon_monitor.png"
                                                                   style="width: 19px;height: 19px;vertical-align: -5px;">安全监测</a>
             </li>
 
-            <li><a href="javascript:;" id="19" class="menus"><img src="style/images/icons/icon_report.png"
+            <li><a href="javascript:;" id="19" class="menus"><img src="${pageContext.request.contextPath}/style/images/icons/icon_report.png"
                                                                   style="width: 19px;height: 19px;vertical-align: -5px;">方案报告</a>
             </li>
 
-            <li><a href="javascript:;" id="15" class="menus"><img src="style/images/icons/icon_user.png"
+            <li><a href="javascript:;" id="15" class="menus"><img src="${pageContext.request.contextPath}/style/images/icons/icon_user.png"
                                                                   style="width: 19px;height: 19px;vertical-align: -5px;">用户管理</a>
             </li>
-            <li><a href="javascript:;" id="18" class="menus"><img src="style/images/icons/icon_report.png"
+            <li><a href="${pageContext.request.contextPath}/moduleBasicCompany/index.action" id="18" class="menus"><img src="${pageContext.request.contextPath}/style/images/icons/icon_report.png"
                                                                   style="width: 19px;height: 19px;vertical-align: -5px;">基础信息</a>
             </li>
 
-            <li><a href="javascript:;" id="6" class="menus"><img src="style/images/icons/icon_config.png"
+            <li><a href="javascript:;" id="6" class="menus"><img src="${pageContext.request.contextPath}/style/images/icons/icon_config.png"
                                                                  style="width: 19px;height: 19px;vertical-align: -5px;">平台设置</a>
             </li>
 
-            <li><a href="javascript:;" id="1" class="menus onnav"><img src="style/images/icons/icon_about.png"
+            <li><a href="javascript:;" id="1" class="menus onnav"><img src="${pageContext.request.contextPath}/style/images/icons/icon_about.png"
                                                                        style="width: 19px;height: 19px;vertical-align: -5px;">关于平台</a>
             </li>
 
@@ -122,8 +122,8 @@
             <div style="margin-top: 10px">
                 上次登录2016-08-23 19:54:07
                 <a href="javascript:;" onclick=""
-                   style="color: white;"><img src="style/images/icons/icon_user_sm.png" style="width: 18px;height: 18px;vertical-align: -5px;">账号信息</a>&nbsp;
-                <a href="javascript:;" onclick="logoutFun();" style="color: white;"><img src="style/images/icons/icon_logout.png"
+                   style="color: white;"><img src="${pageContext.request.contextPath}/style/images/icons/icon_user_sm.png" style="width: 18px;height: 18px;vertical-align: -5px;">账号信息</a>&nbsp;
+                <a href="javascript:;" onclick="logoutFun();" style="color: white;"><img src="${pageContext.request.contextPath}/style/images/icons/icon_logout.png"
                                                                                    style="width: 18px;height: 18px;vertical-align: -5px;">退出系统</a>
             </div>
         </div>

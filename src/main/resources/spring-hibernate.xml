@@ -53,6 +53,7 @@
 		<property name="filters" value="mergeStat" />
 		<!-- <property name="filters" value="config" /> -->
         <property name="connectionProperties" value="config.decrypt=true" />
+		
 	</bean>
 
 	<!-- 配置hibernate session工厂 -->

@@ -3,10 +3,10 @@ package tt.service.bussiness.impl;
 import tt.dao.business.CompanyDaoI;
 import tt.model.business.Company;
 import tt.service.bussiness.CompanyServiceI;
-import org.omg.CORBA.Object;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,31 +20,39 @@ public class CompanyServiceImpl implements CompanyServiceI {
 
     @Override
     public Company get(int id) {
-        return null;
+        return companyDao.get(Company.class, id);
     }
 
     @Override
     public List<Company> list(Map<String, Object> params, int page, int PageSize) {
-        return null;
+        String hql = "from Company where typ=:typ";
+        List<Company> ret = companyDao.find(hql, params, page, PageSize);
+        return ret;
     }
 
     @Override
-    public int count(Map<String, Object> params) {
-        return 0;
+    public long count(Map<String, Object> params) {
+        String sql = "select count(*) from Company where typ=:typ";
+        long ret = companyDao.count(sql, params);
+        return ret;
     }
 
     @Override
     public int add(Company company) {
-        return 0;
+        companyDao.save(company);
+        return 1;
     }
 
     @Override
-    public int del(int id) {
-        return 0;
+    public int del(int[] ids) {
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("ids", ids);
+        return companyDao.executeHql("delete from Company where id in (:ids)", params);
     }
 
     @Override
     public int update(Company company) {
-        return 0;
+        companyDao.update(company);
+        return 1;
     }
 }

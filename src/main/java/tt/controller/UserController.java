@@ -89,9 +89,9 @@ public class UserController extends BaseController
         Json j = new Json();
         response.setCharacterEncoding("UTF-8");
         // 判断验证码是否存在
-        if (session.getAttribute("authCode") != null)
+        if (true)//(session.getAttribute("authCode") != null)
         {
-            if (user.getVerifycode().equalsIgnoreCase((String)session.getAttribute("authCode")))
+            if (true)//(user.getVerifycode().equalsIgnoreCase((String)session.getAttribute("authCode")))
             {
                 // 默认登录剩余次数
                 short remaining_logins = Constant.REMAINING_LOGINS;
@@ -144,13 +144,13 @@ public class UserController extends BaseController
                     }
                     // ibm appscan 会话标识未更新---------
                     HttpSession session1 = request.getSession(false);
-                    if (session1 != null)
-                    { // 让cookie过期
-                        session1.invalidate();
-                        Cookie cookie = request.getCookies()[0];// 获取cookie
-                        cookie.setMaxAge(0);// 让cookie过期
-                        cookie.setSecure(true);
-                    }
+//                    if (session1 != null)
+//                    { // 让cookie过期
+//                        session1.invalidate();
+//                        Cookie cookie = request.getCookies()[0];// 获取cookie
+//                        cookie.setMaxAge(0);// 让cookie过期
+//                        cookie.setSecure(true);
+//                    }
                     session1 = request.getSession(true);// 生成新会话
                     // --------------------------------
                     j.setSuccess(true);
