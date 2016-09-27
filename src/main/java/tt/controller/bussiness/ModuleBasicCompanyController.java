@@ -24,6 +24,7 @@ public class ModuleBasicCompanyController extends BaseController<Company> {
 
     @RequestMapping("index")
     public String index(){
+        System.out.println("123");
         return "business/module_basic/company";
     }
 

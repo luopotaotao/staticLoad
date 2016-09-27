@@ -4,8 +4,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jca.cci.core.InteractionCallback;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import tt.model.business.Company;
 import tt.service.bussiness.CompanyServiceI;
 
@@ -20,19 +23,14 @@ import static org.junit.Assert.*;
  * Created by taotao on 2016/9/23.
  */
 //@RunWith(SpringJUnit45ClassRunner.class)
-public class CompanyServiceImplTest {
-    private ClassPathXmlApplicationContext context;
-    private CompanyServiceI companyService;
-    @Before
-    public void setUp() throws Exception {
-        context = new ClassPathXmlApplicationContext( new String[]{"spring.xml","spring-ehcache.xml","spring-hibernate.xml","spring-druid.xml","spring-tasks.xml"});
-        companyService = (CompanyServiceI) context.getBean("companyService");
-    }
 
-    @After
-    public void tearDown() throws Exception {
-        context.close();
-    }
+//@WebAppConfiguration
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:spring.xml", "classpath:spring-ehcache.xml",
+"classpath:spring-hibernate.xml", "classpath:spring-druid.xml", "classpath:spring-tasks.xml" })
+public class CompanyServiceImplTest {
+    @Autowired
+    private CompanyServiceI companyService;
 
     @Test
     public void get() throws Exception {
