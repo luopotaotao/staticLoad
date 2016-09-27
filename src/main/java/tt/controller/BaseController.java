@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/baseController")
-public class BaseController
+public class BaseController<T>
 {
 
     private static final Logger logger = Logger.getLogger(BaseController.class);
@@ -153,7 +153,7 @@ public class BaseController
      * @return
      */
     protected Map<String,Object> flagResponse(Object flag){
-        Map<String, java.lang.Object> ret = new HashMap<String,Object>();
+        Map<String, Object> ret = new HashMap<String,Object>();
         ret.put("flag",flag);
         return ret;
     }
@@ -164,8 +164,8 @@ public class BaseController
      * @param list 当前页数据
      * @return
      */
-    protected Map<String,Object> listResponse(int count, List<Object> list){
-        Map<String,Object> ret = new HashMap<String,Object>();
+    protected Map<String,Object> listResponse(long count, List<T> list){
+        Map ret = new HashMap<String,T>();
         ret.put("count",count);
         ret.put("rows",list);
         return ret;
