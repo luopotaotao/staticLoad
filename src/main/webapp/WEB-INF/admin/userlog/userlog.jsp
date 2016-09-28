@@ -8,7 +8,7 @@
 <title>用户日志信息</title>
 <jsp:include page="/inc.jsp"></jsp:include>
 <c:if
-	test="${fn:contains(sessionInfo.resourceList, '/userlogController/search.action')}">
+	test="${fn:contains(sessionInfo.resourceSet, '/userlogController/search.action')}">
 	<script type="text/javascript">
 		$.canSearch = true;
 	</script>

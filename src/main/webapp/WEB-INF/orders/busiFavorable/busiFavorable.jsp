@@ -9,13 +9,13 @@
 <title>业务发布信息管理</title>
 <jsp:include page="/inc.jsp"></jsp:include>
 <c:if
-	test="${fn:contains(sessionInfo.resourceList, '/busiFavorableController/editPage.action')}">
+	test="${fn:contains(sessionInfo.resourceSet, '/busiFavorableController/editPage.action')}">
 	<script type="text/javascript">
 		$.canEdit = true;
 	</script>
 </c:if>
 <c:if
-	test="${fn:contains(sessionInfo.resourceList, '/busiFavorableController/delete.action')}">
+	test="${fn:contains(sessionInfo.resourceSet, '/busiFavorableController/delete.action')}">
 	<script type="text/javascript">
 		$.canDelete = true;
 	</script>
@@ -230,7 +230,7 @@
 					</tr> -->
 					<tr>
 						<td><c:if
-								test="${fn:contains(sessionInfo.resourceList, '/busiFavorableController/addPage.action')}">
+								test="${fn:contains(sessionInfo.resourceSet, '/busiFavorableController/addPage.action')}">
 								<a onclick="addFun();" href="javascript:void(0);"
 									class="easyui-linkbutton"
 									data-options="plain:true,iconCls:'edit_add'">添加</a>

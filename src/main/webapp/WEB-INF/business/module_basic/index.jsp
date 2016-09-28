@@ -14,28 +14,19 @@
     <script type="text/javascript"
             src="${pageContext.request.contextPath}/jslib/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js"
             charset="utf-8"></script>
-    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/laserCoreCss.css">
+
 </head>
 <body class="easyui-layout">
-
-<div data-options="region:'north',href:'${pageContext.request.contextPath}/baseController/layout/north.action'"
-     style="height: 79px; overflow: hidden;background:#b6c6f5 url('${pageContext.request.contextPath}/style/themes/default.jpg') repeat-y"
-     id="bannerbg"></div>
 <div data-options="region:'west',split:true" title="功能导航" style="width: 200px; overflow: hidden;">
     <div class="easyui-panel" style="padding:5px">
         <ul id="tree_menu"></ul>
     </div>
 </div>
-<div data-options="region:'center'" title="欢迎使用模板支撑智能安全监测系统" style="overflow: hidden;">
-    <div id="tt" class="easyui-tabs"></div>
-</div>
-<div data-options="region:'east',href:'${pageContext.request.contextPath}/baseController/layout/east.action'"
-     title="日历" style="width: 230px; overflow: hidden;"></div>
-<div data-options="region:'south',href:'${pageContext.request.contextPath}/baseController/layout/south.action',border:false"
-     style="height: 30px; overflow: hidden;"></div>
+<div id="tt" class="easyui-tabs" data-options="region:'center'"></div>
+
 <script>
     $(function () {
-
+        console.log('run..............................');
         var tree_data = [{
             "id": 1,
             "text": "基础信息",
@@ -85,14 +76,14 @@
 
         function openTab(title, url) {
             var $tt = $('#tt');
-            var height = Math.floor($tt.parents('div[class="panel-body layout-body"]').height() * 0.9);
             if (!$tt.tabs('exists', title)) {
-                var $iframe = $('<iframe>', {src: url, class: 'easyui-panel', style: 'height:' + $tt.parent().height() + 'px;width:100%'});
+                var $iframe = $('<iframe/>', {src: url, style: 'width:95%;height:95%;',scrolling:'no'});
                 $tt.tabs('add', {
                     title: title,
                     content: $iframe,
                     closable: true,
-                    fit:true
+                    fit:true,
+                    plain:true
                 });
             } else {
                 $tt.tabs('select', title)

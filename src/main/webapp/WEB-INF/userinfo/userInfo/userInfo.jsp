@@ -9,13 +9,13 @@
 <title>用户信息</title>
 <jsp:include page="/inc.jsp"></jsp:include>
 <c:if
-	test="${fn:contains(sessionInfo.resourceList, '/userInfoController/searchPage.action')}">
+	test="${fn:contains(sessionInfo.resourceSet, '/userInfoController/searchPage.action')}">
 	<script type="text/javascript">
 		$.canSearch = true;
 	</script>
 </c:if>
 <c:if
-	test="${fn:contains(sessionInfo.resourceList, '/userAppletInfoController/searchPage.action')}">
+	test="${fn:contains(sessionInfo.resourceSet, '/userAppletInfoController/searchPage.action')}">
 	<script type="text/javascript">
 		$.canSearchApp = true;
 	</script>

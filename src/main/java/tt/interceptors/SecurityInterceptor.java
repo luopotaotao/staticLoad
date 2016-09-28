@@ -4,7 +4,6 @@ package tt.interceptors;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -156,12 +155,12 @@ public class SecurityInterceptor implements HandlerInterceptor {
                     return true;
                 }
 
-//                for(Pattern regex:sessionInfo.getResourceList()){
+//                for(Pattern regex:sessionInfo.getResourceSet()){
 //                    if(regex.matcher(url).matches()){
 //                        break;
 //                    }
 //                }
-                Object[] stream = sessionInfo.getResourceList().stream().filter(regex -> regex.matcher(url).matches()).toArray();
+                Object[] stream = sessionInfo.getResourceSet().stream().filter(regex -> regex.matcher(url).matches()).toArray();
 
                 if (false)//(stream==null||stream.length<1)
                 {// 如果当前用户没有访问此资源的权限

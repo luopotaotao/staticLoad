@@ -9,7 +9,7 @@
 <title>用户黑名单信息管理</title>
 <jsp:include page="/inc.jsp"></jsp:include>
 <c:if
-	test="${fn:contains(sessionInfo.resourceList, '/userBlackListController/delete.action')}">
+	test="${fn:contains(sessionInfo.resourceSet, '/userBlackListController/delete.action')}">
 	<script type="text/javascript">
 		$.canDelete = true;
 	</script>
@@ -223,17 +223,17 @@
 					</tr>
 					<tr>
 						<td><c:if
-								test="${fn:contains(sessionInfo.resourceList, '/userBlackListController/addPage.action')}">
+								test="${fn:contains(sessionInfo.resourceSet, '/userBlackListController/addPage.action')}">
 								<a onclick="addFun();" href="javascript:void(0);"
 									class="easyui-linkbutton"
 									data-options="plain:true,iconCls:'edit_add'">添加</a>
 							</c:if> <c:if
-								test="${fn:contains(sessionInfo.resourceList, '/userBlackListController/delete.action')}">
+								test="${fn:contains(sessionInfo.resourceSet, '/userBlackListController/delete.action')}">
 								<a onclick="removeFun();" href="javascript:void(0);"
 									class="easyui-linkbutton"
 									data-options="plain:true,iconCls:'delete'">批量删除</a>
 							</c:if> <c:if
-								test="${fn:contains(sessionInfo.resourceList, '/userBlackListController/importPage.action')}">
+								test="${fn:contains(sessionInfo.resourceSet, '/userBlackListController/importPage.action')}">
 								<a onclick="importFun();" href="javascript:void(0);"
 									class="easyui-linkbutton"
 									data-options="plain:true,iconCls:'import'">批量导入</a>

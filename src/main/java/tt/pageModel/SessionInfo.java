@@ -1,22 +1,19 @@
 package tt.pageModel;
 
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Pattern;
 
 
 /**
  * session信息模型
- * 
+ *
  * @author
  */
-public class SessionInfo implements java.io.Serializable
-{
+public class SessionInfo implements java.io.Serializable {
 
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 6561812689378348235L;
 
@@ -38,119 +35,112 @@ public class SessionInfo implements java.io.Serializable
 
     private String userAucName;
 
-    private List<Pattern> resourceList;// 用户可以访问的资源地址列表
+    private Set<Pattern> resourceSet;// 用户可以访问的资源地址列表
 
     private Map<String, String> resourceMap;
 
-    public List<Pattern> getResourceList()
-    {
-        return resourceList;
+    public Set<Pattern> getResourceSet() {
+        return resourceSet;
     }
 
-    public void setResourceList(List<String> resourceList)
-    {
-        if(this.resourceList==null){
-            this.resourceList = new LinkedList<Pattern>();
+    public void setResourceSet(Set<String> resourceSet) {
+        if (this.resourceSet == null) {
+            this.resourceSet = new LinkedHashSet<>();
         }
-        for(String item:resourceList){
-            this.resourceList.add(Pattern.compile(item));
+        for (String item : resourceSet) {
+            if (!resourceMap.containsKey(item)) {
+                this.resourceSet.add(Pattern.compile(item));
+            }
+
         }
-//        this.resourceList = resourceList;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getIp()
-    {
+    public String getIp() {
         return ip;
     }
 
-    public void setIp(String ip)
-    {
+    public void setIp(String ip) {
         this.ip = ip;
     }
 
-    public String getId()
-    {
+    public String getId() {
         return id;
     }
 
-    public void setId(String id)
-    {
+    public void setId(String id) {
         this.id = id;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return this.name;
     }
 
-    public String getIpinfo()
-    {
+    public String getIpinfo() {
         return ipinfo;
     }
 
-    public void setIpinfo(String ipinfo)
-    {
+    public void setIpinfo(String ipinfo) {
         this.ipinfo = ipinfo;
     }
 
-    public Map<String, String> getResourceMap()
-    {
+    public Map<String, String> getResourceMap() {
         return resourceMap;
     }
 
-    public void setResourceMap(Map<String, String> resourceMap)
-    {
+    public void setResourceMap(Map<String, String> resourceMap) {
         this.resourceMap = resourceMap;
-    }
+        this.resourceSet = new LinkedHashSet<>();
+        if (resourceMap != null && resourceMap.size() > 0) {
+            resourceMap.forEach((key, val) -> {
+                this.resourceSet.add(Pattern.compile(val));
+            });
+        }
 
-    public int getUserAucCount()
-    {
+    }
+    public void addToResourceSet(String pattern,String info){
+        if(this.resourceMap!=null&&!this.resourceMap.containsKey(pattern)){
+            this.resourceSet.add(Pattern.compile(pattern));
+            this.resourceMap.put(pattern,info);
+        }
+    }
+    public int getUserAucCount() {
         return userAucCount;
     }
 
-    public void setUserAucCount(int userAucCount)
-    {
+    public void setUserAucCount(int userAucCount) {
         this.userAucCount = userAucCount;
     }
 
-    public boolean isUserAucResult()
-    {
+    public boolean isUserAucResult() {
         return userAucResult;
     }
 
-    public void setUserAucResult(boolean userAucResult)
-    {
+    public void setUserAucResult(boolean userAucResult) {
         this.userAucResult = userAucResult;
     }
 
-    public String getUserAucName()
-    {
+    public String getUserAucName() {
         return userAucName;
     }
 
-    public void setUserAucName(String userAucName)
-    {
+    public void setUserAucName(String userAucName) {
         this.userAucName = userAucName;
     }
 
-    public long getAction_time()
-    {
+    public long getAction_time() {
         return action_time;
     }
 
-    public void setAction_time(long action_time)
-    {
+    public void setAction_time(long action_time) {
         this.action_time = action_time;
     }
 

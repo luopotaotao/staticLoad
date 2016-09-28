@@ -37,12 +37,9 @@ public class UserlogController extends BaseController
     {
         String datagridUrl ="/userlogController/datagrid.action";
         String comboboxUrl ="/userlogController/datagrid.action";
-        Pattern datagridRegex = Pattern.compile(datagridUrl);
-        Pattern comboboxRegex = Pattern.compile(comboboxUrl);
-        this.getSessionInfo().getResourceList().add(datagridRegex);
-        this.getSessionInfo().getResourceMap().put(datagridUrl, "系统日志表格");
-        this.getSessionInfo().getResourceList().add(comboboxRegex);
-        this.getSessionInfo().getResourceMap().put(comboboxUrl,"系统日志-管理员下拉列表");
+
+        getSessionInfo().addToResourceSet(datagridUrl, "系统日志表格");
+        getSessionInfo().addToResourceSet(comboboxUrl,"系统日志-管理员下拉列表");
         return "/admin/userlog/userlog";
     }
 

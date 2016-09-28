@@ -8,7 +8,7 @@
 <title>订单信息管理</title>
 <jsp:include page="/inc.jsp"></jsp:include>
 <c:if
-	test="${fn:contains(sessionInfo.resourceList, '/ordersController/search.action')}">
+	test="${fn:contains(sessionInfo.resourceSet, '/ordersController/search.action')}">
 	<script type="text/javascript">
         $.canSearch = true;
     </script>

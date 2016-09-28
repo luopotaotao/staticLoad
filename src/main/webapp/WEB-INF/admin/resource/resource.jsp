@@ -6,12 +6,12 @@
 <head>
 <title>资源管理</title>
 <jsp:include page="/inc.jsp"></jsp:include>
-<c:if test="${fn:contains(sessionInfo.resourceList, '/resourceController/editPage.action')}">
+<c:if test="${fn:contains(sessionInfo.resourceSet, '/resourceController/editPage.action')}">
 	<script type="text/javascript">
 		$.canEdit = true;
 	</script>
 </c:if>
-<c:if test="${fn:contains(sessionInfo.resourceList, '/resourceController/delete.action')}">
+<c:if test="${fn:contains(sessionInfo.resourceSet, '/resourceController/delete.action')}">
 	<script type="text/javascript">
 		$.canDelete = true;
 	</script>
@@ -177,7 +177,7 @@
 		</div>
 	</div>
  <div id="toolbar" style="display: none;">
-		<c:if test="${fn:contains(sessionInfo.resourceList, '/resourceController/addPage.action')}">
+		<c:if test="${fn:contains(sessionInfo.resourceSet, '/resourceController/addPage.action')}">
 			<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'edit_add'">添加</a>
 		</c:if>
 	</div> 

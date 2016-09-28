@@ -1,14 +1,58 @@
 <%@ page language="java" pageEncoding="UTF-8"
          contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/laserCoreCss.css">
+<link id="easyuiTheme" rel="stylesheet"
+      href="${pageContext.request.contextPath}/jslib/jquery-easyui-1.3.6/themes/default/easyui.css" type="text/css">
+<link rel="stylesheet" type="text/css"
+      href="${pageContext.request.contextPath}/jslib/jquery-easyui-1.3.6/themes/icon.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/jslib/jquery-1.8.3.js" type="text/javascript"
+        charset="utf-8"></script>
+<script type="text/javascript"
+        src="${pageContext.request.contextPath}/jslib/jquery-easyui-1.3.6/jquery.easyui.min.js"
+        charset="utf-8"></script>
+<script type="text/javascript"
+        src="${pageContext.request.contextPath}/jslib/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js"
+        charset="utf-8"></script>
+<%--<style type="text/css">--%>
+<%--#bannerbg{--%>
+<%--background-color: #b6c6f5;--%>
+<%--background-image:url(${pageContext.request.contextPath}/style/themes/default.jpg);--%>
+<%--background-repeat:repeat-y;--%>
+<%----%>
+<%--}--%>
+<%--</style>--%>
 <script type="text/javascript" charset="utf-8">
     $(function () {
 
-        $('#bannerbg').css('background-color', '#b6c6f5');
-        $('#bannerbg').css('background-image', 'url(${pageContext.request.contextPath}/style/themes/default.jpg)');
-        $('#bannerbg').css('background-repeat', 'repeat-y');
-        $('#logoimg').attr("src", "${pageContext.request.contextPath}/style/themes/opentsm_logo_d.png");
-        $('#bannerbg').css('background-position', '50% 0%');
+        <%--$('#bannerbg').css('background-color', '#b6c6f5');--%>
+        <%--$('#bannerbg').css('background-image', 'url(${pageContext.request.contextPath}/style/themes/default.jpg)');--%>
+        <%--$('#bannerbg').css('background-repeat', 'repeat-y');--%>
+        <%--$('#logoimg').attr("src", "${pageContext.request.contextPath}/style/themes/opentsm_logo_d.png");--%>
+        <%--$('#bannerbg').css('background-position', '50% 0%');--%>
+
+        var count = 0;
+        var timeout1;
+        monitoronline();
+        timeout1 = setInterval(monitoronline, 10000);
+        function monitoronline() {
+            $.ajax({
+                url: "${pageContext.request.contextPath}/monitorController/monitoronline.action",
+                timeout: 10000,
+                success: function () {
+
+                },
+                error: function () {
+                    if (count < 2) {
+                        count++;
+                        parent.$.messager.alert('操作提示', "请求服务器失败...");
+                    }
+                    else {
+                        clearInterval(timeout1);
+                    }
+                }
+            })
+        }
     });
 
     function logoutFun() {
@@ -61,6 +105,13 @@
                     href: '${pageContext.request.contextPath}/userController/currentUserResourcePage.action'
                 });
     }
+    function openModule(url){
+        var $iframe = $('#panel_main');
+        var old_url = $iframe.attr('src');
+        if(old_url!=url){
+            $iframe.attr('src',url);
+        }
+    }
 </script>
 <%--<img id="logoimg" src="style/themes/default.jpg"--%>
 <%--style="min-width:681px;cursor:default" />--%>
@@ -80,54 +131,71 @@
 <%--</div>--%>
 
 
-<div style="background: rgb(38,150,203); height: 79px">
-    <div style="float: left;width: 36%;height: 79px;min-width: 460px;">
-        <img src="${pageContext.request.contextPath}/style/images/icons/txt_logo.png" style="margin:18px 0px 0px 5px">
-    </div>
-    <div style="float: left;width: 38%;height: 79px;min-width: 500px;">
+<div data-options="region:'north'"
+     style="height: 79px; overflow: hidden;background:#b6c6f5 url('${pageContext.request.contextPath}/style/themes/default.jpg') repeat-y"
+     id="bannerbg">
+    <div style="background: rgb(38,150,203); height: 79px">
+        <div style="float: left;width: 36%;height: 79px;min-width: 460px;">
+            <img src="${pageContext.request.contextPath}/style/images/icons/txt_logo.png"
+                 style="margin:18px 0px 0px 5px">
+        </div>
+        <div style="float: left;width: 38%;height: 79px;min-width: 500px;">
 
-        <ul class="topul">
+            <ul class="topul">
 
-            <li><a href="javascript:;" id="16" class="menus"><img src="${pageContext.request.contextPath}/style/images/icons/icon_monitor.png"
-                                                                  style="width: 19px;height: 19px;vertical-align: -5px;">安全监测</a>
-            </li>
+                <li><a href="javascript:openModule('');" id="16" class="menus"><img
+                        src="${pageContext.request.contextPath}/style/images/icons/icon_monitor.png"
+                        style="width: 19px;height: 19px;vertical-align: -5px;">安全监测</a>
+                </li>
 
-            <li><a href="javascript:;" id="19" class="menus"><img src="${pageContext.request.contextPath}/style/images/icons/icon_report.png"
-                                                                  style="width: 19px;height: 19px;vertical-align: -5px;">方案报告</a>
-            </li>
+                <li><a href="javascript:;" id="19" class="menus"><img
+                        src="${pageContext.request.contextPath}/style/images/icons/icon_report.png"
+                        style="width: 19px;height: 19px;vertical-align: -5px;">方案报告</a>
+                </li>
 
-            <li><a href="javascript:;" id="15" class="menus"><img src="${pageContext.request.contextPath}/style/images/icons/icon_user.png"
-                                                                  style="width: 19px;height: 19px;vertical-align: -5px;">用户管理</a>
-            </li>
-            <li><a href="${pageContext.request.contextPath}/moduleBasicController/index.action" id="18" class="menus"><img src="${pageContext.request.contextPath}/style/images/icons/icon_report.png"
-                                                                  style="width: 19px;height: 19px;vertical-align: -5px;">基础信息</a>
-            </li>
+                <li><a href="javascript:;" id="15" class="menus"><img
+                        src="${pageContext.request.contextPath}/style/images/icons/icon_user.png"
+                        style="width: 19px;height: 19px;vertical-align: -5px;">用户管理</a>
+                </li>
+                <li><a href="javascript:openModule('${pageContext.request.contextPath}/moduleBasicController/index.action')" id="18"
+                       class="menus"><img src="${pageContext.request.contextPath}/style/images/icons/icon_report.png"
+                                          style="width: 19px;height: 19px;vertical-align: -5px;">基础信息</a>
+                </li>
 
-            <li><a href="javascript:;" id="6" class="menus"><img src="${pageContext.request.contextPath}/style/images/icons/icon_config.png"
-                                                                 style="width: 19px;height: 19px;vertical-align: -5px;">平台设置</a>
-            </li>
+                <li><a href="javascript:;" id="6" class="menus"><img
+                        src="${pageContext.request.contextPath}/style/images/icons/icon_config.png"
+                        style="width: 19px;height: 19px;vertical-align: -5px;">平台设置</a>
+                </li>
 
-            <li><a href="javascript:;" id="1" class="menus onnav"><img src="${pageContext.request.contextPath}/style/images/icons/icon_about.png"
-                                                                       style="width: 19px;height: 19px;vertical-align: -5px;">关于平台</a>
-            </li>
+                <li><a href="javascript:;" id="1" class="menus onnav"><img
+                        src="${pageContext.request.contextPath}/style/images/icons/icon_about.png"
+                        style="width: 19px;height: 19px;vertical-align: -5px;">关于平台</a>
+                </li>
 
-        </ul>
+            </ul>
 
-    </div>
-    <div style="float: right;width: 25%;height: 79px;">
-        <div style="margin-top: 10px;text-align: right;margin-right: 5px;">
+        </div>
+        <div style="float: right;width: 25%;height: 79px;">
+            <div style="margin-top: 10px;text-align: right;margin-right: 5px;">
 
-            <div>当前用户：北京联睿科科技有限公司</div>
-            <c:if test="${sessionInfo.id != null}" ><div>${sessionInfo.name}</div></c:if>
-            <div style="margin-top: 10px">
-                上次登录2016-08-23 19:54:07
-                <a href="javascript:;" onclick=""
-                   style="color: white;"><img src="${pageContext.request.contextPath}/style/images/icons/icon_user_sm.png" style="width: 18px;height: 18px;vertical-align: -5px;">账号信息</a>&nbsp;
-                <a href="javascript:;" onclick="logoutFun();" style="color: white;"><img src="${pageContext.request.contextPath}/style/images/icons/icon_logout.png"
-                                                                                   style="width: 18px;height: 18px;vertical-align: -5px;">退出系统</a>
+                <div>当前用户：
+                    <c:if test="${sessionInfo.id != null}">
+                        ${sessionInfo.name}
+                    </c:if>
+                </div>
+
+                <div style="margin-top: 10px">
+                    <a href="javascript:;" onclick=""
+                       style="color: white;"><img
+                            src="${pageContext.request.contextPath}/style/images/icons/icon_user_sm.png"
+                            style="width: 18px;height: 18px;vertical-align: -5px;">账号信息</a>&nbsp;
+                    <a href="javascript:;" onclick="logoutFun();" style="color: white;"><img
+                            src="${pageContext.request.contextPath}/style/images/icons/icon_logout.png"
+                            style="width: 18px;height: 18px;vertical-align: -5px;">退出系统</a>
+                </div>
             </div>
         </div>
+
+
     </div>
-
-
 </div>

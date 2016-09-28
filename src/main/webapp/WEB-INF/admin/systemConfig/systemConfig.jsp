@@ -9,13 +9,13 @@
 <title>系统参数配置</title>
 <jsp:include page="/inc.jsp"></jsp:include>
 <c:if
-	test="${fn:contains(sessionInfo.resourceList, '/systemConfigController/editPage.action')}">
+	test="${fn:contains(sessionInfo.resourceSet, '/systemConfigController/editPage.action')}">
 	<script type="text/javascript">
 		$.canEdit = true;
 	</script>
 </c:if>
 <c:if
-	test="${fn:contains(sessionInfo.resourceList, '/systemConfigController/delete.action')}">
+	test="${fn:contains(sessionInfo.resourceSet, '/systemConfigController/delete.action')}">
 	<script type="text/javascript">
 		$.canDelete = true;
 	</script>
@@ -222,7 +222,7 @@
 					</tr>
 					<tr>
 						<td><c:if
-								test="${fn:contains(sessionInfo.resourceList, '/systemConfigController/addPage.action')}">
+								test="${fn:contains(sessionInfo.resourceSet, '/systemConfigController/addPage.action')}">
 								<a onclick="addFun();" href="javascript:void(0);"
 									class="easyui-linkbutton"
 									data-options="plain:true,iconCls:'edit_add'">添加</a>

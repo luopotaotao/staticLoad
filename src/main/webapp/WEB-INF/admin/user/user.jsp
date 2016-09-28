@@ -9,19 +9,19 @@
 <jsp:include page="/inc.jsp"></jsp:include>
 
 <c:if
-	test="${fn:contains(sessionInfo.resourceList, '/userController/delete.action')}">
+	test="${fn:contains(sessionInfo.resourceSet, '/userController/delete.action')}">
 	<script type="text/javascript">
 		$.canDelete = true;
 	</script>
 </c:if>
 <c:if
-	test="${fn:contains(sessionInfo.resourceList, '/userController/editPage.action')}">
+	test="${fn:contains(sessionInfo.resourceSet, '/userController/editPage.action')}">
 	<script type="text/javascript">
 		$.canEditUser = true;
 	</script>
 </c:if>
 <c:if
-	test="${fn:contains(sessionInfo.resourceList, '/userController/resetPwd.action')}">
+	test="${fn:contains(sessionInfo.resourceSet, '/userController/resetPwd.action')}">
 	<script type="text/javascript">
 		$.canEditPwd = true;
 	</script>
@@ -418,7 +418,7 @@
 								<tbody>
 									<tr>
 										<td><c:if
-												test="${fn:contains(sessionInfo.resourceList, '/userController/addPage.action')}">
+												test="${fn:contains(sessionInfo.resourceSet, '/userController/addPage.action')}">
 												<a onclick="addFun();" href="javascript:void(0);"
 													class="easyui-linkbutton"
 													data-options="plain:true,iconCls:'edit_add'">添加</a>

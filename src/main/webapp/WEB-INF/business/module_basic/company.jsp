@@ -19,7 +19,7 @@
             charset="utf-8"></script>
 
 </head>
-<body>
+<body style="width:100%">
 
 <div class="easyui-panel" style="width:30%">
     <input class="easyui-searchbox" data-options="prompt:'请输入单位名称',menu:'#mm',searcher:function(val,typ){$('#dg').datagrid('load',{typ:typ,name:val});}" style="width:100%">

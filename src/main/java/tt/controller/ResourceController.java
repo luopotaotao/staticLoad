@@ -81,9 +81,7 @@ public class ResourceController extends BaseController {
     @RequestMapping("/manager")
     public String manager() {
         String url = "/resourceController/treeGrid.action";
-        Pattern regex = Pattern.compile(url);
-        this.getSessionInfo().getResourceList().add(regex);
-        this.getSessionInfo().getResourceMap().put(url, "资源表格");
+        getSessionInfo().addToResourceSet(url, "资源表格");
         return "/admin/resource/resource";
     }
 
@@ -99,9 +97,7 @@ public class ResourceController extends BaseController {
         Resource r = new Resource();
         r.setId(UUID.randomUUID().toString());
         String url = "/resourceController/add.action";
-        Pattern regex = Pattern.compile(url);
-        this.getSessionInfo().getResourceList().add(regex);
-        this.getSessionInfo().getResourceMap().put(url, "资源添加功能");
+        getSessionInfo().addToResourceSet(url, "资源添加功能");
         request.setAttribute("resource", r);
         return "/admin/resource/resourceAdd";
     }
@@ -154,9 +150,7 @@ public class ResourceController extends BaseController {
             return "/error/noInfo";
         }
         String url = "/resourceController/edit.action";
-        Pattern regex = Pattern.compile(url);
-        this.getSessionInfo().getResourceList().add(regex);
-        this.getSessionInfo().getResourceMap().put(url, "资源修改功能");
+        getSessionInfo().addToResourceSet(url, "资源修改功能");
         request.setAttribute("resource", r);
         return "/admin/resource/resourceEdit";
     }

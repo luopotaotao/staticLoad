@@ -10,7 +10,7 @@
 <jsp:include page="/inc.jsp"></jsp:include>
 
 <c:if
-	test="${fn:contains(sessionInfo.resourceList, '/testZhifubaoController/search.action')}">
+	test="${fn:contains(sessionInfo.resourceSet, '/testZhifubaoController/search.action')}">
 	<script type="text/javascript">
 		$.canSearch = true;
 	</script>
@@ -173,7 +173,7 @@
 					</tr>
 					<tr>
 						<td><c:if
-								test="${fn:contains(sessionInfo.resourceList, '/testZhifubaoController/importPage.action')}">
+								test="${fn:contains(sessionInfo.resourceSet, '/testZhifubaoController/importPage.action')}">
 								<a onclick="importFun();" href="javascript:void(0);"
 									class="easyui-linkbutton"
 									data-options="plain:true,iconCls:'import'">导入</a>

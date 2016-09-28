@@ -45,9 +45,7 @@ public class BusinessConfigController extends BaseController {
     @RequestMapping(value = "/manager")
     public String manager() {
         String url = "/businessConfigController/datagrid.action";
-        Pattern regex = Pattern.compile(url);
-        getSessionInfo().getResourceList().add(regex);
-        getSessionInfo().getResourceMap().put(url, "业务参数信息列表");
+        getSessionInfo().addToResourceSet(url, "业务参数信息列表");
         return "/business/businessConfig/businessConfig";
     }
 
@@ -81,9 +79,7 @@ public class BusinessConfigController extends BaseController {
     @RequestMapping(value = "/addPage")
     public String addPage() {
         String url = "/businessConfigController/add.action";
-        Pattern regex = Pattern.compile(url);
-        getSessionInfo().getResourceList().add(regex);
-        getSessionInfo().getResourceMap().put(url, "业务参数信息添加功能");
+        getSessionInfo().addToResourceSet(url, "业务参数信息添加功能");
         return "business/businessConfig/businessConfigAdd";
     }
 
@@ -137,9 +133,7 @@ public class BusinessConfigController extends BaseController {
             return "/error/noInfo";
         }
         String url = "/businessConfigController/edit.action";
-        Pattern regex = Pattern.compile(url);
-        getSessionInfo().getResourceList().add(regex);
-        getSessionInfo().getResourceMap().put(url, "业务参数信息修改功能");
+        getSessionInfo().addToResourceSet(url, "业务参数信息修改功能");
         request.setAttribute("b", b);
         return "business/businessConfig/businessConfigEdit";
     }

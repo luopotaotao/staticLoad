@@ -46,9 +46,7 @@ public class RoleController extends BaseController {
     @RequestMapping("/manager")
     public String manager() {
         String url = "/roleController/treeGrid.action";
-        Pattern regex = Pattern.compile(url);
-        this.getSessionInfo().getResourceList().add(regex);
-        this.getSessionInfo().getResourceMap().put(url, "角色表格");
+        getSessionInfo().addToResourceSet(url, "角色表格");
         return "/admin/role/role";
     }
 
@@ -62,10 +60,7 @@ public class RoleController extends BaseController {
         Role r = new Role();
         r.setId(UUID.randomUUID().toString());
         String url = "/roleController/add.action";
-        Pattern regex = Pattern.compile(url);
-
-        this.getSessionInfo().getResourceList().add(regex);
-        this.getSessionInfo().getResourceMap().put(url, "角色添加功能");
+        getSessionInfo().addToResourceSet(url, "角色添加功能");
         request.setAttribute("role", r);
         return "/admin/role/roleAdd";
     }
@@ -111,10 +106,7 @@ public class RoleController extends BaseController {
             return "/error/noInfo";
         } else {
             String url = "/roleController/edit.action";
-            Pattern regex = Pattern.compile(url);
-
-            this.getSessionInfo().getResourceList().add(regex);
-            this.getSessionInfo().getResourceMap().put(url, "角色编辑功能");
+            getSessionInfo().addToResourceSet(url, "角色编辑功能");
             request.setAttribute("role", r);
             return "/admin/role/roleEdit";
         }
@@ -236,14 +228,9 @@ public class RoleController extends BaseController {
             return "/error/noInfo";
         } else {
             String allTreeUrl = "/resourceController/allTree.action";
-            String grantUrl = "grant";
-            Pattern allTreeRegex = Pattern.compile(allTreeUrl);
-            Pattern grantRegex = Pattern.compile(grantUrl);
-
-            this.getSessionInfo().getResourceList().add(allTreeRegex);
-            this.getSessionInfo().getResourceMap().put(allTreeUrl, "角色授权-资源下拉列表");
-            this.getSessionInfo().getResourceList().add(grantRegex);
-            this.getSessionInfo().getResourceMap().put(grantUrl, "角色授权功能");
+            String grantUrl = "grant";//TODO 这个地址对不对？
+            getSessionInfo().addToResourceSet(allTreeUrl, "角色授权-资源下拉列表");
+            getSessionInfo().addToResourceSet(grantUrl, "角色授权功能");
             request.setAttribute("role", r);
             return "/admin/role/roleGrant";
         }

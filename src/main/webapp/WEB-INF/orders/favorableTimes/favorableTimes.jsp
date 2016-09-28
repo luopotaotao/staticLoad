@@ -9,13 +9,13 @@
 <title>优惠剩余次数信息管理</title>
 <jsp:include page="/inc.jsp"></jsp:include>
 <c:if
-	test="${fn:contains(sessionInfo.resourceList, '/favorableTimesController/editPage.action')}">
+	test="${fn:contains(sessionInfo.resourceSet, '/favorableTimesController/editPage.action')}">
 	<script type="text/javascript">
         $.canEdit = true;
     </script>
 </c:if>
 <c:if
-	test="${fn:contains(sessionInfo.resourceList, '/favorableTimesController/delete.action')}">
+	test="${fn:contains(sessionInfo.resourceSet, '/favorableTimesController/delete.action')}">
 	<script type="text/javascript">
         $.canDelete = true;
     </script>
@@ -190,7 +190,7 @@
 				<tbody>
 					<tr>
 						<td><c:if
-								test="${fn:contains(sessionInfo.resourceList, '/favorableTimesController/addPage.action')}">
+								test="${fn:contains(sessionInfo.resourceSet, '/favorableTimesController/addPage.action')}">
 								<a onclick="addFun();" href="javascript:void(0);"
 									class="easyui-linkbutton"
 									data-options="plain:true,iconCls:'edit_add'">添加</a>

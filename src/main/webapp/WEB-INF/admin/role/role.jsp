@@ -6,17 +6,17 @@
 <head>
 <title>角色管理</title>
 <jsp:include page="/inc.jsp"></jsp:include>
-<c:if test="${fn:contains(sessionInfo.resourceList, '/roleController/editPage.action')}">
+<c:if test="${fn:contains(sessionInfo.resourceSet, '/roleController/editPage.action')}">
 	<script type="text/javascript">
 		$.canEdit = true;
 	</script>
 </c:if>
-<c:if test="${fn:contains(sessionInfo.resourceList, '/roleController/delete.action')}">
+<c:if test="${fn:contains(sessionInfo.resourceSet, '/roleController/delete.action')}">
 	<script type="text/javascript">
 		$.canDelete = true;
 	</script>
 </c:if>
-<c:if test="${fn:contains(sessionInfo.resourceList, '/roleController/grantPage.action')}">
+<c:if test="${fn:contains(sessionInfo.resourceSet, '/roleController/grantPage.action')}">
 	<script type="text/javascript">
 		$.canGrant = true;
 	</script>
@@ -201,7 +201,7 @@
 		</div>
 	</div>
 	<div id="toolbar" style="display: none;">
-		<c:if test="${fn:contains(sessionInfo.resourceList, '/roleController/addPage.action')}">
+		<c:if test="${fn:contains(sessionInfo.resourceSet, '/roleController/addPage.action')}">
 			<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'edit_add'">添加</a>
 		</c:if>
 	</div>

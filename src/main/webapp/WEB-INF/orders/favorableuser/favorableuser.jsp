@@ -9,7 +9,7 @@
 <title>优惠信息管理</title>
 <jsp:include page="/inc.jsp"></jsp:include>
 <c:if
-	test="${fn:contains(sessionInfo.resourceList, '/favorableUserController/delete.action')}">
+	test="${fn:contains(sessionInfo.resourceSet, '/favorableUserController/delete.action')}">
 	<script type="text/javascript">
 		$.canDelete = true;
 	</script>
@@ -174,7 +174,7 @@
 					</tr>
 					<tr>
 						<td><c:if
-								test="${fn:contains(sessionInfo.resourceList, '/favorableUserController/addPage.action')}">
+								test="${fn:contains(sessionInfo.resourceSet, '/favorableUserController/addPage.action')}">
 								<a onclick="addFun();" href="javascript:void(0);"
 									class="easyui-linkbutton"
 									data-options="plain:true,iconCls:'edit_add'">添加</a>

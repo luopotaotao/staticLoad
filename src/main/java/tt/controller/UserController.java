@@ -1,15 +1,9 @@
 package tt.controller;
 
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.regex.Pattern;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -162,19 +156,19 @@ public class UserController extends BaseController
                     sessionInfo.setIp(IpUtil.getIpAddr(request));
                     // modify by kiky 2014-11-24 09:58:56
                     // 根据用户id查询用户资源的全部信息，用于记录日志
-                    List<Tresource> listtresource = userService.resourceList(u.getId());
-                    List<String> l = new ArrayList<String>();
+                    List<Tresource> resourceList = userService.resourceList(u.getId());
+                    Set<String> l = new HashSet<String>();
                     Map<String, String> m = new HashMap<String, String>();
-                    if (listtresource != null && listtresource.size() != 0)
+                    if (resourceList != null && resourceList.size() != 0)
                     {
-                        for (int i = 0; i < listtresource.size(); i++ )
+                        for (int i = 0; i < resourceList.size(); i++ )
                         {
-                            Tresource temp = listtresource.get(i);
+                            Tresource temp = resourceList.get(i);
                             l.add(temp.getUrl());
                             m.put(temp.getUrl(), temp.getName());
                         }
                     }
-                    sessionInfo.setResourceList(l);
+                    sessionInfo.setResourceSet(l);
                     sessionInfo.setResourceMap(m);
                     session1.setAttribute(ConfigUtil.getSessionInfoName(), sessionInfo);
                     // add by kiky 2014-11-21 14:04:06 记录登录日志
@@ -312,9 +306,8 @@ public class UserController extends BaseController
     @RequestMapping(value = "/manager")
     public String manager()
     {
-        String url="/userController/dataGrid.action";Pattern regex = Pattern.compile(url );
-        this.getSessionInfo().getResourceList().add(regex);
-        this.getSessionInfo().getResourceMap().put(url, "用户表格");
+        String url="/userController/dataGrid.action";
+        getSessionInfo().addToResourceSet(url, "用户表格");
         return "/admin/user/user";
     }
 
@@ -350,9 +343,8 @@ public class UserController extends BaseController
     @RequestMapping(value = "/addPage", method = RequestMethod.POST)
     public String addPage(HttpServletRequest request)
     {
-        String url="/userController/add.action";Pattern regex = Pattern.compile(url );
-        this.getSessionInfo().getResourceList().add(regex);
-        this.getSessionInfo().getResourceMap().put(url, "添加用户功能");
+        String url="/userController/add.action";
+        getSessionInfo().addToResourceSet(url, "添加用户功能");
         User u = new User();
         u.setId(UUID.randomUUID().toString());
         request.setAttribute("user", u);
@@ -559,13 +551,9 @@ public class UserController extends BaseController
         }
         String editUrl = "/userController/edit.action";
         String grantUrl = "/roleController/grantRoleTree.action";
-        Pattern editRegex = Pattern.compile(editUrl);
-        Pattern grantRegex = Pattern.compile(grantUrl);
 
-        this.getSessionInfo().getResourceList().add(editRegex);
-        this.getSessionInfo().getResourceMap().put(editUrl, "用户修改功能");
-        this.getSessionInfo().getResourceList().add(grantRegex);
-        this.getSessionInfo().getResourceMap().put(grantUrl,"用户修改-角色下拉列表");
+        getSessionInfo().addToResourceSet(editUrl, "用户修改功能");
+        getSessionInfo().addToResourceSet(grantUrl,"用户修改-角色下拉列表");
         request.setAttribute("user", u);
         return "/admin/user/userEdit";
     }
