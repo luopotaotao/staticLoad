@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "b_company")
 public class Company implements java.io.Serializable{
-    private int id;
+    private Integer id;
     private String name;
     private String contacts;
     private String tel;
@@ -16,11 +16,12 @@ public class Company implements java.io.Serializable{
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    @GeneratedValue
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

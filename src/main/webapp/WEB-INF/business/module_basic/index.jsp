@@ -49,7 +49,7 @@
                 "children": [{
                     "id": 121,
                     "text": "检测机构",
-                    "url": "institution.jsp"
+                    "url": "/moduleBasicInstitutionController/index.action"
                 }, {
                     "id": 122,
                     "text": "检测项目",
