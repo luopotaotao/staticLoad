@@ -17,7 +17,7 @@ public class TcpClientHandler implements IoHandler
     public void exceptionCaught(IoSession session, Throwable e)
         throws Exception
     {
-        session.close(true);
+        session.closeNow();//.close(true);
     }
 
     /**

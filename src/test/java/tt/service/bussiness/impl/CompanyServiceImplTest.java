@@ -42,7 +42,7 @@ public class CompanyServiceImplTest {
     public void list() throws Exception {
         Map<String,Object> params = new HashMap<String,Object>();
         params.put("typ",(byte)1);
-        List<Company> list = companyService.list(params,1,10);
+        List<Company> list = companyService.list(null,null,1,10);
         assertTrue(list.size()>0);
     }
 
@@ -50,7 +50,7 @@ public class CompanyServiceImplTest {
     public void count() throws Exception {
         Map<String,Object> params = new HashMap<String,Object>();
         params.put("typ",(byte)1);
-        assertTrue("count is a number",companyService.count(params)>0);
+        assertTrue("count is a number",companyService.count(null,null)>0);
     }
 
     @Test

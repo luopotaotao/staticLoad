@@ -23,7 +23,7 @@ public class LoadConfigFile
 
     private static final String FILENAME = "config.properties";
 
-    private static final String PFILE = ServerListener.getPath() + "config"
+    private static final String PFILE = (ServerListener.getPath()==null?"D:\\partime\\cjp\\project\\staticLoad\\src\\main\\webapp\\":ServerListener.getPath()) + "config"
                                         + System.getProperty("file.separator") + FILENAME;
 
     static Logger log = Logger.getLogger(LoadConfigFile.class);
@@ -41,6 +41,7 @@ public class LoadConfigFile
         try
         {
             // log.info("***************读取配置文件***********************");
+            System.out.println(PFILE);
             p_file = new File(PFILE);
             m_lastModifiedTime = p_file.lastModified();
             if (m_lastModifiedTime == 0)

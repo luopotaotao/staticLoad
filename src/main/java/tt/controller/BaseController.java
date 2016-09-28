@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.alibaba.fastjson.JSONObject;
 import tt.pageModel.SessionInfo;
 import tt.util.ConfigUtil;
 import tt.util.StringDateToDateEditor;
@@ -152,8 +153,8 @@ public class BaseController<T>
      * @param flag
      * @return
      */
-    protected Map<String,Object> flagResponse(Object flag){
-        Map<String, Object> ret = new HashMap<String,Object>();
+    protected JSONObject flagResponse(Object flag){
+        JSONObject ret = new JSONObject();
         ret.put("flag",flag);
         return ret;
     }
@@ -164,9 +165,9 @@ public class BaseController<T>
      * @param list 当前页数据
      * @return
      */
-    protected Map<String,Object> listResponse(long count, List<T> list){
-        Map ret = new HashMap<String,T>();
-        ret.put("count",count);
+    protected JSONObject listResponse(long count, List<T> list){
+        JSONObject ret = new JSONObject();
+        ret.put("total",count);
         ret.put("rows",list);
         return ret;
     }

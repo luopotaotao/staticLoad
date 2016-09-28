@@ -30,7 +30,7 @@
                 var name = $("#name").val();
                 var pwd = $("#pwd").val();
                 var verifycode = $("#verifycode").val();
-                if (validate(name,pwd,verifycode)) {
+                if (true){//validate(name,pwd,verifycode)) {
                     pwd = $("#pwd").val();
                     $.ajax({
                         url: "${pageContext.request.contextPath}/userController/login.action",

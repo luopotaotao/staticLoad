@@ -99,7 +99,7 @@
             <li><a href="javascript:;" id="15" class="menus"><img src="${pageContext.request.contextPath}/style/images/icons/icon_user.png"
                                                                   style="width: 19px;height: 19px;vertical-align: -5px;">用户管理</a>
             </li>
-            <li><a href="${pageContext.request.contextPath}/moduleBasicCompany/index.action" id="18" class="menus"><img src="${pageContext.request.contextPath}/style/images/icons/icon_report.png"
+            <li><a href="${pageContext.request.contextPath}/moduleBasicController/index.action" id="18" class="menus"><img src="${pageContext.request.contextPath}/style/images/icons/icon_report.png"
                                                                   style="width: 19px;height: 19px;vertical-align: -5px;">基础信息</a>
             </li>
 

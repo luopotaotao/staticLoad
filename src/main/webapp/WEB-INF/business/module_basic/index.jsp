@@ -49,7 +49,7 @@
                 "children": [{
                     "id": 121,
                     "text": "检测机构",
-                    "url": "/myTest/operationsPage.html"
+                    "url": "institution.jsp"
                 }, {
                     "id": 122,
                     "text": "检测项目",
@@ -87,12 +87,12 @@
             var $tt = $('#tt');
             var height = Math.floor($tt.parents('div[class="panel-body layout-body"]').height() * 0.9);
             if (!$tt.tabs('exists', title)) {
-                var $iframe = $('<iframe>', {src: url, class: 'easyui-panel', style: 'height:' + $tt.parent().height() + 'px;width:'+$tt.width()+'px'});
+                var $iframe = $('<iframe>', {src: url, class: 'easyui-panel', style: 'height:' + $tt.parent().height() + 'px;width:100%'});
                 $tt.tabs('add', {
                     title: title,
                     content: $iframe,
                     closable: true,
-                    width:$tt.width()
+                    fit:true
                 });
             } else {
                 $tt.tabs('select', title)

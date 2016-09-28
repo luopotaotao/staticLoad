@@ -3,6 +3,7 @@ package tt.dao.impl;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -169,7 +170,11 @@ public class BaseDaoImpl<T> implements BaseDaoI<T>
         {
             for (String key : params.keySet())
             {
-                q.setParameter(key, params.get(key));
+                if(params.get(key) instanceof List){
+                    q.setParameterList(key,(List)params.get(key));
+                }else{
+                    q.setParameter(key, params.get(key));
+                }
             }
         }
         return (Long)q.uniqueResult();
@@ -190,7 +195,11 @@ public class BaseDaoImpl<T> implements BaseDaoI<T>
         {
             for (String key : params.keySet())
             {
-                q.setParameter(key, params.get(key));
+                if(params.get(key) instanceof List){
+                    q.setParameterList(key,(List)params.get(key));
+                }else{
+                    q.setParameter(key, params.get(key));
+                }
             }
         }
         return q.executeUpdate();

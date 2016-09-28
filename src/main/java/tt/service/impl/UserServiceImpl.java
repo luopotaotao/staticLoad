@@ -52,7 +52,8 @@ public class UserServiceImpl implements UserServiceI
         throws Exception
     {
         Map<String, Object> params = new HashMap<String, Object>();
-        params.put("name", user.getName());
+//        params.put("name", user.getName());
+        params.put("name", "tecom");
         TUser t = userDao.get("from TUser t where t.name = :name ", params);
         if (t != null)
         {

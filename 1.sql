@@ -117,6 +117,53 @@ CREATE TABLE `t_user_log` (
   `USER_IP` varchar(15) COLLATE utf8_bin DEFAULT NULL COMMENT '用户IP信息',
   PRIMARY KEY (`USER_LOG_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+CREATE TABLE b_institution(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+  code VARCHAR(64) COMMENT '机构编号',
+  name VARCHAR(128) COMMENT '机构名称',
+  economy_typ TINYINT COMMENT '经济性质',
+  certificate_code VARCHAR(128) COMMENT '资质证书编号',
+  regist_typ VARCHAR(64) COMMENT '注册类型'
+) COMMENT '机构信息';
+CREATE TABLE b_equipment(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+  code VARCHAR(64) COMMENT '设备编号',
+  name VARCHAR(128) COMMENT '设备名称',
+  institution_id INT COMMENT '所属机构id'
+) COMMENT '设备信息';
+
+CREATE TABLE b_inspector(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+  name VARCHAR(128) COMMENT '姓名',
+  gender TINYINT COMMENT '姓名(1男0女)',
+  note VARCHAR(128) COMMENT '备注',
+  institution_id INT COMMENT '所属机构id'
+) COMMENT '设备信息';
+
+CREATE TABLE b_area(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+  name VARCHAR(128) COMMENT '名称',
+  level TINYINT COMMENT '等级(全国0,省1,市(区)2)',
+  pid INT COMMENT '父节点id',
+  note VARCHAR(128) COMMENT '备注'
+) COMMENT '行政区划';
+
+CREATE TABLE b_project(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+  code VARCHAR(64) COMMENT '工程编码',
+  name VARCHAR(128) COMMENT '工程名称',
+  province_id INT COMMENT '所在省份id',
+  city_id INT COMMENT '所在市id',
+  address VARCHAR(128) COMMENT '具体地址',
+  la FLOAT COMMENT '维度',
+  lo FLOAT COMMENT '经度',
+  constructor_id INT COMMENT '建设单位id',
+  builder_id INT COMMENT '施工单位id',
+  inspector_id INT COMMENT '监理单位id',
+  note VARCHAR(128) COMMENT '备注'
+) COMMENT '工程信息';
+
 /*Data for the table `t_business_config` */
 
 insert  into `t_business_config`(`CONF_ID`,`CONF_NAME`,`CONF_CONTEXT`,`CONF_DESC`,`UPDATE_TIME`,`ADMIN_NAME`,`DATA_VER_FLAG`) values ('RATE_ALYPAY','支付宝渠道费率','6','支付宝渠道费率，单位&permil;','2016-06-01 14:14:25','tecom',1),('RATE_BAIDUPAY','百度支付渠道费率','3','百度支付渠道费率，单位&permil;','2016-06-01 14:15:55','tecom',2),('RATE_UNIONPAY','银联渠道费率','8','银联渠道费率，单位&permil;','2016-06-01 14:17:20','tecom',2),('RATE_WEIXIN','微信支付渠道费率','3','微信支付渠道费率，单位&permil;','2016-06-01 14:16:22','zhaoqiaoning',2),('VERIFICATIONCODE_TIMEOUT','短信验证码超时时间','5','单位为分钟(最大为20)','2016-06-01 14:23:04','tecom',1);

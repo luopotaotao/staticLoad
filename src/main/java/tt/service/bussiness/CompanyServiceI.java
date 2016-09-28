@@ -9,9 +9,9 @@ import java.util.Map;
  */
 public interface CompanyServiceI {
     Company get(int id);
-    List<Company> list(Map<String, Object> params, int page, int PageSize);
-    long count(Map<String, Object> params);
+    List<Company> list(Byte typ,String name, int page, int PageSize);
+    long count(Byte typ,String name);
     int add(Company company);
-    int del(int[] ids);
+    int del(List<Integer> ids);
     int update(Company company);
 }
