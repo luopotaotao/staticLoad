@@ -49,7 +49,7 @@
             }, {
                 "id": 13,
                 "text": "行政区划",
-                "url": "/moduleBasicAreaController/index.action"
+                "url": "/myTest/area.html"
             }, {
                 "id": 14,
                 "text": "about.html"

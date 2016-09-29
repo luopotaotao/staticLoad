@@ -1,140 +1,141 @@
 package tt.model.business;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "b_project")
 public class Project {
-  private Long id;
-  private String code;
-  private String name;
-  private Long province_id;
-  private Long city_id;
-  private String address;
-  private Double la;
-  private Double lo;
-  private Long constructor_id;
-  private Long builder_id;
-  private Long inspector_id;
-  private String note;
+    private Integer id;
+    private String code;
+    private String name;
+    private Area province;
+    private Area city;
+    private String address;
+    private Float lat;
+    private Float lng;
+    private Company constructor;
+    private Company builder;
+    private Company inspector;
+    private String note;
 
-  @Id
-  @Column(name = "id")
-  public Long getId() {
-    return id;
-  }
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    public Integer getId() {
+        return id;
+    }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-  @Basic
-  @Column(name = "code")
-  public String getCode() {
-    return code;
-  }
+    @Basic
+    @Column(name = "code")
+    public String getCode() {
+        return code;
+    }
 
-  public void setCode(String code) {
-    this.code = code;
-  }
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-  @Basic
-  @Column(name = "name")
-  public String getName() {
-    return name;
-  }
+    @Basic
+    @Column(name = "name")
+    public String getName() {
+        return name;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  @Basic
-  @Column(name = "province_id")
-  public Long getProvince_id() {
-    return province_id;
-  }
 
-  public void setProvince_id(Long province_id) {
-    this.province_id = province_id;
-  }
 
-  @Basic
-  @Column(name = "city_id")
-  public Long getCity_id() {
-    return city_id;
-  }
+    @Basic
+    @Column(name = "address")
+    public String getAddress() {
+        return address;
+    }
 
-  public void setCity_id(Long city_id) {
-    this.city_id = city_id;
-  }
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-  @Basic
-  @Column(name = "address")
-  public String getAddress() {
-    return address;
-  }
+    @Basic
+    @Column(name = "lat")
+    public Float getLat() {
+        return lat;
+    }
 
-  public void setAddress(String address) {
-    this.address = address;
-  }
+    public void setLat(Float lat) {
+        this.lat = lat;
+    }
 
-  @Basic
-  @Column(name = "la")
-  public Double getLa() {
-    return la;
-  }
+    @Basic
+    @Column(name = "lng")
+    public Float getLng() {
+        return lng;
+    }
 
-  public void setLa(Double la) {
-    this.la = la;
-  }
+    public void setLng(Float lng) {
+        this.lng = lng;
+    }
 
-  @Basic
-  @Column(name = "lo")
-  public Double getLo() {
-    return lo;
-  }
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "province_id")
+    public Area getProvince() {
+        return province;
+    }
 
-  public void setLo(Double lo) {
-    this.lo = lo;
-  }
+    public void setProvince(Area province) {
+        this.province = province;
+    }
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "city_id")
+    public Area getCity() {
+        return city;
+    }
 
-  @Basic
-  @Column(name = "constructor_id")
-  public Long getConstructor_id() {
-    return constructor_id;
-  }
+    public void setCity(Area city) {
+        this.city = city;
+    }
 
-  public void setConstructor_id(Long constructor_id) {
-    this.constructor_id = constructor_id;
-  }
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "constructor_id")
+    public Company getConstructor() {
+        return constructor;
+    }
 
-  @Basic
-  @Column(name = "builder_id")
-  public Long getBuilder_id() {
-    return builder_id;
-  }
+    public void setConstructor(Company constructor) {
+        this.constructor = constructor;
+    }
 
-  public void setBuilder_id(Long builder_id) {
-    this.builder_id = builder_id;
-  }
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "builder_id")
+    public Company getBuilder() {
+        return builder;
+    }
 
-  @Basic
-  @Column(name = "inspector_id")
-  public Long getInspector_id() {
-    return inspector_id;
-  }
+    public void setBuilder(Company builder) {
+        this.builder = builder;
+    }
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "inspector_id")
+    public Company getInspector() {
+        return inspector;
+    }
 
-  public void setInspector_id(Long inspector_id) {
-    this.inspector_id = inspector_id;
-  }
+    public void setInspector(Company inspector) {
+        this.inspector = inspector;
+    }
 
-  @Basic
-  @Column(name = "note")
-  public String getNote() {
-    return note;
-  }
+    @Basic
+    @Column(name = "note")
+    public String getNote() {
+        return note;
+    }
 
-  public void setNote(String note) {
-    this.note = note;
-  }
+    public void setNote(String note) {
+        this.note = note;
+    }
 }

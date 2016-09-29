@@ -4,7 +4,7 @@
 <html>
 <head>
 <title>模板支撑智能安全监测系统</title>
-<jsp:include page="inc.jsp"></jsp:include>
+<jsp:include page="../../../inc.jsp"></jsp:include>
 <script type="text/javascript">
 	var index_tabs;
 	var index_tabsMenu;
@@ -40,7 +40,7 @@
 								for ( var i = 0; i < frame.length; i++) {
 									frame[i].contentWindow.document.write('');
 									frame[i].contentWindow.close();
-//									frame[i].src = frame[i].src;
+									frame[i].src = frame[i].src;
 								}
 								if (navigator.userAgent.indexOf("MSIE") > 0) {// IE特有回收内存方法
 									try {
@@ -102,36 +102,23 @@
 				}
 			}
 		});
-
-        <%--var url = '${pageContext.request.contextPath}/moduleBasicController/index.action';--%>
-        <%--$.get(url,function (html) {--%>
-            <%--$('#panel_main').html(html);--%>
-        <%--});--%>
-        <%--$('#panel_main').attr('src','${pageContext.request.contextPath}/moduleBasicController/index.action');--%>
 	});
 </script>
 </head>
 <body>
 
 	<div id="index_layout">
-		<jsp:include page="./WEB-INF/layout/north.jsp"></jsp:include>
-
-		<%--<div data-options="region:'west',href:'${pageContext.request.contextPath}/baseController/layout/west.action',split:true" title="功能导航" style="width: 200px; overflow: hidden;"></div>--%>
-		<%--<div data-options="region:'center'" title="欢迎使用模板支撑智能安全监测系统" style="overflow: hidden;">--%>
-			<%--<div id="index_tabs" style="overflow: hidden;">--%>
-				<%--<div title="首页" data-options="border:false" style="overflow: hidden; " align="center">--%>
-					<%--<img src="style/images/pic1.png" style="height:100%; cursor:default">--%>
-					<%--<!-- <iframe src="${pageContext.request.contextPath}/baseController/portal/index" frameborder="0" style="border: 0; width: 100%; height: 98%;"></iframe>  -->--%>
-				<%--</div>--%>
-			<%--</div>--%>
-		<%--</div>--%>
-		<%--<div data-options="region:'east',href:'${pageContext.request.contextPath}/baseController/layout/east.action'" title="日历" style="width: 230px; overflow: hidden;"></div>--%>
-		<%----%>
-		<div data-options="region:'center'" title="欢迎使用模板支撑智能安全监测系统" style="overflow: hidden;width: 100%;height: 100%">
-			<%--<iframe src="${pageContext.request.contextPath}/moduleBasicController/index.action" style="width: 100%;height: 100%"></iframe>--%>
-                <iframe id="panel_main" style="height: 100%;width: 100%;" scrolling="no" src="${pageContext.request.contextPath}/baseController/portal/index"></iframe>
-                <%--<iframe id="panel_main" style="height: 100%;width: 100%;" scrolling="no" src="${pageContext.request.contextPath}/moduleBasicController/index.action"></iframe>--%>
-        </div>
+		<div data-options="region:'north',href:'${pageContext.request.contextPath}/baseController/layout/north.action'" style="height: 79px; overflow: hidden;background:#b6c6f5 url('style/themes/default.jpg') repeat-y" id="bannerbg"></div>
+		<div data-options="region:'west',href:'${pageContext.request.contextPath}/baseController/layout/west.action',split:true" title="功能导航" style="width: 200px; overflow: hidden;"></div>
+		<div data-options="region:'center'" title="欢迎使用模板支撑智能安全监测系统" style="overflow: hidden;">
+			<div id="index_tabs" style="overflow: hidden;">
+				<div title="首页" data-options="border:false" style="overflow: hidden; " align="center">
+					<img src="style/images/pic1.png" style="height:100%; cursor:default">
+					<!-- <iframe src="${pageContext.request.contextPath}/baseController/portal/index" frameborder="0" style="border: 0; width: 100%; height: 98%;"></iframe>  -->
+				</div>
+			</div>
+		</div>
+		<div data-options="region:'east',href:'${pageContext.request.contextPath}/baseController/layout/east.action'" title="日历" style="width: 230px; overflow: hidden;"></div>
 		<div data-options="region:'south',href:'${pageContext.request.contextPath}/baseController/layout/south.action',border:false" style="height: 30px; overflow: hidden;"></div>
 	</div>
 

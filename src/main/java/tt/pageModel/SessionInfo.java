@@ -43,17 +43,17 @@ public class SessionInfo implements java.io.Serializable {
         return resourceSet;
     }
 
-    public void setResourceSet(Set<String> resourceSet) {
-        if (this.resourceSet == null) {
-            this.resourceSet = new LinkedHashSet<>();
-        }
-        for (String item : resourceSet) {
-            if (!resourceMap.containsKey(item)) {
-                this.resourceSet.add(Pattern.compile(item));
-            }
-
-        }
-    }
+//    public void setResourceSet(List<String> resourceList) {
+//        if (this.resourceSet == null) {
+//            this.resourceSet = new LinkedHashSet<>();
+//        }
+//        for (String item : resourceSet) {
+//            if (!resourceMap.containsKey(item)) {
+//                this.resourceSet.add(Pattern.compile(item));
+//            }
+//
+//        }
+//    }
 
     public String getName() {
         return name;
@@ -112,9 +112,10 @@ public class SessionInfo implements java.io.Serializable {
             this.resourceMap.put(pattern,info);
         }
     }
-    public int getUserAucCount() {
-        return userAucCount;
-    }
+//    public void addToResourceSet(List<Map<String>>)
+//    public int getUserAucCount() {
+//        return userAucCount;
+//    }
 
     public void setUserAucCount(int userAucCount) {
         this.userAucCount = userAucCount;

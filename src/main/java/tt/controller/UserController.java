@@ -40,13 +40,12 @@ import tt.util.mail.SendMail;
 
 /**
  * 用户控制器
- * 
+ *
  * @author
  */
 @Controller
 @RequestMapping("/userController")
-public class UserController extends BaseController
-{
+public class UserController extends BaseController {
     private static final Logger logger = Logger.getLogger(UserController.class);
 
     @Autowired
@@ -65,11 +64,11 @@ public class UserController extends BaseController
     // private SysConfigServiceI systemConfigService;
     // @Autowired
     // private PasswordHistoryServiceI passwordHistoryService;
+
     /**
      * 用户登录
-     * 
-     * @param user
-     *            用户对象
+     *
+     * @param user    用户对象
      * @param session
      * @param request
      * @return
@@ -79,8 +78,7 @@ public class UserController extends BaseController
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Json login(User user, HttpSession session, HttpServletRequest request,
                       HttpServletResponse response)
-        throws Exception
-    {
+            throws Exception {
         Json j = new Json();
         response.setCharacterEncoding("UTF-8");
         // 判断验证码是否存在
@@ -91,17 +89,14 @@ public class UserController extends BaseController
                 // 默认登录剩余次数
                 short remaining_logins = Constant.REMAINING_LOGINS;
                 TSystemConfig config = ServerListener.sysConfigMap.get("REMAINING_LOGINS");
-                if (config != null && !config.getConfContext().isEmpty())
-                {
+                if (config != null && !config.getConfContext().isEmpty()) {
                     // 查询用户每天的剩余登录次数
                     remaining_logins = Short.parseShort(config.getConfContext());
                 }
                 User u = userService.login(user);
-                if (u != null)
-                {
+                if (u != null) {
                     // 判断用户有效期
-                    if (null != u.getValiddatetime() && u.getValiddatetime().before(new Date()))
-                    {
+                    if (null != u.getValiddatetime() && u.getValiddatetime().before(new Date())) {
                         j.setMsg("您的密码超过有效期，请联系管理员");
                         j.setSuccess(false);
                         logger.error("用户【" + user.getName() + "】的密码超过有效期！");
@@ -109,20 +104,15 @@ public class UserController extends BaseController
                     }
                     // 除了系统管理员外，检查普通管理员账户是否锁定
                     boolean isAdmin = u.getId().equals("0");
-                    if (!isAdmin)
-                    {
+                    if (!isAdmin) {
                         Short lockSymbol = u.getLockSymbol();
-                        if (lockSymbol == 1)
-                        {
+                        if (lockSymbol == 1) {
                             j.setMsg("您的账户已锁定，请联系管理员或明天再登录");
                             j.setSuccess(false);
                             logger.error("用户名为【" + user.getName() + "】账户已锁定！");
                             return j;
-                        }
-                        else
-                        {
-                            if (remaining_logins != u.getRemainingLogins().shortValue())
-                            {
+                        } else {
+                            if (remaining_logins != u.getRemainingLogins().shortValue()) {
                                 u.setRemainingLogins(remaining_logins);
                                 userService.modifyRemainingLongins(u);
                             }
@@ -130,8 +120,7 @@ public class UserController extends BaseController
                     }
                     // add by zhangxiaohui 判断用户是否已经登录
                     boolean flag = onlineService.searchOnlineUser(u.getName());
-                    if (!flag)
-                    {
+                    if (!flag) {
                         j.setMsg("该用户已经登录，请您稍后登录或使用其他用户登录");
                         j.setSuccess(false);
                         logger.error("用户名为【" + user.getName() + "】的用户已经登录！");
@@ -157,18 +146,14 @@ public class UserController extends BaseController
                     // modify by kiky 2014-11-24 09:58:56
                     // 根据用户id查询用户资源的全部信息，用于记录日志
                     List<Tresource> resourceList = userService.resourceList(u.getId());
-                    Set<String> l = new HashSet<String>();
+//                    Set<String> l = new HashSet<String>();
                     Map<String, String> m = new HashMap<String, String>();
-                    if (resourceList != null && resourceList.size() != 0)
-                    {
-                        for (int i = 0; i < resourceList.size(); i++ )
-                        {
-                            Tresource temp = resourceList.get(i);
-                            l.add(temp.getUrl());
-                            m.put(temp.getUrl(), temp.getName());
-                        }
+                    if (resourceList != null && resourceList.size() != 0) {
+                        resourceList.stream().forEach((item) -> {
+                            m.put(item.getUrl(), item.getName());
+                        });
                     }
-                    sessionInfo.setResourceSet(l);
+//                    sessionInfo.setResourceSet(l);
                     sessionInfo.setResourceMap(m);
                     session1.setAttribute(ConfigUtil.getSessionInfoName(), sessionInfo);
                     // add by kiky 2014-11-21 14:04:06 记录登录日志
@@ -184,55 +169,45 @@ public class UserController extends BaseController
                     userlog.setCreateTime(new Date());
                     userlogService.add(userlog);
                     j.setObj(sessionInfo);
-                }
-                else
-                {
+                } else {
                     User user1 = userService.getUserByName(user.getName());
-                    if (user1 == null)
-                    {
+                    if (user1 == null) {
                         j.setMsg("您输入的用户名或密码不正确，请重新输入");
                         j.setSuccess(false);
                         logger.error("输入的用户名【" + user.getName() + "】或密码不正确！");
                         return j;
                     }
-                    if (!user1.getId().toString().equals("0"))
-                    {
+                    if (!user1.getId().toString().equals("0")) {
                         Short lockSysmbol = user1.getLockSymbol();
-                        if (lockSysmbol == Constant.UNLOCKUSER)
-                        {
+                        if (lockSysmbol == Constant.UNLOCKUSER) {
                             // 假如该用户没有被锁定，更新剩余登录次数-1
-                            short remainingLogins = (short)(user1.getRemainingLogins() - 1);
+                            short remainingLogins = (short) (user1.getRemainingLogins() - 1);
                             user1.setRemainingLogins(remainingLogins);
                             userService.modifyRemainingLongins(user1);
                             // 剩余登录次数为0时，修改锁定标志字段为锁定
-                            if (remainingLogins == 0)
-                            {
+                            if (remainingLogins == 0) {
                                 user1.setLockSymbol(Constant.LOCKUSER);
                                 userService.modifyLockSymbol(user1);
                                 j.setMsg("您输入的用户名或密码不正确。您的账户已锁定，请联系管理员或明天再登录");
                                 logger.error("输入的用户名【" + user.getName() + "】或密码不正确，您的账户已锁定");
                                 config = ServerListener.sysConfigMap.get("MAIL_NOTIFICATION");
                                 // 如果邮件通知开启，邮件通知超管
-                                if (config != null)
-                                {
+                                if (config != null) {
                                     if (config.getConfContext().equals(
-                                        String.valueOf(Constant.MAIL_NOTIFICATION_ON)))
-                                    {
+                                            String.valueOf(Constant.MAIL_NOTIFICATION_ON))) {
                                         SendMail sendmail = new SendMail();
                                         sendmail.SendUserLockMail(user1.getName());
                                     }
                                 }
                                 j.setSuccess(false);
                                 return j;
-                            }
-                            else
-                            {
+                            } else {
                                 j.setMsg("您输入的用户名或密码不正确。密码错误超过系统限制次数，账户将被锁定。今天你还有"
-                                         + remainingLogins + "次机会。");
+                                        + remainingLogins + "次机会。");
                                 j.setSuccess(false);
                                 logger.error("输入的用户名【" + user.getName()
-                                             + "】或密码不正确，密码错误超过系统限制次数，账户将被锁定。今天你还有"
-                                             + remainingLogins + "次机会。");
+                                        + "】或密码不正确，密码错误超过系统限制次数，账户将被锁定。今天你还有"
+                                        + remainingLogins + "次机会。");
                                 return j;
                             }
                         }
@@ -241,16 +216,12 @@ public class UserController extends BaseController
                     logger.error("输入的用户名【" + user.getName() + "】或密码不正确。");
                     j.setSuccess(false);
                 }
-            }
-            else
-            {
+            } else {
                 j.setMsg("您输入的验证码不正确，请重新输入。");
                 j.setSuccess(false);
                 logger.error("您输入的验证码不正确，请重新输入。");
             }
-        }
-        else
-        {
+        } else {
             j.setMsg("验证码超时，请重新输入。");
             j.setSuccess(false);
             logger.error("验证码超时，请重新输入。");
@@ -260,20 +231,17 @@ public class UserController extends BaseController
 
     /**
      * 退出登录
-     * 
+     *
      * @param session
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public Json logout(HttpSession session, HttpServletRequest request)
-        throws Exception
-    {
+            throws Exception {
         Json j = new Json();
-        if (session != null)
-        {
-            if (session.getAttribute(ConfigUtil.getSessionInfoName()) != null)
-            {
+        if (session != null) {
+            if (session.getAttribute(ConfigUtil.getSessionInfoName()) != null) {
                 // add by kiky 2014-11-21 14:04:06 记录退出日志
                 Userlog userlog = new Userlog();
                 userlog.setUserLogId(UUID.randomUUID().toString());
@@ -300,35 +268,32 @@ public class UserController extends BaseController
 
     /**
      * 跳转到用户管理页面
-     * 
+     *
      * @return
      */
     @RequestMapping(value = "/manager")
-    public String manager()
-    {
-        String url="/userController/dataGrid.action";
+    public String manager() {
+        String url = "/userController/dataGrid.action";
         getSessionInfo().addToResourceSet(url, "用户表格");
         return "/admin/user/user";
     }
 
     /**
      * 获取用户数据表格
-     * 
+     *
      * @param user
      * @return
      */
     @RequestMapping(value = "/dataGrid", method = RequestMethod.POST)
     @ResponseBody
     public DataGrid dataGrid(User user)
-        throws Exception
-    {
+            throws Exception {
         DataGrid dg = new DataGrid();
         List<String> validatorList = new ArrayList<String>();
         validatorList.add("page");
         validatorList.add("rows");
         validatorList.add("order");
-        if (ValidatorAnnotationBean.validatorBeanParams(user, validatorList))
-        {
+        if (ValidatorAnnotationBean.validatorBeanParams(user, validatorList)) {
             dg = userService.dataGrid(user);
         }
         return dg;
@@ -336,14 +301,13 @@ public class UserController extends BaseController
 
     /**
      * 跳转到添加用户页面
-     * 
+     *
      * @param request
      * @return
      */
     @RequestMapping(value = "/addPage", method = RequestMethod.POST)
-    public String addPage(HttpServletRequest request)
-    {
-        String url="/userController/add.action";
+    public String addPage(HttpServletRequest request) {
+        String url = "/userController/add.action";
         getSessionInfo().addToResourceSet(url, "添加用户功能");
         User u = new User();
         u.setId(UUID.randomUUID().toString());
@@ -353,25 +317,22 @@ public class UserController extends BaseController
 
     /**
      * 添加用户
-     * 
+     *
      * @return
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public Json add(User user)
-        throws Exception
-    {
+            throws Exception {
         Json j = new Json();
         List<String> validateList = new ArrayList<String>();
         validateList.add("name");
         validateList.add("email");
-        if (ValidatorAnnotationBean.validatorBeanParams(user, validateList))
-        {
+        if (ValidatorAnnotationBean.validatorBeanParams(user, validateList)) {
             Short REMAINING_LOGINS = Constant.REMAINING_LOGINS;
             // 查询用户每天的剩余登录次数
             TSystemConfig config = ServerListener.sysConfigMap.get("REMAINING_LOGINS");
-            if (config != null)
-            {
+            if (config != null) {
                 REMAINING_LOGINS = Short.parseShort(config.getConfContext());
             }
             user.setRemainingLogins(REMAINING_LOGINS);
@@ -379,9 +340,7 @@ public class UserController extends BaseController
             // 管理员类型
             j = userService.add(user);
             j.setObj(user);
-        }
-        else
-        {
+        } else {
             j.setSuccess(false);
             j.setMsg("添加失败(属性校验失败)！");
             logger.info("添加用户信息失败:(属性校验失败)！");
@@ -391,19 +350,17 @@ public class UserController extends BaseController
 
     /**
      * 删除用户
-     * 
+     *
      * @param id
      * @return
      */
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
     public Json delete(String id)
-        throws Exception
-    {
+            throws Exception {
         SessionInfo sessionInfo = getSessionInfo();
         Json j = new Json();
-        if (id != null && !id.equalsIgnoreCase(sessionInfo.getId()))
-        {// 不能删除自己
+        if (id != null && !id.equalsIgnoreCase(sessionInfo.getId())) {// 不能删除自己
             userService.delete(id);
         }
         j.setMsg("删除成功！");
@@ -414,7 +371,7 @@ public class UserController extends BaseController
     /*
     *//**
      * 批量删除用户
-     * 
+     *
      * @param ids
      *            ('0','1','2')
      * @return
@@ -426,7 +383,7 @@ public class UserController extends BaseController
      * this.delete(id); } } } j.setMsg("批量删除成功！"); j.setSuccess(true); return j; }
      *//**
      * 跳转到用户授权页面
-     * 
+     *
      * @return
      */
     /*
@@ -441,7 +398,7 @@ public class UserController extends BaseController
      * }
      *//**
      * 用户授权
-     * 
+     *
      * @param ids
      * @return
      */
@@ -458,18 +415,17 @@ public class UserController extends BaseController
 
     /**
      * 跳转到修改自己的密码页面
-     * 
+     *
      * @return
      */
     @RequestMapping(value = "/editCurrentUserPwdPage", method = RequestMethod.POST)
-    public String editCurrentUserPwdPage()
-    {
+    public String editCurrentUserPwdPage() {
         return "/user/userEditPwd";
     }
 
     /**
      * 修改自己的密码
-     * 
+     *
      * @param session
      * @param pwd
      * @return
@@ -478,42 +434,29 @@ public class UserController extends BaseController
     @ResponseBody
     public Json editCurrentUserPwd(HttpSession session, String oldPwd, String pwd,
                                    String editpwdcode)
-        throws Exception
-    {
+            throws Exception {
         Json j = new Json();
-        if (session != null)
-        {
-            SessionInfo sessionInfo = (SessionInfo)session.getAttribute(ConfigUtil.getSessionInfoName());
-            if (sessionInfo != null)
-            {
+        if (session != null) {
+            SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.getSessionInfoName());
+            if (sessionInfo != null) {
                 // 判断验证码是否存在
-                if (session.getAttribute("authCode") != null)
-                {
-                    if (editpwdcode.equalsIgnoreCase((String)session.getAttribute("authCode")))
-                    {
+                if (session.getAttribute("authCode") != null) {
+                    if (editpwdcode.equalsIgnoreCase((String) session.getAttribute("authCode"))) {
                         j = userService.editCurrentUserPwd(sessionInfo, oldPwd, pwd);
                         session.removeAttribute("authCode");
-                    }
-                    else
-                    {
+                    } else {
                         j.setMsg("您输入的验证码不正确，请重新输入。");
                         j.setSuccess(false);
                     }
-                }
-                else
-                {
+                } else {
                     j.setMsg("验证码超时，请重新输入。");
                     j.setSuccess(false);
                     logger.error("验证码超时。");
                 }
-            }
-            else
-            {
+            } else {
                 j.setMsg("登录超时，请重新登录！");
             }
-        }
-        else
-        {
+        } else {
             j.setMsg("登录超时，请重新登录！");
         }
         return j;
@@ -521,31 +464,28 @@ public class UserController extends BaseController
 
     /**
      * 跳转到显示用户权限页面
-     * 
+     *
      * @return
      */
     @RequestMapping(value = "/currentUserResourcePage", method = RequestMethod.POST)
     public String currentUserResourcePage(HttpServletRequest request, HttpSession session)
-        throws Exception
-    {
-        SessionInfo sessionInfo = (SessionInfo)session.getAttribute(ConfigUtil.getSessionInfoName());
+            throws Exception {
+        SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.getSessionInfoName());
         request.setAttribute("userResources",
-            JSON.toJSONString(resourceService.allTree(sessionInfo)));
+                JSON.toJSONString(resourceService.allTree(sessionInfo)));
         return "/user/userResource";
     }
 
     /**
      * 跳转到用户修改页面
-     * 
+     *
      * @return
      */
     @RequestMapping(value = "/editPage", method = RequestMethod.POST)
     public String editPage(HttpServletRequest request, String id)
-        throws Exception
-    {
+            throws Exception {
         User u = userService.getUser(id);
-        if (u == null)
-        {
+        if (u == null) {
             logger.error("该管理员信息不存在，请刷新页面！");
             return "/error/noInfo";
         }
@@ -553,48 +493,41 @@ public class UserController extends BaseController
         String grantUrl = "/roleController/grantRoleTree.action";
 
         getSessionInfo().addToResourceSet(editUrl, "用户修改功能");
-        getSessionInfo().addToResourceSet(grantUrl,"用户修改-角色下拉列表");
+        getSessionInfo().addToResourceSet(grantUrl, "用户修改-角色下拉列表");
         request.setAttribute("user", u);
         return "/admin/user/userEdit";
     }
 
     /**
      * 修改用户
-     * 
+     *
      * @param user
      * @return
      */
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
     public Json edit(User user)
-        throws Exception
-    {
+            throws Exception {
         Json j = new Json();
         List<String> validateList = new ArrayList<String>();
         validateList.add("id");
         validateList.add("email");
         validateList.add("lockSymbol");
-        if (ValidatorAnnotationBean.validatorBeanParams(user, validateList))
-        {
+        if (ValidatorAnnotationBean.validatorBeanParams(user, validateList)) {
             User u = userService.getUser(user.getId());
-            if (u == null)
-            {
+            if (u == null) {
                 j.setSuccess(false);
                 j.setMsg("修改失败，该管理员信息不存在，请刷新页面！！");
                 j.setObj(user);
                 logger.error("该管理员信息不存在，请刷新页面！");
-            }
-            else
-            {
+            } else {
                 String operateId = this.getSessionInfo().getId();
                 userService.edit(user, operateId);
                 j.setSuccess(true);
                 j.setMsg("修改成功！");
                 j.setObj(user);
             }
-        }
-        else
-        {
+        } else {
             j.setSuccess(false);
             j.setMsg("修改失败(属性校验失败)！");
             logger.info("修改用户信息失败:(属性校验失败)！");
@@ -604,16 +537,15 @@ public class UserController extends BaseController
 
     /**
      * add by zhangxh 2015-11-22 16:32:16
-     * 
+     *
+     * @throws Exception
      * @Description: 重置用户密码
      * @Check
-     * @throws Exception
      */
     @RequestMapping(value = "/resetPwd", method = RequestMethod.POST)
     @ResponseBody
     public Json resetPwd(String id)
-        throws Exception
-    {
+            throws Exception {
         Json j = userService.resetPwd(id);
         return j;
     }

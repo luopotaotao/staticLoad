@@ -34,10 +34,6 @@
             <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'记录编号:',required:true">
         </div>
         <div style="margin-bottom:20px">
-            <input class="easyui-textbox" name="name" style="width:100%"
-                   data-options="label:'单位名称:',required:true">
-        </div>
-        <div style="margin-bottom:20px">
             <input class="easyui-textbox" name="code" style="width:100%"
                    data-options="label:'机构编号:',required:true">
         </div>
