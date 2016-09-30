@@ -148,15 +148,20 @@ public class BaseController<T>
                              + request.getServerPort() + path + "/";
         return requestpath;
     }
+
+    protected JSONObject jsonResponse(String key,Object val){
+        JSONObject ret = new JSONObject();
+        ret.put(key,val);
+        return ret;
+    }
+
     /**
      * Flag响应
      * @param flag
      * @return
      */
     protected JSONObject flagResponse(Object flag){
-        JSONObject ret = new JSONObject();
-        ret.put("flag",flag);
-        return ret;
+        return jsonResponse("flag",flag);
     }
 
     /**

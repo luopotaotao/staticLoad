@@ -149,20 +149,21 @@ CREATE TABLE b_area(
   note VARCHAR(128) COMMENT '备注'
 ) COMMENT '行政区划';
 
-CREATE TABLE b_project(
-  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-  code VARCHAR(64) COMMENT '工程编码',
-  name VARCHAR(128) COMMENT '工程名称',
-  province_id INT COMMENT '所在省份id',
-  city_id INT COMMENT '所在市id',
-  address VARCHAR(128) COMMENT '具体地址',
-  lat FLOAT COMMENT '维度',
-  lng FLOAT COMMENT '经度',
-  constructor_id INT COMMENT '建设单位id',
-  builder_id INT COMMENT '施工单位id',
-  inspector_id INT COMMENT '监理单位id',
-  note VARCHAR(128) COMMENT '备注'
-) COMMENT '工程信息';
+CREATE TABLE `b_project` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(64) DEFAULT NULL COMMENT '工程编码',
+  `name` varchar(128) DEFAULT NULL COMMENT '工程名称',
+  `province_id` int(11) DEFAULT NULL COMMENT '所在省份id',
+  `city_id` int(11) DEFAULT NULL COMMENT '所在市id',
+  `address` varchar(128) DEFAULT NULL COMMENT '具体地址',
+  `lat` float DEFAULT NULL COMMENT '纬度',
+  `lng` float DEFAULT NULL COMMENT '经度',
+  `constructor_id` int(11) DEFAULT NULL COMMENT '建设单位id',
+  `builder_id` int(11) DEFAULT NULL COMMENT '施工单位id',
+  `inspector_id` int(11) DEFAULT NULL COMMENT '监理单位id',
+  `note` varchar(128) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='工程信息'
 
 /*Data for the table `t_business_config` */
 

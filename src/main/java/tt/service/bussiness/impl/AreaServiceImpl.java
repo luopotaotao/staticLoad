@@ -22,21 +22,23 @@ public class AreaServiceImpl implements AreaServiceI {
     }
 
     @Override
-    public int add(Area area) {
+    public Area add(Area area) {
+        Area parent = areaDaoI.get(Area.class,area.getParent().getId());
+        area.setLevel((byte) (parent.getLevel()+1));
         areaDaoI.save(area);
-        return 1;
+        return area;
     }
 
     @Override
-    public int update(Area area) {
+    public Area update(Area area) {
         areaDaoI.update(area);
-        return 1;
+        return area;
     }
 
     @Override
     public int del(Integer id) {
         Area area = load(id);
         areaDaoI.delete(area);
-        return 1;
+        return area.getId();
     }
 }

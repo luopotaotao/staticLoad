@@ -8,9 +8,9 @@ import tt.model.business.Area;
 public interface AreaServiceI {
     Area load(Integer id);
 
-    int add(Area area);
+    Area add(Area area);
 
-    int update(Area area);
+    Area update(Area area);
 
     int del(Integer id);
 }

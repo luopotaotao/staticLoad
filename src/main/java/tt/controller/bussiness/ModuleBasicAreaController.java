@@ -41,23 +41,22 @@ public class ModuleBasicAreaController extends BaseController<Area> {
     public JSONArray list(@PathVariable Integer id) {
         JSONArray ret = new JSONArray();
         Area area = areaService.load(id);
-        ret.add(JSON.toJSON(area));
+        System.out.println(area.getChildren().size());
+        ret.add(area);
         return ret;
     }
 
 //    @RequestMapping(value = "post", method = RequestMethod.POST)
     @RequestMapping(value = "post")
     @ResponseBody
-    public JSONObject add(@ModelAttribute Area area) {
-        int ret = areaService.add(area);
-        return flagResponse(1);
+    public Area add(@ModelAttribute() Area area) {
+        return areaService.add(area);
     }
 
     @RequestMapping(value = "put", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject update(@ModelAttribute Area area) {
-        int ret = areaService.update(area);
-        return flagResponse(ret);
+    public Area update(@ModelAttribute Area area) {
+        return areaService.update(area);
     }
 
     @RequestMapping(value = "delete/{id}", method = RequestMethod.POST)

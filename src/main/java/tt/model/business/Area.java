@@ -1,8 +1,8 @@
 package tt.model.business;
 
 import javax.persistence.*;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 @Table(name = "b_area")
@@ -12,7 +12,7 @@ public class Area {
     private Byte level;
     private Area parent;
     private String note;
-    private Set<Area> children = new LinkedHashSet<>();
+    private List<Area> children = new LinkedList<>();
     @Id
     @Column(name = "id")
     @GeneratedValue
@@ -45,7 +45,7 @@ public class Area {
     }
 
 
-    @ManyToOne(fetch = FetchType.EAGER,optional = true)
+    @ManyToOne(fetch = FetchType.LAZY,optional = true)
     @JoinColumn(name = "pid")
     public Area getParent() {
         return parent;
@@ -70,12 +70,12 @@ public class Area {
      *
      * @return
      */
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "parent",cascade = {CascadeType.ALL})  // TODO 需要加上mappedBy,否则报错，为啥不知道，待查
-    public Set<Area> getChildren() {
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "parent",cascade = {CascadeType.REMOVE})  // TODO 需要加上mappedBy,否则报错，为啥不知道，待查
+    public List<Area> getChildren() {
         return children;
     }
 
-    public void setChildren(Set<Area> children) {
+    public void setChildren(List<Area> children) {
         this.children = children;
     }
 }
