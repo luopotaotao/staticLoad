@@ -70,7 +70,7 @@ public class Area {
      *
      * @return
      */
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "parent",cascade = {CascadeType.REMOVE})  // TODO 需要加上mappedBy,否则报错，为啥不知道，待查
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "parent",cascade = {CascadeType.REMOVE,CascadeType.DETACH})  // TODO 需要加上mappedBy,否则报错，为啥不知道，待查
     public List<Area> getChildren() {
         return children;
     }

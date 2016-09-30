@@ -30,7 +30,7 @@ public class ProjectServiceImplTest {
 
     @Test
     public void list() throws Exception {
-
+        projectService.list(24,null,1,10);
     }
 
     @Test

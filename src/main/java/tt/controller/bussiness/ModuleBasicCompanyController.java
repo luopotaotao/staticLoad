@@ -27,6 +27,11 @@ public class ModuleBasicCompanyController extends BaseController<Company> {
         model.addAttribute("baseUrl","/moduleBasicCompanyController");
         return "business/module_basic/company";
     }
+    @RequestMapping("partial")
+    public String partial(Model model){
+        model.addAttribute("baseUrl","/moduleBasicCompanyController");
+        return "business/module_basic/company_partial";
+    }
 
     @RequestMapping(value = "get/{id}", method = RequestMethod.GET)
     @ResponseBody

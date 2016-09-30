@@ -148,9 +148,9 @@
                         style="width: 19px;height: 19px;vertical-align: -5px;">安全监测</a>
                 </li>
 
-                <li><a href="javascript:;" id="19" class="menus"><img
+                <li><a href="javascript:openModule('${pageContext.request.contextPath}/moduleProjectController/index.action');" id="19" class="menus"><img
                         src="${pageContext.request.contextPath}/style/images/icons/icon_report.png"
-                        style="width: 19px;height: 19px;vertical-align: -5px;">方案报告</a>
+                        style="width: 19px;height: 19px;vertical-align: -5px;">工程管理</a>
                 </li>
 
                 <li><a href="javascript:;" id="15" class="menus"><img

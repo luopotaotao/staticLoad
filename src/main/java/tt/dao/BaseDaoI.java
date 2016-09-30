@@ -217,6 +217,23 @@ public interface BaseDaoI<T>
      */
     public List<Object[]> findBySql(String sql, Map<String, Object> params, int page, int rows);
 
+   /**
+     * 获得结果集
+     *
+     * @param entity
+     *            映射类型
+     * @param sql
+     *            SQL语句
+     * @param params
+     *            参数
+     * @param page
+     *            要显示第几页
+     * @param rows
+     *            每页显示多少条
+     * @return 结果集
+     */
+    public List<T> findBySql(Class<T> entity,String sql, Map<String, Object> params, int page, int rows);
+
     /**
      * 执行SQL语句
      * 

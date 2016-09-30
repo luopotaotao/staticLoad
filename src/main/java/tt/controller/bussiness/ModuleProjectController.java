@@ -19,53 +19,9 @@ import java.util.List;
 @Controller
 @RequestMapping("moduleProjectController")
 public class ModuleProjectController extends BaseController<Project> {
-    @Autowired
-    private ProjectServiceI projectService;
-
     @RequestMapping("index")
     public String index(Model model){
         model.addAttribute("baseUrl","/moduleProjectController");
         return "business/module_project/index";
-    }
-
-    @RequestMapping(value = "get/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public Project get(@PathVariable int id) {
-        return projectService.get(id);
-    }
-
-    @RequestMapping(value = "query",method = RequestMethod.GET)
-    @ResponseBody
-    public JSONObject list(@RequestParam(required = false) Integer area_id,
-                           @RequestParam(required = false) String name,
-                           @RequestParam(value = "page",required = false,defaultValue = "1") Integer page,
-                           @RequestParam(value = "rows",required = false,defaultValue = "10") Integer pageSize) {
-        List<Project> list = projectService.list(area_id,name,page,pageSize);
-        long count = projectService.count(area_id,name);
-        return listResponse(count, list);
-    }
-
-//    @RequestMapping(value = "post", method = RequestMethod.POST)
-    @RequestMapping(value = "post")
-    @ResponseBody
-    public JSONObject add(@ModelAttribute Project project) {
-        int ret = projectService.add(project);
-        return flagResponse(1);
-    }
-
-    @RequestMapping(value = "put", method = RequestMethod.POST)
-    @ResponseBody
-    public JSONObject update(@ModelAttribute Project project) {
-        int ret = projectService.update(project);
-        return flagResponse(ret);
-    }
-
-    @RequestMapping(value = "delete", method = RequestMethod.POST)
-    @ResponseBody
-    public JSONObject delete(@RequestParam(value = "ids[]") int[] ids) {
-        List<Integer> list = new LinkedList<>();
-        Arrays.stream(ids).forEach(id->list.add(id));
-        int ret = projectService.del(list);
-        return flagResponse(ret);
     }
 }

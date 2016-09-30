@@ -246,6 +246,12 @@ public class BaseDaoImpl<T> implements BaseDaoI<T>
         }
         return q.setFirstResult((page - 1) * rows).setMaxResults(rows).list();
     }
+    @Override
+    public List<T> findBySql(Class<T> entity,String sql, Map<String, Object> params, int page, int rows)
+    {
+        SQLQuery q = this.getCurrentSession().createSQLQuery(sql).addEntity(entity);
+        return q.setFirstResult((page - 1) * rows).setMaxResults(rows).list();
+    }
 
     @Override
     public int executeSql(String sql)

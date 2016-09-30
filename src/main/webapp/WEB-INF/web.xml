@@ -48,6 +48,24 @@
 			<param-value>true</param-value>
 		</init-param>
 	</filter>
+	<!--Hibernate OpenSessionInView Filter-->
+	<filter>
+		<filter-name>hibernateFilter</filter-name>
+		<filter-class>
+			org.springframework.orm.hibernate4.support.OpenSessionInViewFilter
+		</filter-class>
+		<!-- singleSession默认为true,若设为false则等于没用OpenSessionInView -->
+		<init-param>
+			<param-name>singleSession</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>exclusions</param-name>
+			<param-value>/css/*,/style/*,/jslib/*,*.js,*.css,/druid*,/attached/*,*.jsp,/upload/*</param-value>
+		</init-param>
+	</filter>
+
+
 	<!-- 配置项目的编码mapping -->
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
@@ -58,7 +76,11 @@
 		<filter-name>druidWebStatFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-
+	<!--Hibernate OpenSessionInView Filter mapping-->
+	<filter-mapping>
+		<filter-name>hibernateFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	<!-- 开启spring功能 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
