@@ -9,6 +9,6 @@ import tt.model.business.Area;
  * Created by tt on 2016/9/29.
  */
 @Repository("areaDao")
-public class AreaDaoIImpl extends BaseDaoImpl<Area> implements AreaDaoI {
+public class AreaDaoImpl extends BaseDaoImpl<Area> implements AreaDaoI {
 
 }

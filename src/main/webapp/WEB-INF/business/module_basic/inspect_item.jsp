@@ -3,46 +3,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>模板支撑智能安全监测系统</title>
+    <title>检测项目</title>
     <jsp:include page="../../layout/common.jsp"></jsp:include>
 
 </head>
 <body style="width:100%">
 
 <div class="easyui-panel" style="width:30%">
-    <input class="easyui-searchbox" data-options="prompt:'请输入单位名称',menu:'#mm',searcher:function(val,typ){$('#dg').datagrid('load',{typ:typ,name:val});}" style="width:100%">
-    <div id="mm">
-        <div data-options="name:'0'">全&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;部</div>
-        <div data-options="name:'1'">建设单位</div>
-        <div data-options="name:'2'">施工单位</div>
-        <div data-options="name:'3'">监理单位</div>
-    </div>
+    <input class="easyui-searchbox" data-options="prompt:'请输入检测项目',searcher:function(val,typ){$('#dg').datagrid('load',{typ:typ,name:val});}" style="width:100%">
 </div>
 
 <table id="dg" style="width:100%"></table>
 <div id="dlg_edit" style="width:100%;max-width:400px;padding:30px 60px;">
     <form id="ff" class="easyui-form" method="post" data-options="novalidate:true" action="${baseUrl}/post.action">
         <div style="margin-bottom:20px;display: none">
-            <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'企业编号:',required:true">
+            <input class="easyui-textbox" name="id" style="width:100%">
         </div>
         <div style="margin-bottom:20px">
             <input class="easyui-textbox" name="name" style="width:100%"
-                   data-options="label:'单位名称:',required:true">
-        </div>
-        <div style="margin-bottom:20px">
-            <input class="easyui-textbox" name="contacts" style="width:100%"
-                   data-options="label:'联系人:'">
-        </div>
-        <div style="margin-bottom:20px">
-            <input class="easyui-numberbox" name="tel" style="width:100%"
-                   data-options="label:'电话号码:'">
-        </div>
-        <div style="margin-bottom:20px">
-            <select class="easyui-combobox" data-options="editable:false" name="typ" label="企业类型:" style="width:100%">
-                <option value="1">建设单位</option>
-                <option value="2">施工单位</option>
-                <option value="3">监理单位</option>
-            </select>
+                   data-options="label:'检测项目:',required:true">
         </div>
     </form>
 </div>
@@ -52,7 +31,7 @@
         $('#dg').datagrid({
             url: '${baseUrl}/query.action',
             method: 'get',
-            title: '单位管理',
+            title: '检测项目',
             iconCls: 'icon-save',
 //            width: 700,
             height: $('body').height(),
@@ -105,60 +84,17 @@
             columns: [[
                 {field: 'ck', checkbox: true},
                 {field: 'id', title: 'ID', hidden:true},
-                {field: 'name', title: '公司名称', width: 120},
-                {field: 'contacts', title: '联系人', width: 80, align: 'right'},
-                {field: 'tel', title: '电话号码', width: 80, align: 'right'},
+                {field: 'name', title: '检测项目', width: 120},
                 {
-                    field: 'typ', title: '公司类型', width: 80, align: 'right', formatter: function (val, row) {
-                    return {1: '建设单位',2:'施工单位',3:'监理单位'}[val];
+                    field: 'null', title: '管理', width: 80, align: 'right', formatter: function (val, row) {
+                    return '<a href:javascript:manageMehtods('+row['id']+');">检测方法</a>'
                 }
                 }
-            ]],
-            onHeaderContextMenu: function (e, field) {
-                e.preventDefault();
-                if (!$.cmenu) {
-                    createColumnMenu();
-                }
-                $.cmenu.menu('show', {
-                    left: e.pageX,
-                    top: e.pageY
-                });
-            }
+            ]]
         });
 
-        function createColumnMenu() {
-            $.cmenu = $('<div/>').appendTo('body');
-            $.cmenu.menu({
-                onClick: function (item) {
-                    if (item.iconCls == 'icon-ok') {
-                        $('#dg').datagrid('hideColumn', item.name);
-                        $.cmenu.menu('setIcon', {
-                            target: item.target,
-                            iconCls: 'icon-empty'
-                        });
-                    } else {
-                        $('#dg').datagrid('showColumn', item.name);
-                        $.cmenu.menu('setIcon', {
-                            target: item.target,
-                            iconCls: 'icon-ok'
-                        });
-                    }
-                }
-            });
-            var fields = $('#dg').datagrid('getColumnFields');
-            for (var i = 0; i < fields.length; i++) {
-                var field = fields[i];
-                var col = $('#dg').datagrid('getColumnOption', field);
-                $.cmenu.menu('appendItem', {
-                    text: col.title,
-                    name: field,
-                    iconCls: 'icon-ok'
-                });
-            }
-        }
-
         $('#dlg_edit').dialog({
-            title: "添加单位",
+            title: "添加",
             closed: true,
             modal: true,
             draggable: false,
@@ -236,6 +172,10 @@
             }).fail(function () {
                 $.messager.alert('提示', '删除失败!');
             });
+        }
+
+        function manageMethods(id) {
+            // TODO 管理方法弹窗
         }
     });
 

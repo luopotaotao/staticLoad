@@ -201,6 +201,16 @@ public interface BaseDaoI<T>
      * @return 结果集
      */
     public List<Object[]> findBySql(String sql, Map<String, Object> params);
+    /**
+     * 获得结果集
+     *
+     * @param sql
+     *            SQL语句
+     * @param params
+     *            参数
+     * @return 结果集
+     */
+    public List<T> findBySql(Class<T> entity,String sql, Map<String, Object> params);
 
     /**
      * 获得结果集

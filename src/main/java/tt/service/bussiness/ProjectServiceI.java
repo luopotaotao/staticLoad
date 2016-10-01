@@ -11,6 +11,7 @@ public interface ProjectServiceI{
     Project get(int id);
 
     List<Project> list(Integer area_id, String name, Integer page, Integer pageSize);
+    List<Project> list(Integer area_id);
 
     long count(Integer area_id, String name);
 

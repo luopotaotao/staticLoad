@@ -4,19 +4,7 @@
 <html>
 <head>
     <title>模板支撑智能安全监测系统</title>
-    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/laserCoreCss.css">
-    <link id="easyuiTheme" rel="stylesheet"
-          href="${pageContext.request.contextPath}/jslib/jquery-easyui-1.3.6/themes/default/easyui.css" type="text/css">
-    <link rel="stylesheet" type="text/css"
-          href="${pageContext.request.contextPath}/jslib/jquery-easyui-1.3.6/themes/icon.css">
-    <script type="text/javascript" src="${pageContext.request.contextPath}/jslib/jquery-1.8.3.js" type="text/javascript"
-            charset="utf-8"></script>
-    <script type="text/javascript"
-            src="${pageContext.request.contextPath}/jslib/jquery-easyui-1.3.6/jquery.easyui.min.js"
-            charset="utf-8"></script>
-    <script type="text/javascript"
-            src="${pageContext.request.contextPath}/jslib/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js"
-            charset="utf-8"></script>
+    <jsp:include page="../../layout/common.jsp"></jsp:include>
 
 </head>
 <body>
@@ -42,7 +30,8 @@
                    data-options="label:'机构名称:'">
         </div>
         <div style="margin-bottom:20px">
-            <select class="easyui-combobox" name="economy_typ" label="经济性质:" style="width:100%">
+            <select class="easyui-combobox" data-options="editable:false" name="economy_typ" label="经济性质:"
+                    style="width:100%">
                 <option value="1">经济性质1</option>
                 <option value="2">经济性质2</option>
                 <option value="3">经济性质3</option>
@@ -53,7 +42,8 @@
                    data-options="label:'电话号码:'">
         </div>
         <div style="margin-bottom:20px">
-            <select class="easyui-combobox" name="regist_typ" label="注册类型:" style="width:100%">
+            <select class="easyui-combobox" data-options="editable:false" name="regist_typ" label="注册类型:"
+                    style="width:100%">
                 <option value="1">注册类型1</option>
                 <option value="2">注册类型2</option>
                 <option value="3">注册类型3</option>
@@ -133,6 +123,20 @@
                     field: 'regist_typ', title: '注册类型', width: 80, align: 'right',
                     formatter: function (val, row) {
                         return {1: '建设单位', 2: '施工单位', 3: '监理单位'}[val];
+                    }
+                },
+                {
+                    field: 'null', title: '操作', width: 80, align: 'right',
+                    formatter: function (val, row) {
+                        var str_arr = [
+                            '<a href="javascript:mangePersonals(',
+                            row['id'],
+                            ');">人员</a>&nbsp;',
+                            '<a href="javascript:mangeEquipments(',
+                            row['id'],
+                            ');">设备</a>'
+                        ];
+                        return str_arr.join('');
                     }
                 }
             ]],
@@ -259,6 +263,14 @@
                 $.messager.alert('提示', '删除失败!');
             });
         }
+
+        function mangePersonals(id) {
+            // TODO 管理人员弹窗
+        }
+        function manageEquipments(id){
+            // TODO 管理设备弹窗
+        }
+
     });
 
 </script>

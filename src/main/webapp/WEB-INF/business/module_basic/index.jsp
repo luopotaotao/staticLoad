@@ -3,17 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>模板支撑智能安全监测系统</title>
-    <link id="easyuiTheme" rel="stylesheet"
-          href="${pageContext.request.contextPath}/jslib/jquery-easyui-1.3.6/themes/default/easyui.css" type="text/css">
-    <script type="text/javascript" src="${pageContext.request.contextPath}/jslib/jquery-1.8.3.js" type="text/javascript"
-            charset="utf-8"></script>
-    <script type="text/javascript"
-            src="${pageContext.request.contextPath}/jslib/jquery-easyui-1.3.6/jquery.easyui.min.js"
-            charset="utf-8"></script>
-    <script type="text/javascript"
-            src="${pageContext.request.contextPath}/jslib/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js"
-            charset="utf-8"></script>
+    <jsp:include page="../../layout/common.jsp"></jsp:include>
 
 </head>
 <body class="easyui-layout">

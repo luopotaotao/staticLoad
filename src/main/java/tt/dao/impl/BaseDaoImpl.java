@@ -234,6 +234,19 @@ public class BaseDaoImpl<T> implements BaseDaoI<T>
     }
 
     @Override
+    public List<T> findBySql(Class<T> entity, String sql, Map<String, Object> params) {
+        SQLQuery q = this.getCurrentSession().createSQLQuery(sql).addEntity(entity);
+        if (params != null && !params.isEmpty())
+        {
+            for (String key : params.keySet())
+            {
+                q.setParameter(key, params.get(key));
+            }
+        }
+        return q.list();
+    }
+
+    @Override
     public List<Object[]> findBySql(String sql, Map<String, Object> params, int page, int rows)
     {
         SQLQuery q = this.getCurrentSession().createSQLQuery(sql);

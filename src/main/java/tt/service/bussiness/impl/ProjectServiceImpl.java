@@ -31,7 +31,7 @@ public class ProjectServiceImpl implements ProjectServiceI {
         Map<String, Object> params = new HashMap<>();
         if (area_id != null && area_id != 0) {
             params.put("area_id", area_id);
-            hql.append(" AND (city_id=:area_id or province_id in (select id from Area where pid=:area_id))");
+            hql.append(" AND (province_id=:area_id or city_id in (select id from Area where pid=:area_id))");
         }
         if (name != null) {
             params.put("name", "%" + name + "%");
@@ -82,6 +82,17 @@ public class ProjectServiceImpl implements ProjectServiceI {
             if (item.getCity() != null) item.getCity().setChildren(null);
         });
         return list;
+    }
+
+    @Override
+    public List<Project> list(Integer area_id) {
+        StringBuilder hql = new StringBuilder("from Project WHERE 1=1");
+        Map<String, Object> params = new HashMap<>();
+        if (area_id != null && area_id != 0) {
+            params.put("area_id", area_id);
+            hql.append(" AND (province_id=:area_id or city_id=:area_id)");
+        }
+        return projectDao.find(hql.toString(),params);
     }
 
     @Override

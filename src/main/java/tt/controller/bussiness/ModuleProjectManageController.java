@@ -27,6 +27,10 @@ public class ModuleProjectManageController extends BaseController<Project> {
         model.addAttribute("baseUrl","/moduleProjectManageController");
         return "business/module_project/project";
     }
+    @RequestMapping("selectCoordinate")
+    public String selectCoordinate(){
+        return "business/module_project/project_select_coordinate";
+    }
 
     @RequestMapping(value = "get/{id}", method = RequestMethod.GET)
     @ResponseBody

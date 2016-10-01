@@ -105,11 +105,11 @@
                     href: '${pageContext.request.contextPath}/userController/currentUserResourcePage.action'
                 });
     }
-    function openModule(url){
+    function openModule(url) {
         var $iframe = $('#panel_main');
         var old_url = $iframe.attr('src');
-        if(old_url!=url){
-            $iframe.attr('src',url);
+        if (old_url != url) {
+            $iframe.attr('src', url);
         }
     }
 </script>
@@ -130,72 +130,78 @@
 <%--<div onclick="currentUserResource();" data-options="iconCls:'user'">我的权限</div>--%>
 <%--</div>--%>
 
+<style type="text/css">
+    .module_icon {
+        width: 19px;
+        height: 19px;
+        /*vertical-align: -5px;*/
+    }
+</style>
+<div style="background: rgb(38,150,203); height: 59px">
+    <div style="float: left;width: 36%;height: 59px;min-width: 460px;">
+        <img src="${pageContext.request.contextPath}/style/images/icons/txt_logo.png"
+             style="margin:8px 0px 0px 5px">
+    </div>
+    <div style="float: left;width: 48%;height: 59px;min-width: 500px;">
 
-<div data-options="region:'north'"
-     style="height: 79px; overflow: hidden;background:#b6c6f5 url('${pageContext.request.contextPath}/style/themes/default.jpg') repeat-y"
-     id="bannerbg">
-    <div style="background: rgb(38,150,203); height: 79px">
-        <div style="float: left;width: 36%;height: 79px;min-width: 460px;">
-            <img src="${pageContext.request.contextPath}/style/images/icons/txt_logo.png"
-                 style="margin:18px 0px 0px 5px">
-        </div>
-        <div style="float: left;width: 38%;height: 79px;min-width: 500px;">
-
-            <ul class="topul">
-
-                <li><a href="javascript:openModule('');" id="16" class="menus"><img
+        <ul class="topul">
+            <li>
+                <a href="javascript:openModule('${pageContext.request.contextPath}/moduleOverviewController/index.action');"
+                   id="16" class="menus"><img
                         src="${pageContext.request.contextPath}/style/images/icons/icon_monitor.png"
-                        style="width: 19px;height: 19px;vertical-align: -5px;">安全监测</a>
-                </li>
+                        class="module_icon">工程概览</a>
+            </li>
 
-                <li><a href="javascript:openModule('${pageContext.request.contextPath}/moduleProjectController/index.action');" id="19" class="menus"><img
+            <li>
+                <a href="javascript:openModule('${pageContext.request.contextPath}/moduleProjectController/index.action');"
+                   id="19" class="menus"><img
                         src="${pageContext.request.contextPath}/style/images/icons/icon_report.png"
-                        style="width: 19px;height: 19px;vertical-align: -5px;">工程管理</a>
-                </li>
+                        class="module_icon">工程管理</a>
+            </li>
 
-                <li><a href="javascript:;" id="15" class="menus"><img
-                        src="${pageContext.request.contextPath}/style/images/icons/icon_user.png"
-                        style="width: 19px;height: 19px;vertical-align: -5px;">用户管理</a>
-                </li>
-                <li><a href="javascript:openModule('${pageContext.request.contextPath}/moduleBasicController/index.action')" id="18"
-                       class="menus"><img src="${pageContext.request.contextPath}/style/images/icons/icon_report.png"
-                                          style="width: 19px;height: 19px;vertical-align: -5px;">基础信息</a>
-                </li>
+            <li><a href="javascript:;" id="15" class="menus"><img
+                    src="${pageContext.request.contextPath}/style/images/icons/icon_user.png"
+                    class="module_icon">用户管理</a>
+            </li>
+            <li><a href="javascript:openModule('${pageContext.request.contextPath}/moduleBasicController/index.action')"
+                   id="18"
+                   class="menus"><img src="${pageContext.request.contextPath}/style/images/icons/icon_report.png"
+                                      class="module_icon">基础信息</a>
+            </li>
 
-                <li><a href="javascript:;" id="6" class="menus"><img
-                        src="${pageContext.request.contextPath}/style/images/icons/icon_config.png"
-                        style="width: 19px;height: 19px;vertical-align: -5px;">平台设置</a>
-                </li>
+            <li><a href="javascript:;" id="6" class="menus"><img
+                    src="${pageContext.request.contextPath}/style/images/icons/icon_config.png"
+                    class="module_icon">平台设置</a>
+            </li>
 
-                <li><a href="javascript:;" id="1" class="menus onnav"><img
-                        src="${pageContext.request.contextPath}/style/images/icons/icon_about.png"
-                        style="width: 19px;height: 19px;vertical-align: -5px;">关于平台</a>
-                </li>
+            <li><a href="javascript:;" id="1" class="menus onnav"><img
+                    src="${pageContext.request.contextPath}/style/images/icons/icon_about.png"
+                    class="module_icon">检测信息</a>
+            </li>
 
-            </ul>
-
-        </div>
-        <div style="float: right;width: 25%;height: 79px;">
-            <div style="margin-top: 10px;text-align: right;margin-right: 5px;">
-
-                <div>当前用户：
-                    <c:if test="${sessionInfo.id != null}">
-                        ${sessionInfo.name}
-                    </c:if>
-                </div>
-
-                <div style="margin-top: 10px">
-                    <a href="javascript:;" onclick=""
-                       style="color: white;"><img
-                            src="${pageContext.request.contextPath}/style/images/icons/icon_user_sm.png"
-                            style="width: 18px;height: 18px;vertical-align: -5px;">账号信息</a>&nbsp;
-                    <a href="javascript:;" onclick="logoutFun();" style="color: white;"><img
-                            src="${pageContext.request.contextPath}/style/images/icons/icon_logout.png"
-                            style="width: 18px;height: 18px;vertical-align: -5px;">退出系统</a>
-                </div>
-            </div>
-        </div>
-
+        </ul>
 
     </div>
+    <div style="float: right;width: 15%;height: 59px;">
+        <div style="margin-top: 10px;text-align: right;margin-right: 5px;">
+
+            <div>当前用户：
+                <c:if test="${sessionInfo.id != null}">
+                    ${sessionInfo.name}
+                </c:if>
+            </div>
+
+            <div style="margin-top: 10px">
+                <a href="javascript:;" onclick=""
+                   style="color: white;"><img
+                        src="${pageContext.request.contextPath}/style/images/icons/icon_user_sm.png"
+                        style="width: 18px;height: 18px;vertical-align: -5px;">账号信息</a>&nbsp;
+                <a href="javascript:;" onclick="logoutFun();" style="color: white;"><img
+                        src="${pageContext.request.contextPath}/style/images/icons/icon_logout.png"
+                        style="width: 18px;height: 18px;vertical-align: -5px;">退出系统</a>
+            </div>
+        </div>
+    </div>
+
+
 </div>

@@ -29,7 +29,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/jslib/jquery-easyui-portal/jquery.portal.js" charset="utf-8"></script>
 
 <!-- 扩展EasyUI -->
-<script type="text/javascript" src="${pageContext.request.contextPath}/jslib/extEasyUI.js?v=201305241044" charset="utf-8"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/jslib/extEasyUI.extEasyUI_.js?v=201305241044" charset="utf-8"></script>
 
 <!-- 扩展EasyUI Icon -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/style/extEasyUIIcon.css?v=201305301906" type="text/css">
