@@ -118,14 +118,42 @@ CREATE TABLE `t_user_log` (
   PRIMARY KEY (`USER_LOG_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-CREATE TABLE b_institution(
-  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-  code VARCHAR(64) COMMENT '机构编号',
-  name VARCHAR(128) COMMENT '机构名称',
-  economy_typ TINYINT COMMENT '经济性质',
-  certificate_code VARCHAR(128) COMMENT '资质证书编号',
-  regist_typ VARCHAR(64) COMMENT '注册类型'
-) COMMENT '机构信息';
+drop table b_institution;
+CREATE TABLE `b_institution` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(64) DEFAULT NULL COMMENT '机构编号',
+  `name` varchar(128) DEFAULT NULL COMMENT '机构名称',
+  `economy_typ` tinyint(4) DEFAULT NULL COMMENT '经济性质',
+  `certificate_code` varchar(128) DEFAULT NULL COMMENT '资质证书编号',
+  `certificate_img` varchar(128) DEFAULT NULL COMMENT '资质证书图片id',
+  `certificate_date` date  DEFAULT NULL COMMENT '发证日期',
+  `expired_date` date DEFAULT NULL COMMENT '有效日期',
+	`national_lib_certificate_code` varchar(128) DEFAULT NULL COMMENT '国家实验室认可证书号',
+	`website` varchar(128) DEFAULT NULL COMMENT '网址',
+	`measure_certificate_code` varchar(128) DEFAULT NULL COMMENT '计量认证书号',
+	`certificate_institution` varchar(128) DEFAULT NULL COMMENT '发证机关',
+	`certificate_attachment` varchar(128) DEFAULT NULL COMMENT '计量认证合格证书及附件',
+	`register_money` varchar(128) DEFAULT NULL COMMENT '注册资金(万元)',
+	`register_type` tinyint DEFAULT NULL COMMENT '注册类型',
+	`investor` varchar(128) DEFAULT NULL COMMENT '投资人',
+	`legal_representative_name` varchar(128) DEFAULT NULL COMMENT '法定代表人',
+	`legal_representative_duty` varchar(128) DEFAULT NULL COMMENT '职务',
+	`legal_representative_title` varchar(128) DEFAULT NULL COMMENT '职称',
+	`tech_representative` varchar(128) DEFAULT NULL COMMENT '技术负责人',
+	`tech_representative_duty` varchar(128) DEFAULT NULL COMMENT '职务',
+	`tech_representative_title` varchar(128) DEFAULT NULL COMMENT '职称',
+	`personal_count` varchar(128) DEFAULT NULL COMMENT '在编人员总数',
+	`professional_count` varchar(128) DEFAULT NULL COMMENT '专业技术人员数',
+	`professional_senior_count` varchar(128) DEFAULT NULL COMMENT '高级职称人数',
+	`professional_intermidate_count` varchar(128) DEFAULT NULL COMMENT '中级职称人数',
+	`professional_junior_count` varchar(128) DEFAULT NULL COMMENT '初级职称人数',
+	`equipment_count` int DEFAULT NULL COMMENT '一起设备总台(套)数',
+	`gross_area` float DEFAULT NULL COMMENT '房屋建筑面积(平方米)',
+	`office_area` float DEFAULT NULL COMMENT '办公面积(平方米)',
+
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='机构信息'
+
 CREATE TABLE b_equipment(
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
   code VARCHAR(64) COMMENT '设备编号',
@@ -141,6 +169,11 @@ CREATE TABLE b_inspector(
   institution_id INT COMMENT '所属机构id'
 ) COMMENT '设备信息';
 
+CREATE TABLE `b_inspect_item` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 CREATE TABLE b_area(
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
   name VARCHAR(128) COMMENT '名称',
@@ -174,6 +207,76 @@ CREATE TABLE `b_project` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='工程信息';
 CREATE OR REPLACE VIEW template.b_overview AS select `template`.`b_area`.`id` AS `id`,`template`.`b_area`.`name` AS `name`,`template`.`b_area`.`level` AS `level`,`template`.`b_area`.`pid` AS `pid`,`template`.`b_area`.`note` AS `note`,`project_count`.`count` AS `count` from (`template`.`b_area` left join (select 0 AS `area_id`,count(0) AS `count` from `template`.`b_project` union all select `template`.`b_project`.`province_id` AS `area_id`,count(0) AS `count(*)` from `template`.`b_project` group by `template`.`b_project`.`province_id` union all select `template`.`b_project`.`city_id` AS `city_id`,count(0) AS `count(*)` from `template`.`b_project` group by `template`.`b_project`.`city_id`) `project_count` on((`template`.`b_area`.`id` = `project_count`.`area_id`)));
+
+--工程登记(监督机构?监督编号?)
+drop table b_inspect_project;
+create table b_inspect_project(
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+  `project_id` int(11) DEFAULT NULL COMMENT '工程id'
+)  ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='工程登记';
+--检测方案
+create table b_inspect_scheme(
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+  inspect_project_id int(11) NOT NULL COMMENT '工程登记id',
+  basement_lev tinyint  COMMENT '低级基础设计等级(甲级,乙级,丙级)',
+  safety_lev tinyint COMMENT '建筑安全等级(一级,二级,三级)',
+  pile_count  int(11) COMMENT '总桩数',
+  institution_id  int(11) COMMENT '检测单位',
+  approval_file_id  int(11) COMMENT '检测方案审批表(attachment_id)',
+  inspect_file_id  int(11) COMMENT '检测方案附件(attachment_id)'
+)  ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='检测方案';
+
+--	检测方案-检测项目关联表
+	create table b_r_inspect_scheme_item(
+		`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+		inspect_scheme_id int(11) NOT NULL COMMENT '检测方案id',
+		inspect_item_id int(11) NOT NULL COMMENT '检测项目id'
+	)  ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='检测方案-检测项目关联表';
+--	检测项目(静载,超声波...)
+	create table b_inspect_item(
+		`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+		`name` varchar(128) DEFAULT NULL COMMENT '检测项目名称'
+	) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='检测项目';
+--	附件
+--	create table attachement(
+--		id,
+--		name,
+--		typ --文件类型
+--	) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='附件';
+
+--检测计划
+create table b_inspect_plan(
+	`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+	inspect_scheme_id int(11) COMMENT '流水号(检测方案id)',
+	inspect_plan_item_id  int(11) COMMENT '检测方案-检测项目关联表id',
+	inspect_method_id int(11) COMMENT '检测方法id',
+	inspector_id int(11) COMMENT '检测负责人id',
+	equipment_id int(11) COMMENT '检测设备id',
+	start_time date,
+	end_time date,
+	marjor_inspector_id int(11) COMMENT '主检人id(需要关联取电话)',
+	assistant_inspector_id int(11) COMMENT '副检人id(需要关联取电话)',
+	note varchar(128) COMMENT '备注'
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='检测计划';
+--	检测方法
+		create table b_inspect_method(
+    		`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+    		`name` varchar(128) DEFAULT NULL COMMENT '检测项目名称'
+    	) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='检测项目';
+---	检测项目-检测方法关联表
+	create table b_r_inspect_item_method(
+		`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+		item_id int(11) NOT NULL COMMENT '检测项目id',
+		method_id int(11) NOT NULL COMMENT '检测方法id'
+--	) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='检测项目-检测方法关联表';
+
+
+
+
+
+
+
+
   /*Data for the table `t_business_config` */
 
 insert  into `t_business_config`(`CONF_ID`,`CONF_NAME`,`CONF_CONTEXT`,`CONF_DESC`,`UPDATE_TIME`,`ADMIN_NAME`,`DATA_VER_FLAG`) values ('RATE_ALYPAY','支付宝渠道费率','6','支付宝渠道费率，单位&permil;','2016-06-01 14:14:25','tecom',1),('RATE_BAIDUPAY','百度支付渠道费率','3','百度支付渠道费率，单位&permil;','2016-06-01 14:15:55','tecom',2),('RATE_UNIONPAY','银联渠道费率','8','银联渠道费率，单位&permil;','2016-06-01 14:17:20','tecom',2),('RATE_WEIXIN','微信支付渠道费率','3','微信支付渠道费率，单位&permil;','2016-06-01 14:16:22','zhaoqiaoning',2),('VERIFICATIONCODE_TIMEOUT','短信验证码超时时间','5','单位为分钟(最大为20)','2016-06-01 14:23:04','tecom',1);

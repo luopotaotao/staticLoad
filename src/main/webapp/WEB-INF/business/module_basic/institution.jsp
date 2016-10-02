@@ -42,7 +42,7 @@
                    data-options="label:'电话号码:'">
         </div>
         <div style="margin-bottom:20px">
-            <select class="easyui-combobox" data-options="editable:false" name="regist_typ" label="注册类型:"
+            <select class="easyui-combobox" data-options="editable:false" name="register_type" label="注册类型:"
                     style="width:100%">
                 <option value="1">注册类型1</option>
                 <option value="2">注册类型2</option>
@@ -120,7 +120,7 @@
                 },
                 {field: 'certificate_code', title: '资质证书编号', width: 80, align: 'right'},
                 {
-                    field: 'regist_typ', title: '注册类型', width: 80, align: 'right',
+                    field: 'register_type', title: '注册类型', width: 80, align: 'right',
                     formatter: function (val, row) {
                         return {1: '建设单位', 2: '施工单位', 3: '监理单位'}[val];
                     }

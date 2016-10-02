@@ -10,7 +10,7 @@ public class Institution implements java.io.Serializable {
     private String name;
     private Byte economy_typ;
     private String certificate_code;
-    private Byte regist_typ;
+    private Byte register_type;
 
     @Id
     @Column(name = "id")
@@ -64,12 +64,12 @@ public class Institution implements java.io.Serializable {
     }
 
     @Basic
-    @Column(name = "regist_typ")
-    public Byte getRegist_typ() {
-        return regist_typ;
+    @Column(name = "register_type")
+    public Byte getregister_type() {
+        return register_type;
     }
 
-    public void setRegist_typ(Byte regist_typ) {
-        this.regist_typ = regist_typ;
+    public void setregister_type(Byte register_type) {
+        this.register_type = register_type;
     }
 }
