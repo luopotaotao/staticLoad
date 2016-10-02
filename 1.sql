@@ -148,7 +148,16 @@ CREATE TABLE b_area(
   pid INT COMMENT '父节点id',
   note VARCHAR(128) COMMENT '备注'
 ) COMMENT '行政区划';
-
+CREATE TABLE `b_company` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) DEFAULT NULL,
+  `column_3` int(11) DEFAULT NULL,
+  `contacts` varchar(64) DEFAULT NULL,
+  `tel` varchar(32) DEFAULT NULL,
+  `column_6` int(11) DEFAULT NULL,
+  `typ` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 CREATE TABLE `b_project` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(64) DEFAULT NULL COMMENT '工程编码',
@@ -163,7 +172,7 @@ CREATE TABLE `b_project` (
   `inspector_id` int(11) DEFAULT NULL COMMENT '监理单位id',
   `note` varchar(128) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='工程信息'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='工程信息';
 
 /*Data for the table `t_business_config` */
 
