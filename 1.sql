@@ -163,7 +163,7 @@ CREATE TABLE `b_project` (
   `inspector_id` int(11) DEFAULT NULL COMMENT '监理单位id',
   `note` varchar(128) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='工程信息'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='工程信息';
 
 /*Data for the table `t_business_config` */
 
