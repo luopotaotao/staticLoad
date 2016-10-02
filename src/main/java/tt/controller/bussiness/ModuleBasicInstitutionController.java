@@ -29,7 +29,11 @@ public class ModuleBasicInstitutionController extends BaseController<Institution
         model.addAttribute("baseUrl","/moduleBasicInstitutionController");
         return "business/module_basic/institution";
     }
-
+    @RequestMapping("{institution_id}/personal")
+    public String personal(@PathVariable Integer institution_id,Model model){
+        model.addAttribute("institution_id",institution_id);
+        return "business/module_basic/institution_personal";
+    }
     @RequestMapping(value = "get/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Institution get(@PathVariable int id) {

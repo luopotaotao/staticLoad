@@ -1,0 +1,224 @@
+地址  http://121.33.208.196:9000/jg_xcjz/toLogin.action
+账号 3htest
+密码 123456
+
+检测机构
+institution(
+	id int auto increment primary key, 
+	机构编号
+	机构名称
+	经济性质
+	资质证书编号
+	资质证书
+	发证日期
+	有效日期
+	国家实验室认可证书号
+	网址
+	计量认证书号
+	发证机关
+	计量认证合格证书及附件
+	注册资金(万元)
+	注册类型
+	投资人
+	法定代表人
+	职务
+	职称
+	技术负责人
+	职务
+	职称
+	在编人员总数
+	专业技术人员数
+	高级职称人数
+	中级职称人数
+	初级职称人数
+	一起设备总台(套)数
+	房屋建筑面积(平方米)
+	办公面积(平方米)
+	
+	备注
+)
+
+CREATE TABLE `b_institution` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(64) DEFAULT NULL COMMENT '机构编号',
+  `name` varchar(128) DEFAULT NULL COMMENT '机构名称',
+  `economy_typ` tinyint(4) DEFAULT NULL COMMENT '经济性质',
+  `certificate_code` varchar(128) DEFAULT NULL COMMENT '资质证书编号',
+  `certificate_img` varchar(128) DEFAULT NULL COMMENT '资质证书图片id',
+  `certificate_date` date  DEFAULT NULL COMMENT '发证日期',
+  `expired_date` date DEFAULT NULL COMMENT '有效日期
+	`national_lib_certificate_code` varchar(128) DEFAULT NULL COMMENT '国家实验室认可证书号
+	`website` varchar(128) DEFAULT NULL COMMENT '网址
+	`measure_certificate_code` varchar(128) DEFAULT NULL COMMENT '计量认证书号
+	`certificate_institution` varchar(128) DEFAULT NULL COMMENT '发证机关
+	`certificate_attachment` varchar(128) DEFAULT NULL COMMENT '计量认证合格证书及附件
+	`register_money` varchar(128) DEFAULT NULL COMMENT '注册资金(万元)
+	`register_type` varchar(128) DEFAULT NULL COMMENT '注册类型
+	`investor` varchar(128) DEFAULT NULL COMMENT '投资人
+	`legal_representative_name` varchar(128) DEFAULT NULL COMMENT '法定代表人
+	`legal_representative_duty` varchar(128) DEFAULT NULL COMMENT '职务
+	`legal_representative_title` varchar(128) DEFAULT NULL COMMENT '职称
+	`tech_representative` varchar(128) DEFAULT NULL COMMENT '技术负责人
+	`tech_representative_duty` varchar(128) DEFAULT NULL COMMENT '职务
+	`tech_representative_title` varchar(128) DEFAULT NULL COMMENT '职称
+	`personal_count` varchar(128) DEFAULT NULL COMMENT '在编人员总数
+	`professional_count` varchar(128) DEFAULT NULL COMMENT '专业技术人员数
+	`professional_senior_count` varchar(128) DEFAULT NULL COMMENT '高级职称人数
+	`professional_intermidate_count` varchar(128) DEFAULT NULL COMMENT '中级职称人数
+	`professional_junior_count` varchar(128) DEFAULT NULL COMMENT '初级职称人数
+	`equipment` varchar(128) DEFAULT NULL COMMENT '一起设备总台(套)数
+	`` varchar(128) DEFAULT NULL COMMENT '房屋建筑面积(平方米)
+	`` varchar(128) DEFAULT NULL COMMENT '办公面积(平方米)
+  `regist_typ` tinyint(4) DEFAULT NULL COMMENT '注册类型',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='机构信息'
+
+检测人员
+inspector(
+	id,
+	name,
+	gender,
+	....,
+	institution_id --检测机构id
+)
+
+检测设备
+equipment(
+	id,
+	name,
+	code,
+	...,
+	institution_id --检测机构
+)
+
+
+单位
+Company(
+	id,
+	name, --单位名称
+	contacts, --单位联系人
+	tel, --电话号码,
+	typ --单位类型(建设单位,施工单位,监理单位) 
+)
+
+行政区划
+说明:为树状结构,为统一处理省和直辖市,将其定义为自定义树,每个级别上面都可以关联项目
+area(
+	id int auto increment primary key, 
+	name varchar(64),	--行政区划名称
+	level tinyint,		--节点层次
+	pid int				--父节点id
+);
+
+工程
+
+project(
+	id int auto increment primary key,
+	code varchar(64),--工程编码
+	name,--工程名称
+	site,--工程地址
+	area_id int, --所属区域id(行政区划id)
+	positionA,--地址经度
+	positionL,--地址纬度
+	construct_company_id,--建设单位
+	build_company_id,--施工单位
+	inspect_company_id,--监理单位
+)
+
+工程登记(监督机构?监督编号?)
+inspect_project(
+	id,
+	project_id,--工程id
+)
+检测方案
+inspect_scheme(
+	id,
+	inspect_project_id,--工程登记id
+	basement_lev --低级基础设计等级(甲级,乙级,丙级)
+	safety_lev --建筑安全等级(一级,二级,三级),
+	pile_count --总桩数,
+	institution_id --检测单位,
+	approval_file_id --检测方案审批表(attachement_id)
+	inspect_file_id --检测方案附件(attachement_id)
+
+)
+	检测方案-检测项目关联表
+	r_inspect_scheme_item(
+		id,
+		inspect_scheme_id --检测方案id
+		inspect_item_id --检测项目id
+	)
+	检测项目(静载,超声波...)
+	inspect_item(
+		id,
+		name
+	)
+	附件
+	attachement(
+		id,
+		name,
+		typ --文件类型
+	)
+
+检测计划
+inspect_plan(
+	id,
+	inspect_scheme_id,--流水号(检测方案id)
+	inspect_plan_item_id --检测方案-检测项目关联表id,
+	inspect_method_id,--检测方法id 
+	inspector_id,--检测负责人id
+	equipment_id,--检测设备id
+	start_time,
+	end_time,
+	marjor_inspector_id,主检人id(需要关联取电话)
+	assistant_inspector_id,副检人id(需要关联取电话)
+	note --备注
+	
+)
+	检测方法
+	inspect_method(
+		id,
+		name
+	)
+	检测项目-检测方法关联表
+	r_inspect_item_method(
+		id,
+		item_id,	--检测项目id
+		mehtod_id	--检测方法id
+	)
+
+数据这里需要讨论
+inspect_data(
+	id,
+	inspect_plan_id --检测计划id
+	timestamp --时间
+	
+)
+
+
+操作流程
+一:录入基础信息
+	1.行政区划信息
+	2.单位信息
+	3.检测机构
+	4.检测机构设备
+	5.检测机构人员
+	6.检测项目信息
+	7.检测方法信息
+	8.传感器设备信息(其中包含所属工程)
+二:建立工程
+	录入工程基础信息,
+	将其挂到某个行政区划节点上
+	选择步骤一中填写的单位,包括建设单位,施工单位,监理单位
+三:检测方案
+	1工程登记:选择步骤2中建立的工程,建立一条工程登记信息
+	2.建立检测方案:
+		每个工程登记信息下可建立多条检测方案信息,
+		选择工程登记信息->填写工程方案基础信息->选择检测项目,上传相关附件
+	3.建立检测计划:
+		每个检测方案下可建立多条检测计划信息,
+		信息填写流程:选择工程登记信息->选择检测方案信息->选择检测项目->选择检测方法
+四:数据处理
+	直接从数据库中取接口服务整理好的数据,根据其设备编号,列出相关工程下的所有工程登记信息
+	->选择检测方案->选择检测计划->执行数据与检测计划的关联
+五:统计分析展示
