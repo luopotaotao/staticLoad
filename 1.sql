@@ -173,8 +173,8 @@ CREATE TABLE `b_project` (
   `note` varchar(128) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='工程信息';
-
-/*Data for the table `t_business_config` */
+CREATE OR REPLACE VIEW template.b_overview AS select `template`.`b_area`.`id` AS `id`,`template`.`b_area`.`name` AS `name`,`template`.`b_area`.`level` AS `level`,`template`.`b_area`.`pid` AS `pid`,`template`.`b_area`.`note` AS `note`,`project_count`.`count` AS `count` from (`template`.`b_area` left join (select 0 AS `area_id`,count(0) AS `count` from `template`.`b_project` union all select `template`.`b_project`.`province_id` AS `area_id`,count(0) AS `count(*)` from `template`.`b_project` group by `template`.`b_project`.`province_id` union all select `template`.`b_project`.`city_id` AS `city_id`,count(0) AS `count(*)` from `template`.`b_project` group by `template`.`b_project`.`city_id`) `project_count` on((`template`.`b_area`.`id` = `project_count`.`area_id`)));
+  /*Data for the table `t_business_config` */
 
 insert  into `t_business_config`(`CONF_ID`,`CONF_NAME`,`CONF_CONTEXT`,`CONF_DESC`,`UPDATE_TIME`,`ADMIN_NAME`,`DATA_VER_FLAG`) values ('RATE_ALYPAY','支付宝渠道费率','6','支付宝渠道费率，单位&permil;','2016-06-01 14:14:25','tecom',1),('RATE_BAIDUPAY','百度支付渠道费率','3','百度支付渠道费率，单位&permil;','2016-06-01 14:15:55','tecom',2),('RATE_UNIONPAY','银联渠道费率','8','银联渠道费率，单位&permil;','2016-06-01 14:17:20','tecom',2),('RATE_WEIXIN','微信支付渠道费率','3','微信支付渠道费率，单位&permil;','2016-06-01 14:16:22','zhaoqiaoning',2),('VERIFICATIONCODE_TIMEOUT','短信验证码超时时间','5','单位为分钟(最大为20)','2016-06-01 14:23:04','tecom',1);
 
