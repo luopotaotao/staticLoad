@@ -152,7 +152,7 @@ CREATE TABLE `b_institution` (
 	`office_area` float DEFAULT NULL COMMENT '办公面积(平方米)',
 
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='机构信息'
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='机构信息';
 
 CREATE TABLE b_equipment(
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
@@ -208,13 +208,13 @@ CREATE TABLE `b_project` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='工程信息';
 CREATE OR REPLACE VIEW template.b_overview AS select `template`.`b_area`.`id` AS `id`,`template`.`b_area`.`name` AS `name`,`template`.`b_area`.`level` AS `level`,`template`.`b_area`.`pid` AS `pid`,`template`.`b_area`.`note` AS `note`,`project_count`.`count` AS `count` from (`template`.`b_area` left join (select 0 AS `area_id`,count(0) AS `count` from `template`.`b_project` union all select `template`.`b_project`.`province_id` AS `area_id`,count(0) AS `count(*)` from `template`.`b_project` group by `template`.`b_project`.`province_id` union all select `template`.`b_project`.`city_id` AS `city_id`,count(0) AS `count(*)` from `template`.`b_project` group by `template`.`b_project`.`city_id`) `project_count` on((`template`.`b_area`.`id` = `project_count`.`area_id`)));
 
---工程登记(监督机构?监督编号?)
+-- 工程登记(监督机构?监督编号?)
 drop table b_inspect_project;
 create table b_inspect_project(
   `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
   `project_id` int(11) DEFAULT NULL COMMENT '工程id'
 )  ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='工程登记';
---检测方案
+-- 检测方案
 create table b_inspect_scheme(
   `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
   inspect_project_id int(11) NOT NULL COMMENT '工程登记id',
@@ -244,7 +244,7 @@ create table b_inspect_scheme(
 --		typ --文件类型
 --	) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='附件';
 
---检测计划
+-- 检测计划
 create table b_inspect_plan(
 	`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 	inspect_scheme_id int(11) COMMENT '流水号(检测方案id)',
@@ -263,18 +263,33 @@ create table b_inspect_plan(
     		`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
     		`name` varchar(128) DEFAULT NULL COMMENT '检测项目名称'
     	) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='检测项目';
----	检测项目-检测方法关联表
+--	检测项目-检测方法关联表
 	create table b_r_inspect_item_method(
 		`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 		item_id int(11) NOT NULL COMMENT '检测项目id',
 		method_id int(11) NOT NULL COMMENT '检测方法id'
---	) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='检测项目-检测方法关联表';
+	) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='检测项目-检测方法关联表';
 
 
+-- 数据这里需要讨论
+create table b_inspect_data(
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+  `PRG` varchar(128) DEFAULT NULL COMMENT '工程:(编号和工程名称)',
+  `STZH` varchar(128) DEFAULT NULL COMMENT '桩号:(数字)',
+  `DevNB` varchar(128) DEFAULT NULL COMMENT '设备编号数据:(字符和数字)',
+  `PRS` varchar(128) DEFAULT NULL COMMENT '压力',
+  `HZJC` varchar(128) DEFAULT NULL COMMENT '荷载',
+  `WYJC` varchar(128) DEFAULT NULL COMMENT '位移,(1#:     ,2#:     3#,)',
+  `GPS` varchar(128) DEFAULT NULL COMMENT 'GPS信息( xxx.xxxxxxx,xxx.xxxxxxx,经纬度)',
+  `Devstr` varchar(128) DEFAULT NULL COMMENT '设备类型代号(GZM,JZCS,FCJC,等,后续添加)',
+  `Time` varchar(128) DEFAULT NULL COMMENT '数据上传时间(YYYY-MM-DD-HH-MM)',
+  `QJX` varchar(128) DEFAULT NULL COMMENT '倾角数据QJX,',
+  `NDSJ` varchar(128) DEFAULT NULL COMMENT '挠度数据NDSJ',
+  `DevST` tinyint DEFAULT NULL COMMENT '设备状态0:,1:,2:,3:'
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='传感器原始数据';
 
 
-
-
+CREATE OR REPLACE VIEW template.b_overview AS select `template`.`b_area`.`id` AS `id`,`template`.`b_area`.`name` AS `name`,`template`.`b_area`.`level` AS `level`,`template`.`b_area`.`pid` AS `pid`,`template`.`b_area`.`note` AS `note`,`project_count`.`count` AS `count` from (`template`.`b_area` left join (select 0 AS `area_id`,count(0) AS `count` from `template`.`b_project` union all select `template`.`b_project`.`province_id` AS `area_id`,count(0) AS `count(*)` from `template`.`b_project` group by `template`.`b_project`.`province_id` union all select `template`.`b_project`.`city_id` AS `city_id`,count(0) AS `count(*)` from `template`.`b_project` group by `template`.`b_project`.`city_id`) `project_count` on((`template`.`b_area`.`id` = `project_count`.`area_id`)));
 
 
   /*Data for the table `t_business_config` */

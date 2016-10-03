@@ -188,13 +188,22 @@ create table b_inspect_plan(
 		method_id int(11) NOT NULL COMMENT '检测方法id'
 	) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='检测项目-检测方法关联表';
 
-数据这里需要讨论
-inspect_data(
-	id,
-	inspect_plan_id --检测计划id
-	timestamp --时间
-	
-)
+-- 数据这里需要讨论
+create table b_inspect_data(
+	 `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+	 `PRG` varchar(128) DEFAULT NULL COMMENT '工程:(编号和工程名称)',
+     `STZH` varchar(128) DEFAULT NULL COMMENT '桩号:(数字)',
+     `DevNB` varchar(128) DEFAULT NULL COMMENT '设备编号数据:(字符和数字)',
+     `PRS` varchar(128) DEFAULT NULL COMMENT '压力',
+     `HZJC` varchar(128) DEFAULT NULL COMMENT '荷载',
+     `WYJC` varchar(128) DEFAULT NULL COMMENT '位移,(1#:     ,2#:     3#,)',
+     `GPS` varchar(128) DEFAULT NULL COMMENT 'GPS信息( xxx.xxxxxxx,xxx.xxxxxxx,经纬度)',
+     `Devstr` varchar(128) DEFAULT NULL COMMENT '设备类型代号(GZM,JZCS,FCJC,等,后续添加)',
+     `Time` varchar(128) DEFAULT NULL COMMENT '数据上传时间(YYYY-MM-DD-HH-MM)',
+     `QJX` varchar(128) DEFAULT NULL COMMENT '倾角数据QJX,',
+     `NDSJ` varchar(128) DEFAULT NULL COMMENT '挠度数据NDSJ',
+     `DevST` tinyint DEFAULT NULL COMMENT '设备状态0:,1:,2:,3:'
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='传感器原始数据';
 
 
 

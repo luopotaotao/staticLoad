@@ -37,7 +37,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/baseController")
 public class BaseController<T>
 {
-
     private static final Logger logger = Logger.getLogger(BaseController.class);
 
     @InitBinder
