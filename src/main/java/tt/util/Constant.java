@@ -2,7 +2,7 @@ package tt.util;
 
 public class Constant
 {
-
+    public final static String HEAD = "$LRK01$";
     public static final String ADD_SUCCESS = "添加成功!";
 
     public static final String ADD_FAIL = "添加失败!";
