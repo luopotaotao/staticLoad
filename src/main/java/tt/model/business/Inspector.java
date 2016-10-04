@@ -2,10 +2,11 @@ package tt.model.business;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 public class Inspector {
-  private Long id;
+  private Integer id;
 
   private String name;
   private Long gender;
@@ -13,12 +14,13 @@ public class Inspector {
   private Long institution_id;
 
   @Id
+  @GeneratedValue
   @Column(name = "id")
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 

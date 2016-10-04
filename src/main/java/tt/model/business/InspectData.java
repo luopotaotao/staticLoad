@@ -3,150 +3,193 @@ package tt.model.business;
 import javax.persistence.*;
 
 @Entity
-@Table(name="b_inspect_data")
+@Table(name = "b_inspect_data")
 public class InspectData {
-  private Long id;
-  private String prg;
-  private String stzh;
-  private String devnb;
-  private String prs;
-  private String hzjc;
-  private String wyjc;
-  private String gps;
-  private String devstr;
-  private String time;
-  private String qjx;
-  private String ndsj;
-  private Long devst;
+    private Integer id;
+    private String prg;
+    private String stzh;
+    private String devnb;
+    private String prs;
+    private String hzjc;
+    private String wyjc;
+    private Float lat;
+    private Float lng;
+    private String devstr;
+    private String time;
+    private String qjx;
+    private String ndsj;
+    private Byte devst;
+    private Boolean typ;
 
-  @Basic
-  @Column(name="id")
-  @GeneratedValue
-  public Long getId() {
-    return id;
-  }
+    @Id
+    @Column(name="id")
+    @GeneratedValue
+    public Integer getId() {
+        return id;
+    }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-  @Basic
-  @Column(name="prg")
-  public String getPrg() {
-    return prg;
-  }
+    @Basic
+    @Column(name="prg")
+    public String getPrg() {
+        return prg;
+    }
 
-  public void setPrg(String prg) {
-    this.prg = prg;
-  }
+    public void setPrg(String prg) {
+        this.prg = prg;
+    }
 
-  @Basic
-  @Column(name="stzh")
-  public String getStzh() {
-    return stzh;
-  }
+    @Basic
+    @Column(name="stzh")
+    public String getStzh() {
+        return stzh;
+    }
 
-  public void setStzh(String stzh) {
-    this.stzh = stzh;
-  }
+    public void setStzh(String stzh) {
+        this.stzh = stzh;
+    }
 
-  @Basic
-  @Column(name="devnb")
-  public String getDevnb() {
-    return devnb;
-  }
+    @Basic
+    @Column(name="devnb")
+    public String getDevnb() {
+        return devnb;
+    }
 
-  public void setDevnb(String devnb) {
-    this.devnb = devnb;
-  }
+    public void setDevnb(String devnb) {
+        this.devnb = devnb;
+    }
 
-  @Basic
-  @Column(name="prs")
-  public String getPrs() {
-    return prs;
-  }
+    @Basic
+    @Column(name="prs")
+    public String getPrs() {
+        return prs;
+    }
 
-  public void setPrs(String prs) {
-    this.prs = prs;
-  }
+    public void setPrs(String prs) {
+        this.prs = prs;
+    }
 
-  @Basic
-  @Column(name="hzjc")
-  public String getHzjc() {
-    return hzjc;
-  }
+    @Basic
+    @Column(name="hzjc")
+    public String getHzjc() {
+        return hzjc;
+    }
 
-  public void setHzjc(String hzjc) {
-    this.hzjc = hzjc;
-  }
+    public void setHzjc(String hzjc) {
+        this.hzjc = hzjc;
+    }
 
-  @Basic
-  @Column(name="wyjc")
-  public String getWyjc() {
-    return wyjc;
-  }
+    @Basic
+    @Column(name="wyjc")
+    public String getWyjc() {
+        return wyjc;
+    }
 
-  public void setWyjc(String wyjc) {
-    this.wyjc = wyjc;
-  }
+    public void setWyjc(String wyjc) {
+        this.wyjc = wyjc;
+    }
 
-  @Basic
-  @Column(name="gps")
-  public String getGps() {
-    return gps;
-  }
+    @Basic
+    @Column(name="lat")
+    public Float getLat() {
+        return lat;
+    }
 
-  public void setGps(String gps) {
-    this.gps = gps;
-  }
+    public void setLat(Float lat) {
+        this.lat = lat;
+    }
 
-  @Basic
-  @Column(name="devstr")
-  public String getDevstr() {
-    return devstr;
-  }
+    @Basic
+    @Column(name="lng")
+    public Float getLng() {
+        return lng;
+    }
 
-  public void setDevstr(String devstr) {
-    this.devstr = devstr;
-  }
+    public void setLng(Float lng) {
+        this.lng = lng;
+    }
 
-  @Basic
-  @Column(name="time")
-  public String getTime() {
-    return time;
-  }
+    @Basic
+    @Column(name="devstr")
+    public String getDevstr() {
+        return devstr;
+    }
 
-  public void setTime(String time) {
-    this.time = time;
-  }
+    public void setDevstr(String devstr) {
+        this.devstr = devstr;
+    }
 
-  @Basic
-  @Column(name="qjx")
-  public String getQjx() {
-    return qjx;
-  }
+    @Basic
+    @Column(name="time")
+    public String getTime() {
+        return time;
+    }
 
-  public void setQjx(String qjx) {
-    this.qjx = qjx;
-  }
+    public void setTime(String time) {
+        this.time = time;
+    }
 
-  @Basic
-  @Column(name="ndsj")
-  public String getNdsj() {
-    return ndsj;
-  }
+    @Basic
+    @Column(name="qjx")
+    public String getQjx() {
+        return qjx;
+    }
 
-  public void setNdsj(String ndsj) {
-    this.ndsj = ndsj;
-  }
+    public void setQjx(String qjx) {
+        this.qjx = qjx;
+    }
 
-  @Basic
-  @Column(name="devst")
-  public Long getDevst() {
-    return devst;
-  }
+    @Basic
+    @Column(name="ndsj")
+    public String getNdsj() {
+        return ndsj;
+    }
 
-  public void setDevst(Long devst) {
-    this.devst = devst;
-  }
+    public void setNdsj(String ndsj) {
+        this.ndsj = ndsj;
+    }
+
+    @Basic
+    @Column(name="devst")
+    public Byte getDevst() {
+        return devst;
+    }
+
+    public void setDevst(Byte devst) {
+        this.devst = devst;
+    }
+
+    @Basic
+    @Column(name="typ")
+    public Boolean getTyp() {
+        return typ;
+    }
+
+    public void setTyp(Boolean typ) {
+        this.typ = typ;
+    }
+
+    @Override
+    public String toString() {
+        return "InspectData{" +
+                "id=" + id +
+                ", prg='" + prg + '\'' +
+                ", stzh='" + stzh + '\'' +
+                ", devnb='" + devnb + '\'' +
+                ", prs='" + prs + '\'' +
+                ", hzjc='" + hzjc + '\'' +
+                ", wyjc='" + wyjc + '\'' +
+                ", lat=" + lat +
+                ", lng=" + lng +
+                ", devstr='" + devstr + '\'' +
+                ", time='" + time + '\'' +
+                ", qjx='" + qjx + '\'' +
+                ", ndsj='" + ndsj + '\'' +
+                ", devst=" + devst +
+                ", typ=" + typ +
+                '}';
+    }
 }
