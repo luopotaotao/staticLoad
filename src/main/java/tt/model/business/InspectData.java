@@ -1,24 +1,53 @@
 package tt.model.business;
 
 import javax.persistence.*;
-
+import com.alibaba.fastjson.annotation.JSONField;
 @Entity
 @Table(name = "b_inspect_data")
 public class InspectData {
+
     private Integer id;
+
+    @JSONField(name = "PRG")
     private String prg;
+
+    @JSONField(name = "STZH")
     private String stzh;
+
+    @JSONField(name = "DevNB")
     private String devnb;
+
+    @JSONField(name="PRS")
     private String prs;
+
+    @JSONField(name="HZJC")
     private String hzjc;
+
+    @JSONField(name="WYJC")
     private String wyjc;
+
+    @JSONField(name="lat")
     private Float lat;
+
+    @JSONField(name="lng")
     private Float lng;
+
+    @JSONField(name="Devstr")
     private String devstr;
+
+    @JSONField(name="Time")
     private String time;
+
+    @JSONField(name="QJX")
     private String qjx;
+
+    @JSONField(name="NDSJ")
     private String ndsj;
+
+    @JSONField(name="DevST")
     private Byte devst;
+
+    @JSONField(name="LoadFlag")
     private Boolean typ;
 
     @Id
