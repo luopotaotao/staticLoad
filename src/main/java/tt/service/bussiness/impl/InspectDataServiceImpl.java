@@ -20,7 +20,7 @@ public class InspectDataServiceImpl implements InspectDataServiceI {
 
     @Override
     public List<InspectData> list(Integer PRG,Integer STZH) {
-        String hql = "from InspectData WHERE PRG=:PRG and STZH=:STZH";
+        String hql = "from InspectData WHERE PRG=:PRG and STZH=:STZH order by PRG,STZH,Time";
         Map<String,Object> params = new HashMap<>();
         params.put("PRG",PRG);
         params.put("STZH",STZH);
