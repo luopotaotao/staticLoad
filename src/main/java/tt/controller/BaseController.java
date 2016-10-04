@@ -175,4 +175,15 @@ public class BaseController<T>
         ret.put("rows",list);
         return ret;
     }
+    /**
+     * 列表响应
+     * @param list 当前页数据
+     * @return
+     */
+    protected JSONObject listResponse(List<T> list){
+        JSONObject ret = new JSONObject();
+        ret.put("total",list.size());
+        ret.put("rows",list);
+        return ret;
+    }
 }

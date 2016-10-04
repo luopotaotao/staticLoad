@@ -1,22 +1,22 @@
 package tt.model.business;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "b_equipment")
 public class Equipment {
-  private Long id;
+  private Integer id;
   private String code;
   private String name;
-  private Long institution_id;
+  private Integer institution_id;
 
   @Id
   @Column(name = "id")
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -42,11 +42,11 @@ public class Equipment {
 
   @Basic
   @Column(name = "institution_id")
-  public Long getInstitution_id() {
+  public Integer getInstitution_id() {
     return institution_id;
   }
 
-  public void setInstitution_id(Long institution_id) {
+  public void setInstitution_id(Integer institution_id) {
     this.institution_id = institution_id;
   }
 }
