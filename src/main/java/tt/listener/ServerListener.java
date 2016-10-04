@@ -32,7 +32,7 @@ public class ServerListener implements ServletContextListener, HttpSessionListen
     private static ApplicationContext ctx = null;
 
     // 存放项目真实路径
-    private static String path;
+    private static String path = ServerListener.class.getClassLoader().getResource("/").getPath().substring(0, (ServerListener.class.getClassLoader().getResource("/").getPath().length() - 16));
 
     // 全局缓存系统参数
     public static ConcurrentHashMap<String, TSystemConfig> sysConfigMap = new ConcurrentHashMap<String, TSystemConfig>();
