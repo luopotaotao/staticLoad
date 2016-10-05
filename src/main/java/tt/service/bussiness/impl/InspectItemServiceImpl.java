@@ -25,16 +25,9 @@ public class InspectItemServiceImpl implements InspectItemServiceI {
 
     @Override
     public List<InspectItem> list(String name, int page, int PageSize) {
-        StringBuilder hql = new StringBuilder("from InspectItem WHERE 1=1");
-        Map<String,Object> params = new HashMap<>();
-        if(name!=null){
-            params.put("name","%"+name+"%");
-            hql.append(" AND name like :name ");
-        }
-        List<InspectItem> ret = inspectItemDao.find(hql.toString(), params, page, PageSize);
+        List<InspectItem> ret = inspectItemDao.list(name, page, PageSize);
         return ret;
     }
-
     @Override
     public long count(String name) {
         StringBuilder hql = new StringBuilder("select count(*) from InspectItem WHERE 1=1");

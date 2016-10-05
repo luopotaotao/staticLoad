@@ -3,38 +3,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>检测项目</title>
+    <title>模板支撑智能安全监测系统</title>
     <jsp:include page="../../layout/common.jsp"></jsp:include>
 
 </head>
-<body style="width:100%">
+<body>
 
 <div class="easyui-panel" style="width:30%">
-    <input class="easyui-searchbox" data-options="prompt:'请输入检测项目',searcher:function(val,typ){$('#dg').datagrid('load',{typ:typ,name:val});}" style="width:100%">
+    <input class="easyui-searchbox"
+           data-options="prompt:'请输入检测项目名称',searcher:function(val){$('#dg').datagrid('load',{name:val});}"
+           style="width:100%">
 </div>
 
 <table id="dg" style="width:100%"></table>
 <div id="dlg_edit" style="width:100%;max-width:400px;padding:30px 60px;">
     <form id="ff" class="easyui-form" method="post" data-options="novalidate:true" action="${baseUrl}/post.action">
         <div style="margin-bottom:20px;display: none">
-            <input class="easyui-textbox" name="id" style="width:100%">
+            <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'记录编号:',required:true">
         </div>
         <div style="margin-bottom:20px">
             <input class="easyui-textbox" name="name" style="width:100%"
-                   data-options="label:'检测项目:',required:true">
+                   data-options="label:'检测项目:'">
         </div>
     </form>
 </div>
+<div id="details"></div>
+
 <script type="text/javascript">
     $(function () {
         var baseUrl = '/';
         $('#dg').datagrid({
             url: '${baseUrl}/query.action',
             method: 'get',
-            title: '检测项目',
+            title: '检测项目管理',
             iconCls: 'icon-save',
 //            width: 700,
-            height: $('body').height(),
+            height: $(document).height(),
             fitColumns: true,
             singleSelect: false,
             pagination: true,
@@ -83,18 +87,65 @@
             }],
             columns: [[
                 {field: 'ck', checkbox: true},
-                {field: 'id', title: 'ID', hidden:true},
-                {field: 'name', title: '检测项目', width: 120},
+                {field: 'id', title: 'ID', hidden: true},
+                {field: 'name', title: '检测项目', width: 80, align: 'center'},
                 {
-                    field: 'null', title: '管理', width: 80, align: 'right', formatter: function (val, row) {
-                    return '<a href:javascript:manageMehtods('+row['id']+');">检测方法</a>'
+                    field: 'null', title: '操作', width: 80, align: 'center',
+                    formatter: function (val, row) {
+                        var str_arr = [
+                            '<a href="javascript:manageMethods(',
+                            row['id'],
+                            ');">检测方法</a>'
+                        ];
+                        return str_arr.join('');
+                    }
                 }
+            ]],
+            onHeaderContextMenu: function (e, field) {
+                e.preventDefault();
+                if (!$.cmenu) {
+                    createColumnMenu();
                 }
-            ]]
+                $.cmenu.menu('show', {
+                    left: e.pageX,
+                    top: e.pageY
+                });
+            }
         });
 
+        function createColumnMenu() {
+            $.cmenu = $('<div/>').appendTo('body');
+            $.cmenu.menu({
+                onClick: function (item) {
+                    if (item.iconCls == 'icon-ok') {
+                        $('#dg').datagrid('hideColumn', item.name);
+                        $.cmenu.menu('setIcon', {
+                            target: item.target,
+                            iconCls: 'icon-empty'
+                        });
+                    } else {
+                        $('#dg').datagrid('showColumn', item.name);
+                        $.cmenu.menu('setIcon', {
+                            target: item.target,
+                            iconCls: 'icon-ok'
+                        });
+                    }
+                }
+            });
+            var fields = $('#dg').datagrid('getColumnFields');
+            for (var i = 0; i < fields.length; i++) {
+                var field = fields[i];
+                var col = $('#dg').datagrid('getColumnOption', field);
+                $.cmenu.menu('appendItem', {
+                    text: col.title,
+                    name: field,
+                    iconCls: 'icon-ok'
+                });
+            }
+        }
+
         $('#dlg_edit').dialog({
-            title: "添加",
+            title: "添加检测项目",
             closed: true,
             modal: true,
             draggable: false,
@@ -173,11 +224,23 @@
                 $.messager.alert('提示', '删除失败!');
             });
         }
-
-        function manageMethods(id) {
-            // TODO 管理方法弹窗
-        }
     });
+    function openDialog(title,href){
+        $('#details').dialog({
+            title: title,
+            width: $('body').width()*0.8,
+            height: $(document).height()*0.8,
+            closed: false,
+            cache: false,
+            href: href,
+            modal: true
+        });
+    }
+    
+    function manageMethods(id) {
+        var href = '/moduleBasicInspectMethodController/index/'+id+'.action';
+        openDialog('检测方法管理',href);
+    }
 
 </script>
 </body>

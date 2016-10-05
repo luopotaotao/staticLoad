@@ -17,22 +17,18 @@ import java.util.List;
  * Created by tt on 2016/10/2.
  */
 @Controller
-@RequestMapping("moduleInspectMethodController")
-public class ModuleInspectMethodController extends BaseController<InspectMethod> {
+@RequestMapping("moduleBasicInspectMethodController")
+public class ModuleBasicInspectMethodController extends BaseController<InspectMethod> {
     @Autowired
     private InspectMethodServiceI inspectMethodService;
-    
-    @RequestMapping("index")
-    public String index(Model model){
-        model.addAttribute("baseUrl","/moduleBasicInspectMethodController");
-        return "business/module_inspect/inspectMethod";
+
+    @RequestMapping("index/{inspect_item_id}")
+    public String index(@PathVariable Integer inspect_item_id, Model model) {
+        model.addAttribute("baseUrl", "/moduleBasicInspectMethodController");
+        model.addAttribute("inspect_item_id", inspect_item_id);
+        return "business/module_basic/inspect_method";
     }
 
-    @RequestMapping("partial")
-    public String partial(Model model){
-        model.addAttribute("baseUrl","/moduleBasicInspectMethodController");
-        return "business/module_basic/company_partial";
-    }
 
     @RequestMapping(value = "get/{id}", method = RequestMethod.GET)
     @ResponseBody
@@ -40,16 +36,14 @@ public class ModuleInspectMethodController extends BaseController<InspectMethod>
         return inspectMethodService.get(id);
     }
 
-    @RequestMapping(value = "query",method = RequestMethod.GET)
+    @RequestMapping(value = "{inspect_item_id}/query", method = RequestMethod.GET)
     @ResponseBody
-    public JSONObject list(@RequestParam(required = false) Byte typ,
-                           @RequestParam(required = false) String name,
-                           @RequestParam(value = "page",required = false,defaultValue = "1") Integer page,
-                           @RequestParam(value = "rows",required = false,defaultValue = "10") Integer pageSize) {
+    public JSONObject list(
+            @PathVariable Integer inspect_item_id,
+            @RequestParam(required = false) String name) {
 
-        List<InspectMethod> list = inspectMethodService.list(name,page,pageSize);
-        long count = inspectMethodService.count(name);
-        return listResponse(count, list);
+        List<InspectMethod> list = inspectMethodService.list(inspect_item_id,name);
+        return listResponse(list);
     }
 
     //    @RequestMapping(value = "post", method = RequestMethod.POST)
@@ -71,7 +65,7 @@ public class ModuleInspectMethodController extends BaseController<InspectMethod>
     @ResponseBody
     public JSONObject delete(@RequestParam(value = "ids[]") int[] ids) {
         List<Integer> list = new LinkedList<>();
-        Arrays.stream(ids).forEach(id->list.add(id));
+        Arrays.stream(ids).forEach(id -> list.add(id));
         int ret = inspectMethodService.del(list);
         return flagResponse(ret);
     }

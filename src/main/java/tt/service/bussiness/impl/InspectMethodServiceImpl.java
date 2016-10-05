@@ -24,26 +24,9 @@ public class InspectMethodServiceImpl implements InspectMethodServiceI {
     }
 
     @Override
-    public List<InspectMethod> list(String name, int page, int PageSize) {
-        StringBuilder hql = new StringBuilder("from InspectMethod WHERE 1=1");
-        Map<String,Object> params = new HashMap<>();
-        if(name!=null){
-            params.put("name","%"+name+"%");
-            hql.append(" AND name like :name ");
-        }
-        List<InspectMethod> ret = inspectMethodDao.find(hql.toString(), params, page, PageSize);
-        return ret;
-    }
+    public List<InspectMethod> list(Integer inspect_item_id,String name) {
 
-    @Override
-    public long count(String name) {
-        StringBuilder hql = new StringBuilder("select count(*) from InspectMethod WHERE 1=1");
-        Map<String,Object> params = new HashMap<>();
-        if(name!=null){
-            params.put("name","%"+name+"%");
-            hql.append(" AND name like :name ");
-        }
-        long ret = inspectMethodDao.count(hql.toString(), params);
+        List<InspectMethod> ret = inspectMethodDao.list(inspect_item_id,name);
         return ret;
     }
 

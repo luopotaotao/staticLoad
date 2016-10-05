@@ -16,7 +16,6 @@
 
 <script>
     $(function () {
-        console.log('run..............................');
         var tree_data = [{
             "id": 1,
             "text": "基础信息",
@@ -34,7 +33,7 @@
                 }, {
                     "id": 122,
                     "text": "检测项目",
-                    "url": "/myTest/operationsPage.html"
+                    "url": "/moduleBasicInspectItemController/index.action"
                 }]
             }, {
                 "id": 13,

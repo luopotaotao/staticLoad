@@ -9,8 +9,7 @@ import java.util.List;
  */
 public interface InspectMethodServiceI {
     InspectMethod get(int id);
-    List<InspectMethod> list(String name, int page, int PageSize);
-    long count(String name);
+    List<InspectMethod> list(Integer inspect_item_id,String name);
     int add(InspectMethod inspectMethod);
     int del(List<Integer> ids);
     int update(InspectMethod inspectMethod);

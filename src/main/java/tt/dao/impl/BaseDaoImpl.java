@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.*;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.SimpleExpression;
 import tt.dao.BaseDaoI;
 import tt.pageModel.PageHelper;
 
@@ -354,5 +356,13 @@ public class BaseDaoImpl<T> implements BaseDaoI<T>
         param = param.replace("_", "[_]");
         param = param.replace("%", "[%]");
         return param;
+    }
+    protected boolean isEmpty(String val){
+        return val==null||val.trim().isEmpty();
+    }
+    protected SimpleExpression like(String field, String val){
+        StringBuilder val_like = new StringBuilder("%");
+        val_like.append(val.trim()).append("%");
+        return Restrictions.like(field,val_like.toString());
     }
 }

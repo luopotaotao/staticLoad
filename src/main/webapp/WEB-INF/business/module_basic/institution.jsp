@@ -131,7 +131,7 @@
                     field: 'null', title: '操作', width: 80, align: 'right',
                     formatter: function (val, row) {
                         var str_arr = [
-                            '<a href="javascript:mangeInspectors(',
+                            '<a href="javascript:manageInspectors(',
                             row['id'],
                             ');">人员</a>&nbsp;',
                             '<a href="javascript:manageEquipments(',
@@ -282,7 +282,7 @@
     }
 
 
-    function mangeInspectors(id) {
+    function manageInspectors(id) {
         var href = '/moduleBasicInspectorController/index/'+id+'.action';
         openDialog('人员管理',href);
     }
