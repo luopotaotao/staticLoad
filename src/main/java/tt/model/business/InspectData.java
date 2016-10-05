@@ -18,13 +18,13 @@ public class InspectData {
     private String devnb;
 
     @JSONField(name="PRS")
-    private String prs;
+    private String prs_str;
 
     @JSONField(name="HZJC")
-    private String hzjc;
+    private String hzjc_str;
 
     @JSONField(name="WYJC")
-    private String wyjc;
+    private String wyjc_str;
 
     @JSONField(name="lat")
     private Float lat;
@@ -39,16 +39,19 @@ public class InspectData {
     private String time;
 
     @JSONField(name="QJX")
-    private String qjx;
+    private String qjx_str;
 
     @JSONField(name="NDSJ")
-    private String ndsj;
+    private String ndsj_str;
 
     @JSONField(name="DevST")
     private Byte devst;
 
+    @JSONField(name="SETprs")
+    private String setprs;
+
     @JSONField(name="LoadFlag")
-    private Boolean typ;
+    private Boolean loadFlag;
 
     @Id
     @Column(name="id")
@@ -66,6 +69,7 @@ public class InspectData {
     public String getPrg() {
         return prg;
     }
+
 
     public void setPrg(String prg) {
         this.prg = prg;
@@ -93,32 +97,50 @@ public class InspectData {
 
     @Basic
     @Column(name="prs")
-    public String getPrs() {
-        return prs;
+    public String getPrs_str() {
+        return prs_str;
     }
-
-    public void setPrs(String prs) {
-        this.prs = prs;
+    @Transient
+    public String[] getPrs(){
+        if(prs_str!=null&&prs_str.length()>0){
+            return prs_str.split(",");
+        }
+        return null;
+    }
+    public void setPrs_str(String prs_str) {
+        this.prs_str = prs_str;
     }
 
     @Basic
     @Column(name="hzjc")
-    public String getHzjc() {
-        return hzjc;
+    public String getHzjc_str() {
+        return hzjc_str;
     }
-
-    public void setHzjc(String hzjc) {
-        this.hzjc = hzjc;
+    @Transient
+    public String[] getHzjc(){
+        if(hzjc_str!=null&&hzjc_str.length()>0){
+            return hzjc_str.split(",");
+        }
+        return null;
+    }
+    public void setHzjc_str(String hzjc_str) {
+        this.hzjc_str = hzjc_str;
     }
 
     @Basic
     @Column(name="wyjc")
-    public String getWyjc() {
-        return wyjc;
+    public String getWyjc_str() {
+        return wyjc_str;
     }
-
-    public void setWyjc(String wyjc) {
-        this.wyjc = wyjc;
+    @Transient
+    public String[] getWyjc(){
+        if(wyjc_str!=null&&wyjc_str.length()>0){
+            return wyjc_str.split(",");
+        }
+        return null;
+    }
+    public void setWyjc_str(String wyjc_str) {
+        this.wyjc_str = wyjc_str;
     }
 
     @Basic
@@ -163,22 +185,34 @@ public class InspectData {
 
     @Basic
     @Column(name="qjx")
-    public String getQjx() {
-        return qjx;
+    public String getQjx_str() {
+        return qjx_str;
     }
-
-    public void setQjx(String qjx) {
-        this.qjx = qjx;
+    @Transient
+    public String[] getQjx(){
+        if(qjx_str!=null&&qjx_str.length()>0){
+            return qjx_str.split(",");
+        }
+        return null;
+    }
+    public void setQjx_str(String qjx_str) {
+        this.qjx_str = qjx_str;
     }
 
     @Basic
     @Column(name="ndsj")
-    public String getNdsj() {
-        return ndsj;
+    public String getNdsj_str() {
+        return ndsj_str;
     }
-
-    public void setNdsj(String ndsj) {
-        this.ndsj = ndsj;
+    @Transient
+    public String[] getNdsj(){
+        if(ndsj_str!=null&&ndsj_str.length()>0){
+            return ndsj_str.split(",");
+        }
+        return null;
+    }
+    public void setNdsj_str(String ndsj_str) {
+        this.ndsj_str = ndsj_str;
     }
 
     @Basic
@@ -192,33 +226,21 @@ public class InspectData {
     }
 
     @Basic
-    @Column(name="typ")
-    public Boolean getTyp() {
-        return typ;
+    @Column(name="Setprs")
+    public String getSetprs() {
+        return setprs;
     }
 
-    public void setTyp(Boolean typ) {
-        this.typ = typ;
+    public void setSetprs(String setprs) {
+        this.setprs = setprs;
+    }
+    @Basic
+    @Column(name="LoadFlag")
+    public Boolean getLoadFlag() {
+        return loadFlag;
     }
 
-    @Override
-    public String toString() {
-        return "InspectData{" +
-                "id=" + id +
-                ", prg='" + prg + '\'' +
-                ", stzh='" + stzh + '\'' +
-                ", devnb='" + devnb + '\'' +
-                ", prs='" + prs + '\'' +
-                ", hzjc='" + hzjc + '\'' +
-                ", wyjc='" + wyjc + '\'' +
-                ", lat=" + lat +
-                ", lng=" + lng +
-                ", devstr='" + devstr + '\'' +
-                ", time='" + time + '\'' +
-                ", qjx='" + qjx + '\'' +
-                ", ndsj='" + ndsj + '\'' +
-                ", devst=" + devst +
-                ", typ=" + typ +
-                '}';
+    public void setLoadFlag(Boolean loadFlag) {
+        this.loadFlag = loadFlag;
     }
 }

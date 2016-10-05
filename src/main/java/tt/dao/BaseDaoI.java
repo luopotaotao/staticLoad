@@ -1,6 +1,5 @@
 package tt.dao;
 
-
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.List;
@@ -100,6 +99,16 @@ public interface BaseDaoI<T>
      * @return List
      */
     public List<T> find(String hql, Map<String, Object> params);
+    /**
+     * 获得Map列表
+     *
+     * @param hql
+     *            HQL语句
+     * @param params
+     *            参数
+     * @return List
+     */
+    public List<Map<String,Object>> findList(String hql, Map<String,Object> params);
 
     /**
      * 获得分页后的对象列表

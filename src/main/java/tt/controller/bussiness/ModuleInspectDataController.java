@@ -12,6 +12,7 @@ import tt.service.bussiness.InspectDataServiceI;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by tt on 2016/10/2.
@@ -25,7 +26,7 @@ public class ModuleInspectDataController extends BaseController<InspectData> {
     @RequestMapping("index")
     public String index(Model model){
         model.addAttribute("baseUrl","/moduleBasicInspectDataController");
-        return "business/module_inspect/inspectProject";
+        return "business/module_data/index";
     }
 
     /**
@@ -36,8 +37,7 @@ public class ModuleInspectDataController extends BaseController<InspectData> {
      */
     @RequestMapping(value = "query/{PRG}/{STZH}",method = RequestMethod.GET)
     @ResponseBody
-    public JSONObject list(@PathVariable Integer PRG,@PathVariable Integer STZH) {
-
+    public JSONObject list(@PathVariable String PRG,@PathVariable String STZH) {
         List<InspectData> list = inspectProjectService.list(PRG,STZH);
         return listResponse( list);
     }
@@ -49,5 +49,10 @@ public class ModuleInspectDataController extends BaseController<InspectData> {
         Arrays.stream(ids).forEach(id->list.add(id));
         int ret = inspectProjectService.del(list);
         return flagResponse(ret);
+    }
+    @RequestMapping(value = "keys",method = RequestMethod.GET)
+    @ResponseBody
+    public List<Map<String,Object>> listKeys(){
+       return inspectProjectService.loadKeys();
     }
 }

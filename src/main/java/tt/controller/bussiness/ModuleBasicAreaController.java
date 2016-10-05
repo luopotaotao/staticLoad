@@ -14,6 +14,7 @@ import tt.service.bussiness.AreaServiceI;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by taotao on 2016/9/27.
@@ -44,6 +45,11 @@ public class ModuleBasicAreaController extends BaseController<Area> {
         System.out.println(area.getChildren().size());
         ret.add(area);
         return ret;
+    }
+    @RequestMapping(value = "area/{pid}",method = RequestMethod.GET)
+    @ResponseBody
+    public List<Map<String,Object>> queryCity(@PathVariable Integer pid){
+        return areaService.queryAreaByPid(pid);
     }
 
 //    @RequestMapping(value = "post", method = RequestMethod.POST)

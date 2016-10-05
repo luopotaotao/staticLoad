@@ -131,6 +131,19 @@ public class BaseDaoImpl<T> implements BaseDaoI<T>
     }
 
     @Override
+    public List<Map<String, Object>> findList(String hql, Map<String, Object> params) {
+        Query q = this.getCurrentSession().createQuery(hql);
+        if (params != null && !params.isEmpty())
+        {
+            for (String key : params.keySet())
+            {
+                q.setParameter(key, params.get(key));
+            }
+        }
+        return q.list();
+    }
+
+    @Override
     public List<T> find(String hql, Map<String, Object> params, int page, int rows)
     {
         Query q = this.getCurrentSession().createQuery(hql);

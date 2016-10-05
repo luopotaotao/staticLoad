@@ -33,21 +33,30 @@
                    data-options="label:'工程名称:',labelAlign:'right'">
         </div>
         <div style="margin-bottom:20px">
-            <input class="easyui-textbox" name="province_id" style="width:45%"
-                   data-options="label:'所在省份:',labelAlign:'right'">
-            <input class="easyui-textbox" name="city_id" style="width:45%"
-                   data-options="label:'所在城市:',labelAlign:'right'">
+            <select id="province_id"  class="easyui-combobox" name="province.id" style="width:45%"
+            data-options="label:'所在省份:',labelAlign:'right'">
+                <option value="2">河北</option>
+                <option value="3">河南</option>
+                <option value="4">山西</option>
+            </select>
+
+            <select id="city_id" class="easyui-combobox" name="city.id" style="width:45%"
+                   data-options="label:'所在城市:',labelAlign:'right', method:'get'">
+                <option value="6">保定</option>
+                <option value="7">邯郸</option>
+
+            </select>
         </div>
         <div style="margin-bottom:20px">
             <input class="easyui-textbox" name="address" style="width:90%"
                    data-options="label:'具体地址:',labelAlign:'right'">
         </div>
         <div style="margin-bottom:20px;display: none">
-            <input class="easyui-textbox" name="lat" style="width:100%"
+            <input id="input_lat" class="easyui-textbox" name="lat" style="width:100%"
                    data-options="label:'纬度:'">
         </div>
         <div style="margin-bottom:20px;display: none">
-            <input class="easyui-textbox" name="lng" style="width:100%"
+            <input id="input_lng" class="easyui-textbox" name="lng" style="width:100%"
                    data-options="label:'经度:'">
         </div>
         <div style="margin-bottom:20px">
@@ -184,7 +193,30 @@
                 });
             }
         }
-
+//        $('#province_id').combobox({
+//            textField:'id',
+//            textField:'text',
+//            label:'所在省份:',
+//            labelAlign:'right',
+//            url:'/moduleBasicAreaController/area/0.action',
+//            method:'get',
+//            onSelect:function(rec){
+//                console.log(rec);
+//                $('#city_id').combobox('reload','/moduleBasicAreaController/area/'+rec.id+'.action');
+//            }
+//
+//        });
+//        $('#city_id').combobox({
+//            label:'所在省份:',
+//            labelAlign:'right',
+//            url:'/moduleBasicAreaController/area/2.action',
+//            method:'get',
+//            onSelect:function(rec){
+//                console.log(rec);
+//                $('#city_id').combobox('reload','/moduleBasicAreaController/area/'+rec.id+'.action');
+//            }
+//
+//        });
         $('input.select').textbox({
             onClickButton: function () {
                 var _this = this;
@@ -250,8 +282,8 @@
                         data.lat
                     ];
                     $(_this).textbox('setText', str_arr.join(''));
-                    $('input[name=lat]').textbox('setValue', data.lat);
-                    $('input[name=lng]').textbox('setValue', data.lng);
+                    $('#input_lat').textbox('setValue', data.lat);
+                    $('#input_lng').textbox('setValue', data.lng);
                 });
             }
         });

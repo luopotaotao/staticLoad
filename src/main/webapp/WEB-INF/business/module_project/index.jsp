@@ -19,7 +19,7 @@
         var baseUrl = '${baseUrl}';
         var tree_data = [{
             "id": 1,
-            "text": "基础信息",
+            "text": "工程管理",
             "url": '/moduleProjectManageController/index.action'
         }];
         initUI();

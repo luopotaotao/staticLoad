@@ -17,7 +17,7 @@
     </div>
 </div>
 <div id="tt" class="easyui-panel" data-options="region:'center'">
-    <div id="div_map" style="width: 500px;height: 500px"></div>
+    <div id="div_map" style="width: 800px;height: 500px"></div>
 </div>
 
 <script>
@@ -43,8 +43,13 @@
                     }
                 },
                 formatter:function(node){
-                    var str_arr = [node.text,' (',node.count,')'];
-                    return str_arr.join('');
+                    if($.isNumeric(node.count)){
+                        var str_arr = [node.text,' (',node.count,')'];
+                        return str_arr.join('');
+                    }else{
+                        return node.text;
+                    }
+
                 }
             });
 

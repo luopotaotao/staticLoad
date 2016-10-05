@@ -3,11 +3,13 @@ package tt.service.bussiness;
 import tt.model.business.InspectData;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by tt on 2016/10/2.
  */
 public interface InspectDataServiceI {
-    List<InspectData> list(Integer PRG,Integer STZH);
+    List<InspectData> list(String PRG,String STZH);
     int del(List<Integer> ids);
+    List<Map<String,Object>> loadKeys();
 }

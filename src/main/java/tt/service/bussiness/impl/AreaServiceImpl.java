@@ -1,10 +1,13 @@
 package tt.service.bussiness.impl;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tt.dao.business.AreaDaoI;
 import tt.model.business.Area;
 import tt.service.bussiness.AreaServiceI;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by tt on 2016/9/29.
@@ -39,5 +42,12 @@ public class AreaServiceImpl implements AreaServiceI {
         Area area = load(id);
         areaDao.delete(area);
         return area.getId();
+    }
+
+    @Override
+    public List<Map<String, Object>> queryAreaByPid(Integer pid) {
+        Map<String,Object> params = new HashMap<>();
+        params.put("pid",pid);
+        return areaDao.findList("select new map(a.id as id,a.text as text) from Area a where pid=:pid",params);
     }
 }

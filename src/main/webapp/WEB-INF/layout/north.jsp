@@ -174,7 +174,8 @@
                     class="module_icon">平台设置</a>
             </li>
 
-            <li><a href="javascript:;" id="1" class="menus onnav"><img
+            <li><a href="javascript:openModule('${pageContext.request.contextPath}/moduleInspectDataController/index.action');"
+                   id="1" class="menus onnav"><img
                     src="${pageContext.request.contextPath}/style/images/icons/icon_about.png"
                     class="module_icon">检测信息</a>
             </li>

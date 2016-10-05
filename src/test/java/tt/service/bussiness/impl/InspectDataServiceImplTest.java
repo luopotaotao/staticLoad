@@ -21,7 +21,7 @@ public class InspectDataServiceImplTest {
     private InspectDataServiceI service;
     @Test
     public void list() throws Exception {
-        System.out.println(service.list(1,1));
+        System.out.println(service.list("含","SH00001"));
     }
 
     @Test

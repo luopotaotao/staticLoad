@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tt.dao.business.ProjectDaoI;
 import tt.model.business.Project;
+import tt.service.bussiness.AreaServiceI;
 import tt.service.bussiness.ProjectServiceI;
 
 import java.util.HashMap;
@@ -18,7 +19,8 @@ import java.util.Map;
 public class ProjectServiceImpl implements ProjectServiceI {
     @Autowired
     private ProjectDaoI projectDao;
-
+    @Autowired
+    private AreaServiceI areaService;
     @Override
     public Project get(int id) {
         return projectDao.get(Project.class, id);
@@ -102,6 +104,7 @@ public class ProjectServiceImpl implements ProjectServiceI {
 
     @Override
     public int add(Project project) {
+        project.getProvince().setParent(areaService.load(0));
         projectDao.save(project);
         return project.getId();
     }
@@ -115,7 +118,7 @@ public class ProjectServiceImpl implements ProjectServiceI {
     @Override
     public int del(List<Integer> list) {
         Map<String, Object> params = new LinkedHashMap<>();
-        params.put(":ids", list);
+        params.put("ids", list);
         return projectDao.executeHql("delete from Project where id in (:ids)", params);
     }
 }

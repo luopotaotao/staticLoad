@@ -40,12 +40,6 @@
                 "id": 13,
                 "text": "行政区划",
                 "url": "/moduleBasicAreaController/index.action"
-            }, {
-                "id": 14,
-                "text": "about.html"
-            }, {
-                "id": 15,
-                "text": "welcome.html"
             }]
         }];
         initUI();

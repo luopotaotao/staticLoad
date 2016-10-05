@@ -19,7 +19,7 @@ public class InspectDataServiceImpl implements InspectDataServiceI {
     private InspectDataDaoI inspectDataDao;
 
     @Override
-    public List<InspectData> list(Integer PRG,Integer STZH) {
+    public List<InspectData> list(String PRG,String STZH) {
         String hql = "from InspectData WHERE PRG=:PRG and STZH=:STZH order by PRG,STZH,Time";
         Map<String,Object> params = new HashMap<>();
         params.put("PRG",PRG);
@@ -35,5 +35,10 @@ public class InspectDataServiceImpl implements InspectDataServiceI {
         Map<String, Object> params = new HashMap<>();
         params.put("ids", ids);
         return inspectDataDao.executeHql("delete from InspectData where id in (:ids)", params);
+    }
+
+    @Override
+    public List<Map<String, Object>> loadKeys() {
+        return inspectDataDao.findList("select distinct  new map(d.prg as prg,d.stzh as stzh) from InspectData d",null);
     }
 }
