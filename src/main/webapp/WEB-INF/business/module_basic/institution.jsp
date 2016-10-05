@@ -51,6 +51,8 @@
         </div>
     </form>
 </div>
+<div id="details"></div>
+
 <script type="text/javascript">
     $(function () {
         var baseUrl = '/';
@@ -129,10 +131,10 @@
                     field: 'null', title: '操作', width: 80, align: 'right',
                     formatter: function (val, row) {
                         var str_arr = [
-                            '<a href="javascript:mangePersonals(',
+                            '<a href="javascript:mangeInspectors(',
                             row['id'],
                             ');">人员</a>&nbsp;',
-                            '<a href="javascript:mangeEquipments(',
+                            '<a href="javascript:manageEquipments(',
                             row['id'],
                             ');">设备</a>'
                         ];
@@ -264,14 +266,30 @@
             });
         }
 
-        function mangePersonals(id) {
-            // TODO 管理人员弹窗
-        }
-        function manageEquipments(id){
-            // TODO 管理设备弹窗
-        }
+
 
     });
+    function openDialog(title,href){
+        $('#details').dialog({
+            title: title,
+            width: $('body').width()*0.8,
+            height:  $('body').height()*0.8,
+            closed: false,
+            cache: false,
+            href: href,
+            modal: true
+        });
+    }
+
+
+    function mangeInspectors(id) {
+        var href = '/moduleBasicInspectorController/index/'+id+'.action';
+        openDialog('人员管理',href);
+    }
+    function manageEquipments(id){
+        var href = '/moduleBasicEquipmentController/index/'+id+'.action';
+        openDialog('设备管理',href);
+    }
 
 </script>
 </body>

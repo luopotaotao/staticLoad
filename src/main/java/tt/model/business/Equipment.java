@@ -8,10 +8,12 @@ public class Equipment {
   private Integer id;
   private String code;
   private String name;
+  private String note;
   private Integer institution_id;
 
   @Id
   @Column(name = "id")
+  @GeneratedValue
   public Integer getId() {
     return id;
   }
@@ -38,6 +40,15 @@ public class Equipment {
 
   public void setName(String name) {
     this.name = name;
+  }
+  @Basic
+  @Column(name = "note")
+  public String getNote() {
+    return note;
+  }
+
+  public void setNote(String note) {
+    this.note = note;
   }
 
   @Basic

@@ -8,8 +8,8 @@ public class Project {
     private Integer id;
     private String code;
     private String name;
-    private Area province;
-    private Area city;
+    private AreaObj province;
+    private AreaObj city;
     private String address;
     private Float lat;
     private Float lng;
@@ -81,22 +81,22 @@ public class Project {
         this.lng = lng;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.REFRESH)
     @JoinColumn(name = "province_id")
-    public Area getProvince() {
+    public AreaObj getProvince() {
         return province;
     }
 
-    public void setProvince(Area province) {
+    public void setProvince(AreaObj province) {
         this.province = province;
     }
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.REFRESH)
     @JoinColumn(name = "city_id")
-    public Area getCity() {
+    public AreaObj getCity() {
         return city;
     }
 
-    public void setCity(Area city) {
+    public void setCity(AreaObj city) {
         this.city = city;
     }
 

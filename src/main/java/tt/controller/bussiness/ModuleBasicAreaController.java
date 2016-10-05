@@ -42,7 +42,6 @@ public class ModuleBasicAreaController extends BaseController<Area> {
     public JSONArray list(@PathVariable Integer id) {
         JSONArray ret = new JSONArray();
         Area area = areaService.load(id);
-        System.out.println(area.getChildren().size());
         ret.add(area);
         return ret;
     }

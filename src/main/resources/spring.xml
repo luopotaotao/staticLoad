@@ -34,7 +34,7 @@
 	</bean>
 
 	<!-- 自动扫描dao、service和timingTask包(自动注入) -->
-	<context:component-scan base-package="tt.dao,tt.service,tt.device,tt.timingTask" />
-	<!--<context:component-scan base-package="tt.dao,tt.service,tt.timingTask" />-->
+	<!--<context:component-scan base-package="tt.dao,tt.service,tt.device,tt.timingTask" />-->
+	<context:component-scan base-package="tt.dao,tt.service,tt.timingTask" />
 
 </beans>

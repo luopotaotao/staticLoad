@@ -2,32 +2,36 @@ package tt.dao.impl;
 
 
 import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.math.BigInteger;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.*;
 import tt.dao.BaseDaoI;
 import tt.pageModel.PageHelper;
 
-import org.hibernate.Query;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 
-@Repository
 public class BaseDaoImpl<T> implements BaseDaoI<T>
 {
-
+    private Class<T> entityClass;
     @Autowired
     private SessionFactory sessionFactory;
 
+    public BaseDaoImpl() {
+        Type genType = getClass().getGenericSuperclass();
+        Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
+        entityClass = (Class) params[0];
+    }
+
     /**
      * 获得当前事物的session
-     * 
+     *
      * @return org.hibernate.Session
      */
     public Session getCurrentSession()
@@ -35,6 +39,9 @@ public class BaseDaoImpl<T> implements BaseDaoI<T>
         return this.sessionFactory.getCurrentSession();
     }
 
+    protected Criteria getCriteria(){
+        return getCurrentSession().createCriteria(entityClass);
+    }
     @Override
     public Serializable save(T o)
     {
