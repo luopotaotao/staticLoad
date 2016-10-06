@@ -11,43 +11,65 @@
 
 <div class="easyui-panel" style="width:30%">
     <input class="easyui-searchbox"
-           data-options="prompt:'请输入单位名称',searcher:function(val){$('#dg').datagrid('load',{name:val});}"
+           data-options="prompt:'请输入项目名称',searcher:function(val){$('#dg').datagrid('load',{name:val});}"
            style="width:100%">
 </div>
 
 <table id="dg" style="width:100%"></table>
-<div id="dlg_edit" style="width:100%;max-width:400px;padding:30px 60px;">
+<div id="dlg_edit" style="width:100%;max-width:600px;padding:30px 60px;">
     <form id="ff" class="easyui-form" method="post" data-options="novalidate:true" action="${baseUrl}/post.action">
         <div style="margin-bottom:20px;display: none">
-            <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'记录编号:',required:true">
+            <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'编号:',required:true">
         </div>
         <div style="margin-bottom:20px">
-            <input class="easyui-textbox" name="code" style="width:100%"
-                   data-options="label:'机构编号:',required:true">
+            <input class="easyui-textbox" name="name" style="width:100%" data-options="label:'计划名称:',labelAlign:'right',required:true">
         </div>
         <div style="margin-bottom:20px">
-            <input class="easyui-textbox" name="name" style="width:100%"
-                   data-options="label:'机构名称:'">
+            <input class="easyui-textbox select-scheme" name="inspectScheme.id" style="width:100%"
+                   data-options="label:'方案名称:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
+                   buttonIcon:'icon-search'" url="${baseUrl}/selectScheme.action">
         </div>
         <div style="margin-bottom:20px">
-            <select class="easyui-combobox" data-options="editable:false" name="economy_typ" label="经济性质:"
-                    style="width:100%">
-                <option value="1">经济性质1</option>
-                <option value="2">经济性质2</option>
-                <option value="3">经济性质3</option>
-            </select>
+            <input class="easyui-textbox select-inspector" name="inspector.id" style="width:100%"
+                   data-options="label:'检测负责人:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
+                   buttonIcon:'icon-search'" url="/moduleInspectSchemeController/selectProject.action">
         </div>
         <div style="margin-bottom:20px">
-            <input class="easyui-textbox" name="certificate_code" style="width:100%"
-                   data-options="label:'电话号码:'">
+            <input class="easyui-textbox select" name="equipment.id" style="width:100%"
+                   data-options="label:'检测设备:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
+                   buttonIcon:'icon-search'" url="/moduleInspectSchemeController/selectProject.action">
         </div>
         <div style="margin-bottom:20px">
-            <select class="easyui-combobox" data-options="editable:false" name="register_type" label="注册类型:"
-                    style="width:100%">
-                <option value="1">注册类型1</option>
-                <option value="2">注册类型2</option>
-                <option value="3">注册类型3</option>
-            </select>
+            <input name="start_time" style="width:100%" type="text" class="easyui-datebox"
+                   data-options="label:'开始日期:',labelAlign:'right',required:true,editable:false">
+        </div>
+        <div style="margin-bottom:20px">
+            <input name="end_time" style="width:100%" type="text" class="easyui-datebox"
+                   data-options="label:'结束日期:',labelAlign:'right',required:true,editable:false">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox select" name="majorInspector.id" style="width:100%"
+                   data-options="label:'主检人:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
+                   buttonIcon:'icon-search'" url="/moduleInspectSchemeController/selectProject.action">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox select" name="assistantInspector.id" style="width:100%"
+                   data-options="label:'副检人:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
+                   buttonIcon:'icon-search'" url="/moduleInspectSchemeController/selectProject.action">
+        </div>
+
+        <div style="margin-bottom:20px">
+            <div style="margin-bottom:20px">
+                <select id="inspectItem_id" class="easyui-combobox" name="inspectMethods" style="width:100%"
+                        data-options="label:'检测项目:',
+            labelAlign:'right',
+            url:'/moduleBasicInspectMethodController/comboList.action',
+            method:'get',
+            valueField: 'id',
+            textField: 'name'
+            ">
+                </select>
+            </div>
         </div>
     </form>
 </div>
@@ -112,35 +134,27 @@
             columns: [[
                 {field: 'ck', checkbox: true},
                 {field: 'id', title: 'ID', hidden: true},
-                {field: 'code', title: '机构编号', width: 80},
-                {field: 'name', title: '机构名称', width: 80, align: 'right'},
+                {field: 'name', title: '方案名称'},
                 {
-                    field: 'economy_typ', title: '经济性质', width: 80, align: 'right',
-                    formatter: function (val, row) {
-                        return {1: '性质1', 2: '性质2', 3: '性质3'}[val];
-                    }
-                },
-                {field: 'certificate_code', title: '资质证书编号', width: 80, align: 'right'},
-                {
-                    field: 'register_type', title: '注册类型', width: 80, align: 'right',
-                    formatter: function (val, row) {
-                        return {1: '建设单位', 2: '施工单位', 3: '监理单位'}[val];
-                    }
-                },
-                {
-                    field: 'null', title: '操作', width: 80, align: 'right',
-                    formatter: function (val, row) {
-                        var str_arr = [
-                            '<a href="javascript:manageInspectors(',
-                            row['id'],
-                            ');">人员</a>&nbsp;',
-                            '<a href="javascript:manageEquipments(',
-                            row['id'],
-                            ');">设备</a>'
-                        ];
-                        return str_arr.join('');
-                    }
+                    field: 'project', title: '工程名称', formatter: function (val) {
+                    return val.name
                 }
+                },
+                {
+                    field: 'basement_lev', title: '低级基础设计等级', width: 80, align: 'right',
+                    formatter: function (val, row) {
+                        return {1: '甲级', 2: '乙级', 3: '丙级'}[val];
+                    }
+                },
+                {
+                    field: 'safety_lev', title: '建筑安全等级', width: 80, align: 'right',
+                    formatter: function (val, row) {
+                        return {1: '一级', 2: '二级', 3: '三级'}[val];
+                    }
+                },
+
+                {field: 'pile_count', title: '总桩数', width: 80},
+                {field: 'institution_id', title: '检测单位', width: 80, align: 'right'}
             ]],
             onHeaderContextMenu: function (e, field) {
                 e.preventDefault();
@@ -183,6 +197,84 @@
                     iconCls: 'icon-ok'
                 });
             }
+        }
+
+        $('input.select').textbox({
+            onClickButton: function () {
+                var _this = this;
+                var url = $(this).attr('url');
+                selectChild(url, function (data) {
+                    var names = [];
+                    var ids = [];
+                    $.each(data, function (i, item) {
+                        ids.push(item.id);
+                        names.push(item.name);
+                    });
+                    $(_this).textbox('setValue', ids);
+                    $(_this).textbox('setText', names);
+                });
+            }
+        });
+        $('input.select-scheme').textbox({
+            onClickButton: function () {
+                var _this = this;
+                var url = $(this).attr('url');
+                selectChild(url, function (data) {
+                    var item = data[0];
+                    console.log(JSON.stringify(item));
+                    $(_this).textbox('setValue', item.id);
+                    $(_this).textbox('setText', item.name);
+                });
+            }
+        });
+        $('input.select-inspector').textbox({
+            onClickButton: function () {
+                var _this = this;
+                var url = '/moduleInspectPlanController/selectInspector/'+''+'.action'
+                selectChild(url, function (data) {
+                    var names = [];
+                    var ids = [];
+                    $.each(data, function (i, item) {
+                        ids.push(item.id);
+                        names.push(item.name);
+                    });
+                    $(_this).textbox('setValue', ids);
+                    $(_this).textbox('setText', names);
+                });
+            }
+        });
+
+        function selectChild(url, callback) {
+            var $doc = $(document);
+            var height = screen.availHeight * 0.6, width = screen.availWidth * 0.6;
+            var $div = $('<div/>', {'height': height, width: width});
+            $div.dialog({
+                title: '请选择',
+                closed: false,
+                cache: true,
+                href: url,
+                modal: true,
+                buttons: [{
+                    text: '确定',
+                    handler: function () {
+                        if (true || $.isFunction(callback)) {
+                            var data = $div.find('#grid').datagrid('getChecked');
+                            if (data && data.length > 0) {
+                                console.log(data);
+                                $div.dialog('close');
+                                callback(data);
+                            } else {
+                                $.messager.alert('提示', '请选择数据!');
+                            }
+                        }
+                    }
+                }, {
+                    text: '取消',
+                    handler: function () {
+                        $div.dialog('close');
+                    }
+                }]
+            });
         }
 
         $('#dlg_edit').dialog({
@@ -267,13 +359,12 @@
         }
 
 
-
     });
-    function openDialog(title,href){
+    function openDialog(title, href) {
         $('#details').dialog({
             title: title,
-            width: $('body').width()*0.8,
-            height:  $('body').height()*0.8,
+            width: $('body').width() * 0.8,
+            height: $('body').height() * 0.8,
             closed: false,
             cache: false,
             href: href,
@@ -281,15 +372,6 @@
         });
     }
 
-
-    function manageInspectors(id) {
-        var href = '/moduleBasicInspectorController/index/'+id+'.action';
-        openDialog('人员管理',href);
-    }
-    function manageEquipments(id){
-        var href = '/moduleBasicEquipmentController/index/'+id+'.action';
-        openDialog('设备管理',href);
-    }
 
 </script>
 </body>

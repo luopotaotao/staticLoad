@@ -12,12 +12,6 @@
     <thead>
     <tr>
         <th data-options="field: 'ck', checkbox: true"></th>
-        <th data-options="field:'id',width:80">Item ID</th>
-        <th data-options="field:'name',width:100">Product</th>
-        <th data-options="field:'money',width:80,align:'right'">List Price</th>
-        <th data-options="field:'typ',width:80,align:'right'">Unit Cost</th>
-
-        <th data-options="field: 'ck', checkbox: true"></th>
         <th data-options="field: 'id', title: 'ID', hidden:true"></th>
         <th data-options="field: 'name', title: '公司名称', width: 120"></th>
         <th data-options="field: 'contacts', title: '联系人', width: 80, align: 'right'"></th>

@@ -33,18 +33,23 @@
                    data-options="label:'工程名称:',labelAlign:'right'">
         </div>
         <div style="margin-bottom:20px">
-            <select id="province_id"  class="easyui-combobox" name="province.id" style="width:45%"
-            data-options="label:'所在省份:',labelAlign:'right'">
-                <option value="2">河北</option>
-                <option value="3">河南</option>
-                <option value="4">山西</option>
+            <select id="province_id" class="easyui-combobox" name="province.id" style="width:45%"
+                    data-options="label:'所在省份:',
+            labelAlign:'right',
+            url:'/moduleBasicAreaController/area/0.action',
+            method:'get',
+            valueField: 'id',
+            textField: 'text',
+            onSelect:function(rec){
+                var $city = $('#city_id');
+                $city.combobox('clear');
+                $city.combobox('reload','/moduleBasicAreaController/area/'+rec.id+'.action');
+            }
+            ">
+
             </select>
-
             <select id="city_id" class="easyui-combobox" name="city.id" style="width:45%"
-                   data-options="label:'所在城市:',labelAlign:'right', method:'get'">
-                <option value="6">保定</option>
-                <option value="7">邯郸</option>
-
+                    data-options="label:'所在城市:',labelAlign:'right', method:'get',valueField: 'id',textField: 'text'">
             </select>
         </div>
         <div style="margin-bottom:20px">
@@ -61,25 +66,95 @@
         </div>
         <div style="margin-bottom:20px">
             <input id="select_coordinate" class="easyui-textbox" style="width:45%;height:32px;">
-            <input class="easyui-textbox" name="constructor_id" style="width:45%"
+            <input class="easyui-textbox select" name="constructor_id" style="width:45%"
                    data-options="label:'建设单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
                    buttonIcon:'icon-search'" url="/moduleBasicCompanyController/partial.action">
         </div>
         <div style="margin-bottom:20px">
-            <input class="easyui-textbox" name="builder_id" style="width:45%"
+            <input class="easyui-textbox select" name="builder_id" style="width:45%"
                    data-options="label:'施工单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
                    buttonIcon:'icon-search'" url="/moduleBasicCompanyController/partial.action">
 
-            <input class="easyui-textbox" name="inspector_id" style="width:45%"
+            <input class="easyui-textbox select" name="inspector_id" style="width:45%"
                    data-options="label:'监理单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
                    buttonIcon:'icon-search'" url="/moduleBasicCompanyController/partial.action">
         </div>
         <div style="margin-bottom:20px">
             <input class="easyui-textbox" name="note" style="width:90%"
-                   data-options="label:'备注信息:'">
+                   data-options="label:'备注信息:',labelAlign:'right'">
         </div>
     </form>
 </div>
+<div id="selectCoordinateDiv">
+    <div id="map_div"></div>
+</div>
+
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/jslib/baiduMap/map_api.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/jslib/baiduMap/AreaRestriction_min.js"></script>
+<script>
+    console.log('init');
+    $(window).on('resize', function () {
+        $('#div_map').width(document.body.clientWidth).height(document.body.clientHeight);
+    });
+    $(function () {
+        var map = initializeMap();
+        $.extend({
+            BaiduMap: {
+                getCoordinate: function () {
+                    var markers = map.getOverlays();
+                    return markers && markers.length > 0 ? markers[0] : null;
+                },
+                center:function(cityName){
+                    map.centerAndZoom(cityName, 9);
+                }
+            }
+
+        });
+        function initializeMap() {
+            var $div = $('#map_div');
+            var height = Math.floor($(document).height() * 0.81);
+            var width = Math.floor($(document).width() * 0.69);
+            $div.height(height).width(width);
+
+            var map = new BMap.Map('map_div');
+            map.centerAndZoom("银川", 5);
+//            map.centerAndZoom(point, 12);                 // 初始化地图，设置中心点坐标和地图级别
+            map.enableScrollWheelZoom(); //启用滚轮放大缩小，默认禁用
+            map.enableContinuousZoom(); //启用地图惯性拖拽，默认禁用
+            var controls = [
+                new BMap.OverviewMapControl(),//添加默认缩略地图控件
+                new BMap.OverviewMapControl({isOpen: true, anchor: BMAP_ANCHOR_TOP_RIGHT}), //右上角，打开
+                new BMap.NavigationControl(),//添加默认缩略地图控件
+                new BMap.NavigationControl({
+                    anchor: BMAP_ANCHOR_BOTTOM_LEFT,
+                    type: BMAP_NAVIGATION_CONTROL_PAN
+                }),//左下角，仅包含平移按钮
+                new BMap.NavigationControl({
+                    anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
+                    type: BMAP_NAVIGATION_CONTROL_ZOOM
+                }),//右下角，仅包含缩放按钮
+                new BMap.MapTypeControl({mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]})//2D图，卫星图
+            ];
+            $.each(controls, function (i, item) {
+                map.addControl(item);
+            });
+            map.addEventListener("click", function (e) {
+                var allOverlay = map.getOverlays();
+                $.each(allOverlay, function (i, item) {
+                    map.removeOverlay(item);
+                });
+                var marker = new BMap.Marker(e.point);  // 创建标注
+
+                map.addOverlay(marker);
+                marker.setAnimation(BMAP_ANIMATION_BOUNCE);
+            });
+            return map;
+        }
+    })
+    ;
+</script>
+
 <script type="text/javascript">
     $(function () {
         var baseUrl = '/';
@@ -193,6 +268,7 @@
                 });
             }
         }
+
 //        $('#province_id').combobox({
 //            textField:'id',
 //            textField:'text',
@@ -235,7 +311,9 @@
         });
 
         function selectChild(url, callback) {
-            var $div = $('<div style="width: 40%;height: 100%"/>');
+            var $doc = $(document);
+            var height = screen.availHeight*0.6, width = screen.availWidth*0.6;
+            var $div = $('<div/>', {'height':height, width:width});
             $div.dialog({
                 title: '请选择',
                 closed: false,
@@ -266,13 +344,13 @@
         }
 
         $('#select_coordinate').textbox({
-            label:'经度纬度:',
-            labelAlign:'right',
+            label: '经度纬度:',
+            labelAlign: 'right',
             buttonText: '选择',
             buttonAlign: 'right',
             buttonIcon: 'icon-search',
             prompt: '经纬度',
-            editable:false,
+            editable: false,
             onClickButton: function () {
                 var _this = this;
                 selectCoordinate(function (data) {
@@ -288,15 +366,16 @@
             }
         });
         function selectCoordinate(callback) {
-            var body = document.body;
+            var currentCity = $('#city_id').combobox('getText');
+            $.BaiduMap.center(currentCity);
             var height = Math.floor($(document).height() * 0.93);
             var width = Math.floor($(document).width() * 0.7);
-            var $div = $('<div/>').height(height).width(width);
+            var $div = $('#selectCoordinateDiv');
             $div.dialog({
                 title: '请选择',
                 closed: false,
-                cache: true,
-                href: '/moduleProjectManageController/selectCoordinate.action',
+                cache: false,
+//                href: '/moduleProjectManageController/selectCoordinate.action',
                 modal: true,
                 buttons: [{
                     text: '确定',

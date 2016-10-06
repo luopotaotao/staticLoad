@@ -24,7 +24,7 @@ public class InspectItemServiceImpl implements InspectItemServiceI {
     }
 
     @Override
-    public List<InspectItem> list(String name, int page, int PageSize) {
+    public List<InspectItem> list(String name, Integer page, Integer PageSize) {
         List<InspectItem> ret = inspectItemDao.list(name, page, PageSize);
         return ret;
     }

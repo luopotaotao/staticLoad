@@ -6,7 +6,7 @@
       href="${pageContext.request.contextPath}/jslib/jquery-easyui-1.3.6/themes/default/easyui.css" type="text/css">
 <link rel="stylesheet" type="text/css"
       href="${pageContext.request.contextPath}/jslib/jquery-easyui-1.3.6/themes/icon.css">
-<script type="text/javascript" src="${pageContext.request.contextPath}/jslib/jquery-1.8.3.js" type="text/javascript"
+<script type="text/javascript" src="${pageContext.request.contextPath}/jslib/jquery-1.11.3.js" type="text/javascript"
         charset="utf-8"></script>
 <script type="text/javascript"
         src="${pageContext.request.contextPath}/jslib/jquery-easyui-1.3.6/jquery.easyui.min.js"

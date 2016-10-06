@@ -25,34 +25,43 @@ public class ModuleBasicInspectItemController extends BaseController<InspectItem
     private InspectItemServiceI inspectItemService;
 
     @RequestMapping("index")
-    public String index(Model model){
-        model.addAttribute("baseUrl","/moduleBasicInspectItemController");
+    public String index(Model model) {
+        model.addAttribute("baseUrl", "/moduleBasicInspectItemController");
         return "business/module_basic/inspect_item";
     }
+
     @RequestMapping("{inspectItem_id}/methods")
-    public String methods(@PathVariable Integer inspectItem_id,Model model){
-        model.addAttribute("inspectItem_id",inspectItem_id);
+    public String methods(@PathVariable Integer inspectItem_id, Model model) {
+        model.addAttribute("inspectItem_id", inspectItem_id);
         return "business/module_basic/inspect_method";
     }
+
     @RequestMapping(value = "get/{id}", method = RequestMethod.GET)
     @ResponseBody
     public InspectItem get(@PathVariable int id) {
         return inspectItemService.get(id);
     }
 
-    @RequestMapping(value = "query",method = RequestMethod.GET)
+    @RequestMapping(value = "query", method = RequestMethod.GET)
     @ResponseBody
-    public JSONObject list( @RequestParam(required = false) String name,
-                           @RequestParam(value = "page",required = false,defaultValue = "1") Integer page,
-                           @RequestParam(value = "rows",required = false,defaultValue = "10") Integer pageSize) {
+    public JSONObject list(@RequestParam(required = false) String name,
+                           @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                           @RequestParam(value = "rows", required = false, defaultValue = "10") Integer pageSize) {
 
-        List<InspectItem> list = inspectItemService.list(name,page,pageSize);
+        List<InspectItem> list = inspectItemService.list(name, page, pageSize);
         long count = inspectItemService.count(name);
         return listResponse(count, list);
     }
 
-//    @RequestMapping(value = "post", method = RequestMethod.POST)
-    @RequestMapping(value = "post")
+    @RequestMapping(value = "comboList", method = RequestMethod.GET)
+    @ResponseBody
+    public List<InspectItem> comboList(@RequestParam(required = false) String name) {
+
+        List<InspectItem> list = inspectItemService.list(name, null, null);
+        return list;
+    }
+
+    @RequestMapping(value = "post", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject add(@ModelAttribute InspectItem inspectItem) {
         int ret = inspectItemService.add(inspectItem);
@@ -70,7 +79,7 @@ public class ModuleBasicInspectItemController extends BaseController<InspectItem
     @ResponseBody
     public JSONObject delete(@RequestParam(value = "ids[]") int[] ids) {
         List<Integer> list = new LinkedList<>();
-        Arrays.stream(ids).forEach(id->list.add(id));
+        Arrays.stream(ids).forEach(id -> list.add(id));
         int ret = inspectItemService.del(list);
         return flagResponse(ret);
     }

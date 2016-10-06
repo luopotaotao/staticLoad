@@ -24,14 +24,18 @@ public class ModuleInspectSchemeController extends BaseController<InspectScheme>
 
     @RequestMapping("index")
     public String index(Model model) {
-        model.addAttribute("baseUrl", "/moduleBasicInspectSchemeController");
-        return "business/module_inspect/inspectProject";
+        model.addAttribute("baseUrl", "/moduleInspectSchemeController");
+        return "business/module_data/scheme";
     }
 
-    @RequestMapping("partial")
-    public String partial(Model model) {
-        model.addAttribute("baseUrl", "/moduleBasicInspectSchemeController");
-        return "business/module_basic/company_partial";
+    @RequestMapping("selectProject")
+    public String selectProject() {
+        return "business/module_data/scheme_select_project";
+    }
+
+    @RequestMapping("selectInstitution")
+    public String selectInstitution() {
+        return "business/module_data/scheme_select_institution";
     }
 
     @RequestMapping(value = "get/{id}", method = RequestMethod.GET)
@@ -42,12 +46,11 @@ public class ModuleInspectSchemeController extends BaseController<InspectScheme>
 
     @RequestMapping(value = "query", method = RequestMethod.GET)
     @ResponseBody
-    public JSONObject list(@RequestParam(required = false) Byte typ,
-                           @RequestParam(required = false) String name,
-                           @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                           @RequestParam(value = "rows", required = false, defaultValue = "10") Integer pageSize) {
+    public JSONObject list(@RequestParam(required = false) String name,
+                           @RequestParam(value = "page", required = false) Integer page,
+                           @RequestParam(value = "rows", required = false) Integer pageSize) {
 
-        List<InspectScheme> list = inspectProjectService.list( name, page, pageSize);
+        List<InspectScheme> list = inspectProjectService.list(name, page, pageSize);
         long count = inspectProjectService.count(name);
         return listResponse(count, list);
     }

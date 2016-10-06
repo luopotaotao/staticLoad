@@ -16,7 +16,7 @@
     <%--<link href="${pageContext.request.contextPath}/style/admin_login.css"--%>
     <%--rel="stylesheet" type="text/css"/>--%>
     <script type="text/javascript"
-            src="${pageContext.request.contextPath}/jslib/jquery-1.8.3.js"></script>
+            src="${pageContext.request.contextPath}/jslib/jquery-1.11.3.js"></script>
     <script type="text/javascript"
             src="${pageContext.request.contextPath}/jslib/extBrowser.js"></script>
     <script type="text/javascript"

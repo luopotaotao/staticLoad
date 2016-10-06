@@ -2,6 +2,7 @@ package tt.service.bussiness.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tt.dao.business.AreaObjDaoI;
 import tt.dao.business.ProjectDaoI;
 import tt.model.business.Project;
 import tt.service.bussiness.AreaServiceI;
@@ -20,7 +21,7 @@ public class ProjectServiceImpl implements ProjectServiceI {
     @Autowired
     private ProjectDaoI projectDao;
     @Autowired
-    private AreaServiceI areaService;
+    private AreaObjDaoI areaObjDaoI;
     @Override
     public Project get(int id) {
         return projectDao.get(Project.class, id);
@@ -68,6 +69,8 @@ public class ProjectServiceImpl implements ProjectServiceI {
 
     @Override
     public int update(Project project) {
+        project.setProvince(areaObjDaoI.get(project.getProvince().getId()));
+        project.setCity(areaObjDaoI.get(project.getCity().getId()));
         projectDao.update(project);
         return 1;
     }

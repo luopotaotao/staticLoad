@@ -59,6 +59,14 @@ public interface BaseDaoI<T>
      * @return 对象
      */
     public T get(Class<T> c, Serializable id);
+    /**
+     * 通过主键获得对象
+     *
+     * @param id
+     *            主键
+     * @return 对象
+     */
+    public T getById(Serializable id);
 
     /**
      * 通过HQL语句获取一个对象

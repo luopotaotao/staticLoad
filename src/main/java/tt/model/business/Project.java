@@ -81,7 +81,7 @@ public class Project {
         this.lng = lng;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.REFRESH)
+    @ManyToOne
     @JoinColumn(name = "province_id")
     public AreaObj getProvince() {
         return province;
@@ -90,7 +90,7 @@ public class Project {
     public void setProvince(AreaObj province) {
         this.province = province;
     }
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.REFRESH)
+    @ManyToOne
     @JoinColumn(name = "city_id")
     public AreaObj getCity() {
         return city;

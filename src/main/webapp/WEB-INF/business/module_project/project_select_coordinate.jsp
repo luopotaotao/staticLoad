@@ -6,13 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div id="div_map"></div>
+<div id="map_div"></div>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/jslib/baiduMap/map_api.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/jslib/baiduMap/AreaRestriction_min.js"></script>
 <script>
+    console.log('init');
     $(window).on('resize', function () {
-        console.debug(document.body.clientHeight + ' : ' + document.body.clientWidth);
         $('#div_map').width(document.body.clientWidth).height(document.body.clientHeight);
     });
     $(function () {
@@ -27,11 +27,16 @@
 
         });
         function initializeMap() {
+            debugger;
+            $('#map_div').empty();
+            var id = Math.random()+'';
+            var $div = $('<div/>',{id:id});
+            $div.appendTo($('#map_div'));
             var height = Math.floor($(document).height() * 0.81);
             var width = Math.floor($(document).width() * 0.69);
-            $('#div_map').height(height).width(width);
+            $div.height(height).width(width);
 
-            var map = new BMap.Map("div_map");
+            var map = new BMap.Map(id);
             map.centerAndZoom("银川", 5);
 //            map.centerAndZoom(point, 12);                 // 初始化地图，设置中心点坐标和地图级别
             map.enableScrollWheelZoom(); //启用滚轮放大缩小，默认禁用

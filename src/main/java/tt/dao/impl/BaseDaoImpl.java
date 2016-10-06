@@ -19,8 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 
-public class BaseDaoImpl<T> implements BaseDaoI<T>
-{
+public class BaseDaoImpl<T> implements BaseDaoI<T> {
     private Class<T> entityClass;
     @Autowired
     private SessionFactory sessionFactory;
@@ -36,103 +35,97 @@ public class BaseDaoImpl<T> implements BaseDaoI<T>
      *
      * @return org.hibernate.Session
      */
-    public Session getCurrentSession()
-    {
+    public Session getCurrentSession() {
         return this.sessionFactory.getCurrentSession();
     }
 
-    protected Criteria getCriteria(){
+    protected Criteria getCriteria() {
         return getCurrentSession().createCriteria(entityClass);
     }
+
+    protected Criteria getCriteria(Integer page, Integer pageSize) {
+        Criteria c = getCurrentSession().createCriteria(entityClass);
+        if (page != null && pageSize != null) {
+            c.setFirstResult((page - 1) * pageSize).setMaxResults(pageSize);
+        }
+        return c;
+    }
+
     @Override
-    public Serializable save(T o)
-    {
-        if (o != null)
-        {
+    public Serializable save(T o) {
+        if (o != null) {
             return this.getCurrentSession().save(o);
         }
         return null;
     }
 
     @Override
-    public T get(Class<T> c, Serializable id)
-    {
-        return (T)this.getCurrentSession().get(c, id);
+    public T getById(Serializable id) {
+        return (T) getCurrentSession().get(entityClass, id);
     }
 
     @Override
-    public T get(String hql)
-    {
+    public T get(Class<T> c, Serializable id) {
+        return (T) this.getCurrentSession().get(c, id);
+    }
+
+    @Override
+    public T get(String hql) {
         Query q = this.getCurrentSession().createQuery(hql);
         List<T> l = q.list();
-        if (l != null && l.size() > 0)
-        {
+        if (l != null && l.size() > 0) {
             return l.get(0);
         }
         return null;
     }
 
     @Override
-    public T get(String hql, Map<String, Object> params)
-    {
+    public T get(String hql, Map<String, Object> params) {
         Query q = this.getCurrentSession().createQuery(hql);
-        if (params != null && !params.isEmpty())
-        {
-            for (String key : params.keySet())
-            {
+        if (params != null && !params.isEmpty()) {
+            for (String key : params.keySet()) {
                 q.setParameter(key, params.get(key));
             }
         }
         List<T> l = q.list();
-        if (l != null && l.size() > 0)
-        {
+        if (l != null && l.size() > 0) {
             return l.get(0);
         }
         return null;
     }
 
     @Override
-    public void delete(T o)
-    {
-        if (o != null)
-        {
+    public void delete(T o) {
+        if (o != null) {
             this.getCurrentSession().delete(o);
         }
     }
 
     @Override
-    public void update(T o)
-    {
-        if (o != null)
-        {
+    public void update(T o) {
+        if (o != null) {
             this.getCurrentSession().update(o);
         }
     }
 
     @Override
-    public void saveOrUpdate(T o)
-    {
-        if (o != null)
-        {
+    public void saveOrUpdate(T o) {
+        if (o != null) {
             this.getCurrentSession().saveOrUpdate(o);
         }
     }
 
     @Override
-    public List<T> find(String hql)
-    {
+    public List<T> find(String hql) {
         Query q = this.getCurrentSession().createQuery(hql);
         return q.list();
     }
 
     @Override
-    public List<T> find(String hql, Map<String, Object> params)
-    {
+    public List<T> find(String hql, Map<String, Object> params) {
         Query q = this.getCurrentSession().createQuery(hql);
-        if (params != null && !params.isEmpty())
-        {
-            for (String key : params.keySet())
-            {
+        if (params != null && !params.isEmpty()) {
+            for (String key : params.keySet()) {
                 q.setParameter(key, params.get(key));
             }
         }
@@ -142,10 +135,8 @@ public class BaseDaoImpl<T> implements BaseDaoI<T>
     @Override
     public List<Map<String, Object>> findList(String hql, Map<String, Object> params) {
         Query q = this.getCurrentSession().createQuery(hql);
-        if (params != null && !params.isEmpty())
-        {
-            for (String key : params.keySet())
-            {
+        if (params != null && !params.isEmpty()) {
+            for (String key : params.keySet()) {
                 q.setParameter(key, params.get(key));
             }
         }
@@ -153,16 +144,13 @@ public class BaseDaoImpl<T> implements BaseDaoI<T>
     }
 
     @Override
-    public List<T> find(String hql, Map<String, Object> params, int page, int rows)
-    {
+    public List<T> find(String hql, Map<String, Object> params, int page, int rows) {
         Query q = this.getCurrentSession().createQuery(hql);
-        if (params != null && !params.isEmpty())
-        {
-            for (String key : params.keySet())
-            {
-                if(params.get(key) instanceof List){
-                    q.setParameterList(key,(List)params.get(key));
-                }else{
+        if (params != null && !params.isEmpty()) {
+            for (String key : params.keySet()) {
+                if (params.get(key) instanceof List) {
+                    q.setParameterList(key, (List) params.get(key));
+                } else {
                     q.setParameter(key, params.get(key));
                 }
             }
@@ -171,55 +159,46 @@ public class BaseDaoImpl<T> implements BaseDaoI<T>
     }
 
     @Override
-    public List<T> find(String hql, int page, int rows)
-    {
+    public List<T> find(String hql, int page, int rows) {
         Query q = this.getCurrentSession().createQuery(hql);
         return q.setFirstResult((page - 1) * rows).setMaxResults(rows).list();
     }
 
     @Override
-    public Long count(String hql)
-    {
+    public Long count(String hql) {
         Query q = this.getCurrentSession().createQuery(hql);
-        return (Long)q.uniqueResult();
+        return (Long) q.uniqueResult();
     }
 
     @Override
-    public Long count(String hql, Map<String, Object> params)
-    {
+    public Long count(String hql, Map<String, Object> params) {
         Query q = this.getCurrentSession().createQuery(hql);
-        if (params != null && !params.isEmpty())
-        {
-            for (String key : params.keySet())
-            {
-                if(params.get(key) instanceof List){
-                    q.setParameterList(key,(List)params.get(key));
-                }else{
+        if (params != null && !params.isEmpty()) {
+            for (String key : params.keySet()) {
+                if (params.get(key) instanceof List) {
+                    q.setParameterList(key, (List) params.get(key));
+                } else {
                     q.setParameter(key, params.get(key));
                 }
             }
         }
-        return (Long)q.uniqueResult();
+        return (Long) q.uniqueResult();
     }
 
     @Override
-    public int executeHql(String hql)
-    {
+    public int executeHql(String hql) {
         Query q = this.getCurrentSession().createQuery(hql);
         return q.executeUpdate();
     }
 
     @Override
-    public int executeHql(String hql, Map<String, Object> params)
-    {
+    public int executeHql(String hql, Map<String, Object> params) {
         Query q = this.getCurrentSession().createQuery(hql);
-        if (params != null && !params.isEmpty())
-        {
-            for (String key : params.keySet())
-            {
-                if(params.get(key) instanceof List){
-                    q.setParameterList(key,(List)params.get(key));
-                }else{
+        if (params != null && !params.isEmpty()) {
+            for (String key : params.keySet()) {
+                if (params.get(key) instanceof List) {
+                    q.setParameterList(key, (List) params.get(key));
+                } else {
                     q.setParameter(key, params.get(key));
                 }
             }
@@ -228,27 +207,22 @@ public class BaseDaoImpl<T> implements BaseDaoI<T>
     }
 
     @Override
-    public List<Object[]> findBySql(String sql)
-    {
+    public List<Object[]> findBySql(String sql) {
         SQLQuery q = this.getCurrentSession().createSQLQuery(sql);
         return q.list();
     }
 
     @Override
-    public List<Object[]> findBySql(String sql, int page, int rows)
-    {
+    public List<Object[]> findBySql(String sql, int page, int rows) {
         SQLQuery q = this.getCurrentSession().createSQLQuery(sql);
         return q.setFirstResult((page - 1) * rows).setMaxResults(rows).list();
     }
 
     @Override
-    public List<Object[]> findBySql(String sql, Map<String, Object> params)
-    {
+    public List<Object[]> findBySql(String sql, Map<String, Object> params) {
         SQLQuery q = this.getCurrentSession().createSQLQuery(sql);
-        if (params != null && !params.isEmpty())
-        {
-            for (String key : params.keySet())
-            {
+        if (params != null && !params.isEmpty()) {
+            for (String key : params.keySet()) {
                 q.setParameter(key, params.get(key));
             }
         }
@@ -258,10 +232,8 @@ public class BaseDaoImpl<T> implements BaseDaoI<T>
     @Override
     public List<T> findBySql(Class<T> entity, String sql, Map<String, Object> params) {
         SQLQuery q = this.getCurrentSession().createSQLQuery(sql).addEntity(entity);
-        if (params != null && !params.isEmpty())
-        {
-            for (String key : params.keySet())
-            {
+        if (params != null && !params.isEmpty()) {
+            for (String key : params.keySet()) {
                 q.setParameter(key, params.get(key));
             }
         }
@@ -269,40 +241,33 @@ public class BaseDaoImpl<T> implements BaseDaoI<T>
     }
 
     @Override
-    public List<Object[]> findBySql(String sql, Map<String, Object> params, int page, int rows)
-    {
+    public List<Object[]> findBySql(String sql, Map<String, Object> params, int page, int rows) {
         SQLQuery q = this.getCurrentSession().createSQLQuery(sql);
-        if (params != null && !params.isEmpty())
-        {
-            for (String key : params.keySet())
-            {
+        if (params != null && !params.isEmpty()) {
+            for (String key : params.keySet()) {
                 q.setParameter(key, params.get(key));
             }
         }
         return q.setFirstResult((page - 1) * rows).setMaxResults(rows).list();
     }
+
     @Override
-    public List<T> findBySql(Class<T> entity,String sql, Map<String, Object> params, int page, int rows)
-    {
+    public List<T> findBySql(Class<T> entity, String sql, Map<String, Object> params, int page, int rows) {
         SQLQuery q = this.getCurrentSession().createSQLQuery(sql).addEntity(entity);
         return q.setFirstResult((page - 1) * rows).setMaxResults(rows).list();
     }
 
     @Override
-    public int executeSql(String sql)
-    {
+    public int executeSql(String sql) {
         SQLQuery q = this.getCurrentSession().createSQLQuery(sql);
         return q.executeUpdate();
     }
 
     @Override
-    public int executeSql(String sql, Map<String, Object> params)
-    {
+    public int executeSql(String sql, Map<String, Object> params) {
         SQLQuery q = this.getCurrentSession().createSQLQuery(sql);
-        if (params != null && !params.isEmpty())
-        {
-            for (String key : params.keySet())
-            {
+        if (params != null && !params.isEmpty()) {
+            for (String key : params.keySet()) {
                 q.setParameter(key, params.get(key));
             }
         }
@@ -310,37 +275,31 @@ public class BaseDaoImpl<T> implements BaseDaoI<T>
     }
 
     @Override
-    public BigInteger countBySql(String sql)
-    {
+    public BigInteger countBySql(String sql) {
         SQLQuery q = this.getCurrentSession().createSQLQuery(sql);
-        return (BigInteger)q.uniqueResult();
+        return (BigInteger) q.uniqueResult();
     }
 
     @Override
-    public BigInteger countBySql(String sql, Map<String, Object> params)
-    {
+    public BigInteger countBySql(String sql, Map<String, Object> params) {
         SQLQuery q = this.getCurrentSession().createSQLQuery(sql);
-        if (params != null && !params.isEmpty())
-        {
-            for (String key : params.keySet())
-            {
+        if (params != null && !params.isEmpty()) {
+            for (String key : params.keySet()) {
                 q.setParameter(key, params.get(key));
             }
         }
-        return (BigInteger)q.uniqueResult();
+        return (BigInteger) q.uniqueResult();
     }
 
     /**
      * 排序
-     * 
+     *
      * @param ph
      * @return
      */
-    protected String orderHql(PageHelper ph)
-    {
+    protected String orderHql(PageHelper ph) {
         String orderString = "";
-        if (ph.getSort() != null && ph.getOrder() != null)
-        {
+        if (ph.getSort() != null && ph.getOrder() != null) {
             orderString = " order by t." + ph.getSort() + " " + ph.getOrder();
         }
         return orderString;
@@ -349,20 +308,21 @@ public class BaseDaoImpl<T> implements BaseDaoI<T>
     /**
      * 避免用户输入特殊字符时查询结果不准确的问题
      */
-    public String ConvertParam(String param)
-    {
+    public String ConvertParam(String param) {
         param = param.replace("", "");
         param = param.replace("[", "[[]");
         param = param.replace("_", "[_]");
         param = param.replace("%", "[%]");
         return param;
     }
-    protected boolean isEmpty(String val){
-        return val==null||val.trim().isEmpty();
+
+    protected boolean isEmpty(String val) {
+        return val == null || val.trim().isEmpty();
     }
-    protected SimpleExpression like(String field, String val){
+
+    protected SimpleExpression like(String field, String val) {
         StringBuilder val_like = new StringBuilder("%");
         val_like.append(val.trim()).append("%");
-        return Restrictions.like(field,val_like.toString());
+        return Restrictions.like(field, val_like.toString());
     }
 }

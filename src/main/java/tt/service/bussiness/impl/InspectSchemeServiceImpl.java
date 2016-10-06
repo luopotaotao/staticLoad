@@ -2,8 +2,12 @@ package tt.service.bussiness.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tt.dao.business.InspectItemDaoI;
 import tt.dao.business.InspectSchemeDaoI;
+import tt.dao.business.InstitutionDaoI;
+import tt.dao.business.ProjectDaoI;
 import tt.model.business.InspectScheme;
+import tt.service.bussiness.InspectItemServiceI;
 import tt.service.bussiness.InspectSchemeServiceI;
 
 import java.util.HashMap;
@@ -17,6 +21,12 @@ import java.util.Map;
 public class InspectSchemeServiceImpl implements InspectSchemeServiceI {
     @Autowired
     private InspectSchemeDaoI inspectSchemeDao;
+    @Autowired
+    private ProjectDaoI projectDao;
+    @Autowired
+    private InspectItemDaoI inspectItemDao;
+    @Autowired
+    private InstitutionDaoI institutionDao;
 
     @Override
     public InspectScheme get(int id) {
@@ -25,13 +35,7 @@ public class InspectSchemeServiceImpl implements InspectSchemeServiceI {
 
     @Override
     public List<InspectScheme> list(String name, int page, int PageSize) {
-        StringBuilder hql = new StringBuilder("from InspectScheme WHERE 1=1");
-        Map<String,Object> params = new HashMap<>();
-        if(name!=null){
-            params.put("name","%"+name+"%");
-            hql.append(" AND name like :name ");
-        }
-        List<InspectScheme> ret = inspectSchemeDao.find(hql.toString(), params, page, PageSize);
+        List<InspectScheme> ret = inspectSchemeDao.list(name, page, PageSize);
         return ret;
     }
 
@@ -49,6 +53,7 @@ public class InspectSchemeServiceImpl implements InspectSchemeServiceI {
 
     @Override
     public int add(InspectScheme inspectScheme) {
+        resetProject(inspectScheme);
         inspectSchemeDao.save(inspectScheme);
         return 1;
     }
@@ -65,7 +70,13 @@ public class InspectSchemeServiceImpl implements InspectSchemeServiceI {
 
     @Override
     public int update(InspectScheme inspectScheme) {
+        resetProject(inspectScheme);
         inspectSchemeDao.update(inspectScheme);
         return 1;
+    }
+    private void resetProject(InspectScheme inspectScheme){
+        inspectScheme.setProject(projectDao.getById(inspectScheme.getProject().getId()));
+        inspectScheme.setInspectItem(inspectItemDao.getById(inspectScheme.getInspectItem().getId()));
+        inspectScheme.setInstitution(institutionDao.getById(inspectScheme.getInstitution().getId()));
     }
 }

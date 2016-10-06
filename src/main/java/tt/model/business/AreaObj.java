@@ -11,7 +11,6 @@ public class AreaObj {
     private String text;
     @Id
     @Column(name = "id")
-    @GeneratedValue
     public Integer getId() {
         return id;
     }

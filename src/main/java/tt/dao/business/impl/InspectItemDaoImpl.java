@@ -15,13 +15,9 @@ import java.util.List;
 public class InspectItemDaoImpl extends BaseDaoImpl<InspectItem> implements InspectItemDaoI {
     @Override
     public List<InspectItem> list(String name, Integer page, Integer pageSize) {
-        Criteria c = getCriteria();
+        Criteria c = getCriteria(page,pageSize);
         if(!isEmpty(name)){
             c.add(like("name",name));
-        }
-        if(page!=null&pageSize!=null){
-            c.setFirstResult((page-1)*pageSize);
-            c.setMaxResults(pageSize);
         }
         return c.list();
     }

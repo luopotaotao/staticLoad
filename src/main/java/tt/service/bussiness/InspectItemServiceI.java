@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface InspectItemServiceI {
     InspectItem get(int id);
-    List<InspectItem> list(String name, int page, int PageSize);
+    List<InspectItem> list(String name, Integer page, Integer PageSize);
     long count(String name);
     int add(InspectItem inspectItem);
     int del(List<Integer> ids);
