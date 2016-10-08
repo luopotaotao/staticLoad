@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div style="width:100%">
+<div style="width:97%">
 
     <div class="easyui-panel" style="width:30%">
         <input class="easyui-searchbox"
-               data-options="prompt:'请输入设备名称',searcher:function(val,typ){$('#dg_method').datagrid('load',{typ:typ,name:val});}"
+               data-options="prompt:'请输入检测方法名称',searcher:function(val,typ){$('#dg_method').datagrid('load',{typ:typ,name:val});}"
                style="width:100%">
     </div>
 
@@ -48,10 +48,10 @@
             $('#dg_method').datagrid({
                 url: '${baseUrl}/${inspect_item_id}/query.action',
                 method: 'get',
-                title: '设备管理',
-                iconCls: 'icon-save',
+//                title: '设备管理',
+//                iconCls: 'icon-save',
 //            width: 700,
-                height: $('body').height(),
+                height: $('body').height()*0.65,
                 fitColumns: true,
                 singleSelect: false,
                 pagination: false,

@@ -228,7 +228,7 @@
     function openDialog(title,href){
         $('#details').dialog({
             title: title,
-            width: $('body').width()*0.8,
+            width: $('body').width()*0.6,
             height: $(document).height()*0.8,
             closed: false,
             cache: false,

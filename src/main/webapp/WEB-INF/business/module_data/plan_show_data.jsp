@@ -6,13 +6,13 @@
     <title>模板支撑智能安全监测系统</title>
     <jsp:include page="../../layout/common.jsp"></jsp:include>
 </head>
-<body class="easyui-layout">
+<body class="easyui-layout" style="width: 100%;height: 100%;">
 <div data-options="region:'west',split:true" title="数据列表" style="width: 200px; overflow: hidden;">
     <div class="easyui-panel" style="padding:5px">
         <ul id="tree_menu"></ul>
     </div>
 </div>
-<div id="tt" class="easyui-tabs" data-options="region:'center'">
+<div id="tt" class="easyui-tabs" data-options="region:'center'" style="width: 97%; overflow: hidden;">
     <div title="原始记录">
         <table id="tb_source" class="easyui-datagrid" title="原始记录"
                data-options="
@@ -20,30 +20,30 @@
        rownumbers:true,
        <!--url:'source_data.json',-->
        method:'get',
-       fitColumns:true
+       fitColumns:true,
     ">
             <thead>
             <tr>
-                <th data-options="field:'PRG'">工程</th>
-                <th data-options="field:'STZH'">桩号</th>
-                <th data-options="field:'DevNB',align:'center'">设备编号</th>
-                <th data-options="field:'PRS',align:'center'">压力</th>
-                <th data-options="field:'AVG_PRS',align:'center'">平均压力</th>
-                <th data-options="field:'HZJC',align:'center'">荷载</th>
-                <th data-options="field:'AVG_HZJC',align:'center'">平均荷载</th>
-                <th data-options="field:'WYJC',align:'center'">位移</th>
-                <th data-options="field:'AVG_WYJC',align:'center'">平均位移</th>
-                <th data-options="field:'GPS',align:'center',formatter:function(obj,row){return row.lat+','+row.lng}">
+                <th data-options="field:'prg'">工程</th>
+                <th data-options="field:'stzh'">桩号</th>
+                <th data-options="field:'devnb',align:'center'">设备编号</th>
+                <th data-options="field:'prs',align:'center'">压力</th>
+                <th data-options="field:'avg_prs',align:'center'">平均压力</th>
+                <th data-options="field:'hzjc',align:'center'">荷载</th>
+                <th data-options="field:'avg_hzjc',align:'center'">平均荷载</th>
+                <th data-options="field:'wyjc',align:'center'">位移</th>
+                <th data-options="field:'avg_wyjc',align:'center'">平均位移</th>
+                <th data-options="field:'gps',align:'center',formatter:function(obj,row){return row.lat+','+row.lng}">
                     GPS信息
                 </th>
-                <th data-options="field:'Devstr',align:'center'">设备代号</th>
-                <th data-options="field:'Time',align:'center'">数据上传时间</th>
-                <th data-options="field:'Delay',align:'center'">时间间隔</th>
-                <th data-options="field:'QJX',align:'center'">倾角数据</th>
-                <th data-options="field:'AVG_QJX',align:'center'">平均倾角数据</th>
-                <th data-options="field:'NDSJ',align:'center'">挠度数据</th>
-                <th data-options="field:'AVG_NDSJ',align:'center'">平均挠度数据</th>
-                <th data-options="field:'DevST',align:'center'">设备状态</th>
+                <th data-options="field:'devstr',align:'center'">设备代号</th>
+                <th data-options="field:'time',align:'center'">数据上传时间</th>
+                <th data-options="field:'delay',align:'center'">时间间隔</th>
+                <th data-options="field:'qjx',align:'center'">倾角数据</th>
+                <th data-options="field:'avg_qjx',align:'center'">平均倾角数据</th>
+                <th data-options="field:'ndsj',align:'center'">挠度数据</th>
+                <th data-options="field:'avg_ndsj',align:'center'">平均挠度数据</th>
+                <th data-options="field:'devst',align:'center'">设备状态</th>
             </tr>
             </thead>
         </table>
@@ -108,17 +108,17 @@
                 var rows = data.rows;
                 if (rows && rows.length > 0) {
                     $.each(rows, function (i, item) {
-                        if (!statistic.hasOwnProperty(item.SETprs)) {
-                            statistic[item.SETprs] = [];
+                        if (!statistic.hasOwnProperty(item.setprs)) {
+                            statistic[item.setprs] = [];
                         }
                         var avg_vals = {};
                         $.each(fields, function (j, field) {
                             var key = field.key;
                             var avg_val = avg(item[key]);
-                            item['AVG_' + key.toUpperCase()] = avg_val
-                            avg_vals[item.SETprs + key] = avg_val;
+                            item['avg_' + key] = avg_val
+                            avg_vals[item.setprs + key] = avg_val;
                         });
-                        statistic[item.SETprs].push(avg_vals);
+                        statistic[item.setprs].push(avg_vals);
                         var delay = null;
                         switch (i) {
                             case 0:
@@ -128,13 +128,13 @@
                                 delay = null;
                                 break;
                             default:
-                                if (item.SETprs == rows[i - 1].SETprs) {
-                                    delay = Math.round((new Date(item.Time).getTime() - new Date(rows[i - 1].Time).getTime()) / (1000 * 60));
+                                if (item.setprs == rows[i - 1].setprs) {
+                                    delay = Math.round((new Date(item.time).getTime() - new Date(rows[i - 1].time).getTime()) / (1000 * 60));
                                 } else {
                                     delay = 0;
                                 }
                         }
-                        item.Delay = delay;
+                        item.delay = delay;
                     });
                     console.log(JSON.stringify(statistic));
                 }

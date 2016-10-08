@@ -12,11 +12,11 @@
     <table id="dg_inspector" style="width:100%"></table>
     <div id="dlg_inspector_edit" class="easyui-dialog" style="width:100%;max-width:400px;padding:30px 60px;"
             data-options="
-            title: '添加人员',
+            //title: '添加人员',
             closed: true,
             modal: true,
             draggable: false,
-            iconCls: 'icon-add',
+            //iconCls: 'icon-add',
             buttons: [{
             text: '保存',
             iconCls: 'icon-ok',
@@ -59,8 +59,8 @@
             $('#dg_inspector').datagrid({
                 url: '${baseUrl}/${institution_id}/query.action',
                 method: 'get',
-                title: '人员管理',
-                iconCls: 'icon-save',
+//                title: '人员管理',
+//                iconCls: 'icon-save',
 //            width: 700,
                 height: $('body').height(),
                 fitColumns: true,

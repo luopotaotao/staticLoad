@@ -74,7 +74,7 @@
 </div>
 <div id="details"></div>
 <div id="data_details">
-    <iframe id="data_details_iframe" style="width: 97%;height: 97%"></iframe>
+    <iframe id="data_details_iframe" style="width: 98%;height: 98%"></iframe>
 </div>
 
 <script type="text/javascript">
@@ -171,10 +171,11 @@
                 },
                 {field: 'note', title: '备注', align: 'center'},
                 {
-                    field: 'null', title: '操作', width: 80, align: 'center',
+                    field: 'null', title: '数据操作', width: 80, align: 'center',
                     formatter: function (val, row) {
-                        var str_arr = ['<a href="javascript:showData(',row.id,')">查看数据</a>',
-                            '<a href="javascript:linkData(',row.id,')">关联数据</a>'];
+                        var str_arr = ['<a href="javascript:showData(',row.id,')">查看</a>',
+                                '&nbsp',
+                            '<a href="javascript:linkData(',row.id,')">关联</a>'];
                         console.log(str_arr.join(''));
                         return str_arr.join('');
                     }
@@ -413,10 +414,11 @@
         var url = '/moduleInspectPlanController/showData/'+plan_id+'.action';
         var $iframe = $('#data_details_iframe');
         $iframe.attr('src',url);
+        debugger;
         $('#data_details').dialog({
             title: '详情',
-            width: $('body').width() * 0.8,
-            height: $('body').height() * 0.8,
+            width: $('body').width() * 0.9,
+            height: $(document).height() * 0.6,
             closed: false,
             modal: true
         });
@@ -429,7 +431,8 @@
                 url:'/moduleInspectDataController/linkData/'+plan_id+'.action',
                 type:'post',
                 dataType:'json',
-                data:{data:data}
+                data:JSON.stringify(data),
+                contentType: "application/json"
             }).done(function (ret) {
                 console.log(ret);
             }).fail(function () {

@@ -43,6 +43,7 @@ public class ModuleBasicAreaController extends BaseController<Area> {
         JSONArray ret = new JSONArray();
         Area area = areaService.load(id);
         ret.add(area);
+
         return ret;
     }
     @RequestMapping(value = "area/{pid}",method = RequestMethod.GET)

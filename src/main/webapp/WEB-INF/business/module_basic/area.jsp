@@ -26,7 +26,7 @@
     function initUI() {
 
         $('#tree_area').tree({
-            url: baseUrl + '/query/1.action',
+            url: baseUrl + '/query/0.action',
             method: 'get',
             animate: true,
             dnd: false,

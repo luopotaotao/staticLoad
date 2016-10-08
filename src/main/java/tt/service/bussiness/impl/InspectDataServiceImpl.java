@@ -54,7 +54,11 @@ public class InspectDataServiceImpl implements InspectDataServiceI {
     @Override
     public int linkData(Integer plan_id, List<Map<String, Object>> data) {
         String sql = "update b_inspect_data set plan_id=:plan_id where prg=:prg and stzh=:stzh";
-        data.forEach(item->{item.put("plan_id",plan_id);inspectDataDao.executeSql(sql,item);});
-        return 0;
+        int ret = 0;
+        for(Map item:data){
+            item.put("plan_id",plan_id);
+            ret+=inspectDataDao.executeSql(sql,item);
+        }
+        return ret;
     }
 }

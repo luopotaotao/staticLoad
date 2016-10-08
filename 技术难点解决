@@ -1,0 +1,86 @@
+SpringMVC接收复杂参数
+如Clazz 班级有一个List<Student>,接收一个类似{id:1,name:'班级1',students:[{id:1,name:'张三'}]}的json对象
+
+maven 依赖
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.8.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.8.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.8.3</version>
+        </dependency>
+
+spring配置
+<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/html; charset=utf-8</value>
+                            <value>application/json; charset=utf-8</value>
+                        </list>
+                    </property>
+                </bean>
+                <bean class="org.springframework.http.converter.ResourceHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
+            </list>
+        </property>
+    </bean>
+
+Controller配置
+@Controller
+@RequestMapping("hello")
+public class HelloController {
+    @RequestMapping(value = "/",method = RequestMethod.POST)
+    public Object acceptData(@RequestBody Clazz clazz){
+        System.out.println(clazz);
+        return null;
+    }
+}
+
+前端请求配置
+$.ajax({
+	url:'hello/',
+	type:'post',
+	dataType:'json',
+	data:JSON.stringify({id:1,name:'clazz1',students:[{id:2,name:3}]}),
+	contentType: "application/json"
+}).done(function(){
+
+})
+
+
+jackson hibernate springMVC 死循环
+
+如行政区划
+class Area{
+    int id;
+    String name;
+    Area parent;
+     List<Area> children;
+}
+当使用Hibernate查询出一个节点以及其子节点作为树,并返回前台时,由于其中的parent也是Area对象,会递归加载其parent,children同理也会递归加载,导致死循环
+解决方案:
+    禁止其递归加载parent.
+    具体配置 在其parent上使用JsonIgnoreProperties
+        @ManyToOne(fetch = FetchType.LAZY,optional = true)
+        @JoinColumn(name = "pid")
+        @JsonIgnoreProperties(value = { "parent", "children" })
+        public Area getParent() {
+            return parent;
+        }

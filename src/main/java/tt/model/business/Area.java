@@ -1,5 +1,7 @@
 package tt.model.business;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
@@ -47,6 +49,7 @@ public class Area {
 
     @ManyToOne(fetch = FetchType.LAZY,optional = true)
     @JoinColumn(name = "pid")
+    @JsonIgnoreProperties(value = { "parent", "children" })
     public Area getParent() {
         return parent;
     }

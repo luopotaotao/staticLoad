@@ -273,7 +273,7 @@
         $('#details').dialog({
             title: title,
             width: $('body').width()*0.8,
-            height:  $('body').height()*0.8,
+            height: $(document).height(),
             closed: false,
             cache: false,
             href: href,

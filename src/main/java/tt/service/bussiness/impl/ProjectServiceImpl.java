@@ -38,7 +38,7 @@ public class ProjectServiceImpl implements ProjectServiceI {
         }
         if (name != null) {
             params.put("name", "%" + name + "%");
-            hql.append(" AND name like :name ");
+            hql.append(" AND (name like :name or code like :name) ");
         }
         List<Project> ret = projectDao.find(hql.toString(), params, page, pageSize);
 

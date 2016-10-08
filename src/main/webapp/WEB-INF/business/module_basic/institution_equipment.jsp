@@ -56,8 +56,8 @@
             $('#dg_equipment').datagrid({
                 url: '${baseUrl}/${institution_id}/query.action',
                 method: 'get',
-                title: '设备管理',
-                iconCls: 'icon-save',
+//                title: '设备管理',
+//                iconCls: 'icon-save',
 //            width: 700,
                 height: $('body').height(),
                 fitColumns: true,
@@ -109,8 +109,8 @@
                 columns: [[
                     {field: 'ck', checkbox: true},
                     {field: 'id', title: 'ID', hidden:true},
-                    {field: 'code', title: '设备名称'},
-                    {field: 'name', title: '姓名'},
+                    {field: 'code', title: '设备编号'},
+                    {field: 'name', title: '设备名称'},
                     {field: 'note', title: '备注'}
                 ]],
                 onHeaderContextMenu: function (e, field) {
