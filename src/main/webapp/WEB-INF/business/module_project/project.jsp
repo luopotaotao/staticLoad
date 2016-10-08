@@ -10,14 +10,8 @@
 
 <div class="easyui-panel" style="width:30%">
     <input class="easyui-searchbox"
-           data-options="prompt:'请输入单位名称',menu:'#mm',searcher:function(val,typ){$('#dg').datagrid('load',{typ:typ,name:val});}"
+           data-options="prompt:'请输入工程名称或工程编号',searcher:function(val,typ){$('#dg').datagrid('load',{typ:typ,name:val});}"
            style="width:100%">
-    <div id="mm">
-        <div data-options="name:'0'">全&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;部</div>
-        <div data-options="name:'1'">建设单位</div>
-        <div data-options="name:'2'">施工单位</div>
-        <div data-options="name:'3'">监理单位</div>
-    </div>
 </div>
 
 <table id="dg" style="width:100%"></table>

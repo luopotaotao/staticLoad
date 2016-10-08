@@ -23,52 +23,79 @@
 	<context:component-scan base-package="tt.controller" />
 
 	<!-- Spring MVC JSON配置 -->
-	<bean id="fastJsonConfig" class="com.alibaba.fastjson.support.config.FastJsonConfig">
-		<!-- Default charset -->
-		<property name="charset" value="UTF-8" />
-		<!-- Default dateFormat -->
-		<property name="dateFormat" value="yyyy-MM-dd HH:mm:ss" />
-		<!-- Feature -->
-		<!--<property name="features">-->
-			<!--<list>-->
-				<!--<value>Your feature</value>-->
-			<!--</list>-->
-		<!--</property>-->
-		<!--&lt;!&ndash; SerializerFeature &ndash;&gt;-->
-		<!--<property name="serializerFeatures">-->
-			<!--<list>-->
-				<!--<value>Your serializer feature</value>-->
-			<!--</list>-->
-		<!--</property>-->
-		<!--&lt;!&ndash; Global SerializeFilter &ndash;&gt;-->
-		<!--<property name="serializeFilters">-->
-			<!--<list>-->
-				<!--<ref bean="Your serializer filter"/>-->
-			<!--</list>-->
-		<!--</property>-->
-		<!--&lt;!&ndash; Class Level SerializeFilter &ndash;&gt;-->
-		<!--<property name="classSerializeFilters">-->
-			<!--<map>-->
-				<!--<entry key="Your filter class" value-ref="Your serializer filter"/>-->
-			<!--</map>-->
-		<!--</property>-->
-	</bean>
-    <mvc:annotation-driven>
-        <mvc:message-converters>
-            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
-                <!-- MediaTypes -->
-                <property name="supportedMediaTypes">
-                    <list>
-                        <value>application/json</value>
-                        <value>text/html;charset=UTF-8</value><!-- 避免IE出现下载JSON文件的情况 -->
-                    </list>
-                </property>
-                <!-- FastJsonConfig -->
-                <property name="fastJsonConfig" ref="fastJsonConfig" />
-            </bean>
-        </mvc:message-converters>
-    </mvc:annotation-driven>
-
+	<!--<bean id="fastJsonConfig" class="com.alibaba.fastjson.support.config.FastJsonConfig">-->
+		<!--&lt;!&ndash; Default charset &ndash;&gt;-->
+		<!--<property name="charset" value="UTF-8" />-->
+		<!--&lt;!&ndash; Default dateFormat &ndash;&gt;-->
+		<!--<property name="dateFormat" value="yyyy-MM-dd HH:mm:ss" />-->
+		<!--&lt;!&ndash; Feature &ndash;&gt;-->
+		<!--&lt;!&ndash;<property name="features">&ndash;&gt;-->
+			<!--&lt;!&ndash;<list>&ndash;&gt;-->
+				<!--&lt;!&ndash;<value>Your feature</value>&ndash;&gt;-->
+			<!--&lt;!&ndash;</list>&ndash;&gt;-->
+		<!--&lt;!&ndash;</property>&ndash;&gt;-->
+		<!--&lt;!&ndash;&lt;!&ndash; SerializerFeature &ndash;&gt;&ndash;&gt;-->
+		<!--&lt;!&ndash;<property name="serializerFeatures">&ndash;&gt;-->
+			<!--&lt;!&ndash;<list>&ndash;&gt;-->
+				<!--&lt;!&ndash;<value>Your serializer feature</value>&ndash;&gt;-->
+			<!--&lt;!&ndash;</list>&ndash;&gt;-->
+		<!--&lt;!&ndash;</property>&ndash;&gt;-->
+		<!--&lt;!&ndash;&lt;!&ndash; Global SerializeFilter &ndash;&gt;&ndash;&gt;-->
+		<!--&lt;!&ndash;<property name="serializeFilters">&ndash;&gt;-->
+			<!--&lt;!&ndash;<list>&ndash;&gt;-->
+				<!--&lt;!&ndash;<ref bean="Your serializer filter"/>&ndash;&gt;-->
+			<!--&lt;!&ndash;</list>&ndash;&gt;-->
+		<!--&lt;!&ndash;</property>&ndash;&gt;-->
+		<!--&lt;!&ndash;&lt;!&ndash; Class Level SerializeFilter &ndash;&gt;&ndash;&gt;-->
+		<!--&lt;!&ndash;<property name="classSerializeFilters">&ndash;&gt;-->
+			<!--&lt;!&ndash;<map>&ndash;&gt;-->
+				<!--&lt;!&ndash;<entry key="Your filter class" value-ref="Your serializer filter"/>&ndash;&gt;-->
+			<!--&lt;!&ndash;</map>&ndash;&gt;-->
+		<!--&lt;!&ndash;</property>&ndash;&gt;-->
+	<!--</bean>-->
+    <!--<mvc:annotation-driven>-->
+        <!--<mvc:message-converters>-->
+            <!--<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">-->
+                <!--&lt;!&ndash; MediaTypes &ndash;&gt;-->
+                <!--<property name="supportedMediaTypes">-->
+                    <!--<list>-->
+                        <!--<value>application/json</value>-->
+                        <!--<value>text/html;charset=UTF-8</value>&lt;!&ndash; 避免IE出现下载JSON文件的情况 &ndash;&gt;-->
+                    <!--</list>-->
+                <!--</property>-->
+                <!--&lt;!&ndash; FastJsonConfig &ndash;&gt;-->
+                <!--<property name="fastJsonConfig" ref="fastJsonConfig" />-->
+            <!--</bean>-->
+        <!--</mvc:message-converters>-->
+    <!--</mvc:annotation-driven>-->
+    <mvc:annotation-driven/>
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/html; charset=utf-8</value>
+                            <value>application/json; charset=utf-8</value>
+                        </list>
+                    </property>
+                </bean>
+                <bean class="org.springframework.http.converter.ResourceHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>
+                <!--<bean class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter"/>-->
+                <bean class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/html; charset=utf-8</value>
+                            <value>application/json; charset=utf-8</value>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
     <!--<bean-->
 		<!--class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">-->
 		<!--<property name="messageConverters">-->

@@ -181,10 +181,11 @@ public class BaseController<T>
      * @param list 当前页数据
      * @return
      */
-    protected JSONObject listResponse(List<T> list){
+    protected JSONObject listResponse(List list){
         JSONObject ret = new JSONObject();
         ret.put("total",list.size());
         ret.put("rows",list);
         return ret;
     }
+
 }

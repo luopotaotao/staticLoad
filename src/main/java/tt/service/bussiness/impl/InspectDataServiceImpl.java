@@ -41,4 +41,20 @@ public class InspectDataServiceImpl implements InspectDataServiceI {
     public List<Map<String, Object>> loadKeys() {
         return inspectDataDao.findList("select distinct  new map(d.prg as prg,d.stzh as stzh) from InspectData d",null);
     }
+    @Override
+    public List<Map<String, Object>> loadUnLinkedKeys() {
+        return inspectDataDao.findList("select distinct  new map(d.prg as prg,d.stzh as stzh) from InspectData d where d.plan_id is null",null);
+    }
+    public List<Map<String, Object>> loadLinkedKeys(Integer plan_id) {
+        Map<String,Object> params = new HashMap<>();
+        params.put("plan_id",plan_id);
+        return inspectDataDao.findList("select distinct  new map(d.prg as prg,d.stzh as stzh) from InspectData d where d.plan_id=:plan_id",params);
+    }
+
+    @Override
+    public int linkData(Integer plan_id, List<Map<String, Object>> data) {
+        String sql = "update b_inspect_data set plan_id=:plan_id where prg=:prg and stzh=:stzh";
+        data.forEach(item->{item.put("plan_id",plan_id);inspectDataDao.executeSql(sql,item);});
+        return 0;
+    }
 }

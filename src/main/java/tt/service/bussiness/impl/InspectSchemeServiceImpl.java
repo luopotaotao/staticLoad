@@ -34,7 +34,7 @@ public class InspectSchemeServiceImpl implements InspectSchemeServiceI {
     }
 
     @Override
-    public List<InspectScheme> list(String name, int page, int PageSize) {
+    public List<InspectScheme> list(String name, Integer page, Integer PageSize) {
         List<InspectScheme> ret = inspectSchemeDao.list(name, page, PageSize);
         return ret;
     }

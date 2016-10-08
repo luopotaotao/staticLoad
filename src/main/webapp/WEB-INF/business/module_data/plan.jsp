@@ -32,7 +32,7 @@
         <div style="margin-bottom:20px">
             <input class="easyui-textbox select-inspector" name="inspector.id" style="width:100%"
                    data-options="label:'检测负责人:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="/moduleInspectSchemeController/selectProject.action">
+                   buttonIcon:'icon-search'">
         </div>
         <div style="margin-bottom:20px">
             <input class="easyui-textbox select" name="equipment.id" style="width:100%"
@@ -50,20 +50,19 @@
         <div style="margin-bottom:20px">
             <input class="easyui-textbox select" name="majorInspector.id" style="width:100%"
                    data-options="label:'主检人:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="/moduleInspectSchemeController/selectProject.action">
+                   buttonIcon:'icon-search'">
         </div>
         <div style="margin-bottom:20px">
             <input class="easyui-textbox select" name="assistantInspector.id" style="width:100%"
                    data-options="label:'副检人:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="/moduleInspectSchemeController/selectProject.action">
+                   buttonIcon:'icon-search'">
         </div>
 
         <div style="margin-bottom:20px">
             <div style="margin-bottom:20px">
-                <select id="inspectItem_id" class="easyui-combobox" name="inspectMethods" style="width:100%"
+                <select id="inspect_method" class="easyui-combobox" name="inspectMethods" style="width:100%"
                         data-options="label:'检测项目:',
             labelAlign:'right',
-            url:'/moduleBasicInspectMethodController/comboList.action',
             method:'get',
             valueField: 'id',
             textField: 'name'
@@ -74,6 +73,9 @@
     </form>
 </div>
 <div id="details"></div>
+<div id="data_details">
+    <iframe id="data_details_iframe" style="width: 97%;height: 97%"></iframe>
+</div>
 
 <script type="text/javascript">
     $(function () {
@@ -134,27 +136,49 @@
             columns: [[
                 {field: 'ck', checkbox: true},
                 {field: 'id', title: 'ID', hidden: true},
-                {field: 'name', title: '方案名称'},
+                {field: 'name', title: '计划名称'},
                 {
-                    field: 'project', title: '工程名称', formatter: function (val) {
-                    return val.name
+                    field: 'inspectScheme', title: '方案名称', formatter: function (val) {
+                    return val?val.name:'';
                 }
                 },
                 {
-                    field: 'basement_lev', title: '低级基础设计等级', width: 80, align: 'right',
+                    field: 'inspector', title: '检测负责人', width: 80, align: 'center',
                     formatter: function (val, row) {
-                        return {1: '甲级', 2: '乙级', 3: '丙级'}[val];
+                        return val?val.name:'';
                     }
                 },
                 {
-                    field: 'safety_lev', title: '建筑安全等级', width: 80, align: 'right',
+                    field: 'equipment', title: '检测设备', width: 80, align: 'center',
                     formatter: function (val, row) {
-                        return {1: '一级', 2: '二级', 3: '三级'}[val];
+                        return val?val.name:'';
                     }
                 },
 
-                {field: 'pile_count', title: '总桩数', width: 80},
-                {field: 'institution_id', title: '检测单位', width: 80, align: 'right'}
+                {field: 'start_time', title: '开始时间', width: 80},
+                {field: 'end_time', title: '结束时间', width: 80, align: 'center'},
+                {
+                    field: 'majorInspector', title: '主检人', width: 80, align: 'center',
+                    formatter: function (val, row) {
+                        return val?val.name:'';
+                    }
+                },
+                {
+                    field: 'assistantInspector', title: '副检人', width: 80, align: 'center',
+                    formatter: function (val, row) {
+                        return val?val.name:'';
+                    }
+                },
+                {field: 'note', title: '备注', align: 'center'},
+                {
+                    field: 'null', title: '操作', width: 80, align: 'center',
+                    formatter: function (val, row) {
+                        var str_arr = ['<a href="javascript:showData(',row.id,')">查看数据</a>',
+                            '<a href="javascript:linkData(',row.id,')">关联数据</a>'];
+                        console.log(str_arr.join(''));
+                        return str_arr.join('');
+                    }
+                }
             ]],
             onHeaderContextMenu: function (e, field) {
                 e.preventDefault();
@@ -221,16 +245,20 @@
                 var url = $(this).attr('url');
                 selectChild(url, function (data) {
                     var item = data[0];
-                    console.log(JSON.stringify(item));
                     $(_this).textbox('setValue', item.id);
                     $(_this).textbox('setText', item.name);
+                    console.log(JSON.stringify(item));
+                    var url_method = '/moduleBasicInspectMethodController/'+item.inspectItem.id+'/comboList.action';
+                    var url_inspector = '/moduleInspectPlanController/selectInspector/'+item.inspectItem.id+'.action';
+                    $('#inspect_method').combobox('reload',url);
+                    $('input.select-inspector').attr('url',url_inspector);
                 });
             }
         });
         $('input.select-inspector').textbox({
             onClickButton: function () {
                 var _this = this;
-                var url = '/moduleInspectPlanController/selectInspector/'+''+'.action'
+                var url = $(_this).attr('url');
                 selectChild(url, function (data) {
                     var names = [];
                     var ids = [];
@@ -244,38 +272,7 @@
             }
         });
 
-        function selectChild(url, callback) {
-            var $doc = $(document);
-            var height = screen.availHeight * 0.6, width = screen.availWidth * 0.6;
-            var $div = $('<div/>', {'height': height, width: width});
-            $div.dialog({
-                title: '请选择',
-                closed: false,
-                cache: true,
-                href: url,
-                modal: true,
-                buttons: [{
-                    text: '确定',
-                    handler: function () {
-                        if (true || $.isFunction(callback)) {
-                            var data = $div.find('#grid').datagrid('getChecked');
-                            if (data && data.length > 0) {
-                                console.log(data);
-                                $div.dialog('close');
-                                callback(data);
-                            } else {
-                                $.messager.alert('提示', '请选择数据!');
-                            }
-                        }
-                    }
-                }, {
-                    text: '取消',
-                    handler: function () {
-                        $div.dialog('close');
-                    }
-                }]
-            });
-        }
+
 
         $('#dlg_edit').dialog({
             title: "添加单位",
@@ -308,10 +305,19 @@
         function submitForm() {
             $.messager.progress();	// display the progress bar
             $('#ff').form('submit', {
-                onSubmit: function () {
+                onSubmit: function (param) {
                     var isValid = $(this).form('validate');
                     if (!isValid) {
                         $.messager.progress('close');	// hide progress bar while the form is invalid
+                    }
+                    var methods = $('#inspect_method').combobox('getValues');
+                    debugger;
+                    delete param.inspectMethods;
+                    if($.isArray(methods)&&methods.length>0){
+                        param.inspectMethods = [];
+                        $.each(methods,function(i,val){
+                            param.inspectMethods.push({id:val});
+                        });
                     }
                     return isValid;	// return false will stop the form submission
                 },
@@ -371,7 +377,66 @@
             modal: true
         });
     }
-
+    function selectChild(url, callback) {
+        var $doc = $(document);
+        var height = screen.availHeight * 0.6, width = screen.availWidth * 0.6;
+        var $div = $('<div/>', {'height': height, width: width});
+        $div.dialog({
+            title: '请选择',
+            closed: false,
+            cache: true,
+            href: url,
+            modal: true,
+            buttons: [{
+                text: '确定',
+                handler: function () {
+                    if (true || $.isFunction(callback)) {
+                        var data = $div.find('#grid').datagrid('getChecked');
+                        if (data && data.length > 0) {
+                            console.log(data);
+                            $div.dialog('close');
+                            callback(data);
+                        } else {
+                            $.messager.alert('提示', '请选择数据!');
+                        }
+                    }
+                }
+            }, {
+                text: '取消',
+                handler: function () {
+                    $div.dialog('close');
+                }
+            }]
+        });
+    }
+    function showData(plan_id) {
+        var url = '/moduleInspectPlanController/showData/'+plan_id+'.action';
+        var $iframe = $('#data_details_iframe');
+        $iframe.attr('src',url);
+        $('#data_details').dialog({
+            title: '详情',
+            width: $('body').width() * 0.8,
+            height: $('body').height() * 0.8,
+            closed: false,
+            modal: true
+        });
+    }
+    function linkData(plan_id) {
+        var url = '/moduleInspectPlanController/selectData/'+plan_id+'.action';
+        selectChild(url, function (data) {
+            console.log(JSON.stringify(data));
+            $.ajax({
+                url:'/moduleInspectDataController/linkData/'+plan_id+'.action',
+                type:'post',
+                dataType:'json',
+                data:{data:data}
+            }).done(function (ret) {
+                console.log(ret);
+            }).fail(function () {
+                $.messager.alert('提示','关联数据失败!');
+            })
+        })
+    }
 
 </script>
 </body>

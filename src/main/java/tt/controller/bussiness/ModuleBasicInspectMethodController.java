@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import tt.controller.BaseController;
+import tt.model.business.InspectItem;
 import tt.model.business.InspectMethod;
 import tt.service.bussiness.InspectMethodServiceI;
 
@@ -29,6 +30,19 @@ public class ModuleBasicInspectMethodController extends BaseController<InspectMe
         return "business/module_basic/inspect_method";
     }
 
+    @RequestMapping("{inspect_item_id}/methods")
+    public String methods(@PathVariable Integer inspect_item_id, Model model) {
+        model.addAttribute("inspect_item_id", inspect_item_id);
+        return "business/module_basic/inspect_method";
+    }
+
+    @RequestMapping(value = "{inspect_item_id}/comboList", method = RequestMethod.GET)
+    @ResponseBody
+    public List<InspectMethod> comboList(@PathVariable Integer inspect_item_id,@RequestParam(required=false) String name) {
+
+        List<InspectMethod> list = inspectMethodService.list(inspect_item_id,name);
+        return list;
+    }
 
     @RequestMapping(value = "get/{id}", method = RequestMethod.GET)
     @ResponseBody

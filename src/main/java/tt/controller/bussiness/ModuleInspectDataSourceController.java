@@ -18,15 +18,15 @@ import java.util.Map;
  * Created by tt on 2016/10/2.
  */
 @Controller
-@RequestMapping("moduleInspectDataController")
-public class ModuleInspectDataController extends BaseController<InspectData> {
+@RequestMapping("moduleInspectDataSourceController")
+public class ModuleInspectDataSourceController extends BaseController<InspectData> {
     @Autowired
     private InspectDataServiceI inspectProjectService;
 
     @RequestMapping("index")
     public String index(Model model){
-        model.addAttribute("baseUrl","/moduleBasicInspectDataController");
-        return "business/module_data/index";
+        model.addAttribute("baseUrl","/moduleInspectDataSourceController");
+        return "business/module_data/data";
     }
 
     /**
@@ -54,22 +54,5 @@ public class ModuleInspectDataController extends BaseController<InspectData> {
     @ResponseBody
     public List<Map<String,Object>> listKeys(){
        return inspectProjectService.loadKeys();
-    }
-    @RequestMapping(value = "unLinkedKeys",method = RequestMethod.GET)
-    @ResponseBody
-    public JSONObject listUnlinkedKeys(){
-       return listResponse(inspectProjectService.loadUnLinkedKeys());
-    }
-    @RequestMapping(value = "linkedKeys/{plan_id}",method = RequestMethod.GET)
-    @ResponseBody
-    public List<Map<String,Object>> listlinkedKeys(@PathVariable Integer plan_id){
-       return inspectProjectService.loadLinkedKeys(plan_id);
-    }
-    @RequestMapping(value = "linkData/{plan_id}",method = RequestMethod.POST)
-    @ResponseBody
-    public JSONObject linkData(@PathVariable(value = "plan_id") Integer plan_id,@RequestBody Map<String,Integer>[] data){
-        System.out.println(plan_id);
-        System.out.println(JSONObject.toJSON(data));
-        return flagResponse(true);
     }
 }

@@ -29,7 +29,7 @@
     <div data-options="region:'center'" style="overflow: hidden;width: 100%;height: 100%">
         <%--<iframe src="${pageContext.request.contextPath}/moduleBasicController/index.action" style="width: 100%;height: 100%"></iframe>--%>
         <iframe id="panel_main" style="height: 100%;width: 100%;" scrolling="no"
-                src="${pageContext.request.contextPath}/baseController/portal/index"></iframe>
+                src="${pageContext.request.contextPath}/baseController/portal/index.action"></iframe>
         <%--<iframe id="panel_main" style="height: 100%;width: 100%;" scrolling="no" src="${pageContext.request.contextPath}/moduleBasicController/index.action"></iframe>--%>
     </div>
 

@@ -9,7 +9,8 @@ public class Overview {
     private Integer id;
     private String text;
     private Byte level;
-    private Overview parent;
+//    private Overview parent;
+    private Integer pid;
     private String note;
     private Long count;
     private List<Overview> children;
@@ -45,14 +46,24 @@ public class Overview {
         this.level = level;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY,optional = true)
-    @JoinColumn(name = "pid")
-    public Overview getParent() {
-        return parent;
+//    @ManyToOne(fetch = FetchType.LAZY,optional = true)
+//    @JoinColumn(name = "pid")
+//    public Overview getParent() {
+//        return parent;
+//    }
+//
+//    public void setParent(Overview parent) {
+//        this.parent = parent;
+//    }
+
+    @Basic
+    @Column(name = "pid")
+    public Integer getPid() {
+        return pid;
     }
 
-    public void setParent(Overview parent) {
-        this.parent = parent;
+    public void setPid(Integer pid) {
+        this.pid = pid;
     }
 
     @Basic
@@ -75,7 +86,7 @@ public class Overview {
         this.count = count;
     }
 
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "parent")
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "pid")
     public List<Overview> getChildren() {
         return children;
     }

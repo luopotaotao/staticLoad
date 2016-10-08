@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>模板支撑智能安全监测系统</title>
     <jsp:include page="../../layout/common.jsp"></jsp:include>
+
 </head>
 <body class="easyui-layout">
 <div data-options="region:'west',split:true" title="功能导航" style="width: 200px; overflow: hidden;">
@@ -12,162 +12,55 @@
         <ul id="tree_menu"></ul>
     </div>
 </div>
-<div id="tt" class="easyui-tabs" data-options="region:'center'">
-    <div title="原始记录">
-        <table id="tb_source" class="easyui-datagrid" title="原始记录"
-               data-options="
-       singleSelect:true,
-       rownumbers:true,
-       <!--url:'source_data.json',-->
-       method:'get',
-       fitColumns:true
-    ">
-            <thead>
-            <tr>
-                <th data-options="field:'PRG'">工程</th>
-                <th data-options="field:'STZH'">桩号</th>
-                <th data-options="field:'DevNB',align:'center'">设备编号</th>
-                <th data-options="field:'PRS',align:'center'">压力</th>
-                <th data-options="field:'AVG_PRS',align:'center'">平均压力</th>
-                <th data-options="field:'HZJC',align:'center'">荷载</th>
-                <th data-options="field:'AVG_HZJC',align:'center'">平均荷载</th>
-                <th data-options="field:'WYJC',align:'center'">位移</th>
-                <th data-options="field:'AVG_WYJC',align:'center'">平均位移</th>
-                <th data-options="field:'GPS',align:'center',formatter:function(obj,row){return row.lat+','+row.lng}">
-                    GPS信息
-                </th>
-                <th data-options="field:'Devstr',align:'center'">设备代号</th>
-                <th data-options="field:'Time',align:'center'">数据上传时间</th>
-                <th data-options="field:'Delay',align:'center'">时间间隔</th>
-                <th data-options="field:'QJX',align:'center'">倾角数据</th>
-                <th data-options="field:'AVG_QJX',align:'center'">平均倾角数据</th>
-                <th data-options="field:'NDSJ',align:'center'">挠度数据</th>
-                <th data-options="field:'AVG_NDSJ',align:'center'">平均挠度数据</th>
-                <th data-options="field:'DevST',align:'center'">设备状态</th>
-            </tr>
-            </thead>
-        </table>
-    </div>
-    <div title="统计数据">
-        <table id="tb_load"></table>
-    </div>
-
-
-</div>
+<div id="tt" class="easyui-tabs" data-options="region:'center'"></div>
 
 <script>
     $(function () {
-        init();
-        function init() {
+        var tree_data = [{
+            "id": 1,
+            "text": "检测方案",
+            url: '/moduleInspectSchemeController/index.action',
+        }, {
+            "id": 1,
+            "text": "检测计划",
+            url: '/moduleInspectPlanController/index.action',
+        }, {
+            "id": 1,
+            "text": "原始数据",
+            url: '/moduleInspectDataSourceController/index.action',
+        }];
+        initUI();
+        function initUI() {
             $('#tree_menu').tree({
-                url:'/moduleInspectDataController/keys.action',
-                method:'get',
-                formatter:function(node){
-                    return '工程:'+node.prg+';桩号:'+node.stzh;
-                },
-                onClick: function(node){
-                    loadData(node.prg,node.stzh);
+//                    url:'tree_data1.json',
+                data: tree_data,
+//                    method:'get',
+                animate: true,
+                onClick: function (node) {
+                    if (node.text && node.url) {
+                        openTab(node.text, node.url);
+                    }
                 }
-            })
+            });
+
         }
-        function loadData(prg,stzh){
-            var fields = [
-                {key: 'prs', title: '1'},
-                {key: 'hzjc', title: '2'},
-                {key: 'wyjc', title: '3'},
-                {key: 'qjx', title: '4'},
-                {key: 'ndsj', title: '5'}
-            ];
-            $.get('/moduleInspectDataController/query/' + prg + '/' + stzh+'.action', function (data) {
-                var ret = filterData(data, fields);
-                var source = ret.source;
-                var statistic = ret.statistic;
-                console.log(ret.statistic.columns);
-                $('#tb_source').datagrid({'data': source});
-                $('#tb_load').datagrid({
-                    rownumbers:true,
-                    columns: statistic.columns,
-                    data: statistic.data,
-                    fitColumns: true
+
+        function openTab(title, url) {
+            var $tt = $('#tt');
+            if (!$tt.tabs('exists', title)) {
+                var $iframe = $('<iframe/>', {src: url, style: 'width:95%;height:95%;', scrolling: 'no'});
+                $tt.tabs('add', {
+                    title: title,
+                    content: $iframe,
+                    closable: true,
+                    fit: true,
+                    plain: true
                 });
-            },'json');
-        }
-        /**
-         * 处理原始数据,生成{source: data, statistic: statisticData};
-         * @param data
-         * @param fields
-         * @returns {{source: *, statistic: ({columns, data}|*)}}
-         */
-        function filterData(data, fields) {
-            if (data) {
-                var statistic = {};
-                var rows = data.rows;
-                if (rows && rows.length > 0) {
-                    $.each(rows, function (i, item) {
-                        if (!statistic.hasOwnProperty(item.SETprs)) {
-                            statistic[item.SETprs] = [];
-                        }
-                        var avg_vals = {};
-                        $.each(fields, function (j, field) {
-                            var key = field.key;
-                            var avg_val = avg(item[key]);
-                            item['AVG_' + key.toUpperCase()] = avg_val
-                            avg_vals[item.SETprs + key] = avg_val;
-                        });
-                        statistic[item.SETprs].push(avg_vals);
-                        var delay = null;
-                        switch (i) {
-                            case 0:
-                                delay = 0;
-                                break;
-                            case item.length - 1:
-                                delay = null;
-                                break;
-                            default:
-                                if (item.SETprs == rows[i - 1].SETprs) {
-                                    delay = Math.round((new Date(item.Time).getTime() - new Date(rows[i - 1].Time).getTime()) / (1000 * 60));
-                                } else {
-                                    delay = 0;
-                                }
-                        }
-                        item.Delay = delay;
-                    });
-                    console.log(JSON.stringify(statistic));
-                }
+            } else {
+                $tt.tabs('select', title)
             }
-            return {source: data, statistic: generateStatisticInfo(statistic, fields)};
+
         }
-
-        function avg(arr) {
-            var sum = arr.reduce(function (a, b) {
-                return parseFloat(a) + parseFloat(b);
-            });
-            return sum / arr.length;
-        }
-
-        /**
-         *
-         * @param s
-         * @param fields
-         * @returns {{columns: *[], data: Array}}
-         */
-        function generateStatisticInfo(s, fields) {
-            var columns = [[], []];
-            var ret = [];
-            $.each(s, function (key, arr) {
-                columns[0].push({title: key, colspan: fields.length});
-                $.each(fields, function (i, field) {
-                    columns[1].push({title: field.title, field: key + field.key, width: 80});
-                })
-
-                for (var i = 0; i < arr.length; i++) {
-                    ret[i] = ret[i] || {};
-                    $.extend(ret[i], arr[i]);
-                }
-            });
-            return {columns: columns, data: ret}
-        }
-
     });
 </script>
 

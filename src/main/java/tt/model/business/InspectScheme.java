@@ -76,7 +76,7 @@ public class InspectScheme {
         this.pile_count = pile_count;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "institution_id")
     public Institution getInstitution() {
         return institution;

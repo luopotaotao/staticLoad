@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface InspectSchemeServiceI {
     InspectScheme get(int id);
-    List<InspectScheme> list(String name, int page, int PageSize);
+    List<InspectScheme> list(String name, Integer page, Integer PageSize);
     long count(String name);
     int add(InspectScheme inspectScheme);
     int del(List<Integer> ids);
