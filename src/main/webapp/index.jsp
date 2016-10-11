@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>模板支撑智能安全监测系统</title>
+    <title>智能无线静荷载试验检测云平台</title>
 
 
 </head>
@@ -16,7 +16,7 @@
         <jsp:include page="./WEB-INF/layout/north.jsp"></jsp:include>
     </div>
     <%--<div data-options="region:'west',href:'${pageContext.request.contextPath}/baseController/layout/west.action',split:true" title="功能导航" style="width: 200px; overflow: hidden;"></div>--%>
-    <%--<div data-options="region:'center'" title="欢迎使用模板支撑智能安全监测系统" style="overflow: hidden;">--%>
+    <%--<div data-options="region:'center'" title="欢迎使用智能无线静荷载试验检测云平台" style="overflow: hidden;">--%>
     <%--<div id="index_tabs" style="overflow: hidden;">--%>
     <%--<div title="首页" data-options="border:false" style="overflow: hidden; " align="center">--%>
     <%--<img src="style/images/pic1.png" style="height:100%; cursor:default">--%>

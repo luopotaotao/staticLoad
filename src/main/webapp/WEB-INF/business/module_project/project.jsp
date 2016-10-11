@@ -3,20 +3,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>模板支撑智能安全监测系统</title>
+    <title>智能无线静荷载试验检测云平台</title>
     <jsp:include page="../../layout/common.jsp"></jsp:include>
 </head>
 <body style="width:100%">
 
 <div class="easyui-panel" style="width:30%">
     <input class="easyui-searchbox"
-           data-options="prompt:'请输入工程名称或工程编号',searcher:function(val,typ){$('#dg').datagrid('load',{typ:typ,name:val});}"
+           data-options="prompt:'请输入工程名称或工程编号',searcher:function(val,typ){$('#project_dg').datagrid('load',{typ:typ,name:encodeURIComponent(val)});}"
            style="width:100%">
 </div>
 
-<table id="dg" style="width:100%"></table>
-<div id="dlg_edit" style="width:80%;max-width:800px;padding:10px 60px;">
-    <form id="ff" class="easyui-form" method="post" data-options="novalidate:true" action="${baseUrl}/post.action">
+<table id="project_dg" style="width:100%"></table>
+<div id="project_dlg_edit" style="width:80%;max-width:800px;padding:10px 60px;">
+    <form id="project_ff" class="easyui-form" method="post" data-options="novalidate:true" action="${baseUrl}/post.action">
         <div style="margin-bottom:20px;display: none">
             <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'企业编号:',required:true">
         </div>
@@ -27,7 +27,7 @@
                    data-options="label:'工程名称:',labelAlign:'right'">
         </div>
         <div style="margin-bottom:20px">
-            <select id="province_id" class="easyui-combobox" name="province.id" style="width:45%"
+            <select id="project_province_id" class="easyui-combobox" name="province.id" style="width:45%"
                     data-options="label:'所在省份:',
             labelAlign:'right',
             url:'/moduleBasicAreaController/area/0.action',
@@ -35,14 +35,14 @@
             valueField: 'id',
             textField: 'text',
             onSelect:function(rec){
-                var $city = $('#city_id');
+                var $city = $('#project_city_id');
                 $city.combobox('clear');
                 $city.combobox('reload','/moduleBasicAreaController/area/'+rec.id+'.action');
             }
             ">
 
             </select>
-            <select id="city_id" class="easyui-combobox" name="city.id" style="width:45%"
+            <select id="project_city_id" class="easyui-combobox" name="city.id" style="width:45%"
                     data-options="label:'所在城市:',labelAlign:'right', method:'get',valueField: 'id',textField: 'text'">
             </select>
         </div>
@@ -51,25 +51,25 @@
                    data-options="label:'具体地址:',labelAlign:'right'">
         </div>
         <div style="margin-bottom:20px;display: none">
-            <input id="input_lat" class="easyui-textbox" name="lat" style="width:100%"
+            <input id="project_input_lat" class="easyui-textbox" name="lat" style="width:100%"
                    data-options="label:'纬度:'">
         </div>
         <div style="margin-bottom:20px;display: none">
-            <input id="input_lng" class="easyui-textbox" name="lng" style="width:100%"
+            <input id="project_input_lng" class="easyui-textbox" name="lng" style="width:100%"
                    data-options="label:'经度:'">
         </div>
         <div style="margin-bottom:20px">
-            <input id="select_coordinate" class="easyui-textbox" style="width:45%;height:32px;">
-            <input class="easyui-textbox select" name="constructor_id" style="width:45%"
+            <input id="project_select_coordinate" class="easyui-textbox" style="width:45%;height:32px;">
+            <input id="select_constructor" class="easyui-textbox select" name="constructor.id" style="width:45%"
                    data-options="label:'建设单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
                    buttonIcon:'icon-search'" url="/moduleBasicCompanyController/partial.action">
         </div>
         <div style="margin-bottom:20px">
-            <input class="easyui-textbox select" name="builder_id" style="width:45%"
+            <input id="project_select_builder" class="easyui-textbox select" name="builder.id" style="width:45%"
                    data-options="label:'施工单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
                    buttonIcon:'icon-search'" url="/moduleBasicCompanyController/partial.action">
 
-            <input class="easyui-textbox select" name="inspector_id" style="width:45%"
+            <input id="project_select_inspector" class="easyui-textbox select" name="inspector.id" style="width:45%"
                    data-options="label:'监理单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
                    buttonIcon:'icon-search'" url="/moduleBasicCompanyController/partial.action">
         </div>
@@ -79,8 +79,8 @@
         </div>
     </form>
 </div>
-<div id="selectCoordinateDiv">
-    <div id="map_div"></div>
+<div id="project_selectCoordinateDiv">
+    <div id="project_map_div"></div>
 </div>
 
 
@@ -106,12 +106,12 @@
 
         });
         function initializeMap() {
-            var $div = $('#map_div');
+            var $div = $('#project_map_div');
             var height = Math.floor($(document).height() * 0.81);
             var width = Math.floor($(document).width() * 0.69);
             $div.height(height).width(width);
 
-            var map = new BMap.Map('map_div');
+            var map = new BMap.Map('project_map_div');
             map.centerAndZoom("银川", 5);
 //            map.centerAndZoom(point, 12);                 // 初始化地图，设置中心点坐标和地图级别
             map.enableScrollWheelZoom(); //启用滚轮放大缩小，默认禁用
@@ -152,10 +152,9 @@
 <script type="text/javascript">
     $(function () {
         var baseUrl = '/';
-        $('#dg').datagrid({
+        $('#project_dg').datagrid({
             url: '${baseUrl}/query.action',
             method: 'get',
-            title: '单位管理',
             iconCls: 'icon-save',
 //            width: 700,
             height: $('body').height(),
@@ -173,7 +172,7 @@
                 text: '编辑',
                 iconCls: 'icon-edit',
                 handler: function () {
-                    var rows = $('#dg').datagrid('getChecked');
+                    var rows = $('#project_dg').datagrid('getChecked');
                     if (!rows || !rows.length) {
                         $.messager.alert('提示', '请选择要编辑的行!');
                         return;
@@ -189,7 +188,7 @@
                 text: '删除',
                 iconCls: 'icon-remove',
                 handler: function () {
-                    var rows = $('#dg').datagrid('getChecked');
+                    var rows = $('#project_dg').datagrid('getChecked');
                     if (!rows || !rows.length) {
                         $.messager.alert('提示', '请选择要删除的行!');
                         return;
@@ -199,7 +198,7 @@
                             remove($.map(rows, function (row) {
                                 return row.id;
                             }), function () {
-                                $('#dg').datagrid('reload');
+                                $('#project_dg').datagrid('reload');
                             });
                         }
                     });
@@ -210,14 +209,14 @@
                 {field: 'id', title: 'ID', hidden: true},
                 {field: 'code', title: '工程编码', width: 80},
                 {field: 'name', title: '工程名称', width: 80},
-                {field: 'province_id', title: '所在省份id', width: 80},
-                {field: 'city_id', title: '所在市id', width: 80},
+                {field: 'province', title: '所在省份', width: 80,formatter:function(val){return val?val.text:''}},
+                {field: 'city', title: '所在市', width: 80,formatter:function(val){return val?val.text:''}},
                 {field: 'address', title: '具体地址', width: 80},
                 {field: 'lat', title: '纬度', width: 80},
                 {field: 'lng', title: '经度', width: 80},
-                {field: 'constructor_id', title: '建设单位', width: 80},
-                {field: 'builder_id', title: '施工单位', width: 80},
-                {field: 'inspector_id', title: '监理单位', width: 80}
+                {field: 'constructor', title: '建设单位', width: 80,formatter:function(val){return val?val.name:''}},
+                {field: 'builder', title: '施工单位', width: 80,formatter:function(val){return val?val.name:''}},
+                {field: 'inspector', title: '监理单位', width: 80,formatter:function(val){return val?val.name:''}},
 
             ]],
             onHeaderContextMenu: function (e, field) {
@@ -237,13 +236,13 @@
             $.cmenu.menu({
                 onClick: function (item) {
                     if (item.iconCls == 'icon-ok') {
-                        $('#dg').datagrid('hideColumn', item.name);
+                        $('#project_dg').datagrid('hideColumn', item.name);
                         $.cmenu.menu('setIcon', {
                             target: item.target,
                             iconCls: 'icon-empty'
                         });
                     } else {
-                        $('#dg').datagrid('showColumn', item.name);
+                        $('#project_dg').datagrid('showColumn', item.name);
                         $.cmenu.menu('setIcon', {
                             target: item.target,
                             iconCls: 'icon-ok'
@@ -251,10 +250,10 @@
                     }
                 }
             });
-            var fields = $('#dg').datagrid('getColumnFields');
+            var fields = $('#project_dg').datagrid('getColumnFields');
             for (var i = 0; i < fields.length; i++) {
                 var field = fields[i];
-                var col = $('#dg').datagrid('getColumnOption', field);
+                var col = $('#project_dg').datagrid('getColumnOption', field);
                 $.cmenu.menu('appendItem', {
                     text: col.title,
                     name: field,
@@ -262,31 +261,6 @@
                 });
             }
         }
-
-//        $('#province_id').combobox({
-//            textField:'id',
-//            textField:'text',
-//            label:'所在省份:',
-//            labelAlign:'right',
-//            url:'/moduleBasicAreaController/area/0.action',
-//            method:'get',
-//            onSelect:function(rec){
-//                console.log(rec);
-//                $('#city_id').combobox('reload','/moduleBasicAreaController/area/'+rec.id+'.action');
-//            }
-//
-//        });
-//        $('#city_id').combobox({
-//            label:'所在省份:',
-//            labelAlign:'right',
-//            url:'/moduleBasicAreaController/area/2.action',
-//            method:'get',
-//            onSelect:function(rec){
-//                console.log(rec);
-//                $('#city_id').combobox('reload','/moduleBasicAreaController/area/'+rec.id+'.action');
-//            }
-//
-//        });
         $('input.select').textbox({
             onClickButton: function () {
                 var _this = this;
@@ -337,7 +311,7 @@
             });
         }
 
-        $('#select_coordinate').textbox({
+        $('#project_select_coordinate').textbox({
             label: '经度纬度:',
             labelAlign: 'right',
             buttonText: '选择',
@@ -350,21 +324,20 @@
                 selectCoordinate(function (data) {
                     var str_arr = [
                         data.lng,
-                        ',',
                         data.lat
                     ];
-                    $(_this).textbox('setText', str_arr.join(''));
-                    $('#input_lat').textbox('setValue', data.lat);
-                    $('#input_lng').textbox('setValue', data.lng);
+                    $(_this).textbox('setText', str_arr.join(','));
+                    $('#project_input_lat').textbox('setValue', data.lat);
+                    $('#project_input_lng').textbox('setValue', data.lng);
                 });
             }
         });
         function selectCoordinate(callback) {
-            var currentCity = $('#city_id').combobox('getText');
+            var currentCity = $('#project_city_id').combobox('getText');
             $.BaiduMap.center(currentCity);
             var height = Math.floor($(document).height() * 0.93);
             var width = Math.floor($(document).width() * 0.7);
-            var $div = $('#selectCoordinateDiv');
+            var $div = $('#project_selectCoordinateDiv');
             $div.dialog({
                 title: '请选择',
                 closed: false,
@@ -394,7 +367,7 @@
             });
         }
 
-        $('#dlg_edit').dialog({
+        $('#project_dlg_edit').dialog({
             title: "添加工程",
             closed: true,
             modal: true,
@@ -412,19 +385,35 @@
         })
 
         function showEditDialog(data) {
-            var $ff = $('#ff');
+            var $ff = $('#project_ff');
             if (data) {
                 $ff.form('load', data);
+                $('#project_province_id').combobox('select',data.province.id);
+                $('#project_city_id').combobox('select',data.city.id);
+                $('#project_select_coordinate').textbox('setText',[data.lng,data.lat].join(','));
+                if(data.constructor){
+                    $('#select_constructor').textbox('setValue',data.constructor.id)
+                    $('#select_constructor').textbox('setText',data.constructor.name);
+                }
+                if(data.builder){
+                    $('#project_select_builder').textbox('setValue',data.builder.id)
+                    $('#project_select_builder').textbox('setText',data.builder.name);
+                }
+                if(data.inspector){
+                    $('#project_select_inspector').textbox('setValue',data.inspector.id)
+                    $('#project_select_inspector').textbox('setText',data.inspector.name);
+                }
+
                 $ff.form({url: 'put.action'});
             } else {
                 $ff.form({url: 'post.action'});
             }
-            $('#dlg_edit').dialog('open');
+            $('#project_dlg_edit').dialog('open');
         }
 
         function submitForm() {
             $.messager.progress();	// display the progress bar
-            $('#ff').form('submit', {
+            $('#project_ff').form('submit', {
                 onSubmit: function () {
                     var isValid = $(this).form('validate');
                     if (!isValid) {
@@ -434,10 +423,6 @@
                 },
                 success: function (data) {
                     $.messager.progress('close');	// hide progress bar while submit successfully
-//                    {
-//                        "success": true,
-//                            "message": "Message sent successfully."
-//                    }
                     data = $.parseJSON(data);
                     if (data.flag) {
                         $.messager.alert('提示', '保存成功!');
@@ -451,10 +436,10 @@
 
         function closeEditDialog(needRefresh) {
             if (needRefresh) {
-                $('#dg').datagrid('reload');
+                $('#project_dg').datagrid('reload');
             }
-            $('#ff').form('clear');
-            $('#dlg_edit').dialog('close');
+            $('#project_ff').form('clear');
+            $('#project_dlg_edit').dialog('close');
         }
 
         function remove(ids) {
@@ -466,7 +451,7 @@
             }).done(function (ret) {
                 if (ret && ret.flag) {
                     $.messager.alert('提示', '删除成功!');
-                    $('#dg').datagrid('reload');
+                    $('#project_dg').datagrid('reload');
                 } else {
                     $.messager.alert('提示', ret, msg || '删除失败!');
                 }

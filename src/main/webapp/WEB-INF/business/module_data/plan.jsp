@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>模板支撑智能安全监测系统</title>
+    <title>智能无线静荷载试验检测云平台</title>
     <jsp:include page="../../layout/common.jsp"></jsp:include>
 
 </head>
@@ -11,12 +11,12 @@
 
 <div class="easyui-panel" style="width:30%">
     <input class="easyui-searchbox"
-           data-options="prompt:'请输入项目名称',searcher:function(val){$('#dg').datagrid('load',{name:val});}"
+           data-options="prompt:'请输入项目名称',searcher:function(val){$('#dg').datagrid('load',{name:encodeURIComponent(val)});}"
            style="width:100%">
 </div>
 
 <table id="dg" style="width:100%"></table>
-<div id="dlg_edit" style="width:100%;max-width:600px;padding:30px 60px;">
+<div id="dlg_edit" style="width:100%;max-width:600px;padding:10px 60px;">
     <form id="ff" class="easyui-form" method="post" data-options="novalidate:true" action="${baseUrl}/post.action">
         <div style="margin-bottom:20px;display: none">
             <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'编号:',required:true">
@@ -83,7 +83,6 @@
         $('#dg').datagrid({
             url: '${baseUrl}/query.action',
             method: 'get',
-            title: '机构管理',
             iconCls: 'icon-save',
 //            width: 700,
             height: $('body').height(),
@@ -155,8 +154,12 @@
                     }
                 },
 
-                {field: 'start_time', title: '开始时间', width: 80},
-                {field: 'end_time', title: '结束时间', width: 80, align: 'center'},
+                {field: 'start_time', title: '开始时间', width: 80,formatter:function (val) {
+                    return $.isNumeric(val)?$.DateUtil.format(new Date(val),'yyyy/MM/dd'):'';
+                }},
+                {field: 'end_time', title: '结束时间', width: 80, align: 'center',formatter:function (val) {
+                    return $.isNumeric(val)?$.DateUtil.format(new Date(val),'yyyy/MM/dd'):'';
+                }},
                 {
                     field: 'majorInspector', title: '主检人', width: 80, align: 'center',
                     formatter: function (val, row) {
@@ -276,9 +279,10 @@
 
 
         $('#dlg_edit').dialog({
-            title: "添加单位",
+            title: "添加计划",
             closed: true,
             modal: true,
+            height:520,
             draggable: false,
             iconCls: 'icon-add',
             buttons: [{
@@ -312,7 +316,6 @@
                         $.messager.progress('close');	// hide progress bar while the form is invalid
                     }
                     var methods = $('#inspect_method').combobox('getValues');
-                    debugger;
                     delete param.inspectMethods;
                     if($.isArray(methods)&&methods.length>0){
                         param.inspectMethods = [];
@@ -414,7 +417,6 @@
         var url = '/moduleInspectPlanController/showData/'+plan_id+'.action';
         var $iframe = $('#data_details_iframe');
         $iframe.attr('src',url);
-        debugger;
         $('#data_details').dialog({
             title: '详情',
             width: $('body').width() * 0.9,

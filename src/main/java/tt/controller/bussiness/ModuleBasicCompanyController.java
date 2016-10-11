@@ -10,6 +10,8 @@ import tt.controller.BaseController;
 import tt.model.business.Company;
 import tt.service.bussiness.CompanyServiceI;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.*;
 
 /**
@@ -36,7 +38,6 @@ public class ModuleBasicCompanyController extends BaseController<Company> {
     @RequestMapping(value = "get/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Company get(@PathVariable int id) {
-        System.out.println("*********************************************************"+id);
         return companyService.get(id);
     }
 
@@ -46,17 +47,13 @@ public class ModuleBasicCompanyController extends BaseController<Company> {
                            @RequestParam(required = false) String name,
                            @RequestParam(value = "page",required = false,defaultValue = "1") Integer page,
                            @RequestParam(value = "rows",required = false,defaultValue = "10") Integer pageSize) {
-//        Map params = new HashMap<String,Object>();
-//        if(typ!=null){
-//            params.put("typ",typ);
-//        }else{
-//            List<Byte> typs = new LinkedList<>();
-//            typs.add((byte)1);
-//            typs.add((byte)2);
-//            typs.add((byte)3);
-//            params.put("typ",typs);
-//        }
-        System.out.println(companyService+"Null+++++++++++++++++++++++++++++++++++++++");
+        if(name!=null&&!name.trim().isEmpty()){
+            try {
+                name = URLDecoder.decode(name,"utf-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
 
         List<Company> list = companyService.list(typ,name,page,pageSize);
         long count = companyService.count(typ,name);

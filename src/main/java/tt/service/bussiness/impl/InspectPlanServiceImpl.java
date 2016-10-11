@@ -24,6 +24,7 @@ public class InspectPlanServiceImpl implements InspectPlanServiceI {
     @Autowired
     private InspectItemDaoI inspectItemDao;
 
+
     @Override
     public InspectPlan get(int id) {
         return inspectPlanDao.get(InspectPlan.class, id);
@@ -71,7 +72,7 @@ public class InspectPlanServiceImpl implements InspectPlanServiceI {
         return 1;
     }
     private void resetProject(InspectPlan inspectPlan){
-//        inspectPlan.setProject(projectDao.getById(inspectPlan.getProject().getId()));
+//        inspectPlan.setInspectScheme(in.getById(inspectPlan.getProject().getId()));
 //        inspectPlan.setInspectItem(inspectItemDao.getById(inspectPlan.getInspectItem().getId()));
     }
 }

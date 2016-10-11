@@ -5,7 +5,7 @@
 
     <div class="easyui-panel" style="width:30%">
         <input class="easyui-searchbox"
-               data-options="prompt:'请输入检测方法名称',searcher:function(val,typ){$('#dg_method').datagrid('load',{typ:typ,name:val});}"
+               data-options="prompt:'请输入检测方法名称',searcher:function(val,typ){$('#dg_method').datagrid('load',{typ:typ,name:encodeURIComponent(val)});}"
                style="width:100%">
     </div>
 

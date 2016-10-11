@@ -9,6 +9,8 @@ import tt.controller.BaseController;
 import tt.model.business.Project;
 import tt.service.bussiness.ProjectServiceI;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -44,6 +46,13 @@ public class ModuleProjectManageController extends BaseController<Project> {
                            @RequestParam(required = false) String name,
                            @RequestParam(value = "page",required = false,defaultValue = "1") Integer page,
                            @RequestParam(value = "rows",required = false,defaultValue = "10") Integer pageSize) {
+        if(name!=null&&!name.trim().isEmpty()){
+            try {
+                name = URLDecoder.decode(name,"utf-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
         List<Project> list = projectService.list(area_id,name,page,pageSize);
         long count = projectService.count(area_id,name);
         return listResponse(count, list);

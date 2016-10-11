@@ -9,6 +9,8 @@ import tt.controller.BaseController;
 import tt.model.business.Institution;
 import tt.service.bussiness.InstitutionServiceI;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -46,7 +48,13 @@ public class ModuleBasicInstitutionController extends BaseController<Institution
                            @RequestParam(required = false) String name,
                            @RequestParam(value = "page",required = false,defaultValue = "1") Integer page,
                            @RequestParam(value = "rows",required = false,defaultValue = "10") Integer pageSize) {
-
+        if(name!=null&&!name.trim().isEmpty()){
+            try {
+                name = URLDecoder.decode(name,"utf-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
         List<Institution> list = institutionService.list(typ,name,page,pageSize);
         long count = institutionService.count(typ,name);
         return listResponse(count, list);

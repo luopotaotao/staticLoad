@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>模板支撑智能安全监测系统</title>
+    <title>智能无线静荷载试验检测云平台</title>
     <jsp:include page="../../layout/common.jsp"></jsp:include>
 
     <script type="text/javascript" src="${pageContext.request.contextPath}/jslib/baiduMap/map_api.js"></script>
@@ -59,7 +59,7 @@
             var url = '/moduleOverviewController/' + area_id + '/queryProjects.action';
             $.getJSON(url, function (ret) {
                 showMarkers(ret,function (marker) {
-                    var template = '<p>工程名称:{name}</p><p>工程编码:{code}</p><p>地址:{city}{address}</p>';
+                    var template = '<p>工程名称:{name}<a href="">123</a></p><p>工程编码:{code}</p><p>地址:{city}{address}</p>';
                     var info = marker.info;
                     map.centerAndZoom(marker.M, 11);
                     showInfo(marker.M, template, {name:info.name||'',code:info.code||'',city:info.city?(info.city.text||''):'',address:info.address||''});
@@ -93,6 +93,9 @@
 //
 //        $.Map.showMarkers(markers);
         function initializeMap() {
+            var $div = $('#div_map');
+            $div.height($(document).height()*0.92);
+            $div.width($(document).width()*0.85);
             var map = new BMap.Map("div_map");
 //            var point = new BMap.Point(113.276, 23.117);
             map.centerAndZoom("西安", 4);

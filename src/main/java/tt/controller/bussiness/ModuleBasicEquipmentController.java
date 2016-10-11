@@ -10,6 +10,8 @@ import tt.controller.BaseController;
 import tt.model.business.Equipment;
 import tt.service.bussiness.EquipmentServiceI;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -40,7 +42,13 @@ public class ModuleBasicEquipmentController extends BaseController<Equipment> {
     @ResponseBody
     public JSONObject list(@PathVariable Integer institution_id,
                            @RequestParam(required = false) String name) {
-
+        if(name!=null&&!name.trim().isEmpty()){
+            try {
+                name = URLDecoder.decode(name,"utf-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
         List<Equipment> list = equipmentService.list(institution_id,name);
         return listResponse(list);
     }

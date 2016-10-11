@@ -10,6 +10,8 @@ import tt.model.business.InspectItem;
 import tt.model.business.InspectMethod;
 import tt.service.bussiness.InspectMethodServiceI;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -55,7 +57,13 @@ public class ModuleBasicInspectMethodController extends BaseController<InspectMe
     public JSONObject list(
             @PathVariable Integer inspect_item_id,
             @RequestParam(required = false) String name) {
-
+        if(name!=null&&!name.trim().isEmpty()){
+            try {
+                name = URLDecoder.decode(name,"utf-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
         List<InspectMethod> list = inspectMethodService.list(inspect_item_id,name);
         return listResponse(list);
     }

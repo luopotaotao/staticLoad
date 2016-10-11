@@ -3,14 +3,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>模板支撑智能安全监测系统</title>
+    <title>智能无线静荷载试验检测云平台</title>
     <jsp:include page="../../layout/common.jsp"></jsp:include>
 
 </head>
 <body style="width:100%">
 
 <div class="easyui-panel" style="width:30%">
-    <input class="easyui-searchbox" data-options="prompt:'请输入单位名称',menu:'#mm',searcher:function(val,typ){$('#dg').datagrid('load',{typ:typ,name:val});}" style="width:100%">
+    <input class="easyui-searchbox" data-options="prompt:'请输入单位名称',menu:'#mm',searcher:function(val,typ){$('#dg').datagrid('load',{typ:typ,name:encodeURIComponent(val)});}" style="width:100%">
     <div id="mm">
         <div data-options="name:'0'">全&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;部</div>
         <div data-options="name:'1'">建设单位</div>
@@ -47,12 +47,12 @@
     </form>
 </div>
 <script type="text/javascript">
+
     $(function () {
         var baseUrl = '/';
         $('#dg').datagrid({
             url: '${baseUrl}/query.action',
             method: 'get',
-            title: '单位管理',
             iconCls: 'icon-save',
 //            width: 700,
             height: $('body').height(),

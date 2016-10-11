@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>模板支撑智能安全监测系统</title>
+    <title>智能无线静荷载试验检测云平台</title>
     <jsp:include page="../../layout/common.jsp"></jsp:include>
 </head>
 <body class="easyui-layout">
@@ -19,9 +19,54 @@
         var baseUrl = '${baseUrl}';
         var tree_data = [{
             "id": 1,
-            "text": "工程管理",
+            "text": "工程管理<a>123</a>",
             "url": '/moduleProjectManageController/index.action'
         }];
+        var tree_data1 = [
+            {
+                id:1,
+                text:'测试工程1',
+                children:[
+                    {
+                        id:11,
+                        text:'检测方案1',
+                        children:[
+                            {
+                                id:111,
+                                text:'检测计划11'
+                            },
+                            {
+                                id:112,
+                                text:'检测计划12'
+                            },
+                            {
+                                id:113,
+                                text:'检测计划13'
+                            }
+                        ]
+                    },
+                    {
+                        id:12,
+                        text:'检测方案2',
+                        children:[
+                            {
+                                id:121,
+                                text:'检测计划21'
+                            },
+                            {
+                                id:122,
+                                text:'检测计划22'
+                            },
+                            {
+                                id:123,
+                                text:'检测计划23'
+                            }
+                        ]
+                    }
+                ]
+            }
+
+        ];
         initUI();
         function initUI() {
             $('#tree_menu').tree({
@@ -52,7 +97,6 @@
             } else {
                 $tt.tabs('select', title)
             }
-
         }
     });
 </script>

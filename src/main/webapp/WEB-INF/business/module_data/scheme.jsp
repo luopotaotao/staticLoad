@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>模板支撑智能安全监测系统</title>
+    <title>智能无线静荷载试验检测云平台</title>
     <jsp:include page="../../layout/common.jsp"></jsp:include>
 
 </head>
@@ -11,7 +11,7 @@
 
 <div class="easyui-panel" style="width:30%">
     <input class="easyui-searchbox"
-           data-options="prompt:'请输入项目名称',searcher:function(val){$('#dg').datagrid('load',{name:val});}"
+           data-options="prompt:'请输入项目名称',searcher:function(val){$('#dg').datagrid('load',{name:encodeURIComponent(val)});}"
            style="width:100%">
 </div>
 
@@ -87,7 +87,6 @@
         $('#dg').datagrid({
             url: '${baseUrl}/query.action',
             method: 'get',
-            title: '机构管理',
             iconCls: 'icon-save',
 //            width: 700,
             height: $('body').height(),

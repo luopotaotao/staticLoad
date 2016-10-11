@@ -7,5 +7,5 @@ import tt.model.business.Company;
  * Created by taotao on 2016/9/23.
  */
 public interface CompanyDaoI extends BaseDaoI<Company> {
-
+    Company get(Integer id);
 }

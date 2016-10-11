@@ -27,7 +27,6 @@
 
         });
         function initializeMap() {
-            debugger;
             $('#map_div').empty();
             var id = Math.random()+'';
             var $div = $('<div/>',{id:id});

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>模板支撑智能安全监测系统</title>
+    <title>智能无线静荷载试验检测云平台</title>
     <jsp:include page="../../layout/common.jsp"></jsp:include>
 
 </head>
@@ -11,7 +11,7 @@
 
 <div class="easyui-panel" style="width:30%">
     <input class="easyui-searchbox"
-           data-options="prompt:'请输入单位名称',searcher:function(val){$('#dg').datagrid('load',{name:val});}"
+           data-options="prompt:'请输入机构名称',searcher:function(val){$('#dg').datagrid('load',{name:encodeURIComponent(val)});}"
            style="width:100%">
 </div>
 
@@ -44,9 +44,9 @@
         <div style="margin-bottom:20px">
             <select class="easyui-combobox" data-options="editable:false" name="register_type" label="注册类型:"
                     style="width:100%">
-                <option value="1">注册类型1</option>
-                <option value="2">注册类型2</option>
-                <option value="3">注册类型3</option>
+                <option value="1">建设单位</option>
+                <option value="2">施工单位</option>
+                <option value="3">监理单位</option>
             </select>
         </div>
     </form>
@@ -59,7 +59,6 @@
         $('#dg').datagrid({
             url: '${baseUrl}/query.action',
             method: 'get',
-            title: '机构管理',
             iconCls: 'icon-save',
 //            width: 700,
             height: $('body').height(),
@@ -186,7 +185,7 @@
         }
 
         $('#dlg_edit').dialog({
-            title: "添加单位",
+            title: "添加机构",
             closed: true,
             modal: true,
             draggable: false,

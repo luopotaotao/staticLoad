@@ -10,4 +10,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("companyDao")
 public class CompanyDaoImpl extends BaseDaoImpl<Company> implements CompanyDaoI {
+    @Override
+    public Company get(Integer id) {
+        return super.getById(id);
+    }
 }

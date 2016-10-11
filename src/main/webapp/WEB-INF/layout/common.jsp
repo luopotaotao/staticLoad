@@ -24,3 +24,6 @@
 <script type="text/javascript"
         src="${pageContext.request.contextPath}/jslib/extEasyui.js"
         charset="utf-8"></script>
+<script type="text/javascript"
+        src="${pageContext.request.contextPath}/jslib/DateUtil.js"
+        charset="utf-8"></script>

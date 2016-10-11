@@ -30,7 +30,7 @@
                 var name = $("#name").val();
                 var pwd = $("#pwd").val();
                 var verifycode = $("#verifycode").val();
-                if (true){//validate(name,pwd,verifycode)) {
+                if (true) {//validate(name,pwd,verifycode)) {
                     pwd = $("#pwd").val();
                     $.ajax({
                         url: "${pageContext.request.contextPath}/userController/login.action",
@@ -67,7 +67,7 @@
                 }
             }
 
-            function validate(name,pwd,verifycode) {
+            function validate(name, pwd, verifycode) {
                 $("#btn_login").focus();
 
                 if (!name) {
@@ -103,7 +103,7 @@
             }
 
             function bindHandlers() {
-                $('#btn_login').bind('click',doLogin);
+                $('#btn_login').bind('click', doLogin);
             }
         });
         function openWid(title, url, width, height) {
@@ -213,13 +213,15 @@
 <body>
 
 <div id="bgTop"
-     style="position: absolute; z-index: 1; width: 100%; height: 494px; background-color: rgb(38, 150, 203);">
+     style="position: absolute; z-index: 1; width: 100%; height: 408px; background-color: rgb(38, 150, 203);">
     &nbsp;</div>
 <div style="position:absolute;z-index:2;width: 100%">
-    <img src="style/images/logo.png" style="height: 56px;margin-left: 5px;">
-    <div id="title" style="text-align: center; height: 55px; margin-top: 206px;"><img src="style/images/9_05.png"></div>
+    <%--<img src="style/images/logo.png" style="height: 56px;margin-left: 5px;">--%>
+    <div id="title" style="text-align: center; height: 55px; margin-top: 206px">
+        <h1 style="color: white;font-size: 40px;font-family: initial;">智能无线静荷载试验检测云平台</h1>
+    </div>
 
-    <div style="height: 200px;width: 636px;background: url('style/images/031.gif') no-repeat;margin: 30px auto">
+    <div style="height: 200px;width: 636px;background: url('style/images/031.gif') no-repeat;margin: 0px auto">
 
         <div style="float: left;width: 30%;margin-top: 30px;margin-left: 30px;"><img src="style/images//9_03.png"></div>
         <div style="float: right;width: 60%;margin-top: 30px;">

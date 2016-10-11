@@ -9,6 +9,8 @@ import tt.controller.BaseController;
 import tt.model.business.InspectItem;
 import tt.service.bussiness.InspectItemServiceI;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -45,7 +47,13 @@ public class ModuleInspectItemController extends BaseController<InspectItem> {
     public JSONObject list(@RequestParam(required = false) String name,
                            @RequestParam(value = "page", required = false) Integer page,
                            @RequestParam(value = "rows", required = false) Integer pageSize) {
-
+        if(name!=null&&!name.trim().isEmpty()){
+            try {
+                name = URLDecoder.decode(name,"utf-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
         List<InspectItem> list = inspectItemService.list(name, page, pageSize);
         long count = inspectItemService.count(name);
         return listResponse(count, list);

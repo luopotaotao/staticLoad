@@ -3,9 +3,11 @@ package tt.service.bussiness.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tt.dao.business.AreaObjDaoI;
+import tt.dao.business.CompanyDaoI;
 import tt.dao.business.ProjectDaoI;
+import tt.model.business.AreaObj;
+import tt.model.business.Company;
 import tt.model.business.Project;
-import tt.service.bussiness.AreaServiceI;
 import tt.service.bussiness.ProjectServiceI;
 
 import java.util.HashMap;
@@ -21,7 +23,9 @@ public class ProjectServiceImpl implements ProjectServiceI {
     @Autowired
     private ProjectDaoI projectDao;
     @Autowired
-    private AreaObjDaoI areaObjDaoI;
+    private AreaObjDaoI areaObjDao;
+    @Autowired
+    private CompanyDaoI companyDao;
     @Override
     public Project get(int id) {
         return projectDao.get(Project.class, id);
@@ -63,14 +67,14 @@ public class ProjectServiceImpl implements ProjectServiceI {
 
     @Override
     public int add(Project project) {
+        resetProjectComponents(project);
         projectDao.save(project);
         return project.getId();
     }
 
     @Override
     public int update(Project project) {
-        project.setProvince(areaObjDaoI.get(project.getProvince().getId()));
-        project.setCity(areaObjDaoI.get(project.getCity().getId()));
+        resetProjectComponents(project);
         projectDao.update(project);
         return 1;
     }
@@ -80,5 +84,31 @@ public class ProjectServiceImpl implements ProjectServiceI {
         Map<String, Object> params = new LinkedHashMap<>();
         params.put("ids", list);
         return projectDao.executeHql("delete from Project where id in (:ids)", params);
+    }
+
+    private void resetProjectComponents(Project project){
+        AreaObj province = project.getProvince();
+        AreaObj city = project.getCity();
+        Company builder = project.getBuilder();
+        Company constructor = project.getConstructor();
+        Company inspector = project.getInspector();
+
+        if(province!=null&&province.getId()>0){
+            project.setProvince(areaObjDao.get(province.getId()));
+        }
+        if(city!=null&&city.getId()>0){
+            project.setCity(areaObjDao.get(city.getId()));
+        }
+        if(builder!=null&&builder.getId()>0){
+            project.setBuilder(companyDao.get(builder.getId()));
+        }
+        if(constructor!=null&&constructor.getId()>0){
+            project.setConstructor(companyDao.get(constructor.getId()));
+        }
+        if(inspector!=null&&inspector.getId()>0){
+            project.setInspector(companyDao.get(inspector.getId()));
+        }
+
+
     }
 }
