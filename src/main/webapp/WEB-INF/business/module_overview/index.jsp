@@ -22,6 +22,7 @@
 
 <script>
     $(function () {
+        var selectedProject = ${selectedProject};
         var baseUrl = '${baseUrl}';
         var tree_data = [{
             "id": 1,
@@ -66,7 +67,6 @@
                 });
             });
         }
-
         var map = initializeMap();
         $.extend({
             Map: {
@@ -149,16 +149,6 @@
                         });
                     }
                 });
-//                var lng_span = max_lng - min_lng;
-//                var lat_span = max_lat - min_lat;
-//                var sw = new BMap.Point(min_lng - lng_span * 0.2, min_lat - lat_span * 0.2);
-//                var ne = new BMap.Point(max_lng + lng_span * 0.2, max_lat + lat_span * 0.2);
-//                var b = new BMap.Bounds(sw, ne);
-//                try {
-//                    BMapLib.AreaRestriction.setBounds(map, b);
-//                } catch (e) {
-//                    alert(e);
-//                }
             }
         }
 
@@ -182,6 +172,14 @@
             var allOverlay = map.getOverlays();
             $.each(allOverlay,function (i,item) {
                 map.removeOverlay(item);
+            });
+        }
+        if(selectedProject&&selectedProject.id){
+            showMarkers([selectedProject],function (marker) {
+                var template = '<p><a href="javascript:top.openModule(\'${pageContext.request.contextPath}/moduleProjectController/index.action\');">工程名称:{name}</a></p><p>工程编码:{code}</p><p>地址:{city}{address}</p>';
+                var info = marker.info;
+                map.centerAndZoom(marker.M, 11);
+                showInfo(marker.M, template, {name:info.name||'',code:info.code||'',city:info.city?(info.city.text||''):'',address:info.address||''});
             });
         }
     });

@@ -11,76 +11,303 @@
     <div class="easyui-panel" style="padding:5px">
         <ul id="tree_menu"></ul>
     </div>
+    <div id="project_mm_project" class="easyui-menu" style="width:120px;">
+        <div class="menu_item" onclick="$.project.addScheme()" data-options="iconCls:'icon-add'">添加方案</div>
+        <div class="menu_item_remove" onclick="$.project.remove()" data-options="iconCls:'icon-remove'">删除工程
+        </div>
+        <div class="menu-sep"></div>
+        <div class="menu_item" onclick="$.project.expandNode()">展开</div>
+        <div class="menu_item" onclick="">收起</div>
+    </div>
+    <div id="project_mm_scheme" class="easyui-menu" style="width:120px;">
+        <div class="menu_item" onclick="$.project.addPlan()" data-options="iconCls:'icon-add'">添加计划</div>
+        <div class="menu_item_remove" onclick="$.project.remove()" data-options="iconCls:'icon-remove'">删除方案</div>
+        <div class="menu-sep"></div>
+        <div class="menu_item" onclick="operate('expand')">展开</div>
+        <div class="menu_item" onclick="operate('collapse')">收起</div>
+    </div>
+    <div id="project_mm_plan" class="easyui-menu" style="width:120px;">
+        <div class="menu_item_remove" onclick="$.project.remove()" data-options="iconCls:'icon-remove'">删除计划</div>
+    </div>
 </div>
-<div id="tt" class="easyui-tabs" data-options="region:'center'"></div>
+<div id="tt" class="easyui-panel" data-options="region:'center'" style="width: 100%">
+    <form class="easyui-form info_form" method="post" data-options="novalidate:true" action="${baseUrl}/post.action">
+        <input id="view_map" type="button" value="查看地图">
+        <script>
+            $('#view_map').on('click',function () {
+                var id = $('form').eq(0).find('input[name="id"]').val();
+                top.openModule('${pageContext.request.contextPath}/moduleOverviewController/index.action?project_id='+id);
+            })
+        </script>
+        <div style="margin-bottom:20px;display: none">
+            <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'工程编号:',required:true">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox" name="code" style="width:45%"
+                   data-options="label:'工程编码:',labelAlign:'right',required:true">
+            <input class="easyui-textbox" name="name" style="width:45%"
+                   data-options="label:'工程名称:',labelAlign:'right'">
+        </div>
+        <div style="margin-bottom:20px">
+            <select id="project_province_id" class="easyui-combobox" name="province.id" style="width:45%"
+                    data-options="label:'所在省份:',
+            labelAlign:'right',
+            url:'/moduleBasicAreaController/area/0.action',
+            method:'get',
+            valueField: 'id',
+            textField: 'text',
+            onSelect:function(rec){
+                var $city = $('#project_city_id');
+                $city.combobox('clear');
+                $city.combobox('reload','/moduleBasicAreaController/area/'+rec.id+'.action');
+            }
+            ">
+
+            </select>
+            <select id="project_city_id" class="easyui-combobox" name="city.id" style="width:45%"
+                    data-options="label:'所在城市:',labelAlign:'right', method:'get',valueField: 'id',textField: 'text'">
+            </select>
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox" name="address" style="width:90%"
+                   data-options="label:'具体地址:',labelAlign:'right'">
+        </div>
+        <div style="margin-bottom:20px;display: none">
+            <input id="project_input_lat" class="easyui-textbox" name="lat" style="width:100%"
+                   data-options="label:'纬度:'">
+        </div>
+        <div style="margin-bottom:20px;display: none">
+            <input id="project_input_lng" class="easyui-textbox" name="lng" style="width:100%"
+                   data-options="label:'经度:'">
+        </div>
+        <div style="margin-bottom:20px">
+            <input id="project_select_coordinate" class="easyui-textbox" style="width:45%;height:32px;">
+            <input id="select_constructor" class="easyui-textbox select" name="constructor.id" style="width:45%"
+                   data-options="label:'建设单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
+                   buttonIcon:'icon-search'" url="/moduleBasicCompanyController/partial.action">
+        </div>
+        <div style="margin-bottom:20px">
+            <input id="project_select_builder" class="easyui-textbox select" name="builder.id" style="width:45%"
+                   data-options="label:'施工单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
+                   buttonIcon:'icon-search'" url="/moduleBasicCompanyController/partial.action">
+
+            <input id="project_select_inspector" class="easyui-textbox select" name="inspector.id" style="width:45%"
+                   data-options="label:'监理单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
+                   buttonIcon:'icon-search'" url="/moduleBasicCompanyController/partial.action">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox" name="note" style="width:90%"
+                   data-options="label:'备注信息:',labelAlign:'right'">
+        </div>
+    </form>
+    <form class="easyui-form info_form" method="post" data-options="novalidate:true" action="${baseUrl}/post.action">
+        <div style="margin-bottom:20px;display: none">
+            <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'编号:',required:true">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox" name="name" style="width:100%" data-options="label:'方案名称:',required:true">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox select" name="project.id" style="width:100%"
+                   data-options="label:'工程名称:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
+                   buttonIcon:'icon-search'" url="/moduleInspectSchemeController/selectProject.action">
+        </div>
+        <div style="margin-bottom:20px">
+            <select class="easyui-combobox" data-options="editable:false,labelAlign:'right'" name="basement_lev"
+                    label="低级基础设计等级:"
+                    style="width:100%">
+                <option value="1">甲级</option>
+                <option value="2">乙级</option>
+                <option value="3">丙级</option>
+            </select>
+        </div>
+        <div style="margin-bottom:20px">
+            <select class="easyui-combobox" data-options="editable:false,labelAlign:'right'" name="safety_lev"
+                    label="建筑安全等级:"
+                    style="width:100%">
+                <option value="1">一级</option>
+                <option value="2">二级</option>
+                <option value="3">三级</option>
+            </select>
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-numberbox" name="pile_count" style="width:100%"
+                   data-options="label:'总桩数:',labelAlign:'right',required:true">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox select" name="institution.id" style="width:100%"
+                   data-options="label:'检测单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
+                   buttonIcon:'icon-search'" url="/moduleInspectSchemeController/selectInstitution.action">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox" name="code" style="width:100%"
+                   data-options="label:'检测方案审批表:',labelAlign:'right',required:true">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox" name="name" style="width:100%"
+                   data-options="label:'检测方案附件:',labelAlign:'right'">
+        </div>
+        <div style="margin-bottom:20px">
+            <div style="margin-bottom:20px">
+                <select id="inspectItem_id" class="easyui-combobox" name="inspectItem.id" style="width:100%"
+                        data-options="label:'检测项目:',
+            labelAlign:'right',
+            url:'/moduleBasicInspectItemController/comboList.action',
+            method:'get',
+            valueField: 'id',
+            textField: 'name'
+            ">
+                </select>
+            </div>
+        </div>
+    </form>
+    <form class="easyui-form info_form" method="post" data-options="novalidate:true" action="${baseUrl}/post.action">
+        <div style="margin-bottom:20px;display: none">
+            <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'编号:',required:true">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox" name="name" style="width:100%" data-options="label:'计划名称:',labelAlign:'right',required:true">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox select-scheme" name="inspectScheme.id" style="width:100%"
+                   data-options="label:'方案名称:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
+                   buttonIcon:'icon-search'" url="${baseUrl}/selectScheme.action">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox select-inspector" name="inspector.id" style="width:100%"
+                   data-options="label:'检测负责人:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
+                   buttonIcon:'icon-search'">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox select" name="equipment.id" style="width:100%"
+                   data-options="label:'检测设备:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
+                   buttonIcon:'icon-search'" url="/moduleInspectSchemeController/selectProject.action">
+        </div>
+        <div style="margin-bottom:20px">
+            <input name="start_time" style="width:100%" type="text" class="easyui-datebox"
+                   data-options="label:'开始日期:',labelAlign:'right',required:true,editable:false">
+        </div>
+        <div style="margin-bottom:20px">
+            <input name="end_time" style="width:100%" type="text" class="easyui-datebox"
+                   data-options="label:'结束日期:',labelAlign:'right',required:true,editable:false">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox select" name="majorInspector.id" style="width:100%"
+                   data-options="label:'主检人:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
+                   buttonIcon:'icon-search'">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox select" name="assistantInspector.id" style="width:100%"
+                   data-options="label:'副检人:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
+                   buttonIcon:'icon-search'">
+        </div>
+
+        <div style="margin-bottom:20px">
+            <div style="margin-bottom:20px">
+                <select id="inspect_method" class="easyui-combobox" name="inspectMethods" style="width:100%"
+                        data-options="label:'检测项目:',
+            labelAlign:'right',
+            method:'get',
+            valueField: 'id',
+            textField: 'name'
+            ">
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
 
 <script>
     $(function () {
         var baseUrl = '${baseUrl}';
-        var tree_data = [{
-            "id": 1,
-            "text": "工程管理<a>123</a>",
-            "url": '/moduleProjectManageController/index.action'
-        }];
-        var tree_data1 = [
-            {
-                id:1,
-                text:'测试工程1',
-                children:[
-                    {
-                        id:11,
-                        text:'检测方案1',
-                        children:[
-                            {
-                                id:111,
-                                text:'检测计划11'
-                            },
-                            {
-                                id:112,
-                                text:'检测计划12'
-                            },
-                            {
-                                id:113,
-                                text:'检测计划13'
-                            }
-                        ]
-                    },
-                    {
-                        id:12,
-                        text:'检测方案2',
-                        children:[
-                            {
-                                id:121,
-                                text:'检测计划21'
-                            },
-                            {
-                                id:122,
-                                text:'检测计划22'
-                            },
-                            {
-                                id:123,
-                                text:'检测计划23'
-                            }
-                        ]
-                    }
-                ]
-            }
-
-        ];
         initUI();
         function initUI() {
+            debugger;
             $('#tree_menu').tree({
-//                    url:'tree_data1.json',
-                data: tree_data,
-//                    method:'get',
+                url: '/moduleProjectManageController/tree.action',
+//                data: tree_data,
+                method: 'get',
+                idField: 'id',
+                textField: 'name',
                 animate: true,
                 onClick: function (node) {
-                    if (node.text && node.url) {
-                        openTab(node.text, node.url);
+                    console.log(node);
+                    debugger;
+                    showInfo(node.level,node);
+                },
+                onContextMenu: function (e, node) {
+                    e.preventDefault();
+                    $(this).tree('select', node.target);
+                    if (node) {
+                        var $mm = null;
+                        switch (node.level) {
+                                //工程节点
+                            case 0:
+                                $mm = $('#project_mm_project');
+                                break;
+                                //方案节点
+                            case 1:
+                                $mm = $('#project_mm_scheme');
+                                break;
+                                //计划节点
+                            case 2:
+                                $mm = $('#project_mm_plan');
+                                break;
+                        }
+                        $mm.menu('show', {
+                            left: e.pageX,
+                            top: e.pageY
+                        });
                     }
                 }
             });
 
+        }
+
+        function addProject() {
+
+        }
+
+        function showProject() {
+
+        }
+
+        function addScheme() {
+            var node = getNode();
+            showAddDialog({
+                title: '添加方案',
+                parent: {name: 'project.id', value: node.id}
+            }, '/moduleProjectManageController/addScheme.action', function (ret) {
+                if (ret && ret.flag) {
+                    $('#tree_menu').tree('reload');
+                }
+            })
+        }
+
+        function showScheme() {
+            var node = getNode();
+            showInfo(node.level, node);
+        }
+
+        function addPlan() {
+
+        }
+
+
+        function showPlan() {
+
+        }
+
+        function expandNode(project_id, scheme_id, plan_id) {
+
+        }
+
+        function showInfo(level, obj) {
+            var $forms = $('.info_form');
+            $forms.hide();
+            var $target = $forms.eq(level);
+            $target.form('load', obj);
+            $target.show();
         }
 
         function openTab(title, url) {
@@ -98,6 +325,96 @@
                 $tt.tabs('select', title)
             }
         }
+
+        function showAddDialog(options, url, callback) {
+            var height = screen.availHeight * 0.6, width = screen.availWidth * 0.6;
+            var $div = $('<div/>', {'height': height, width: width});
+            $div.dialog({
+                title: options.title,
+                closed: false,
+                cache: true,
+                href: url,
+                modal: true,
+                buttons: [{
+                    text: '确定',
+                    handler: function () {
+                        if ($.isFunction(callback)) {
+                            $.messager.progress();
+                            var $form = $div.find('form');
+                            $form.form('submit', {
+                                onSubmit: function () {
+                                    var isValid = $form.form('enableValidation').form('validate');
+                                    if (!isValid) {
+                                        $.messager.progress('close');
+                                    }
+                                    return isValid;
+                                },
+                                success: function (ret) {
+                                    $.messager.progress('close');
+                                    $.messager.alert('提示', '保存成功!');
+                                    callback(ret);
+                                }
+                            });
+                        } else {
+                            $div.dialog('close');
+                        }
+                    }
+                }, {
+                    text: '取消',
+                    handler: function () {
+                        $div.dialog('close');
+                    }
+                }],
+                onLoad: function () {
+                    $div.find('input[name="' + options.parent.name + '"]').val(options.parent.value);
+                }
+            });
+        }
+
+        function getNode() {
+            return $('#tree_menu').tree('getSelected');
+        }
+
+        function remove() {
+            var node = getNode();
+            var msg = ['是否确认删除:', node.text, '?'].join('');
+            var url = [
+                '/moduleProjectManageController/delete.action',
+                '/moduleInspectSchemeController/delete.action',
+                '/moduleInspectPlanController/delete.action'
+            ][node.level];
+            $.messager.confirm('提示', msg, function (r) {
+                if (r) {
+                    $.ajax({
+                        url: url,
+                        type: 'post',
+                        dataType: 'json',
+                        data: {ids: [node.id]}
+                    }).done(function (ret) {
+                        if (ret && ret.flag) {
+                            $.messager.alert('提示', '删除成功!');
+                        } else {
+                            $.messager.alert('提示', '删除失败!');
+                        }
+                    }).fail(function () {
+                        $.messager.alert('提示', '删除失败!');
+                    });
+                }
+            });
+        }
+
+        $.extend({
+            project: {
+                addProject: addProject,
+                showProject: showProject,
+                addScheme: addScheme,
+                showScheme: showScheme,
+                addPlan: addPlan,
+                showPlan: showPlan,
+                expandNode: expandNode,
+                remove: remove,
+            }
+        })
     });
 </script>
 

@@ -17,8 +17,8 @@
     <%--rel="stylesheet" type="text/css"/>--%>
     <script type="text/javascript"
             src="${pageContext.request.contextPath}/jslib/jquery-1.11.3.js"></script>
-    <script type="text/javascript"
-            src="${pageContext.request.contextPath}/jslib/extBrowser.js"></script>
+    <%--<script type="text/javascript"--%>
+            <%--src="${pageContext.request.contextPath}/jslib/extBrowser.js"></script>--%>
     <script type="text/javascript"
             src="${pageContext.request.contextPath}/jslib/sha256.js"></script>
     <script type="text/javascript"

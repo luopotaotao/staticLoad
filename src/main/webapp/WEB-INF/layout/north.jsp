@@ -55,6 +55,7 @@
                 }
             })
         }
+        openModule('${pageContext.request.contextPath}/moduleOverviewController/index.action');
     });
 
     function logoutFun() {
@@ -114,6 +115,7 @@
             $iframe.attr('src', url);
         }
     }
+
 </script>
 <%--<img id="logoimg" src="style/themes/default.jpg"--%>
 <%--style="min-width:681px;cursor:default" />--%>

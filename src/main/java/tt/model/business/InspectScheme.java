@@ -1,9 +1,13 @@
 package tt.model.business;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "b_inspect_scheme")
+@JsonIgnoreProperties(value = {"project" })
 public class InspectScheme {
     private Integer id;
     private String name;
@@ -15,6 +19,7 @@ public class InspectScheme {
     private Integer approval_file_id;
     private Integer inspect_file_id;
     private InspectItem inspectItem;
+    private List<InspectPlan> children;
     @Id
     @Column(name = "id")
     @GeneratedValue
@@ -114,5 +119,23 @@ public class InspectScheme {
 
     public void setInspectItem(InspectItem inspectItem) {
         this.inspectItem = inspectItem;
+    }
+
+    @OneToMany(mappedBy = "inspectScheme",fetch = FetchType.EAGER)
+    public List<InspectPlan> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<InspectPlan> children) {
+        this.children = children;
+    }
+    @Transient
+    public String getText(){
+        return this.name;
+    }
+
+    @Transient
+    public int getLevel() {
+        return 1;
     }
 }

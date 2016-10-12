@@ -1,6 +1,9 @@
 package tt.model.business;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "b_project")
@@ -17,6 +20,8 @@ public class Project {
     private Company builder;
     private Company inspector;
     private String note;
+
+    private List<InspectScheme> children;
 
     @Id
     @GeneratedValue
@@ -48,7 +53,6 @@ public class Project {
     public void setName(String name) {
         this.name = name;
     }
-
 
 
     @Basic
@@ -90,6 +94,7 @@ public class Project {
     public void setProvince(AreaObj province) {
         this.province = province;
     }
+
     @ManyToOne
     @JoinColumn(name = "city_id")
     public AreaObj getCity() {
@@ -119,6 +124,7 @@ public class Project {
     public void setBuilder(Company builder) {
         this.builder = builder;
     }
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "inspector_id")
     public Company getInspector() {
@@ -137,5 +143,25 @@ public class Project {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    @OneToMany(mappedBy = "project")
+
+    public List<InspectScheme> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<InspectScheme> children) {
+        this.children = children;
+    }
+
+    @Transient
+    public String getText() {
+        return this.name;
+    }
+
+    @Transient
+    public int getLevel() {
+        return 0;
     }
 }

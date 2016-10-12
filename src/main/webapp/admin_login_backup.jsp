@@ -15,8 +15,8 @@
 <jsp:include page="inc.jsp"></jsp:include>
 <link href="${pageContext.request.contextPath}/style/admin_login.css"
 	rel="stylesheet" type="text/css" />
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/jslib/extBrowser.js"></script>
+<%--<script type="text/javascript"--%>
+	<%--src="${pageContext.request.contextPath}/jslib/extBrowser.js"></script>--%>
 <script type="text/javascript" charset="utf-8">
     $(function() {
         var formParam = {

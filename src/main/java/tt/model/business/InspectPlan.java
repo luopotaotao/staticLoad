@@ -1,15 +1,19 @@
 package tt.model.business;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "b_inspect_plan")
+@JsonIgnoreProperties(value = {"inspectScheme"})
 public class InspectPlan {
     private Integer id;
+    private String name;
     private InspectScheme inspectScheme;
-//    private List<InspectMethod> inspectMethods;
+    //    private List<InspectMethod> inspectMethods;
     private Inspector inspector;
     private Equipment equipment;
     private Date start_time;
@@ -27,6 +31,16 @@ public class InspectPlan {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Basic
+    @Column(name = "name")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @ManyToOne
@@ -118,5 +132,15 @@ public class InspectPlan {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    @Transient
+    public String getText() {
+        return this.name;
+    }
+
+    @Transient
+    public int getLevel() {
+        return 2;
     }
 }

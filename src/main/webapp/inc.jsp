@@ -5,7 +5,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/jslib/extBrowser.js" charset="utf-8"></script>
 
 <!-- 引入my97日期时间控件 -->
-<script type="text/javascript" src="${pageContext.request.contextPath}/jslib/My97DatePicker4.8b3/My97DatePicker/WdatePicker.js" charset="utf-8"></script>
+<%--<script type="text/javascript" src="${pageContext.request.contextPath}/jslib/My97DatePicker4.8b3/My97DatePicker/WdatePicker.js" charset="utf-8"></script>--%>
 
 <!-- 引入jQuery -->
 <%--<script src="${pageContext.request.contextPath}/jslib/jquery-1.8.3.jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>--%>

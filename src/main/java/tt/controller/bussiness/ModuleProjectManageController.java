@@ -58,6 +58,14 @@ public class ModuleProjectManageController extends BaseController<Project> {
         return listResponse(count, list);
     }
 
+    @RequestMapping(value = "tree",method = RequestMethod.GET)
+    @ResponseBody
+    public List<Project> list() {
+        List<Project> list = projectService.list(null);
+        return list;
+    }
+
+
 //    @RequestMapping(value = "post", method = RequestMethod.POST)
     @RequestMapping(value = "post")
     @ResponseBody
@@ -80,5 +88,10 @@ public class ModuleProjectManageController extends BaseController<Project> {
         Arrays.stream(ids).forEach(id->list.add(id));
         int ret = projectService.del(list);
         return flagResponse(ret);
+    }
+
+    @RequestMapping("addScheme")
+    public String addScheme(){
+        return "business/module_project/project_add_scheme";
     }
 }
