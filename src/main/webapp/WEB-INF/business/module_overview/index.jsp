@@ -60,7 +60,9 @@
             var url = '/moduleOverviewController/' + area_id + '/queryProjects.action';
             $.getJSON(url, function (ret) {
                 showMarkers(ret,function (marker) {
-                    var template = '<p>工程名称:{name}<a href="">123</a></p><p>工程编码:{code}</p><p>地址:{city}{address}</p>';
+                    var template = '<p><a href="javascript:top.openModule(\'${pageContext.request.contextPath}/moduleProjectController/index.action\');">工程名称:{name}</a></p><p>工程编码:{code}</p><p>地址:{city}{address}</p>';
+
+//                    var template = '<p>工程名称:{name}<a href="">123</a></p><p>工程编码:{code}</p><p>地址:{city}{address}</p>';
                     var info = marker.info;
                     map.centerAndZoom(marker.M, 11);
                     showInfo(marker.M, template, {name:info.name||'',code:info.code||'',city:info.city?(info.city.text||''):'',address:info.address||''});

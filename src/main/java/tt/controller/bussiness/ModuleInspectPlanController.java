@@ -42,6 +42,11 @@ public class ModuleInspectPlanController extends BaseController<InspectPlan> {
         model.addAttribute("institution_id", institution_id);
         return "business/module_data/plan_select_inspector";
     }
+    @RequestMapping("selectEquipment/{institution_id}")
+    public String selectEquipment(@PathVariable Integer institution_id, Model model) {
+        model.addAttribute("institution_id", institution_id);
+        return "business/module_data/plan_select_equipment";
+    }
     @RequestMapping("showData/{plan_id}")
     public String showData(@PathVariable Integer plan_id,Model model) {
         model.addAttribute("plan_id",plan_id);

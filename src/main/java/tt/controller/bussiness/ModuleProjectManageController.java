@@ -90,8 +90,16 @@ public class ModuleProjectManageController extends BaseController<Project> {
         return flagResponse(ret);
     }
 
+    @RequestMapping("addProject")
+    public String addProject(){
+        return "business/module_project/project_add_project";
+    }
     @RequestMapping("addScheme")
     public String addScheme(){
         return "business/module_project/project_add_scheme";
+    }
+    @RequestMapping("addPlan")
+    public String addPlan(){
+        return "business/module_project/project_add_plan";
     }
 }

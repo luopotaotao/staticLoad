@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div id="dlg_edit" style="width:100%;max-width:600px;padding:30px 60px;">
+<div style="width:100%;max-width:600px;padding:30px 60px;">
     <form id="ff" class="easyui-form" method="post" data-options="novalidate:true" action="/moduleInspectSchemeController/post.action">
         <div style="margin-bottom:20px;display: none">
             <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'编号:'">
