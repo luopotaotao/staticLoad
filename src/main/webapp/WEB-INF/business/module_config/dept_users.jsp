@@ -20,11 +20,11 @@
             buttons: [{
             text: '保存',
             iconCls: 'icon-ok',
-            handler: $.submitInspectorForm
+            handler: $.submitUserForm
             }, {
             text: '取消',
             iconCls: 'icon-cancel',
-            handler: $.closeInspectorEditDialog
+            handler: $.closeUserEditDialog
             }]
         ">
         <form id="ff_user" class="easyui-form" method="post" data-options="novalidate:true" action="../${baseUrl}/post.action">
@@ -117,66 +117,9 @@
                     {field: 'name', title: '姓名'},
                     {field: 'password', title: '密码'},
                     {field: 'note', title: '备注'}
-                ]],
-                onHeaderContextMenu: function (e, field) {
-                    e.preventDefault();
-                    if (!$.cmenu) {
-                        createColumnMenu();
-                    }
-                    $.cmenu.menu('show', {
-                        left: e.pageX,
-                        top: e.pageY
-                    });
-                }
+                ]]
             });
 
-            function createColumnMenu() {
-                $.cmenu = $('<div/>').appendTo('body');
-                $.cmenu.menu({
-                    onClick: function (item) {
-                        if (item.iconCls == 'icon-ok') {
-                            $('#dg_user').datagrid('hideColumn', item.name);
-                            $.cmenu.menu('setIcon', {
-                                target: item.target,
-                                iconCls: 'icon-empty'
-                            });
-                        } else {
-                            $('#dg_user').datagrid('showColumn', item.name);
-                            $.cmenu.menu('setIcon', {
-                                target: item.target,
-                                iconCls: 'icon-ok'
-                            });
-                        }
-                    }
-                });
-                var fields = $('#dg_user').datagrid('getColumnFields');
-                for (var i = 0; i < fields.length; i++) {
-                    var field = fields[i];
-                    var col = $('#dg_user').datagrid('getColumnOption', field);
-                    $.cmenu.menu('appendItem', {
-                        text: col.title,
-                        name: field,
-                        iconCls: 'icon-ok'
-                    });
-                }
-            }
-
-//            $('#dlg_user_edit').dialog({
-//                title: "添加人员",
-//                closed: true,
-//                modal: true,
-//                draggable: false,
-//                iconCls: 'icon-add',
-//                buttons: [{
-//                    text: '保存',
-//                    iconCls: 'icon-ok',
-//                    handler: submitForm
-//                }, {
-//                    text: '取消',
-//                    iconCls: 'icon-cancel',
-//                    handler: closeEditDialog
-//                }]
-//            })
 
             function showEditDialog(data) {
                 var $ff = $('#ff_user');
@@ -222,8 +165,8 @@
                 $('#ff_user').form('clear');
                 $('#dlg_user_edit').dialog('close');
             }
-            $.submitInspectorForm = submitForm;
-            $.closeInspectorEditDialog = closeEditDialog;
+            $.submitUserForm = submitForm;
+            $.closeUserEditDialog = closeEditDialog;
             function remove(ids) {
                 $.ajax({
                     url: baseUrl+'/delete.action',

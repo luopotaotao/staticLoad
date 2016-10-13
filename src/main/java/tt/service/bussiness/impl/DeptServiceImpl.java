@@ -6,6 +6,7 @@ import tt.dao.business.DeptDaoI;
 import tt.model.business.Dept;
 import tt.service.bussiness.DeptServiceI;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,14 +26,17 @@ public class DeptServiceImpl implements DeptServiceI {
     }
 
     @Override
-    public List<Dept> list(String name, int page, int PageSize) {
-        StringBuilder hql = new StringBuilder("from Dept WHERE 1=1");
+    public List<Dept> list(String name, Integer page, Integer PageSize) {
         Map<String,Object> params = new HashMap<>();
+        List<Dept> ret = null;
         if(name!=null){
-            params.put("name","%"+name+"%");
-            hql.append(" AND name like :name ");
+            params.put(":like_name",name);
         }
-        List<Dept> ret = deptDao.find(hql.toString(), params, page, PageSize);
+        if(page!=null&&PageSize!=null){
+            ret =deptDao.find(params, page, PageSize);
+        }else{
+            ret =deptDao.find(params);
+        }
         return ret;
     }
 
@@ -51,7 +55,7 @@ public class DeptServiceImpl implements DeptServiceI {
     @Override
     public int add(Dept dept) {
         deptDao.save(dept);
-        return 1;
+        return dept.getId()>0?1:0;
     }
 
     @Override
@@ -60,8 +64,8 @@ public class DeptServiceImpl implements DeptServiceI {
             return 0;
         }
         Map<String, Object> params = new HashMap<String, Object>();
-        params.put("ids", ids);
-        return deptDao.executeHql("delete from Dept where id in (:ids)", params);
+        params.put("id", ids);
+        return deptDao.logicDelete("b_dept", params);
     }
 
     @Override

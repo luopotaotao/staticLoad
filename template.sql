@@ -24,8 +24,16 @@ CREATE TABLE `b_dept` (
   `name` varchar(128) DEFAULT NULL COMMENT '公司名称',
   `logo` varchar(128) DEFAULT NULL COMMENT '公司logo文件名',
   `note` varchar(128) DEFAULT NULL COMMENT '备注',
+  `deleted` tinyint(1) DEFAULT FALSE COMMENT '删除标识',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='公司信息';
+DELIMITER ;;
+CREATE TRIGGER `init_area` AFTER INSERT ON `b_dept` FOR EACH ROW begin
+  insert into b_area(name,level,deleted,dept_id) values('全国',0,0,NEW.id);
+end
+;;
+DELIMITER ;
+SET FOREIGN_KEY_CHECKS=1;
 -- ----------------------------
 -- Table structure for `b_area`
 -- ----------------------------
@@ -36,6 +44,8 @@ CREATE TABLE `b_area` (
   `level` tinyint(4) DEFAULT NULL COMMENT '等级(全国0,省1,市(区)2)',
   `pid` int(11) DEFAULT NULL COMMENT '父节点id',
   `note` varchar(128) DEFAULT NULL COMMENT '备注',
+  `deleted` tinyint(1) DEFAULT FALSE COMMENT '删除标识',
+  `dept_id` int(11) DEFAULT NULL COMMENT '所属公司',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='行政区划';
 
@@ -64,7 +74,9 @@ CREATE TABLE `b_company` (
   `contacts` varchar(64) DEFAULT NULL,
   `tel` varchar(32) DEFAULT NULL,
   `column_6` int(11) DEFAULT NULL,
-  `typ` tinyint(4) DEFAULT NULL,
+  `typ` TINYINT(4) DEFAULT NULL,
+  `deleted` tinyint(1) DEFAULT FALSE COMMENT '删除标识',
+  `dept_id` int(11) DEFAULT NULL COMMENT '所属公司',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
@@ -85,6 +97,8 @@ CREATE TABLE `b_equipment` (
   `name` varchar(128) DEFAULT NULL COMMENT '设备名称',
   `note` varchar(128) DEFAULT NULL COMMENT '备注',
   `institution_id` int(11) DEFAULT NULL COMMENT '所属机构id',
+  `deleted` tinyint(1) DEFAULT FALSE COMMENT '删除标识',
+  `dept_id` int(11) DEFAULT NULL COMMENT '所属公司',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='设备信息';
 
@@ -103,6 +117,8 @@ CREATE TABLE `b_inspector` (
   `gender` tinyint(1) DEFAULT NULL COMMENT '性别(1男0女)',
   `note` varchar(128) DEFAULT NULL COMMENT '备注',
   `institution_id` int(11) DEFAULT NULL COMMENT '所属机构id',
+  `deleted` tinyint(1) DEFAULT FALSE COMMENT '删除标识',
+  `dept_id` int(11) DEFAULT NULL COMMENT '所属公司',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='设备信息';
 
@@ -137,6 +153,8 @@ CREATE TABLE `b_inspect_data` (
   `SETprs` varchar(128) DEFAULT NULL COMMENT '基准值',
   `LoadFlag` tinyint(1) DEFAULT NULL COMMENT '数据类型:true加压,false减压',
   `plan_id` int(11) DEFAULT NULL COMMENT '检测计划id',
+  `deleted` tinyint(1) DEFAULT FALSE COMMENT '删除标识',
+  `dept_id` int(11) DEFAULT NULL COMMENT '所属公司',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8 COMMENT='传感器原始数据';
 
@@ -172,6 +190,8 @@ DROP TABLE IF EXISTS `b_inspect_item`;
 CREATE TABLE `b_inspect_item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL COMMENT '检测项目名称',
+  `deleted` tinyint(1) DEFAULT FALSE COMMENT '删除标识',
+  `dept_id` int(11) DEFAULT NULL COMMENT '所属公司',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
@@ -190,6 +210,8 @@ CREATE TABLE `b_inspect_method` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) DEFAULT NULL COMMENT '检测方法名称',
   `inspect_item_id` int(11) DEFAULT NULL COMMENT '检测项目id',
+  `deleted` tinyint(1) DEFAULT FALSE COMMENT '删除标识',
+  `dept_id` int(11) DEFAULT NULL COMMENT '所属公司',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='检测项目';
 
@@ -215,6 +237,8 @@ CREATE TABLE `b_inspect_plan` (
   `major_inspector_id` int(11) DEFAULT NULL COMMENT '主检人id(需要关联取电话)',
   `assistant_inspector_id` int(11) DEFAULT NULL COMMENT '副检人id(需要关联取电话)',
   `note` varchar(128) DEFAULT NULL COMMENT '备注',
+  `deleted` tinyint(1) DEFAULT FALSE COMMENT '删除标识',
+  `dept_id` int(11) DEFAULT NULL COMMENT '所属公司',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COMMENT='检测计划';
 
@@ -233,6 +257,8 @@ DROP TABLE IF EXISTS `b_inspect_project`;
 CREATE TABLE `b_inspect_project` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `project_id` int(11) DEFAULT NULL COMMENT '工程id',
+  `deleted` tinyint(1) DEFAULT FALSE COMMENT '删除标识',
+  `dept_id` int(11) DEFAULT NULL COMMENT '所属公司',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='工程登记';
 
@@ -254,6 +280,8 @@ CREATE TABLE `b_inspect_scheme` (
   `institution_id` int(11) DEFAULT NULL COMMENT '检测单位',
   `approval_file_id` int(11) DEFAULT NULL COMMENT '检测方案审批表(attachment_id)',
   `inspect_file_id` int(11) DEFAULT NULL COMMENT '检测方案附件(attachment_id)',
+  `deleted` tinyint(1) DEFAULT FALSE COMMENT '删除标识',
+  `dept_id` int(11) DEFAULT NULL COMMENT '所属公司',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='检测方案';
 
@@ -299,6 +327,8 @@ CREATE TABLE `b_institution` (
   `equipment_count` int(11) DEFAULT NULL COMMENT '一起设备总台(套)数',
   `gross_area` float DEFAULT NULL COMMENT '房屋建筑面积(平方米)',
   `office_area` float DEFAULT NULL COMMENT '办公面积(平方米)',
+  `deleted` tinyint(1) DEFAULT FALSE COMMENT '删除标识',
+  `dept_id` int(11) DEFAULT NULL COMMENT '所属公司',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='机构信息';
 
@@ -324,7 +354,9 @@ CREATE TABLE `b_project` (
   `builder_id` int(11) DEFAULT NULL COMMENT '施工单位id',
   `inspector_id` int(11) DEFAULT NULL COMMENT '监理单位id',
   `note` varchar(128) DEFAULT NULL COMMENT '备注',
-  PRIMARY KEY (`id`)
+   `deleted` tinyint(1) DEFAULT FALSE COMMENT '删除标识',
+  `dept_id` int(11) DEFAULT NULL COMMENT '所属公司',
+ PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='工程信息';
 
 -- ----------------------------
@@ -341,6 +373,8 @@ CREATE TABLE `b_r_inspect_plan_method` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `plan_id` int(11) NOT NULL COMMENT '检测项目id',
   `method_id` int(11) NOT NULL COMMENT '检测方法id',
+  `deleted` tinyint(1) DEFAULT FALSE COMMENT '删除标识',
+  `dept_id` int(11) DEFAULT NULL COMMENT '所属公司',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='检测项目-检测方法关联表';
 
@@ -356,6 +390,8 @@ CREATE TABLE `b_r_inspect_scheme_item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `inspect_scheme_id` int(11) NOT NULL COMMENT '检测方案id',
   `inspect_item_id` int(11) NOT NULL COMMENT '检测项目id',
+  `deleted` tinyint(1) DEFAULT FALSE COMMENT '删除标识',
+  `dept_id` int(11) DEFAULT NULL COMMENT '所属公司',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='检测方案-检测项目关联表';
 
@@ -378,6 +414,8 @@ CREATE TABLE `t_business_config` (
   `UPDATE_TIME` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后修改时间',
   `ADMIN_NAME` varchar(20) COLLATE utf8_bin NOT NULL COMMENT '操作管理员名称',
   `DATA_VER_FLAG` smallint(5) unsigned NOT NULL DEFAULT '1' COMMENT '数据版本标识',
+  `deleted` tinyint(1) DEFAULT FALSE COMMENT '删除标识',
+  `dept_id` int(11) DEFAULT NULL COMMENT '所属公司',
   PRIMARY KEY (`CONF_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -399,6 +437,8 @@ CREATE TABLE `t_online` (
   `IP` varchar(20) COLLATE utf8_bin NOT NULL,
   `LOGINDATETIME` datetime NOT NULL,
   `LOGINNAME` varchar(20) COLLATE utf8_bin NOT NULL,
+  `deleted` tinyint(1) DEFAULT FALSE COMMENT '删除标识',
+  `dept_id` int(11) DEFAULT NULL COMMENT '所属公司',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -716,6 +756,8 @@ CREATE TABLE `t_user` (
   `PWD` varchar(100) COLLATE utf8_bin NOT NULL COMMENT '登陆密码',
   `REMAINING_LOGINS` smallint(6) NOT NULL COMMENT '每天的剩余登陆次数',
   `VALIDDATETIME` date DEFAULT NULL COMMENT '管理员账户有效时间',
+  `deleted` tinyint(1) DEFAULT FALSE COMMENT '删除标识',
+  `dept_id` int(11) DEFAULT NULL COMMENT '所属公司',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `UK_r10pkdejrfxie1lbe7a7rlcwt` (`NAME`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -723,20 +765,20 @@ CREATE TABLE `t_user` (
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES ('0', '2015-12-25 11:19:51', 'zhangzq@bjleisen.com', '0', null, 'admin', '5B42403537626463656162:30DE21804EA6806A325E4A708172D50C51DEE323FA9987DFE8B0DBD4C3E17BE8', '5', null);
-INSERT INTO `t_user` VALUES ('451f140b-d1b2-4607-b6c2-31ede8e48daa', '2015-12-25 11:44:17', 'zhangzq@bjleisen.com', '0', '2016-03-07 10:30:44', 'zhangziqi', '5B42403431346435343762:72F4AE8102E281B79B452B79BF1465D26AC62EC237DEE97523656192BB73C9FF', '5', '2019-12-31');
-INSERT INTO `t_user` VALUES ('5b072f38-6f61-40d2-93bc-27ae64cecb07', '2016-05-25 16:34:08', 'fanpp@bjleisen.com', '0', '2016-05-25 16:36:02', 'fanpanpan', '5B42403232323238653438:5284C7367BE6CCDE50CE4F9EEF42F75F35C75EC71177E75B0565954C73BC839D', '5', null);
-INSERT INTO `t_user` VALUES ('5b4c01ff-7be0-4eff-84b1-b7ddfdcf45fe', '2016-06-23 15:06:43', 'ningzy@bjleisen.com', '0', '2016-06-23 15:07:26', 'ningzhaoyun', '5B424034313761396339:FC711358BDE7CA4DFBDF3ACC05D2A27F247EB796A82122750E55E3516F5851C1', '5', null);
-INSERT INTO `t_user` VALUES ('676a82b0-aeb7-4570-a7b9-cfbdbca130d8', '2016-07-26 09:22:28', 'liyx@bjleisen.com', '0', '2016-07-26 09:25:01', 'zhaoqiaoning', '5B424039623133666631:7529B4F95654ACDCAF039DC46BCBE581AEA6D66309FAA98487EB38D5D14E2195', '5', null);
-INSERT INTO `t_user` VALUES ('8d619a6e-ba32-4e29-8759-0d361a9d2ecc', '2016-03-07 13:08:20', 'chenjp@bjleisen.com', '0', '2016-03-07 13:10:37', 'chenjinpeng', '5B42403438363165343337:DB215BF0B3F41E929D121358D671E816B6209E2474BCB074A9ACA335AD2A23DC', '5', null);
-INSERT INTO `t_user` VALUES ('a51139b5-bf94-4576-a0d3-bf60f297433d', '2016-05-23 17:06:57', 'linjw@bjleisen.com', '0', '2016-05-23 17:21:43', 'linjingwu', '5B424062353738343939:606785DFD25071816C2D8337AB5A2CE9D8838AF95C0AD884DF8721AAA08FC67A', '5', null);
-INSERT INTO `t_user` VALUES ('af23f125-9d12-4aec-9d96-ea518d19bf86', '2015-12-28 17:44:01', 'zhangxh@bjleisen.com', '0', '2016-08-18 14:07:44', 'zhangxiaohui', '5B42403537626463656162:30DE21804EA6806A325E4A708172D50C51DEE323FA9987DFE8B0DBD4C3E17BE8', '5', null);
-INSERT INTO `t_user` VALUES ('ca232b3b-7d5a-4859-884f-32e16beeb4e3', '2016-03-07 14:20:58', 'chenjp@bjleisen.com', '0', '2016-08-24 13:33:33', 'chenjp', '5B42403537626463656162:30DE21804EA6806A325E4A708172D50C51DEE323FA9987DFE8B0DBD4C3E17BE8', '5', null);
-INSERT INTO `t_user` VALUES ('ca5a9f16-b040-4c7f-b76b-85886bf7ef01', '2016-05-06 11:23:14', 'hanxk@bjleisen.com', '0', '2016-05-06 11:23:37', 'hanxk', '5B42403630333934626665:B4961A75957A5E5973CC29DCD44AEC2BD56049CB2547B1995314174B2A38C484', '5', null);
-INSERT INTO `t_user` VALUES ('e2bb3f51-1b3c-4797-9d4c-f5118fedf805', '2016-07-19 17:33:14', 'songzq@bjleisen.com', '0', '2016-07-21 10:52:06', 'songzhiqiang', '5B424035333839643633:6E1E32F1FC3B6A27527F4B008644A37F0BC981BEF422B02E30F76642D75B0E26', '5', null);
-INSERT INTO `t_user` VALUES ('f6dd51df-b9c8-49a3-95ff-be3304ec829e', '2015-12-28 16:55:32', 'liyx@bjleisen.com', '0', '2016-07-26 09:30:18', 'liyunxia', '5B42403734386266653135:3869CED78FCA9955C41A7A0FCD608553551B1EB07B6A6D9E95D2243C27F81F98', '5', null);
-INSERT INTO `t_user` VALUES ('fd6bd97a-2eb9-4d2a-95a4-d81cf8a2607e', '2016-01-15 16:18:51', 'mamz@bjleisen.com', '0', '2016-01-15 16:22:54', 'mamingzhi', '5B42403334363637356239:A2EA5A0A8F9822082A5381ED1CB536447E061902ED4A5501D1F375B80417067A', '5', null);
-INSERT INTO `t_user` VALUES ('guest', '2015-12-25 11:19:51', 'zhangzq@bjleisen.com', '0', '2015-12-27 12:05:28', 'guest', '5B42403537626463656162:30DE21804EA6806A325E4A708172D50C51DEE323FA9987DFE8B0DBD4C3E17BE8', '5', null);
+INSERT INTO `t_user` VALUES ('0', '2015-12-25 11:19:51', 'zhangzq@bjleisen.com', '0', null, 'admin', '5B42403537626463656162:30DE21804EA6806A325E4A708172D50C51DEE323FA9987DFE8B0DBD4C3E17BE8', '5', null,FALSE,11);
+INSERT INTO `t_user` VALUES ('451f140b-d1b2-4607-b6c2-31ede8e48daa', '2015-12-25 11:44:17', 'zhangzq@bjleisen.com', '0', '2016-03-07 10:30:44', 'zhangziqi', '5B42403431346435343762:72F4AE8102E281B79B452B79BF1465D26AC62EC237DEE97523656192BB73C9FF', '5', '2019-12-31',FALSE ,11);
+INSERT INTO `t_user` VALUES ('5b072f38-6f61-40d2-93bc-27ae64cecb07', '2016-05-25 16:34:08', 'fanpp@bjleisen.com', '0', '2016-05-25 16:36:02', 'fanpanpan', '5B42403232323238653438:5284C7367BE6CCDE50CE4F9EEF42F75F35C75EC71177E75B0565954C73BC839D', '5', null,FALSE ,11);
+INSERT INTO `t_user` VALUES ('5b4c01ff-7be0-4eff-84b1-b7ddfdcf45fe', '2016-06-23 15:06:43', 'ningzy@bjleisen.com', '0', '2016-06-23 15:07:26', 'ningzhaoyun', '5B424034313761396339:FC711358BDE7CA4DFBDF3ACC05D2A27F247EB796A82122750E55E3516F5851C1', '5', null,FALSE ,11);
+INSERT INTO `t_user` VALUES ('676a82b0-aeb7-4570-a7b9-cfbdbca130d8', '2016-07-26 09:22:28', 'liyx@bjleisen.com', '0', '2016-07-26 09:25:01', 'zhaoqiaoning', '5B424039623133666631:7529B4F95654ACDCAF039DC46BCBE581AEA6D66309FAA98487EB38D5D14E2195', '5', null,FALSE ,11);
+INSERT INTO `t_user` VALUES ('8d619a6e-ba32-4e29-8759-0d361a9d2ecc', '2016-03-07 13:08:20', 'chenjp@bjleisen.com', '0', '2016-03-07 13:10:37', 'chenjinpeng', '5B42403438363165343337:DB215BF0B3F41E929D121358D671E816B6209E2474BCB074A9ACA335AD2A23DC', '5', null,FALSE ,11);
+INSERT INTO `t_user` VALUES ('a51139b5-bf94-4576-a0d3-bf60f297433d', '2016-05-23 17:06:57', 'linjw@bjleisen.com', '0', '2016-05-23 17:21:43', 'linjingwu', '5B424062353738343939:606785DFD25071816C2D8337AB5A2CE9D8838AF95C0AD884DF8721AAA08FC67A', '5', null,FALSE ,11);
+INSERT INTO `t_user` VALUES ('af23f125-9d12-4aec-9d96-ea518d19bf86', '2015-12-28 17:44:01', 'zhangxh@bjleisen.com', '0', '2016-08-18 14:07:44', 'zhangxiaohui', '5B42403537626463656162:30DE21804EA6806A325E4A708172D50C51DEE323FA9987DFE8B0DBD4C3E17BE8', '5', null,FALSE ,11);
+INSERT INTO `t_user` VALUES ('ca232b3b-7d5a-4859-884f-32e16beeb4e3', '2016-03-07 14:20:58', 'chenjp@bjleisen.com', '0', '2016-08-24 13:33:33', 'chenjp', '5B42403537626463656162:30DE21804EA6806A325E4A708172D50C51DEE323FA9987DFE8B0DBD4C3E17BE8', '5', null,FALSE ,11);
+INSERT INTO `t_user` VALUES ('ca5a9f16-b040-4c7f-b76b-85886bf7ef01', '2016-05-06 11:23:14', 'hanxk@bjleisen.com', '0', '2016-05-06 11:23:37', 'hanxk', '5B42403630333934626665:B4961A75957A5E5973CC29DCD44AEC2BD56049CB2547B1995314174B2A38C484', '5', null,FALSE ,11);
+INSERT INTO `t_user` VALUES ('e2bb3f51-1b3c-4797-9d4c-f5118fedf805', '2016-07-19 17:33:14', 'songzq@bjleisen.com', '0', '2016-07-21 10:52:06', 'songzhiqiang', '5B424035333839643633:6E1E32F1FC3B6A27527F4B008644A37F0BC981BEF422B02E30F76642D75B0E26', '5', null,FALSE ,11);
+INSERT INTO `t_user` VALUES ('f6dd51df-b9c8-49a3-95ff-be3304ec829e', '2015-12-28 16:55:32', 'liyx@bjleisen.com', '0', '2016-07-26 09:30:18', 'liyunxia', '5B42403734386266653135:3869CED78FCA9955C41A7A0FCD608553551B1EB07B6A6D9E95D2243C27F81F98', '5', null,FALSE ,11);
+INSERT INTO `t_user` VALUES ('fd6bd97a-2eb9-4d2a-95a4-d81cf8a2607e', '2016-01-15 16:18:51', 'mamz@bjleisen.com', '0', '2016-01-15 16:22:54', 'mamingzhi', '5B42403334363637356239:A2EA5A0A8F9822082A5381ED1CB536447E061902ED4A5501D1F375B80417067A', '5', null,FALSE ,11);
+INSERT INTO `t_user` VALUES ('guest', '2015-12-25 11:19:51', 'zhangzq@bjleisen.com', '0', '2015-12-27 12:05:28', 'guest', '5B42403537626463656162:30DE21804EA6806A325E4A708172D50C51DEE323FA9987DFE8B0DBD4C3E17BE8', '5', null,FALSE ,11);
 
 -- ----------------------------
 -- Table structure for `t_user_log`

@@ -21,6 +21,7 @@ import org.springframework.stereotype.Repository;
 
 public class BaseDaoImpl<T> implements BaseDaoI<T> {
     private Class<T> entityClass;
+    private static final String like_prefix  = ":like_";
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -50,8 +51,9 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
         }
         return c;
     }
-    public Criteria getCriteria(Integer page, Integer pageSize,Integer dept_id) {
-        return getCriteria(page,pageSize).add(Restrictions.eq("dept_id",dept_id));
+
+    public Criteria getCriteria(Integer page, Integer pageSize, Integer dept_id) {
+        return getCriteria(page, pageSize).add(Restrictions.eq("dept_id", dept_id));
     }
 
     @Override
@@ -66,9 +68,10 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
     public T getById(Serializable id) {
         return (T) getCurrentSession().get(entityClass, id);
     }
+
     @Override
-    public T getById(Serializable id,Serializable dept_id) {
-        return (T) getCurrentSession().createCriteria(entityClass).add(Restrictions.eq("dept_id",dept_id)).setMaxResults(1).list().get(0);
+    public T getById(Serializable id, Serializable dept_id) {
+        return (T) getCurrentSession().createCriteria(entityClass).add(Restrictions.eq("dept_id", dept_id)).setMaxResults(1).list().get(0);
     }
 
 
@@ -140,6 +143,33 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
         return q.list();
     }
 
+    private Criteria getCriteria(Map<String, Object> params){
+        Criteria c = getCriteria();
+        if(params!=null&&params.size()>0){
+            params.forEach((k,v) -> {
+                if (v instanceof Collection){
+                    c.add(Restrictions.in(k,(Collection)v));
+                }else {
+                    if(k.startsWith(like_prefix)){
+                        c.add(like(k.substring(like_prefix.length()),(String) v));
+                    }else {
+                        c.add(Restrictions.eq(k,v));
+                    }
+                }
+            });
+        }
+        return c;
+    }
+    @Override
+    public List<T> find(Map<String, Object> params) {
+        return getCriteria(params).list();
+    }
+
+    @Override
+    public List<T> find(Map<String, Object> params, Integer page, Integer rows) {
+        return getCriteria(params).setMaxResults(rows).setFirstResult((page-1)*rows).list();
+    }
+
     @Override
     public List<Map<String, Object>> findList(String hql, Map<String, Object> params) {
         Query q = this.getCurrentSession().createQuery(hql);
@@ -165,6 +195,7 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
         }
         return q.setFirstResult((page - 1) * rows).setMaxResults(rows).list();
     }
+
 
     @Override
     public List<T> find(String hql, int page, int rows) {
@@ -274,10 +305,14 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
     @Override
     public int executeSql(String sql, Map<String, Object> params) {
         SQLQuery q = this.getCurrentSession().createSQLQuery(sql);
-        if (params != null && !params.isEmpty()) {
-            for (String key : params.keySet()) {
-                q.setParameter(key, params.get(key));
-            }
+        if(params!=null&&!params.isEmpty()){
+            params.forEach((key,val)->{
+                if(val instanceof Collection){
+                    q.setParameterList(key,(Collection) val);
+                }else{
+                    q.setParameter(key, params.get(key));
+                }
+            });
         }
         return q.executeUpdate();
     }
@@ -297,6 +332,23 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
             }
         }
         return (BigInteger) q.uniqueResult();
+    }
+
+    @Override
+    public int logicDelete(String table,Map<String,Object> params) {
+
+        StringBuilder sql = new StringBuilder("update ").append(table).append(" set deleted=true where 1=1 ");
+        if(params!=null&&params.size()>0){
+            params.forEach((k,v)->{
+                sql.append("and ").append(k);
+                if(v instanceof Collection){
+                    sql.append(" in (:").append(k).append(")");
+                }else{
+                    sql.append("= :");
+                }
+            });
+        }
+        return executeSql(sql.toString(),params);
     }
 
     /**

@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface DeptServiceI {
     Dept get(int id);
-    List<Dept> list(String name, int page, int PageSize);
+    List<Dept> list(String name, Integer page, Integer PageSize);
     long count(String name);
     int add(Dept Dept);
     int del(List<Integer> ids);

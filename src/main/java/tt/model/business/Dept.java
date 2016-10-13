@@ -1,17 +1,22 @@
 package tt.model.business;
 
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by tt on 2016/10/23.
  */
 @Entity
 @Table(name = "b_dept")
-public class Dept {
+//@Where(clause = "deleted='false'")
+public class Dept implements Serializable {
     private Integer id;
     private String name;
     private String logo;
     private String note;
+    private boolean isDeleted;
 
     @Id
     @GeneratedValue
@@ -23,6 +28,7 @@ public class Dept {
     public void setId(Integer id) {
         this.id = id;
     }
+
     @Basic
     @Column(name = "name")
     public String getName() {
@@ -32,6 +38,7 @@ public class Dept {
     public void setName(String name) {
         this.name = name;
     }
+
     @Basic
     @Column(name = "logo")
     public String getLogo() {
@@ -41,6 +48,7 @@ public class Dept {
     public void setLogo(String logo) {
         this.logo = logo;
     }
+
     @Basic
     @Column(name = "note")
     public String getNote() {
@@ -49,5 +57,15 @@ public class Dept {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    @Basic
+    @Column(name = "deleted")
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 }

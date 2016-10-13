@@ -34,11 +34,11 @@ public class ModuleConfigDeptController extends BaseController<Dept> {
     @RequestMapping("index")
     public String index(Model model) {
         model.addAttribute("baseUrl", "moduleConfigController");
-        return "business/module_config/index";
+        return getDeptId() == -1 ? "business/module_config/admin_index" : "business/module_config/index";
     }
 
     @RequestMapping("{dept_id}/users")
-    public String personal(@PathVariable Integer dept_id, Model model) {
+    public String listAccounts(@PathVariable Integer dept_id, Model model) {
         model.addAttribute("dept_id", dept_id);
         return "business/module_config/dept_users";
     }
@@ -73,8 +73,8 @@ public class ModuleConfigDeptController extends BaseController<Dept> {
 
         boolean isSaved = false;
         try {
-            isSaved = saveUploadFile(dept.getLogo(),session);
-            if(isSaved){
+            isSaved = saveUploadFile(dept.getLogo(), session);
+            if (isSaved) {
                 deptService.add(dept);
                 return flagResponse(1);
             }
@@ -85,6 +85,7 @@ public class ModuleConfigDeptController extends BaseController<Dept> {
     }
 
     public boolean saveUploadFile(String filename, HttpSession session) throws IOException {
+        boolean flag = false;
         if (filename != null && !filename.isEmpty()) {
             String upload_dir = session.getServletContext()
                     .getRealPath(UPLOAD_DIR) + File.separator + filename;
@@ -92,23 +93,36 @@ public class ModuleConfigDeptController extends BaseController<Dept> {
                     .getRealPath(LOGO_DIR) + File.separator + filename;
             Path source = Paths.get(upload_dir);
             Path nwdir = Paths.get(img_dir);
-
-            Files.move(source, nwdir);
-            return true;
+            if (Files.exists(nwdir)) {
+                flag = true;
+            } else {
+                Files.move(source, nwdir);
+            }
         }
-        return false;
+        return flag;
     }
 
     @RequestMapping(value = "put", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject update(@ModelAttribute Dept dept) {
-        int ret = deptService.update(dept);
+    public JSONObject update(@ModelAttribute Dept dept, HttpSession session) {
+        int ret = 0;
+
+        boolean isSaved = false;
+        try {
+            isSaved = saveUploadFile(dept.getLogo(), session);
+            if (isSaved) {
+                deptService.update(dept);
+                ret = deptService.update(dept);
+            }
+        } catch (IOException e) {
+
+        }
         return flagResponse(ret);
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject delete(@RequestParam(value = "ids[]") int[] ids) {
+    public JSONObject delete(@RequestParam(value = "ids[]") int[] ids, HttpSession session) {
         List<Integer> list = new LinkedList<>();
         Arrays.stream(ids).forEach(id -> list.add(id));
         int ret = deptService.del(list);

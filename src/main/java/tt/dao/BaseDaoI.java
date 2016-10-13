@@ -2,6 +2,7 @@ package tt.dao;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -109,6 +110,9 @@ public interface BaseDaoI<T>
      * @return List
      */
     public List<T> find(String hql, Map<String, Object> params);
+
+    public List<T> find(Map<String, Object> params);
+    public List<T> find(Map<String, Object> params,Integer page,Integer rows);
     /**
      * 获得Map列表
      *
@@ -303,4 +307,5 @@ public interface BaseDaoI<T>
      */
     public BigInteger countBySql(String sql, Map<String, Object> params);
 
+    public int logicDelete(String table, Map<String,Object> params);
 }

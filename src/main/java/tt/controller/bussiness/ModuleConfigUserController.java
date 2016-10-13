@@ -12,10 +12,7 @@ import tt.service.bussiness.UserServiceI;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by tt on 2016/10/2.
@@ -56,8 +53,24 @@ public class ModuleConfigUserController extends BaseController<User> {
         return listResponse(list);
     }
 
-    //    @RequestMapping(value = "post", method = RequestMethod.POST)
-    @RequestMapping(value = "post")
+    @RequestMapping(value = "/queryAll", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject list(@RequestParam(required = false) String name) {
+        Map<String, Object> params = new HashMap<>();
+        if (name != null && !name.trim().isEmpty()) {
+            try {
+                name = URLDecoder.decode(name, "utf-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            params.put("name", name);
+        }
+        List<User> list = userService.list(params, null, null, getDeptId());
+        return listResponse(list);
+    }
+
+
+    @RequestMapping(value = "post", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject add(@ModelAttribute User user, BindingResult result) {
         if (userService.isExist(user.getId())) {
