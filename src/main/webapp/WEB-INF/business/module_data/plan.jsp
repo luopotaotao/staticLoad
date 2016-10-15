@@ -439,8 +439,8 @@
                 console.log(ret);
             }).fail(function () {
                 $.messager.alert('提示','关联数据失败!');
-            })
-        })
+            });
+        });
     }
 
 </script>
