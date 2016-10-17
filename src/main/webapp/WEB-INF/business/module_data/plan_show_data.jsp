@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="easyui-layout" style="width: 100%;height: 97%;">
     <div data-options="region:'west',split:false,closable:false,border:false,collapsible:false" title="桩号" style="width: 120px; overflow: hidden;">
-        <div class="easyui-panel" style="padding:2px">
+        <div class="easyui-panel" data-options="border:false" style="padding:2px">
             <ul id="plan_data_tree_menu"></ul>
         </div>
     </div>

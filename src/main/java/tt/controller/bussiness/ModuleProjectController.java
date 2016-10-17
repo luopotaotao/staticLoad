@@ -20,8 +20,9 @@ import java.util.List;
 @RequestMapping("moduleProjectController")
 public class ModuleProjectController extends BaseController<Project> {
     @RequestMapping("index")
-    public String index(Model model){
+    public String index(@RequestParam(name = "project_id",required = false) String project_id,Model model){
         model.addAttribute("baseUrl","/moduleProjectController");
+        model.addAttribute("project_id",project_id!=null?project_id:"null");
         return "business/module_project/index";
     }
 }

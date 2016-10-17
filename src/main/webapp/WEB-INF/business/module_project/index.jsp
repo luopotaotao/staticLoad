@@ -34,7 +34,7 @@
         <div class="menu_item" onclick="operate('collapse')">收起</div>
     </div>
     <div id="project_mm_plan" class="easyui-menu" style="width:120px;">
-        <div class="menu_item_remove" onclick="$.project.linkeData()" data-options="iconCls:'icon-remove'">关联数据</div>
+        <div class="menu_item_remove" onclick="$.project.linkData()" data-options="iconCls:'icon-remove'">关联数据</div>
         <div class="menu_item_remove" onclick="$.project.remove()" data-options="iconCls:'icon-remove'">删除计划</div>
     </div>
 </div>
@@ -285,6 +285,7 @@
         });
         var $tree_menu = $('#tree_menu');
         initUI();
+        var project_id = ${project_id};
         function initUI() {
             $tree_menu.tree({
                 url: '/moduleProjectManageController/tree.action',
@@ -292,8 +293,14 @@
                 idField: 'id',
                 textField: 'name',
                 animate: true,
-                onClick: function (node) {
+                onSelect: function (node) {
                     showInfo(node.level, node);
+                },
+                onLoadSuccess:function (node, data) {
+                    if($.isNumeric(project_id)){
+                        var node = $('#tree_menu').tree('find',project_id);
+                        $(this).tree('select',node.target);
+                    }
                 },
                 onContextMenu: function (e, node) {
                     e.preventDefault();
@@ -372,7 +379,9 @@
             }
             setValues('project_scheme_plan_', ['assistantInspector', 'inspector', 'majorInspector', 'equipment'], data);
         }
-        function linkData(plan_id) {
+        function linkData() {
+            var node = getNode();
+            var plan_id = node.id;
             var url = '/moduleInspectPlanController/selectData/'+plan_id+'.action';
             selectChild(url, function (data) {
                 console.log(JSON.stringify(data));
@@ -384,9 +393,42 @@
                     contentType: "application/json"
                 }).done(function (ret) {
                     console.log(ret);
+                    $('#project_scheme_plan_show_data_div').panel('refresh','/moduleInspectPlanController/showData/'+plan_id+'.action');
                 }).fail(function () {
                     $.messager.alert('提示','关联数据失败!');
                 });
+            });
+        }
+        function selectChild(url, callback) {
+            var $doc = $(document);
+            var height = screen.availHeight * 0.6, width = screen.availWidth * 0.6;
+            var $div = $('<div/>', {'height': height, width: width});
+            $div.dialog({
+                title: '请选择',
+                closed: false,
+                cache: true,
+                href: url,
+                modal: true,
+                buttons: [{
+                    text: '确定',
+                    handler: function () {
+                        if (true || $.isFunction(callback)) {
+                            var data = $div.find('#grid').datagrid('getChecked');
+                            if (data && data.length > 0) {
+                                console.log(data);
+                                $div.dialog('close');
+                                callback(data);
+                            } else {
+                                $.messager.alert('提示', '请选择数据!');
+                            }
+                        }
+                    }
+                }, {
+                    text: '取消',
+                    handler: function () {
+                        $div.dialog('close');
+                    }
+                }]
             });
         }
         function setValues(prefix, keys, data) {
@@ -529,6 +571,7 @@
                 showScheme: showScheme,
                 addPlan: addPlan,
                 showPlan: showPlan,
+                linkData:linkData,
                 expandNode: expandNode,
                 remove: remove,
             }
