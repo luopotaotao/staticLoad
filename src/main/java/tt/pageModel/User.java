@@ -5,6 +5,7 @@ import java.util.Date;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
+import tt.model.business.Dept;
 import tt.util.annotation.Validator;
 
 
@@ -43,6 +44,7 @@ public class User extends PageHelper implements java.io.Serializable
     private String verifycode;
 
     private Date validdatetime;
+    private Dept dept;
 
     // 是否锁定的标志，默认为0:未锁定;1:锁定
     @Validator(accessShortValue = {1, 0})
@@ -215,4 +217,11 @@ public class User extends PageHelper implements java.io.Serializable
         this.email = email;
     }
 
+    public Dept getDept() {
+        return dept;
+    }
+
+    public void setDept(Dept dept) {
+        this.dept = dept;
+    }
 }

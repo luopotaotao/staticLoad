@@ -25,7 +25,6 @@ public class ModuleBasicCompanyController extends BaseController<Company> {
 
     @RequestMapping("index")
     public String index(Model model){
-        System.out.println("*********************************");
         model.addAttribute("baseUrl","/moduleBasicCompanyController");
         return "business/module_basic/company";
     }
@@ -38,7 +37,7 @@ public class ModuleBasicCompanyController extends BaseController<Company> {
     @RequestMapping(value = "get/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Company get(@PathVariable int id) {
-        return companyService.get(id);
+        return companyService.get(id,getDeptId());
     }
 
     @RequestMapping(value = "query",method = RequestMethod.GET)
@@ -54,9 +53,10 @@ public class ModuleBasicCompanyController extends BaseController<Company> {
                 e.printStackTrace();
             }
         }
-
-        List<Company> list = companyService.list(typ,name,page,pageSize);
-        long count = companyService.count(typ,name);
+        Map<String,Object> params = createHashMap("name",name);
+        params.put("typ",typ);
+        List<Company> list = companyService.list(params,page,pageSize,getDeptId());
+        long count = companyService.count(params,getDeptId());
         return listResponse(count, list);
     }
 
@@ -64,15 +64,15 @@ public class ModuleBasicCompanyController extends BaseController<Company> {
     @RequestMapping(value = "post")
     @ResponseBody
     public JSONObject add(@ModelAttribute Company company) {
-        int ret = companyService.add(company);
-        return flagResponse(1);
+        companyService.add(company,getDeptId());
+        return flagResponse(company.getId()>0);
     }
 
     @RequestMapping(value = "put", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject update(@ModelAttribute Company company) {
-        int ret = companyService.update(company);
-        return flagResponse(ret);
+        companyService.update(company,getDeptId());
+        return flagResponse(company.getId()>0);
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)
@@ -80,7 +80,7 @@ public class ModuleBasicCompanyController extends BaseController<Company> {
     public JSONObject delete(@RequestParam(value = "ids[]") int[] ids) {
         List<Integer> list = new LinkedList<>();
         Arrays.stream(ids).forEach(id->list.add(id));
-        int ret = companyService.del(list);
+        int ret = companyService.del(list,getDeptId());
         return flagResponse(ret);
     }
 }

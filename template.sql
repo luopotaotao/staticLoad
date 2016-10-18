@@ -16,6 +16,17 @@ Date: 2016-10-15 22:52:38
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
+-- Table structure for `b_area` 所属公司
+-- ----------------------------
+DROP TABLE IF EXISTS `b_dept`;
+CREATE TABLE `b_dept` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) DEFAULT NULL COMMENT '公司名称',
+  `logo` varchar(128) DEFAULT NULL COMMENT '公司logo文件名',
+  `note` varchar(128) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='公司信息';
+-- ----------------------------
 -- Table structure for `b_area`
 -- ----------------------------
 DROP TABLE IF EXISTS `b_area`;

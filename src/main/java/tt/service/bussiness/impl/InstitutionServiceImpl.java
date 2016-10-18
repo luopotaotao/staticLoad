@@ -19,21 +19,22 @@ public class InstitutionServiceImpl implements InstitutionServiceI {
     private InstitutionDaoI institutionDao;
 
     @Override
-    public Institution get(int id) {
-        System.out.println("run get");
-        return institutionDao.get(Institution.class, id);
+    public Institution get(Integer id, Integer dept_id) {
+        return institutionDao.getById(id,dept_id);
     }
 
     @Override
-    public List<Institution> list(Byte typ,String name, int page, int PageSize) {
-        StringBuilder hql = new StringBuilder("from Institution WHERE 1=1");
-        Map<String,Object> params = new HashMap<>();
-        if(typ!=null&&typ!=0){
+    public List<Institution> list(Map<String,Object> params, Integer page, Integer PageSize, Integer dept_id) {
+        StringBuilder hql = new StringBuilder("from Institution WHERE dept_id=:dept_id");
+        params.put("dept_id",dept_id);
+        Object typ =  params.get("typ");
+        Object name =   params.get("name");
+        if(typ!=null&&(Byte)typ!=0){
             params.put("typ",typ);
             hql.append(" AND typ=:typ ");
         }
         if(name!=null){
-            params.put("name","%"+name+"%");
+            params.put("name","%"+(String) name+"%");
             hql.append(" AND name like :name ");
         }
         List<Institution> ret = institutionDao.find(hql.toString(), params, page, PageSize);
@@ -41,11 +42,12 @@ public class InstitutionServiceImpl implements InstitutionServiceI {
     }
 
     @Override
-    public long count(Byte typ,String name) {
-        StringBuilder hql = new StringBuilder("select count(*) from Institution WHERE 1=1");
-        Map<String,Object> params = new HashMap<>();
+    public long count(Map<String,Object> params, Integer dept_id) {
+        StringBuilder hql = new StringBuilder("select count(*) from Institution WHERE dept_id=:dept_id");
+        params.put("dept_id",dept_id);
+        Byte typ = (Byte) params.get("typ");
+        Byte name = (Byte) params.get("name");
         if(typ!=null&&typ!=0){
-            params.put("typ",typ);
             hql.append(" AND typ=:typ ");
         }
         if(name!=null){
@@ -57,24 +59,27 @@ public class InstitutionServiceImpl implements InstitutionServiceI {
     }
 
     @Override
-    public int add(Institution institution) {
+    public Institution add(Institution institution, Integer dept_id) {
+        institution.setDept_id(dept_id);
         institutionDao.save(institution);
-        return 1;
+        return institution;
     }
 
     @Override
-    public int del(List<Integer> ids) {
+    public int del(List<Integer> ids, Integer dept_id) {
         if(ids==null||ids.size()<1){
             return 0;
         }
         Map<String, Object> params = new HashMap<String, Object>();
+        params.put("dept_id",dept_id);
         params.put("ids", ids);
-        return institutionDao.executeHql("delete from Institution where id in (:ids)", params);
+        return institutionDao.executeHql("delete from Institution where id in (:ids) and dept_id=:dept_id", params);
     }
 
     @Override
-    public int update(Institution institution) {
+    public Institution update(Institution institution, Integer dept_id) {
+        institution.setDept_id(dept_id);
         institutionDao.update(institution);
-        return 1;
+        return institution;
     }
 }

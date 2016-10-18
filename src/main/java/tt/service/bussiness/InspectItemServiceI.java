@@ -7,11 +7,5 @@ import java.util.List;
 /**
  * Created by tt on 2016/10/2.
  */
-public interface InspectItemServiceI {
-    InspectItem get(int id);
-    List<InspectItem> list(String name, Integer page, Integer PageSize);
-    long count(String name);
-    int add(InspectItem inspectItem);
-    int del(List<Integer> ids);
-    int update(InspectItem inspectItem);
+public interface InspectItemServiceI extends BaseService<InspectItem> {
 }

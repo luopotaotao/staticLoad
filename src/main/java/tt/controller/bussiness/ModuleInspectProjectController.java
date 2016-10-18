@@ -14,6 +14,7 @@ import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by tt on 2016/10/2.
@@ -39,7 +40,7 @@ public class ModuleInspectProjectController extends BaseController<InspectProjec
     @RequestMapping(value = "get/{id}", method = RequestMethod.GET)
     @ResponseBody
     public InspectProject get(@PathVariable int id) {
-        return inspectProjectService.get(id);
+        return inspectProjectService.get(id,getDeptId());
     }
 
     @RequestMapping(value = "query",method = RequestMethod.GET)
@@ -55,8 +56,9 @@ public class ModuleInspectProjectController extends BaseController<InspectProjec
                 e.printStackTrace();
             }
         }
-        List<InspectProject> list = inspectProjectService.list(name,page,pageSize);
-        long count = inspectProjectService.count(name);
+        Map<String,Object> params = createHashMap("name",name);
+        List<InspectProject> list = inspectProjectService.list(params,page,pageSize,getDeptId());
+        long count = inspectProjectService.count(params,getDeptId());
         return listResponse(count, list);
     }
 
@@ -64,15 +66,15 @@ public class ModuleInspectProjectController extends BaseController<InspectProjec
     @RequestMapping(value = "post")
     @ResponseBody
     public JSONObject add(@ModelAttribute InspectProject company) {
-        int ret = inspectProjectService.add(company);
-        return flagResponse(1);
+        inspectProjectService.add(company,getDeptId());
+        return flagResponse(company.getId()>0);
     }
 
     @RequestMapping(value = "put", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject update(@ModelAttribute InspectProject company) {
-        int ret = inspectProjectService.update(company);
-        return flagResponse(ret);
+        inspectProjectService.update(company,getDeptId());
+        return flagResponse(company.getId()>0);
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)
@@ -80,7 +82,7 @@ public class ModuleInspectProjectController extends BaseController<InspectProjec
     public JSONObject delete(@RequestParam(value = "ids[]") int[] ids) {
         List<Integer> list = new LinkedList<>();
         Arrays.stream(ids).forEach(id->list.add(id));
-        int ret = inspectProjectService.del(list);
+        int ret = inspectProjectService.del(list,getDeptId());
         return flagResponse(ret);
     }
 }

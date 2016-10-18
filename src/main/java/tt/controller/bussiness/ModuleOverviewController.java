@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import tt.controller.BaseController;
 import tt.model.business.Overview;
 import tt.model.business.Project;
 import tt.service.bussiness.OverviewServiceI;
@@ -22,7 +23,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("moduleOverviewController")
-public class ModuleOverviewController {
+public class ModuleOverviewController extends BaseController<Overview>{
 
     @Autowired
     private OverviewServiceI overviewServiceI;
@@ -33,7 +34,7 @@ public class ModuleOverviewController {
     public String index(Model model, @RequestParam(value = "project_id",required = false) Integer id) {
         Project selectedProject = null;
         if(id!=null&&id>0){
-            selectedProject = projectServiceI.get(id);
+            selectedProject = projectServiceI.get(id,getDeptId());
         }
 
         if(selectedProject!=null){
@@ -64,7 +65,7 @@ public class ModuleOverviewController {
     @RequestMapping("{area_id}/queryProjects")
     @ResponseBody
     public List<Project> queryProjects(@PathVariable Integer area_id) {
-        List<Project> projects = projectServiceI.list(area_id);
+        List<Project> projects = projectServiceI.list(area_id,getDeptId());
         return projects;
     }
 
@@ -76,7 +77,7 @@ public class ModuleOverviewController {
     @RequestMapping("queryOverviews")
     @ResponseBody
     public List<Overview> queryOverviews() {
-        List<Overview> ret = overviewServiceI.queryOverviews(0);
+        List<Overview> ret = overviewServiceI.queryOverviews(0,getDeptId());
         return ret;
     }
 

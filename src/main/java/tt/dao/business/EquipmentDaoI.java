@@ -9,5 +9,5 @@ import java.util.List;
  * Created by taotao on 2016/9/23.
  */
 public interface EquipmentDaoI extends BaseDaoI<Equipment> {
-    List<Equipment> list(Integer institution_id, String name);
+    List<Equipment> list(Integer institution_id, String name,Integer dept_id);
 }

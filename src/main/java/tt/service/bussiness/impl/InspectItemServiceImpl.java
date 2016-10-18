@@ -19,19 +19,21 @@ public class InspectItemServiceImpl implements InspectItemServiceI {
     private InspectItemDaoI inspectItemDao;
 
     @Override
-    public InspectItem get(int id) {
-        return inspectItemDao.get(InspectItem.class, id);
+    public InspectItem get(Integer id, Integer dept_id) {
+        return inspectItemDao.getById(id,dept_id);
     }
 
     @Override
-    public List<InspectItem> list(String name, Integer page, Integer PageSize) {
-        List<InspectItem> ret = inspectItemDao.list(name, page, PageSize);
+    public List<InspectItem> list(Map<String,Object> params, Integer page, Integer PageSize, Integer dept_id) {
+        String name = (String) params.get("name");
+        List<InspectItem> ret = inspectItemDao.list(name, page, PageSize,dept_id);
         return ret;
     }
     @Override
-    public long count(String name) {
-        StringBuilder hql = new StringBuilder("select count(*) from InspectItem WHERE 1=1");
-        Map<String,Object> params = new HashMap<>();
+    public long count(Map<String,Object> params, Integer dept_id) {
+        StringBuilder hql = new StringBuilder("select count(*) from InspectItem WHERE and dept_id=:dept_id");
+        params.put("dept_id",dept_id);
+        String name = (String) params.get("name");
         if(name!=null){
             params.put("name","%"+name+"%");
             hql.append(" AND name like :name ");
@@ -41,24 +43,27 @@ public class InspectItemServiceImpl implements InspectItemServiceI {
     }
 
     @Override
-    public int add(InspectItem inspectItem) {
+    public InspectItem add(InspectItem inspectItem, Integer dept_id) {
+        inspectItem.setDept_id(dept_id);
         inspectItemDao.save(inspectItem);
-        return 1;
+        return inspectItem;
     }
 
     @Override
-    public int del(List<Integer> ids) {
+    public int del(List<Integer> ids, Integer dept_id) {
         if(ids==null||ids.size()<1){
             return 0;
         }
         Map<String, Object> params = new HashMap<>();
+        params.put("dept_id",dept_id);
         params.put("ids", ids);
-        return inspectItemDao.executeHql("delete from InspectItem where id in (:ids)", params);
+        return inspectItemDao.executeHql("delete from InspectItem where id in (:ids) and dept_id=:dept_id", params);
     }
 
     @Override
-    public int update(InspectItem inspectItem) {
+    public InspectItem update(InspectItem inspectItem, Integer dept_id) {
+        inspectItem.setDept_id(dept_id);
         inspectItemDao.update(inspectItem);
-        return 1;
+        return inspectItem;
     }
 }

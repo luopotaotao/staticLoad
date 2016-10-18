@@ -11,9 +11,7 @@ import tt.service.bussiness.ProjectServiceI;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by taotao on 2016/9/27.
@@ -37,7 +35,7 @@ public class ModuleProjectManageController extends BaseController<Project> {
     @RequestMapping(value = "get/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Project get(@PathVariable int id) {
-        return projectService.get(id);
+        return projectService.get(id,getDeptId());
     }
 
     @RequestMapping(value = "query",method = RequestMethod.GET)
@@ -53,15 +51,18 @@ public class ModuleProjectManageController extends BaseController<Project> {
                 e.printStackTrace();
             }
         }
-        List<Project> list = projectService.list(area_id,name,page,pageSize);
-        long count = projectService.count(area_id,name);
+        Map<String,Object> params = new HashMap<>();
+        params.put("area_id",area_id);
+        params.put("name",name);
+        List<Project> list = projectService.list(params,page,pageSize,getDeptId());
+        long count = projectService.count(params,getDeptId());
         return listResponse(count, list);
     }
 
     @RequestMapping(value = "tree",method = RequestMethod.GET)
     @ResponseBody
     public List<Project> list() {
-        List<Project> list = projectService.list(null);
+        List<Project> list = projectService.list(null,getDeptId());
         return list;
     }
 
@@ -70,15 +71,15 @@ public class ModuleProjectManageController extends BaseController<Project> {
     @RequestMapping(value = "post")
     @ResponseBody
     public JSONObject add(@ModelAttribute Project project) {
-        int ret = projectService.add(project);
-        return flagResponse(1);
+        projectService.add(project,getDeptId());
+        return flagResponse(project.getId()>0);
     }
 
     @RequestMapping(value = "put", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject update(@ModelAttribute Project project) {
-        int ret = projectService.update(project);
-        return flagResponse(ret);
+        projectService.update(project,getDeptId());
+        return flagResponse(project.getId()>0);
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)
@@ -86,7 +87,7 @@ public class ModuleProjectManageController extends BaseController<Project> {
     public JSONObject delete(@RequestParam(value = "ids[]") int[] ids) {
         List<Integer> list = new LinkedList<>();
         Arrays.stream(ids).forEach(id->list.add(id));
-        int ret = projectService.del(list);
+        int ret = projectService.del(list,getDeptId());
         return flagResponse(ret);
     }
 

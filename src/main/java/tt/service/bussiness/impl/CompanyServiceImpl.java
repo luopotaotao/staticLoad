@@ -21,15 +21,16 @@ public class CompanyServiceImpl implements CompanyServiceI {
     private CompanyDaoI companyDao;
 
     @Override
-    public Company get(int id) {
-        System.out.println("run get");
-        return companyDao.get(Company.class, id);
+    public Company get(Integer id, Integer dept_id) {
+        return companyDao.getById(id,dept_id);
     }
 
     @Override
-    public List<Company> list(Byte typ,String name, int page, int PageSize) {
-        StringBuilder hql = new StringBuilder("from Company WHERE 1=1");
-        Map<String,Object> params = new HashMap<>();
+    public List<Company> list(Map<String,Object> params, Integer page, Integer PageSize, Integer dept_id) {
+        params.put("dept_id",dept_id);
+        Byte typ = (Byte) params.get("typ");
+        Byte name = (Byte) params.get("name");
+        StringBuilder hql = new StringBuilder("from Company WHERE dept_id=:dept_id");
         if(typ!=null&&typ!=0){
             params.put("typ",typ);
             hql.append(" AND typ=:typ ");
@@ -43,9 +44,11 @@ public class CompanyServiceImpl implements CompanyServiceI {
     }
 
     @Override
-    public long count(Byte typ,String name) {
-        StringBuilder hql = new StringBuilder("select count(*) from Company WHERE 1=1");
-        Map<String,Object> params = new HashMap<>();
+    public long count(Map<String,Object> params, Integer dept_id) {
+        StringBuilder hql = new StringBuilder("select count(*) from Company WHERE dept_id=:dept_id");
+        Byte typ = (Byte) params.get("typ");
+        Byte name = (Byte) params.get("name");
+        params.put("dept_id",dept_id);
         if(typ!=null&&typ!=0){
             params.put("typ",typ);
             hql.append(" AND typ=:typ ");
@@ -59,24 +62,27 @@ public class CompanyServiceImpl implements CompanyServiceI {
     }
 
     @Override
-    public int add(Company company) {
+    public Company add(Company company, Integer dept_id) {
+        company.setDept_id(dept_id);
         companyDao.save(company);
-        return 1;
+        return company;
     }
 
     @Override
-    public int del(List<Integer> ids) {
+    public int del(List<Integer> ids, Integer dept_id) {
         if(ids==null||ids.size()<1){
             return 0;
         }
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("ids", ids);
-        return companyDao.executeHql("delete from Company where id in (:ids)", params);
+        params.put("dept_id",dept_id);
+        return companyDao.executeHql("delete from Company where id in (:ids) and dept_id=:dept_id", params);
     }
 
     @Override
-    public int update(Company company) {
+    public Company update(Company company, Integer dept_id) {
+        company.setDept_id(dept_id);
         companyDao.update(company);
-        return 1;
+        return company;
     }
 }

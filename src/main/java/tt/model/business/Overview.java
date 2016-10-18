@@ -5,7 +5,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "b_overview")
-public class Overview {
+public class Overview extends BaseModel {
     private Integer id;
     private String text;
     private Byte level;

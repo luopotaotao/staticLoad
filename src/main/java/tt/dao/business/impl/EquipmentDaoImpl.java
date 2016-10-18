@@ -16,11 +16,11 @@ import java.util.List;
 @Repository("equipmentDao")
 public class EquipmentDaoImpl extends BaseDaoImpl<Equipment> implements EquipmentDaoI {
     @Override
-    public List<Equipment> list(Integer institution_id, String name) {
-        Criteria criteria = getCriteria()
+    public List<Equipment> list(Integer institution_id, String name,Integer dept_id) {
+        Criteria criteria = getCriteria(null,null,dept_id)
                 .add(Restrictions.eq("institution_id",institution_id)).addOrder(Order.asc("id"));
         if(name!=null&&!name.trim().isEmpty()){
-            criteria.add(Restrictions.like("name","%"+name+"%"));
+            criteria.add(like("name",name));
         }
 //        if(page!=null&&pageSize!=null){
 //            criteria.setFirstResult((page-1)*pageSize);

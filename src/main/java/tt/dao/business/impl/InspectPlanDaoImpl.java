@@ -14,8 +14,8 @@ import java.util.List;
 @Repository("inspectPlanDao")
 public class InspectPlanDaoImpl extends BaseDaoImpl<InspectPlan> implements InspectPlanDaoI {
     @Override
-    public List<InspectPlan> list(String name, Integer page, Integer pageSize) {
-        Criteria c = getCriteria(page,pageSize);
+    public List<InspectPlan> list(String name, Integer page, Integer pageSize,Integer dept_id) {
+        Criteria c = getCriteria(page,pageSize,dept_id);
         if(!isEmpty(name)){
             c.add(like("name",name));
         }

@@ -2,6 +2,7 @@
 <%
     HttpSession s = request.getSession();
     s.setMaxInactiveInterval(300);
+    String dept_id = request.getParameter("dept_id");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -30,13 +31,14 @@
                 var name = $("#name").val();
                 var pwd = $("#pwd").val();
                 var verifycode = $("#verifycode").val();
+                var dept_id = $("#dept_id").val();
                 if (true) {//validate(name,pwd,verifycode)) {
                     pwd = $("#pwd").val();
                     $.ajax({
                         url: "${pageContext.request.contextPath}/userController/login.action",
                         dataType: 'json',
                         type: 'post',
-                        data: {name: name, pwd: pwd, verifycode: verifycode}
+                        data: {name: name, pwd: pwd, verifycode: verifycode,'dept.id':'<%=dept_id%>'}
                     }).success(function (r) {
 
                         try {
@@ -235,6 +237,10 @@
                 <tr>
                     <td align="right">密&nbsp;&nbsp;&nbsp;码：</td>
                     <td><input style="width: 180px" type="password" name="pwd" id="pwd" class="txt" tabindex="2"></td>
+                </tr>
+                <tr>
+                    <td align="right">所属公司：</td>
+                    <td><input style="width: 180px" type="text" name="dept.id" id="dept_id" class="txt" value="<%=dept_id%>"></td>
                 </tr>
                 <tr>
                     <td align="right">验证码：</td>

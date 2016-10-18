@@ -19,36 +19,40 @@ public class InspectMethodServiceImpl implements InspectMethodServiceI {
     private InspectMethodDaoI inspectMethodDao;
 
     @Override
-    public InspectMethod get(int id) {
-        return inspectMethodDao.get(InspectMethod.class, id);
+    public InspectMethod get(Integer id, Integer dept_id) {
+        return inspectMethodDao.getById(id,dept_id);
     }
 
     @Override
-    public List<InspectMethod> list(Integer inspect_item_id,String name) {
-
-        List<InspectMethod> ret = inspectMethodDao.list(inspect_item_id,name);
+    public List<InspectMethod> list(Map<String,Object> params,Integer page,Integer pageSize, Integer dept_id) {
+        Integer inspect_item_id = (Integer) params.get("inspect_item_id");
+        String name = (String) params.get("name");
+        List<InspectMethod> ret = inspectMethodDao.list(inspect_item_id,name,dept_id);
         return ret;
     }
 
     @Override
-    public int add(InspectMethod inspectMethod) {
+    public InspectMethod add(InspectMethod inspectMethod, Integer dept_id) {
+        inspectMethod.setDept_id(dept_id);
         inspectMethodDao.save(inspectMethod);
-        return 1;
+        return inspectMethod;
     }
 
     @Override
-    public int del(List<Integer> ids) {
+    public int del(List<Integer> ids, Integer dept_id) {
         if(ids==null||ids.size()<1){
             return 0;
         }
         Map<String, Object> params = new HashMap<>();
+        params.put("dept_id",dept_id);
         params.put("ids", ids);
-        return inspectMethodDao.executeHql("delete from InspectMethod where id in (:ids)", params);
+        return inspectMethodDao.executeHql("delete from InspectMethod where id in (:ids) and dept_id=:dept_id", params);
     }
 
     @Override
-    public int update(InspectMethod inspectMethod) {
+    public InspectMethod update(InspectMethod inspectMethod, Integer dept_id) {
+        inspectMethod.setDept_id(dept_id);
         inspectMethodDao.update(inspectMethod);
-        return 1;
+        return inspectMethod;
     }
 }

@@ -7,10 +7,7 @@ import java.util.List;
 /**
  * Created by tt on 2016/10/2.
  */
-public interface InspectMethodServiceI {
-    InspectMethod get(int id);
-    List<InspectMethod> list(Integer inspect_item_id,String name);
-    int add(InspectMethod inspectMethod);
-    int del(List<Integer> ids);
-    int update(InspectMethod inspectMethod);
+public interface InspectMethodServiceI extends BaseService<InspectMethod> {
+//    List<InspectMethod> list(Integer inspect_item_id,String name,Integer dept_id);
+//TODO 额外参数
 }

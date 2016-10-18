@@ -8,13 +8,14 @@ import java.util.List;
 
 @Entity
 @Table(name = "b_area")
-public class Area {
+public class Area extends BaseModel{
     private Integer id;
     private String text;
     private Byte level;
     private Area parent;
     private String note;
     private List<Area> children = new LinkedList<>();
+
     @Id
     @Column(name = "id")
     @GeneratedValue

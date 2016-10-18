@@ -34,14 +34,14 @@ public class ModuleBasicAreaController extends BaseController<Area> {
     @RequestMapping(value = "get/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Area get(@PathVariable int id) {
-        return areaService.load(id);
+        return areaService.get(id,getDeptId());
     }
 
     @RequestMapping(value = "query/{id}",method = RequestMethod.GET)
     @ResponseBody
     public JSONArray list(@PathVariable Integer id) {
         JSONArray ret = new JSONArray();
-        Area area = areaService.load(id);
+        Area area = areaService.get(id,getDeptId());
         ret.add(area);
 
         return ret;
@@ -49,26 +49,28 @@ public class ModuleBasicAreaController extends BaseController<Area> {
     @RequestMapping(value = "area/{pid}",method = RequestMethod.GET)
     @ResponseBody
     public List<Map<String,Object>> queryCity(@PathVariable Integer pid){
-        return areaService.queryAreaByPid(pid);
+        return areaService.queryAreaByPid(pid,getDeptId());
     }
 
 //    @RequestMapping(value = "post", method = RequestMethod.POST)
     @RequestMapping(value = "post")
     @ResponseBody
     public Area add(@ModelAttribute() Area area) {
-        return areaService.add(area);
+        setDeptId(area);
+        return areaService.add(area,getDeptId());
     }
 
     @RequestMapping(value = "put", method = RequestMethod.POST)
     @ResponseBody
     public Area update(@ModelAttribute Area area) {
-        return areaService.update(area);
+        setDeptId(area);
+        return areaService.update(area,getDeptId());
     }
 
     @RequestMapping(value = "delete/{id}", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject delete(@PathVariable Integer id) {
-        int ret = areaService.del(id);
+        int ret = areaService.del(id,getDeptId());
         return flagResponse(ret);
     }
 }

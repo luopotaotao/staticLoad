@@ -7,17 +7,7 @@ import java.util.List;
 /**
  * Created by tt on 2016/9/29.
  */
-public interface ProjectServiceI{
-    Project get(int id);
-
-    List<Project> list(Integer area_id, String name, Integer page, Integer pageSize);
-    List<Project> list(Integer area_id);
-
-    long count(Integer area_id, String name);
-
-    int add(Project project);
-
-    int update(Project project);
-
-    int del(List<Integer> list);
+public interface ProjectServiceI extends BaseService<Project>{
+    List<Project> list(Integer area_id, Integer dept_id);
+// TODO 额外参数
 }

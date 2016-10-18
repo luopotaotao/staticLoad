@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "b_area")
-public class AreaObj {
+public class AreaObj extends BaseModel{
     private Integer id;
     private String text;
     @Id

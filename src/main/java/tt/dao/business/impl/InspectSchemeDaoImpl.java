@@ -15,8 +15,8 @@ import java.util.List;
 @Repository("inspectSchemeDao")
 public class InspectSchemeDaoImpl extends BaseDaoImpl<InspectScheme> implements InspectSchemeDaoI {
     @Override
-    public List<InspectScheme> list(String name, Integer page, Integer pageSize) {
-        Criteria c = getCriteria(page,pageSize);
+    public List<InspectScheme> list(String name, Integer page, Integer pageSize,Integer dept_id) {
+        Criteria c = getCriteria(page,pageSize,dept_id);
         if(!isEmpty(name)){
             c.add(like("name",name));
         }

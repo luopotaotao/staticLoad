@@ -15,6 +15,7 @@ import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by tt on 2016/10/2.
@@ -61,7 +62,7 @@ public class ModuleInspectPlanController extends BaseController<InspectPlan> {
     @RequestMapping(value = "get/{id}", method = RequestMethod.GET)
     @ResponseBody
     public InspectPlan get(@PathVariable int id) {
-        return inspectPlanService.get(id);
+        return inspectPlanService.get(id,getDeptId());
     }
 
     @RequestMapping(value = "query", method = RequestMethod.GET)
@@ -76,8 +77,9 @@ public class ModuleInspectPlanController extends BaseController<InspectPlan> {
                 e.printStackTrace();
             }
         }
-        List<InspectPlan> list = inspectPlanService.list(name, page, pageSize);
-        long count = inspectPlanService.count(name);
+        Map<String,Object> params = createHashMap("name",name);
+        List<InspectPlan> list = inspectPlanService.list(params, page, pageSize,getDeptId());
+        long count = inspectPlanService.count(params,getDeptId());
         return listResponse(count, list);
     }
 
@@ -85,15 +87,15 @@ public class ModuleInspectPlanController extends BaseController<InspectPlan> {
     @RequestMapping(value = "post")
     @ResponseBody
     public JSONObject add(@ModelAttribute InspectPlan plan, BindingResult result) {
-        int ret = inspectPlanService.add(plan);
-        return flagResponse(1);
+        inspectPlanService.add(plan,getDeptId());
+        return flagResponse(plan.getId()>0);
     }
 
     @RequestMapping(value = "put", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject update(@ModelAttribute InspectPlan plan) {
-        int ret = inspectPlanService.update(plan);
-        return flagResponse(ret);
+        inspectPlanService.update(plan,getDeptId());
+        return flagResponse(plan.getId()>0);
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)
@@ -101,7 +103,7 @@ public class ModuleInspectPlanController extends BaseController<InspectPlan> {
     public JSONObject delete(@RequestParam(value = "ids[]") int[] ids) {
         List<Integer> list = new LinkedList<>();
         Arrays.stream(ids).forEach(id -> list.add(id));
-        int ret = inspectPlanService.del(list);
+        int ret = inspectPlanService.del(list,getDeptId());
         return flagResponse(ret);
     }
 }

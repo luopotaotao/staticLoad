@@ -8,14 +8,7 @@ import java.util.Map;
 /**
  * Created by tt on 2016/9/29.
  */
-public interface AreaServiceI {
-    Area load(Integer id);
-
-    Area add(Area area);
-
-    Area update(Area area);
-
-    int del(Integer id);
-
-    List<Map<String,Object>> queryAreaByPid(Integer pid);
+public interface AreaServiceI extends BaseService<Area>{
+    int del(Integer id,Integer dept_id);
+    List<Map<String,Object>> queryAreaByPid(Integer pid,Integer dept_id);
 }

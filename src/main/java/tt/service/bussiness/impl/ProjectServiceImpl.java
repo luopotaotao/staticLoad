@@ -15,6 +15,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.bouncycastle.asn1.x500.style.RFC4519Style.name;
+
 /**
  * Created by tt on 2016/9/29.
  */
@@ -27,17 +29,18 @@ public class ProjectServiceImpl implements ProjectServiceI {
     @Autowired
     private CompanyDaoI companyDao;
     @Override
-    public Project get(int id) {
-        return projectDao.get(Project.class, id);
+    public Project get(Integer id, Integer dept_id) {
+        return projectDao.getById(id,dept_id);
     }
 
 
     @Override
-    public List<Project> list(Integer area_id, String name, Integer page, Integer pageSize) {
-        StringBuilder hql = new StringBuilder("from Project WHERE 1=1");
-        Map<String, Object> params = new HashMap<>();
+    public List<Project> list(Map<String,Object> params, Integer page, Integer pageSize, Integer dept_id) {
+        params.put("dept_id",dept_id);
+        Integer area_id = (Integer) params.get("area_id");
+        String name = (String) params.get("name");
+        StringBuilder hql = new StringBuilder("from Project WHERE dept_id=:dept_id");
         if (area_id != null && area_id != 0) {
-            params.put("area_id", area_id);
             hql.append(" AND (province_id=:area_id or city_id in (select id from Area where pid=:area_id))");
         }
         if (name != null) {
@@ -50,9 +53,10 @@ public class ProjectServiceImpl implements ProjectServiceI {
     }
 
     @Override
-    public List<Project> list(Integer area_id) {
-        StringBuilder hql = new StringBuilder("from Project WHERE 1=1");
+    public List<Project> list(Integer area_id, Integer dept_id) {
+        StringBuilder hql = new StringBuilder("from Project WHERE dept_id=:dept_id");
         Map<String, Object> params = new HashMap<>();
+        params.put("dept_id",dept_id);
         if (area_id != null && area_id != 0) {
             params.put("area_id", area_id);
             hql.append(" AND (province_id=:area_id or city_id=:area_id)");
@@ -60,30 +64,32 @@ public class ProjectServiceImpl implements ProjectServiceI {
         return projectDao.find(hql.toString(),params);
     }
 
+    //TODO delete?
     @Override
-    public long count(Integer area_id, String name) {
+    public long count(Map<String,Object> params, Integer dept_id) {
         return 0;
     }
 
     @Override
-    public int add(Project project) {
+    public Project add(Project project, Integer dept_id) {
         resetProjectComponents(project);
         projectDao.save(project);
-        return project.getId();
+        return project;
     }
 
     @Override
-    public int update(Project project) {
+    public Project update(Project project, Integer dept_id) {
         resetProjectComponents(project);
         projectDao.update(project);
-        return 1;
+        return project;
     }
 
     @Override
-    public int del(List<Integer> list) {
+    public int del(List<Integer> list, Integer dept_id) {
         Map<String, Object> params = new LinkedHashMap<>();
+        params.put("dept_id",dept_id);
         params.put("ids", list);
-        return projectDao.executeHql("delete from Project where id in (:ids)", params);
+        return projectDao.executeHql("delete from Project where id in (:ids) and dept_id=:dept_id", params);
     }
 
     private void resetProjectComponents(Project project){
