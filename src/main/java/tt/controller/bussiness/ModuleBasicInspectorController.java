@@ -27,7 +27,7 @@ public class ModuleBasicInspectorController extends BaseController<Inspector> {
 
     @RequestMapping("index/{institution_id}")
     public String index(@PathVariable Integer institution_id,Model model){
-        model.addAttribute("baseUrl","/moduleBasicInspectorController");
+        model.addAttribute("baseUrl","moduleBasicInspectorController");
         model.addAttribute("institution_id",institution_id);
         return "business/module_basic/institution_inspector";
     }

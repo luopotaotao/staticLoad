@@ -28,7 +28,7 @@ public class ModuleBasicInspectItemController extends BaseController<InspectItem
 
     @RequestMapping("index")
     public String index(Model model) {
-        model.addAttribute("baseUrl", "/moduleBasicInspectItemController");
+        model.addAttribute("baseUrl", "moduleBasicInspectItemController");
         return "business/module_basic/inspect_item";
     }
 

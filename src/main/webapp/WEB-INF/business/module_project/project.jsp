@@ -30,14 +30,14 @@
             <select id="project_province_id" class="easyui-combobox" name="province.id" style="width:45%"
                     data-options="label:'所在省份:',
             labelAlign:'right',
-            url:'/moduleBasicAreaController/area/0.action',
+            url:'${pageContext.request.contextPath}/moduleBasicAreaController/area/0.action',
             method:'get',
             valueField: 'id',
             textField: 'text',
             onSelect:function(rec){
                 var $city = $('#project_city_id');
                 $city.combobox('clear');
-                $city.combobox('reload','/moduleBasicAreaController/area/'+rec.id+'.action');
+                $city.combobox('reload','${pageContext.request.contextPath}/moduleBasicAreaController/area/'+rec.id+'.action');
             }
             ">
 
@@ -62,16 +62,16 @@
             <input id="project_select_coordinate" class="easyui-textbox" style="width:45%;height:32px;">
             <input id="select_constructor" class="easyui-textbox select" name="constructor.id" style="width:45%"
                    data-options="label:'建设单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="/moduleBasicCompanyController/partial.action">
+                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial.action">
         </div>
         <div style="margin-bottom:20px">
             <input id="project_select_builder" class="easyui-textbox select" name="builder.id" style="width:45%"
                    data-options="label:'施工单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="/moduleBasicCompanyController/partial.action">
+                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial.action">
 
             <input id="project_select_inspector" class="easyui-textbox select" name="inspector.id" style="width:45%"
                    data-options="label:'监理单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="/moduleBasicCompanyController/partial.action">
+                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial.action">
         </div>
         <div style="margin-bottom:20px">
             <input class="easyui-textbox" name="note" style="width:90%"
@@ -152,7 +152,7 @@
     $(function () {
         var baseUrl = '/';
         $('#project_dg').datagrid({
-            url: '${baseUrl}/query.action',
+            url: '${pageContext.request.contextPath}/${baseUrl}/query.action',
             method: 'get',
             iconCls: 'icon-save',
 //            width: 700,
@@ -341,7 +341,7 @@
                 title: '请选择',
                 closed: false,
                 cache: false,
-//                href: '/moduleProjectManageController/selectCoordinate.action',
+//                href: '${pageContext.request.contextPath}/moduleProjectManageController/selectCoordinate.action',
                 modal: true,
                 buttons: [{
                     text: '确定',
@@ -443,7 +443,7 @@
 
         function remove(ids) {
             $.ajax({
-                url: '${baseUrl}/delete.action',
+                url: '${pageContext.request.contextPath}/${baseUrl}/delete.action',
                 data: {ids: ids},
                 type: 'post',
                 dataType: 'json'

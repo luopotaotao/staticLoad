@@ -27,7 +27,7 @@ public class ModuleBasicInspectMethodController extends BaseController<InspectMe
 
     @RequestMapping("index/{inspect_item_id}")
     public String index(@PathVariable Integer inspect_item_id, Model model) {
-        model.addAttribute("baseUrl", "/moduleBasicInspectMethodController");
+        model.addAttribute("baseUrl", "moduleBasicInspectMethodController");
         model.addAttribute("inspect_item_id", inspect_item_id);
         return "business/module_basic/inspect_method";
     }

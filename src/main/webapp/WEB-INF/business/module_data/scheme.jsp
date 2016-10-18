@@ -27,7 +27,7 @@
         <div style="margin-bottom:20px">
             <input class="easyui-textbox select" name="project.id" style="width:100%"
                    data-options="label:'工程名称:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="/moduleInspectSchemeController/selectProject.action">
+                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleInspectSchemeController/selectProject.action">
         </div>
         <div style="margin-bottom:20px">
             <select class="easyui-combobox" data-options="editable:false,labelAlign:'right'" name="basement_lev"
@@ -54,7 +54,7 @@
         <div style="margin-bottom:20px">
             <input class="easyui-textbox select" name="institution.id" style="width:100%"
                    data-options="label:'检测单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="/moduleInspectSchemeController/selectInstitution.action">
+                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleInspectSchemeController/selectInstitution.action">
         </div>
         <div style="margin-bottom:20px">
             <input class="easyui-textbox" name="code" style="width:100%"
@@ -69,7 +69,7 @@
                 <select id="inspectItem_id" class="easyui-combobox" name="inspectItem.id" style="width:100%"
                         data-options="label:'检测项目:',
             labelAlign:'right',
-            url:'/moduleBasicInspectItemController/comboList.action',
+            url:'${pageContext.request.contextPath}/moduleBasicInspectItemController/comboList.action',
             method:'get',
             valueField: 'id',
             textField: 'name'
@@ -85,7 +85,7 @@
     $(function () {
         var baseUrl = '/';
         $('#dg').datagrid({
-            url: '${baseUrl}/query.action',
+            url: '${pageContext.request.contextPath}/${baseUrl}/query.action',
             method: 'get',
             iconCls: 'icon-save',
 //            width: 700,
@@ -319,7 +319,7 @@
 
         function remove(ids) {
             $.ajax({
-                url: '${baseUrl}/delete.action',
+                url: '${pageContext.request.contextPath}/${baseUrl}/delete.action',
                 data: {ids: ids},
                 type: 'post',
                 dataType: 'json'

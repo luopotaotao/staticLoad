@@ -51,7 +51,7 @@
     $(function () {
         var baseUrl = '/';
         $('#dg').datagrid({
-            url: '${baseUrl}/query.action',
+            url: '../${baseUrl}/query.action',
             method: 'get',
             iconCls: 'icon-save',
 //            width: 700,
@@ -222,7 +222,7 @@
 
         function remove(ids) {
             $.ajax({
-                url: '${baseUrl}/delete.action',
+                url: '../${baseUrl}/delete.action',
                 data: {ids: ids},
                 type: 'post',
                 dataType: 'json'

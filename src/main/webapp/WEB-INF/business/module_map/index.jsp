@@ -23,14 +23,14 @@
             "children": [{
                 "id": 11,
                 "text": "单位管理",
-                "url": "/moduleBasicCompanyController/index.action"
+                "url": "${pageContext.request.contextPath}/moduleBasicCompanyController/index.action"
             }, {
                 "id": 12,
                 "text": "检测信息",
                 "children": [{
                     "id": 121,
                     "text": "检测机构",
-                    "url": "/moduleBasicInstitutionController/index.action"
+                    "url": "${pageContext.request.contextPath}/moduleBasicInstitutionController/index.action"
                 }, {
                     "id": 122,
                     "text": "检测项目",

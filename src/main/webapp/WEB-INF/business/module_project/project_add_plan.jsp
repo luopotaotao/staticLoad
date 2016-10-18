@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div style="width:100%;max-width:600px;padding:30px 60px;">
     <input id="project_add_plan_institution_id" type="hidden" name="institution.id">
-    <form class="easyui-form" method="post" data-options="novalidate:true" action="/moduleInspectPlanController/post.action">
+    <form class="easyui-form" method="post" data-options="novalidate:true" action="${pageContext.request.contextPath}/moduleInspectPlanController/post.action">
         <div style="margin-bottom:20px;display: none">
             <input class="easyui-textbox" name="id" style="display: none" data-options="label:'编号:'">
         </div>
@@ -62,7 +62,7 @@
             onClickButton: function () {
                 var _this = this;
                 var institution_id = $('#project_add_plan_institution_id').val();
-                var  url="/moduleInspectPlanController/selectEquipment/"+institution_id+'.action';
+                var  url="${pageContext.request.contextPath}/moduleInspectPlanController/selectEquipment/"+institution_id+'.action';
                 selectChild(url, function (data) {
                     var names = [];
                     var ids = [];
@@ -79,7 +79,7 @@
             onClickButton: function () {
                 var _this = this;
                 var institution_id = $('#project_add_plan_institution_id').val();
-                var  url="/moduleInspectPlanController/selectInspector/"+institution_id+'.action';
+                var  url="${pageContext.request.contextPath}/moduleInspectPlanController/selectInspector/"+institution_id+'.action';
                 selectChild(url, function (data) {
                     var names = [];
                     var ids = [];

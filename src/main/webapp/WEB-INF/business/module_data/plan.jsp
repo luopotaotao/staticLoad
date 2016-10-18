@@ -37,7 +37,7 @@
         <div style="margin-bottom:20px">
             <input class="easyui-textbox select" name="equipment.id" style="width:100%"
                    data-options="label:'检测设备:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="/moduleInspectSchemeController/selectProject.action">
+                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleInspectSchemeController/selectProject.action">
         </div>
         <div style="margin-bottom:20px">
             <input name="start_time" style="width:100%" type="text" class="easyui-datebox"
@@ -81,7 +81,7 @@
     $(function () {
         var baseUrl = '/';
         $('#dg').datagrid({
-            url: '${baseUrl}/query.action',
+            url: '${pageContext.request.contextPath}/${baseUrl}/query.action',
             method: 'get',
             iconCls: 'icon-save',
 //            width: 700,
@@ -252,8 +252,8 @@
                     $(_this).textbox('setValue', item.id);
                     $(_this).textbox('setText', item.name);
                     console.log(JSON.stringify(item));
-                    var url_method = '/moduleBasicInspectMethodController/'+item.inspectItem.id+'/comboList.action';
-                    var url_inspector = '/moduleInspectPlanController/selectInspector/'+item.inspectItem.id+'.action';
+                    var url_method = '${pageContext.request.contextPath}/moduleBasicInspectMethodController/'+item.inspectItem.id+'/comboList.action';
+                    var url_inspector = '${pageContext.request.contextPath}/moduleInspectPlanController/selectInspector/'+item.inspectItem.id+'.action';
                     $('#inspect_method').combobox('reload',url);
                     $('input.select-inspector').attr('url',url_inspector);
                 });
@@ -352,7 +352,7 @@
 
         function remove(ids) {
             $.ajax({
-                url: '${baseUrl}/delete.action',
+                url: '${pageContext.request.contextPath}/${baseUrl}/delete.action',
                 data: {ids: ids},
                 type: 'post',
                 dataType: 'json'
@@ -414,7 +414,7 @@
         });
     }
     function showData(plan_id) {
-        var url = '/moduleInspectPlanController/showData/'+plan_id+'.action';
+        var url = '${pageContext.request.contextPath}/moduleInspectPlanController/showData/'+plan_id+'.action';
         var $iframe = $('#data_details_iframe');
         $iframe.attr('src',url);
         $('#data_details').dialog({
@@ -426,11 +426,11 @@
         });
     }
     function linkData(plan_id) {
-        var url = '/moduleInspectPlanController/selectData/'+plan_id+'.action';
+        var url = '${pageContext.request.contextPath}/moduleInspectPlanController/selectData/'+plan_id+'.action';
         selectChild(url, function (data) {
             console.log(JSON.stringify(data));
             $.ajax({
-                url:'/moduleInspectDataController/linkData/'+plan_id+'.action',
+                url:'${pageContext.request.contextPath}/moduleInspectDataController/linkData/'+plan_id+'.action',
                 type:'post',
                 dataType:'json',
                 data:JSON.stringify(data),

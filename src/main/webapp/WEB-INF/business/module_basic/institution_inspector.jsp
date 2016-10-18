@@ -27,7 +27,7 @@
             handler: $.closeInspectorEditDialog
             }]
         ">
-        <form id="ff_inspector" class="easyui-form" method="post" data-options="novalidate:true" action="${baseUrl}/post.action">
+        <form id="ff_inspector" class="easyui-form" method="post" data-options="novalidate:true" action="../${baseUrl}/post.action">
             <div style="margin-bottom:20px;display: none">
                 <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'企业编号:',required:true">
             </div>
@@ -55,9 +55,9 @@
     <script type="text/javascript">
         $(function () {
             var institution_id = '${institution_id}';
-            var baseUrl = '${baseUrl}';
+            var baseUrl = '${pageContext.request.contextPath}/${baseUrl}';
             $('#dg_inspector').datagrid({
-                url: '${baseUrl}/${institution_id}/query.action',
+                url: '../${baseUrl}/${institution_id}/query.action',
                 method: 'get',
 //                title: '人员管理',
 //                iconCls: 'icon-save',
@@ -184,9 +184,9 @@
                 var $ff = $('#ff_inspector');
                 if (data) {
                     $ff.form('load', data);
-                    $ff.form({url: '${baseUrl}/put.action'});
+                    $ff.form({url: '../${baseUrl}/put.action'});
                 } else {
-                    $ff.form({url: '${baseUrl}/post.action'});
+                    $ff.form({url: '../${baseUrl}/post.action'});
                 }
                 $('#inspector_institution_id').textbox('setValue', institution_id);
                 $('#dlg_inspector_edit').dialog('open');
@@ -231,7 +231,7 @@
             $.closeInspectorEditDialog = closeEditDialog;
             function remove(ids) {
                 $.ajax({
-                    url: '${baseUrl}/delete.action',
+                    url: '../${baseUrl}/delete.action',
                     data: {ids: ids},
                     type: 'post',
                     dataType: 'json'

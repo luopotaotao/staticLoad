@@ -23,17 +23,17 @@
 <script>
     $(function () {
         var selectedProject = ${selectedProject};
-        var baseUrl = '${baseUrl}';
+        var baseUrl = '${pageContext.request.contextPath}/${baseUrl}';
         var tree_data = [{
             "id": 1,
             "text": "基础信息",
-            "url": '/moduleOverviewController/index.action'
+            "url": '${pageContext.request.contextPath}/moduleOverviewController/index.action'
         }];
 
         initUI();
         function initUI() {
             $('#tree_menu').tree({
-                url: '/moduleOverviewController/queryOverviews.action',
+                url: '${pageContext.request.contextPath}/moduleOverviewController/queryOverviews.action',
                 method: 'get',
                 textField:'name',
                 animate: true,
@@ -57,7 +57,7 @@
         }
 
         function getProjectsAndShow(area_id) {
-            var url = '/moduleOverviewController/' + area_id + '/queryProjects.action';
+            var url = '${pageContext.request.contextPath}/moduleOverviewController/' + area_id + '/queryProjects.action';
             $.getJSON(url, function (ret) {
                 showMarkers(ret,function (marker) {
                     var template = '<p><a href="javascript:top.openModule(\'${pageContext.request.contextPath}/moduleProjectController/index.action?project_id={id}\');">工程名称:{name}</a></p><p>工程编码:{code}</p><p>地址:{city}{address}</p>';

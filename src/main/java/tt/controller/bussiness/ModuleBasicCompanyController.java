@@ -25,8 +25,7 @@ public class ModuleBasicCompanyController extends BaseController<Company> {
 
     @RequestMapping("index")
     public String index(Model model){
-        System.out.println("*********************************");
-        model.addAttribute("baseUrl","/moduleBasicCompanyController");
+        model.addAttribute("baseUrl","moduleBasicCompanyController");
         return "business/module_basic/company";
     }
     @RequestMapping("partial")

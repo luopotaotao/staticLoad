@@ -27,7 +27,7 @@ public class ModuleBasicEquipmentController extends BaseController<Equipment> {
 
     @RequestMapping("index/{institution_id}")
     public String index(@PathVariable Integer institution_id,Model model){
-        model.addAttribute("baseUrl","/moduleBasicEquipmentController");
+        model.addAttribute("baseUrl","moduleBasicEquipmentController");
         model.addAttribute("institution_id",institution_id);
         return "business/module_basic/institution_equipment";
     }

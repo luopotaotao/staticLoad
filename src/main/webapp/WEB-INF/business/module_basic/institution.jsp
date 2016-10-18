@@ -57,7 +57,7 @@
     $(function () {
         var baseUrl = '/';
         $('#dg').datagrid({
-            url: '${baseUrl}/query.action',
+            url: '../${baseUrl}/query.action',
             method: 'get',
             iconCls: 'icon-save',
 //            width: 700,
@@ -249,7 +249,7 @@
 
         function remove(ids) {
             $.ajax({
-                url: '${baseUrl}/delete.action',
+                url: '../${baseUrl}/delete.action',
                 data: {ids: ids},
                 type: 'post',
                 dataType: 'json'
@@ -282,11 +282,11 @@
 
 
     function manageInspectors(id) {
-        var href = '/moduleBasicInspectorController/index/'+id+'.action';
+        var href = '../moduleBasicInspectorController/index/'+id+'.action';
         openDialog('人员管理',href);
     }
     function manageEquipments(id){
-        var href = '/moduleBasicEquipmentController/index/'+id+'.action';
+        var href = '../moduleBasicEquipmentController/index/'+id+'.action';
         openDialog('设备管理',href);
     }
 

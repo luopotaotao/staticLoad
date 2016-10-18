@@ -28,7 +28,7 @@ public class ModuleBasicInstitutionController extends BaseController<Institution
 
     @RequestMapping("index")
     public String index(Model model){
-        model.addAttribute("baseUrl","/moduleBasicInstitutionController");
+        model.addAttribute("baseUrl","moduleBasicInstitutionController");
         return "business/module_basic/institution";
     }
     @RequestMapping("{institution_id}/personal")

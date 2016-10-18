@@ -19,15 +19,15 @@
         var tree_data = [{
             "id": 1,
             "text": "检测方案",
-            url: '/moduleInspectSchemeController/index.action',
+            url: '${pageContext.request.contextPath}/moduleInspectSchemeController/index.action',
         }, {
             "id": 1,
             "text": "检测计划",
-            url: '/moduleInspectPlanController/index.action',
+            url: '${pageContext.request.contextPath}/moduleInspectPlanController/index.action',
         }, {
             "id": 1,
             "text": "原始数据",
-            url: '/moduleInspectDataSourceController/index.action',
+            url: '${pageContext.request.contextPath}/moduleInspectDataSourceController/index.action',
         }];
         initUI();
         function initUI() {

@@ -108,36 +108,36 @@ public class SecurityInterceptor implements HandlerInterceptor {
             throws Exception {
 
         // HTTP头设置 Referer过滤
-        String referer = request.getHeader("referer"); // REFRESH
-        // 跨帧脚本编制防御
-        response.addHeader("x-frame-options", "SAMEORIGIN");
-        String host = request.getHeader("host"); // HOST
-        LoadConfigFile loadconfigfile = LoadConfigFile.getInstance();
-        boolean b = false;
-        boolean bb = false;
-        String[] hosts = loadconfigfile.getValue("referer").split(";");
-        for (int i = 0; i < hosts.length; i++) {
-            b = host != null && host.indexOf(hosts[i]) >= 0;
-            if (b) {
-                break;
-            }
-        }
-        for (int i = 0; i < hosts.length; i++) {
-            bb = referer != null && referer.indexOf(hosts[i]) >= 0;
-            if (bb) {
-                break;
-            }
-        }
-        if (host != null && !b) {
-            logger.info("host为" + host);
-            request.getRequestDispatcher("/WEB-INF/error/csrferror.jsp").forward(request, response);
-            return false;
-        }
-        if (referer != null && !bb) {
-            logger.info("受到来自[" + referer + "]的CSRF攻击");
-            request.getRequestDispatcher("/WEB-INF/error/csrferror.jsp").forward(request, response);
-            return false;
-        }
+//        String referer = request.getHeader("referer"); // REFRESH
+//        // 跨帧脚本编制防御
+//        response.addHeader("x-frame-options", "SAMEORIGIN");
+//        String host = request.getHeader("host"); // HOST
+//        LoadConfigFile loadconfigfile = LoadConfigFile.getInstance();
+//        boolean b = false;
+//        boolean bb = false;
+//        String[] hosts = loadconfigfile.getValue("referer").split(";");
+//        for (int i = 0; i < hosts.length; i++) {
+//            b = host != null && host.indexOf(hosts[i]) >= 0;
+//            if (b) {
+//                break;
+//            }
+//        }
+//        for (int i = 0; i < hosts.length; i++) {
+//            bb = referer != null && referer.indexOf(hosts[i]) >= 0;
+//            if (bb) {
+//                break;
+//            }
+//        }
+//        if (host != null && !b) {
+//            logger.info("host为" + host);
+//            request.getRequestDispatcher("/WEB-INF/error/csrferror.jsp").forward(request, response);
+//            return false;
+//        }
+//        if (referer != null && !bb) {
+//            logger.info("受到来自[" + referer + "]的CSRF攻击");
+//            request.getRequestDispatcher("/WEB-INF/error/csrferror.jsp").forward(request, response);
+//            return false;
+//        }
 
         String requestUri = request.getRequestURI();
         String contextPath = request.getContextPath();

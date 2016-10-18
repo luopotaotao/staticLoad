@@ -27,7 +27,7 @@
             handler: $.closeMethodEditDialog
             }]
         ">
-        <form id="ff_method" class="easyui-form" method="post" data-options="novalidate:true" action="${baseUrl}/post.action">
+        <form id="ff_method" class="easyui-form" method="post" data-options="novalidate:true" action="../${baseUrl}/post.action">
             <div style="margin-bottom:20px;display: none">
                 <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'id:',required:true">
             </div>
@@ -46,7 +46,7 @@
             var inspect_item_id = '${inspect_item_id}';
             var baseUrl = '${baseUrl}';
             $('#dg_method').datagrid({
-                url: '${baseUrl}/${inspect_item_id}/query.action',
+                url: '../${baseUrl}/${inspect_item_id}/query.action',
                 method: 'get',
 //                title: '设备管理',
 //                iconCls: 'icon-save',
@@ -167,9 +167,9 @@
                 var $ff = $('#ff_method');
                 if (data) {
                     $ff.form('load', data);
-                    $ff.form({url: '${baseUrl}/put.action'});
+                    $ff.form({url: '../${baseUrl}/put.action'});
                 } else {
-                    $ff.form({url: '${baseUrl}/post.action'});
+                    $ff.form({url: '../${baseUrl}/post.action'});
                 }
                 $('#inspect_item_id').textbox('setValue', inspect_item_id);
                 $('#dlg_method_edit').dialog('open');
@@ -214,7 +214,7 @@
             $.closeMethodEditDialog = closeEditDialog;
             function remove(ids) {
                 $.ajax({
-                    url: '${baseUrl}/delete.action',
+                    url: '../${baseUrl}/delete.action',
                     data: {ids: ids},
                     type: 'post',
                     dataType: 'json'

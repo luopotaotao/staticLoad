@@ -54,7 +54,7 @@
             init();
             function init() {
                 $('#plan_data_tree_menu').tree({
-                    url: '/moduleInspectDataController/linkedKeys/${plan_id}.action',
+                    url: '${pageContext.request.contextPath}/moduleInspectDataController/linkedKeys/${plan_id}.action',
                     method: 'get',
                     formatter: function (node) {
                         return node.stzh;
@@ -79,7 +79,7 @@
                     {key: 'qjx', title: '4'},
                     {key: 'ndsj', title: '5'}
                 ];
-                $.get('/moduleInspectDataController/query/' + prg + '/' + stzh + '.action', function (data) {
+                $.get('${pageContext.request.contextPath}/moduleInspectDataController/query/' + prg + '/' + stzh + '.action', function (data) {
                     var ret = filterData(data, fields);
                     var source = ret.source;
                     var statistic = ret.statistic;

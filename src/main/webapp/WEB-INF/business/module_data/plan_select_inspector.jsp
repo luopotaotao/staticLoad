@@ -8,7 +8,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <table id="grid" class="easyui-datagrid" style="width:100%;height:100%"
-       data-options="singleSelect:false,url:'/moduleBasicInspectorController/${institution_id}/query.action',method:'get'">
+       data-options="singleSelect:false,url:'${pageContext.request.contextPath}/moduleBasicInspectorController/${institution_id}/query.action',method:'get'">
     <thead>
     <tr>
         <th data-options="field: 'ck', checkbox: true"></th>

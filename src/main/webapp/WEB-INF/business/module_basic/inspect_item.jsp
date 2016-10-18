@@ -33,7 +33,7 @@
     $(function () {
         var baseUrl = '/';
         $('#dg').datagrid({
-            url: '${baseUrl}/query.action',
+            url: '../${baseUrl}/query.action',
             method: 'get',
             iconCls: 'icon-save',
 //            width: 700,
@@ -208,7 +208,7 @@
 
         function remove(ids) {
             $.ajax({
-                url: '${baseUrl}/delete.action',
+                url: '../${baseUrl}/delete.action',
                 data: {ids: ids},
                 type: 'post',
                 dataType: 'json'
@@ -237,7 +237,7 @@
     }
     
     function manageMethods(id) {
-        var href = '/moduleBasicInspectMethodController/index/'+id+'.action';
+        var href = '../moduleBasicInspectMethodController/index/'+id+'.action';
         openDialog('检测方法管理',href);
     }
 
