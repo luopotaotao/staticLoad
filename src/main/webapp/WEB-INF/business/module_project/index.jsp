@@ -256,7 +256,8 @@
 
     </div>
 </div>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/jslib/Highcharts-4.1.3/js/highcharts.js" type="text/javascript"
+        charset="utf-8"></script>
 <script>
     $(function () {
         var baseUrl = '${pageContext.request.contextPath}/${baseUrl}';

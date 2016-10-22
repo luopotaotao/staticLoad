@@ -45,11 +45,21 @@
         <div title="统计数据">
             <table id="tb_load"></table>
         </div>
+        <div title="Q-s曲线">
+            <div id="qs_chart" style="width: 50%; height: 400px"></div>
+        </div>
+        <div title="s-lgt曲线">
+            <div id="slgt_chart" style="width: 50%; height: 400px;"></div>
+        </div>
+        <div title="s-lgQ曲线">
+            <div id="slgQ_chart" style="width: 50%; height: 400px;"></div>
+        </div>
 
 
     </div>
 
     <script>
+
         $(function () {
             init();
             function init() {
@@ -80,17 +90,21 @@
                     {key: 'ndsj', title: '5'}
                 ];
                 $.get('${pageContext.request.contextPath}/moduleInspectDataController/query/' + prg + '/' + stzh + '.action', function (data) {
-                    var ret = filterData(data, fields);
-                    var source = ret.source;
-                    var statistic = ret.statistic;
-                    console.log(ret.statistic.columns);
-                    $('#tb_source').datagrid({'data': source});
-                    $('#tb_load').datagrid({
-                        rownumbers: true,
-                        columns: statistic.columns,
-                        data: statistic.data,
-                        fitColumns: true
-                    });
+//                    var ret = filterData(data, fields);
+//                    var source = ret.source;
+//                    var statistic = ret.statistic;
+//                    console.log(ret.statistic.columns);
+                    $('#tb_source').datagrid({'data': data.source});
+//                    $('#tb_load').datagrid({
+//                        rownumbers: true,
+//                        columns: statistic.columns,
+//                        data: statistic.data,
+//                        fitColumns: true
+//                    });
+                    initChart0(data.chart0);
+                    initChart1(data.chart1);
+                    initChart2(data.chart2);
+
                 }, 'json');
             }
 
@@ -170,6 +184,278 @@
                 return {columns: columns, data: ret}
             }
 
+            function initChart0(data){
+//                var data = [
+//                    {x: 0, y: 0.00},
+//                    {x: 340, y: 0.70},
+//                    {x: 510, y: 1.42},
+//                    {x: 680, y: 2.35},
+//                    {x: 850, y: 3.39},
+//                    {x: 1020, y: 4.51},
+//                    {x: 1190, y: 5.78},
+//                    {x: 1360, y: 6.95},
+//                    {x: 1530, y: 8.17},
+//                    {x: 1700, y: 9.47},
+//                    {x: 1700, y: 9.47},
+//                    {x: 1700, y: 9.47},
+//                    {x: 1700, y: 9.47}];
+                $('#qs_chart').highcharts({
+                    legend: {
+                        enabled: false
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    chart: {
+                        marginLeft: 120
+                    },
+
+                    title: {
+                        text: 'Q-s曲线'
+                    },
+                    xAxis: {
+                        opposite: true,
+                        lineWidth: 2,
+                        min: 0,
+                        title: {
+                            text: 'Q (kN)',
+                            align: 'high',
+                            y: 70,
+                            rotation: 0,
+                            x: -20
+                        }
+                    },
+                    yAxis: {
+                        reversed: true,
+                        lineWidth: 2,
+                        min: 0,
+                        tickWidth: 1,
+                        labels: {
+                            step:1,
+                            formatter: function () {
+                                return this.value.toFixed(2);
+                            }
+                        },
+                        title: {
+                            text: 's (mm)',
+                            align: 'low',
+                            x: 70,
+                            rotation: 0,
+                            y: -20
+                        }
+                    }, plotOptions: {
+                        series: {
+                            marker: {
+                                enabled: true
+                            }
+                        }
+                    },
+                    series: [{
+                        type: 'line',
+                        data: data
+                    }]
+                });
+            }
+            function initChart1(data) {
+                var opts = {
+                    dataLabels: {
+                        enabled: true,
+                        align: 'left',
+                        style: {
+                            fontWeight: 'bold'
+                        },
+                        verticalAlign: 'middle',
+                        overflow: true,
+                        crop: false,
+                        formatter: function () {
+                            return this.series.name + ' kN';
+                        }
+                    }
+                }
+//                var data = [{
+//                    name: '340',
+//                    data: [
+//                        {x: 0, y: 0.50},
+//                        {x: 5, y: 0.56},
+//                        {x: 15, y: 0.60},
+//                        {x: 30, y: 0.64},
+//                        {x: 45, y: 0.66},
+//                        {x: 60, y: 0.67},
+//                        {x: 90, y: 0.70}
+//                    ]
+//                },
+//                    {
+//                        name: '510',
+//                        data: [
+//                            {x: 0, y: 1.22},
+//                            {x: 5, y: 1.28},
+//                            {x: 15, y: 1.31},
+//                            {x: 30, y: 1.35},
+//                            {x: 45, y: 1.38},
+//                            {x: 60, y: 1.40},
+//                            {x: 90, y: 1.42}
+//                        ]
+//                    },
+//
+//                    {
+//                        name: '640',
+//                        data: [
+//                            {x: 0, y: 2.14},
+//                            {x: 5, y: 2.19},
+//                            {x: 15, y: 2.23},
+//                            {x: 30, y: 2.27},
+//                            {x: 45, y: 2.30},
+//                            {x: 60, y: 2.33},
+//                            {x: 90, y: 2.35}
+//                        ]
+//                    }
+//                ];
+
+                $.each(data,function (i,item) {
+                    var index = item.data.length-1;
+                    var last_p = item.data[index];
+                    $.extend(last_p,opts);
+                })
+
+                $('#slgt_chart').highcharts({
+                    legend: {
+                        enabled: false
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    chart: {
+                        marginLeft: 120
+                    },
+
+                    title: {
+                        text: 'Q-s曲线'
+                    },
+
+                    tooltip: {
+                        pointFormat: '{series.name} kN: <b>{point.y}</b><br/>',
+                        valueSuffix: ' mm',
+                        shared: true
+                    },
+
+                    xAxis: {
+                        opposite: true,
+                        lineWidth: 2,
+                        min: 0,
+                        title: {
+                            text: 't (min)',
+                            align: 'high',
+                            y: 70,
+                            rotation: 0,
+                            x: -20
+                        }
+                    },
+
+                    yAxis: {
+                        reversed: true,
+                        lineWidth: 2,
+                        min: 0,
+                        tickWidth: 1,
+                        labels: {
+                            step: 1,
+                            formatter: function () {
+                                return this.value.toFixed(2);
+                            }
+                        },
+                        title: {
+                            text: 's (mm)',
+                            align: 'low',
+                            x: 70,
+                            rotation: 0,
+                            y: -20
+                        }
+                    }, plotOptions: {
+                        series: {
+                            marker: {
+                                enabled: true
+                            }
+                        }
+                    },
+                    series: data
+                });
+            }
+            function initChart2(data) {
+//                var data = [
+//                    {y:0.00,x:0          },
+//                    {y:0.70,x:2.531478917},
+//                    {y:1.42,x:2.707570176},
+//                    {y:2.35,x:2.832508913},
+//                    {y:3.39,x:2.929418926},
+//                    {y:4.51,x:3.008600172},
+//                    {y:5.78,x:3.075546961},
+//                    {y:6.95,x:3.133538908},
+//                    {y:8.17,x:3.184691431},
+//                    {y:9.47,x:3.230448921},
+//                    {y:9.47,x:3.230448921},
+//                    {y:9.47,x:3.230448921},
+//                    {y:9.47,x:3.230448921}];
+                $('#slgQ_chart').highcharts({
+                    legend: {
+                        enabled: false
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    chart: {
+                        marginLeft: 120
+                    },
+                    title: {
+                        text: 's-lgQ曲线'
+                    },
+                    xAxis: {
+                        opposite: true,
+                        lineWidth: 2,
+                        min: 0,
+                        title: {
+                            text: 'Q (kN)',
+                            align: 'high',
+                            y: 70,
+                            rotation: 0,
+                            x: -20
+                        },
+                        labels: {
+                            formatter: function () {
+                                return Math.pow(10,this.value).toFixed(0);
+                            }
+                        }
+                    },
+                    yAxis: {
+                        reversed: true,
+                        lineWidth: 2,
+                        min: 0,
+                        tickWidth: 1,
+                        labels: {
+                            step:1,
+                            formatter: function () {
+                                return this.value.toFixed(2);
+                            }
+                        },
+                        title: {
+                            text: 's (mm)',
+                            align: 'low',
+                            x: 70,
+                            rotation: 0,
+                            y: -20
+                        }
+                    }, plotOptions: {
+                        series: {
+                            marker: {
+                                enabled: true
+                            }
+                        }
+                    },
+                    series: [{
+                        type: 'line',
+                        data: data
+                    }]
+
+                });
+            }
         });
     </script>
 </div>
