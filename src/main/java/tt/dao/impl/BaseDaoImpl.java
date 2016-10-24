@@ -43,12 +43,15 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
         return getCurrentSession().createCriteria(entityClass);
     }
 
-    public Criteria getCriteria(Integer page, Integer pageSize,Integer dept_id) {
-        Criteria c = getCurrentSession().createCriteria(entityClass).add(Restrictions.eq("dept_id",dept_id));
+    public Criteria getCriteria(Integer page, Integer pageSize) {
+        Criteria c = getCurrentSession().createCriteria(entityClass);
         if (page != null && pageSize != null) {
             c.setFirstResult((page - 1) * pageSize).setMaxResults(pageSize);
         }
         return c;
+    }
+    public Criteria getCriteria(Integer page, Integer pageSize,Integer dept_id) {
+        return getCriteria(page,pageSize).add(Restrictions.eq("dept_id",dept_id));
     }
 
     @Override

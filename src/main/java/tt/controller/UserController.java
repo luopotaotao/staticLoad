@@ -284,7 +284,7 @@ public class UserController extends BaseController {
      * @param user
      * @return
      */
-    @RequestMapping(value = "/dataGrid", method = RequestMethod.POST)
+    @RequestMapping(value = "/dataGrid")
     @ResponseBody
     public DataGrid dataGrid(User user)
             throws Exception {

@@ -143,8 +143,8 @@
 </style>
 <div style="background: rgb(38,150,203); height: 59px">
     <div style="float: left;width: 36%;height: 59px;min-width: 460px;">
-        <%--<img src="${pageContext.request.contextPath}/style/images/icons/txt_logo.png"--%>
-             <%--style="margin:8px 0px 0px 5px">--%>
+        <img src="${pageContext.request.contextPath}/logo/${sessionInfo.dept.logo}"
+             style="margin:8px 0px 0px 5px">
         <h2 style="color:white;margin: 5px;">智能无线静荷载试验检测云平台</h2>
     </div>
     <div style="float: left;width: 48%;height: 59px;min-width: 500px;">

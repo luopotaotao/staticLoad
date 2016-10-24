@@ -25,7 +25,7 @@ public class ModuleInspectDataController extends BaseController<InspectData> {
 
     @RequestMapping("index")
     public String index(Model model) {
-        model.addAttribute("baseUrl", "/moduleBasicInspectDataController");
+        model.addAttribute("baseUrl", "moduleBasicInspectDataController");
         return "business/module_data/index";
     }
 
@@ -37,7 +37,7 @@ public class ModuleInspectDataController extends BaseController<InspectData> {
     @RequestMapping(value = "query/{PRG}/{STZH}", method = RequestMethod.GET)
     @ResponseBody
     public JSONObject queryData(@PathVariable String PRG, @PathVariable String STZH) {
-        List<InspectData> list = inspectDataService.list(PRG, STZH);
+        List<InspectData> list = inspectDataService.list(PRG, STZH,getDeptId());
         Map<String,JSONArray> data = sortData(list);
         JSONObject ret = new JSONObject();
         ret.put("source",listResponse(list));
@@ -123,38 +123,37 @@ public class ModuleInspectDataController extends BaseController<InspectData> {
         return ret;
     }
 
-
     @RequestMapping(value = "delete", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject delete(@RequestParam(value = "ids[]") int[] ids) {
         List<Integer> list = new LinkedList<>();
         Arrays.stream(ids).forEach(id -> list.add(id));
-        int ret = inspectDataService.del(list);
+        int ret = inspectDataService.del(list,getDeptId());
         return flagResponse(ret);
     }
 
     @RequestMapping(value = "keys", method = RequestMethod.GET)
     @ResponseBody
     public List<Map<String, Object>> listKeys() {
-        return inspectDataService.loadKeys();
+        return inspectDataService.loadKeys(getDeptId());
     }
 
     @RequestMapping(value = "unLinkedKeys", method = RequestMethod.GET)
     @ResponseBody
     public JSONObject listUnlinkedKeys() {
-        return listResponse(inspectDataService.loadUnLinkedKeys());
+        return listResponse(inspectDataService.loadUnLinkedKeys(getDeptId()));
     }
 
     @RequestMapping(value = "linkedKeys/{plan_id}", method = RequestMethod.GET)
     @ResponseBody
     public List<Map<String, Object>> listLinkedKeys(@PathVariable Integer plan_id) {
-        return inspectDataService.loadLinkedKeys(plan_id);
+        return inspectDataService.loadLinkedKeys(plan_id,getDeptId());
     }
 
     @RequestMapping(value = "linkData/{plan_id}", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject linkData(@PathVariable(value = "plan_id") Integer plan_id, @RequestBody List<Map<String,Object>> data) {
-        int count = inspectDataService.linkData(plan_id,data);
+        int count = inspectDataService.linkData(plan_id,data,getDeptId());
         return flagResponse(count>0);
     }
 }

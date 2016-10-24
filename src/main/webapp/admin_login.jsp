@@ -38,7 +38,7 @@
                         url: "${pageContext.request.contextPath}/userController/login.action",
                         dataType: 'json',
                         type: 'post',
-                        data: {name: name, pwd: pwd, verifycode: verifycode,'dept.id':'<%=dept_id%>'}
+                        data: {name: name, pwd: pwd, verifycode: verifycode}
                     }).success(function (r) {
 
                         try {
@@ -237,10 +237,6 @@
                 <tr>
                     <td align="right">密&nbsp;&nbsp;&nbsp;码：</td>
                     <td><input style="width: 180px" type="password" name="pwd" id="pwd" class="txt" tabindex="2"></td>
-                </tr>
-                <tr>
-                    <td align="right">所属公司：</td>
-                    <td><input style="width: 180px" type="text" name="dept.id" id="dept_id" class="txt" value="<%=dept_id%>"></td>
                 </tr>
                 <tr>
                     <td align="right">验证码：</td>

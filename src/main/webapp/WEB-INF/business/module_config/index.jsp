@@ -31,6 +31,10 @@
                    data-options="label:'备注信息:'">
         </div>
         <div style="margin-bottom:20px">
+            <input class="easyui-textbox" id="dept_logo" name="logo" style="width:100%"
+                   data-options="label:'logo:'">
+        </div>
+        <div style="margin-bottom:20px">
 
             <div class="resumable-progress">
                 <table>
@@ -126,7 +130,7 @@
                 {
                     field: 'logo', title: '公司Logo', width: 80, align: 'right',
                     formatter: function (val, row) {
-                        return '<img src="'+val+'">';
+                        return '<img src="${pageContext.request.contextPath}/logo/'+val+'">';
                     }
                 },
                 {
@@ -275,14 +279,14 @@
 
 
     function manageTUsers(id) {
-        var href = '../moduleBasicInspectorController/index/'+id+'.action';
+        var href = '../moduleConfigUserController/index/'+id+'.action';
         openDialog('账号管理',href);
     }
 
 
     //EditDialog
     var r = new Resumable({
-        target: '../fileController/upload',
+        target: '../fileController/upload.action',
         chunkSize: 1 * 1024 * 1024,
         simultaneousUploads: 4,
         testChunks: true,
@@ -330,8 +334,8 @@
         });
         r.on('fileSuccess', function (file, message) {
             message = $.parseJSON(message);
-            $('#fileName').val(message.url);
-            $('#img').attr('src', '../resources/tmp/' + message.url);
+            $('#dept_logo').textbox('setValue',message.url);
+            $('#img').attr('src', '${pageContext.request.contextPath}/tmp/' + message.url);
             console.log('完成:' + message);
             // Reflect that the file upload has completed
             $('.resumable-file-' + file.uniqueIdentifier + ' .resumable-file-progress').html('(completed)');
@@ -348,7 +352,7 @@
     }
     $('#btn_save').on('click', function () {
         $.ajax({
-            url: '../fileController/save',
+            url: '../fileController/save.action',
             type: 'post',
             dataType: 'json',
             data: {fileName:$('#fileName').val()}
