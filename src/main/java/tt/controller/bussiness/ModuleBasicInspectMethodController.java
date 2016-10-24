@@ -15,6 +15,7 @@ import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by tt on 2016/10/2.
@@ -41,15 +42,16 @@ public class ModuleBasicInspectMethodController extends BaseController<InspectMe
     @RequestMapping(value = "{inspect_item_id}/comboList", method = RequestMethod.GET)
     @ResponseBody
     public List<InspectMethod> comboList(@PathVariable Integer inspect_item_id,@RequestParam(required=false) String name) {
-
-        List<InspectMethod> list = inspectMethodService.list(inspect_item_id,name);
+        Map<String,Object> params = createHashMap("inspect_item_id",inspect_item_id);
+        params.put("name",name);
+        List<InspectMethod> list = inspectMethodService.list(params,null,null,getDeptId());
         return list;
     }
 
     @RequestMapping(value = "get/{id}", method = RequestMethod.GET)
     @ResponseBody
     public InspectMethod get(@PathVariable int id) {
-        return inspectMethodService.get(id);
+        return inspectMethodService.get(id,getDeptId());
     }
 
     @RequestMapping(value = "{inspect_item_id}/query", method = RequestMethod.GET)
@@ -64,7 +66,9 @@ public class ModuleBasicInspectMethodController extends BaseController<InspectMe
                 e.printStackTrace();
             }
         }
-        List<InspectMethod> list = inspectMethodService.list(inspect_item_id,name);
+        Map<String,Object> params = createHashMap("inspect_item_id",inspect_item_id);
+        params.put("name",name);
+        List<InspectMethod> list = inspectMethodService.list(params,null,null,getDeptId());
         return listResponse(list);
     }
 
@@ -72,15 +76,15 @@ public class ModuleBasicInspectMethodController extends BaseController<InspectMe
     @RequestMapping(value = "post")
     @ResponseBody
     public JSONObject add(@ModelAttribute InspectMethod company) {
-        int ret = inspectMethodService.add(company);
-        return flagResponse(1);
+        inspectMethodService.add(company,getDeptId());
+        return flagResponse(company.getId()>0);
     }
 
     @RequestMapping(value = "put", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject update(@ModelAttribute InspectMethod company) {
-        int ret = inspectMethodService.update(company);
-        return flagResponse(ret);
+        inspectMethodService.update(company,getDeptId());
+        return flagResponse(company.getId()>0);
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)
@@ -88,7 +92,7 @@ public class ModuleBasicInspectMethodController extends BaseController<InspectMe
     public JSONObject delete(@RequestParam(value = "ids[]") int[] ids) {
         List<Integer> list = new LinkedList<>();
         Arrays.stream(ids).forEach(id -> list.add(id));
-        int ret = inspectMethodService.del(list);
+        int ret = inspectMethodService.del(list,getDeptId());
         return flagResponse(ret);
     }
 }

@@ -15,6 +15,7 @@ import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by tt on 2016/10/2.
@@ -35,7 +36,7 @@ public class ModuleBasicInspectorController extends BaseController<Inspector> {
     @RequestMapping(value = "get/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Inspector get(@PathVariable int id) {
-        return inspectorService.get(id);
+        return inspectorService.get(id,getDeptId());
     }
 
     @RequestMapping(value = "{institution_id}/query",method = RequestMethod.GET)
@@ -49,7 +50,9 @@ public class ModuleBasicInspectorController extends BaseController<Inspector> {
                 e.printStackTrace();
             }
         }
-        List<Inspector> list = inspectorService.list(institution_id,name);
+        Map<String,Object> params = createHashMap("institution_id",institution_id);
+        params.put("name",name);
+        List<Inspector> list = inspectorService.list(params,null,null,getDeptId());
         return listResponse(list);
     }
 
@@ -57,15 +60,15 @@ public class ModuleBasicInspectorController extends BaseController<Inspector> {
     @RequestMapping(value = "post")
     @ResponseBody
     public JSONObject add(@ModelAttribute Inspector inspector, BindingResult result) {
-        int ret = inspectorService.add(inspector);
-        return flagResponse(1);
+        inspectorService.add(inspector,getDeptId());
+        return flagResponse(inspector.getId()>0);
     }
 
     @RequestMapping(value = "put", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject update(@ModelAttribute Inspector inspector) {
-        int ret = inspectorService.update(inspector);
-        return flagResponse(ret);
+        inspectorService.update(inspector,getDeptId());
+        return flagResponse(inspector.getId()>0);
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)
@@ -73,7 +76,7 @@ public class ModuleBasicInspectorController extends BaseController<Inspector> {
     public JSONObject delete(@RequestParam(value = "ids[]") int[] ids) {
         List<Integer> list = new LinkedList<>();
         Arrays.stream(ids).forEach(id->list.add(id));
-        int ret = inspectorService.del(list);
+        int ret = inspectorService.del(list,getDeptId());
         return flagResponse(ret);
     }
 }

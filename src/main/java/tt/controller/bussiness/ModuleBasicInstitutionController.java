@@ -14,6 +14,7 @@ import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by taotao on 2016/9/27.
@@ -39,7 +40,7 @@ public class ModuleBasicInstitutionController extends BaseController<Institution
     @RequestMapping(value = "get/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Institution get(@PathVariable int id) {
-        return institutionService.get(id);
+        return institutionService.get(id,getDeptId());
     }
 
     @RequestMapping(value = "query",method = RequestMethod.GET)
@@ -55,8 +56,10 @@ public class ModuleBasicInstitutionController extends BaseController<Institution
                 e.printStackTrace();
             }
         }
-        List<Institution> list = institutionService.list(typ,name,page,pageSize);
-        long count = institutionService.count(typ,name);
+        Map<String,Object> params = createHashMap("name",name);
+        params.put("typ",typ);
+        List<Institution> list = institutionService.list(params,page,pageSize,getDeptId());
+        long count = institutionService.count(params,getDeptId());
         return listResponse(count, list);
     }
 
@@ -64,15 +67,15 @@ public class ModuleBasicInstitutionController extends BaseController<Institution
     @RequestMapping(value = "post")
     @ResponseBody
     public JSONObject add(@ModelAttribute Institution institution) {
-        int ret = institutionService.add(institution);
-        return flagResponse(1);
+        institutionService.add(institution,getDeptId());
+        return flagResponse(institution.getId()>0);
     }
 
     @RequestMapping(value = "put", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject update(@ModelAttribute Institution institution) {
-        int ret = institutionService.update(institution);
-        return flagResponse(ret);
+        institutionService.update(institution,getDeptId());
+        return flagResponse(institution.getId()>0);
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)
@@ -80,7 +83,7 @@ public class ModuleBasicInstitutionController extends BaseController<Institution
     public JSONObject delete(@RequestParam(value = "ids[]") int[] ids) {
         List<Integer> list = new LinkedList<>();
         Arrays.stream(ids).forEach(id->list.add(id));
-        int ret = institutionService.del(list);
+        int ret = institutionService.del(list,getDeptId());
         return flagResponse(ret);
     }
 }

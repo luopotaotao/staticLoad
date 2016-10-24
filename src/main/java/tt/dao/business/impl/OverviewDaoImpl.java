@@ -16,10 +16,11 @@ import java.util.Map;
 public class OverviewDaoImpl extends BaseDaoImpl<Overview> implements OverviewDaoI {
 
     @Override
-    public List<Overview> queryOverview(Integer area_id) {
+    public List<Overview> queryOverview(Integer area_id,Integer dept_id) {
         Map params = new HashMap();
         params.put("area_id",area_id);
-        List<Overview> ret = find("from Overview where id=:area_id",params);
+        params.put("dept_id",dept_id);
+        List<Overview> ret = find("from Overview where id=:area_id and dept_id=:dept_id",params);
         return ret;
     }
 }

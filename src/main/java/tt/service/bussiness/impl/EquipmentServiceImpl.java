@@ -19,36 +19,41 @@ public class EquipmentServiceImpl implements EquipmentServiceI {
     private EquipmentDaoI equipmentDao;
 
     @Override
-    public Equipment get(int id) {
-        return equipmentDao.get(Equipment.class, id);
+    public Equipment get(Integer id, Integer dept_id) {
+        return equipmentDao.getById(id, dept_id);
     }
 
 
     @Override
-    public List<Equipment> list(Integer institution_id, String name) {
-        List<Equipment> ret = equipmentDao.list(institution_id, name);
+    public List<Equipment> list(Map<String, Object> params,Integer page,Integer pageSize, Integer dept_id) {
+        Integer institution_id = (Integer) params.get("institution_id");
+        String name = (String) params.get("name");
+        List<Equipment> ret = equipmentDao.list(institution_id, name,dept_id);
         return ret;
     }
 
     @Override
-    public int add(Equipment equipment) {
+    public Equipment add(Equipment equipment, Integer dept_id) {
+        equipment.setDept_id(dept_id);
         equipmentDao.save(equipment);
-        return 1;
+        return equipment;
     }
 
     @Override
-    public int del(List<Integer> ids) {
+    public int del(List<Integer> ids, Integer dept_id) {
         if (ids == null || ids.size() < 1) {
             return 0;
         }
         Map<String, Object> params = new HashMap<>();
         params.put("ids", ids);
-        return equipmentDao.executeHql("delete from Equipment where id in (:ids)", params);
+        params.put("dept_id",dept_id);
+        return equipmentDao.executeHql("delete from Equipment where id in (:ids) and dept_id=:dept_id", params);
     }
 
     @Override
-    public int update(Equipment equipment) {
+    public Equipment update(Equipment equipment, Integer dept_id) {
+        equipment.setDept_id(dept_id);
         equipmentDao.update(equipment);
-        return 1;
+        return equipment;
     }
 }

@@ -7,11 +7,5 @@ import java.util.List;
 /**
  * Created by tt on 2016/10/2.
  */
-public interface InspectSchemeServiceI {
-    InspectScheme get(int id);
-    List<InspectScheme> list(String name, Integer page, Integer PageSize);
-    long count(String name);
-    int add(InspectScheme inspectScheme);
-    int del(List<Integer> ids);
-    int update(InspectScheme inspectScheme);
+public interface InspectSchemeServiceI extends BaseService<InspectScheme> {
 }

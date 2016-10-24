@@ -14,6 +14,7 @@ import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by tt on 2016/10/2.
@@ -39,7 +40,7 @@ public class ModuleInspectItemController extends BaseController<InspectItem> {
     @RequestMapping(value = "get/{id}", method = RequestMethod.GET)
     @ResponseBody
     public InspectItem get(@PathVariable int id) {
-        return inspectItemService.get(id);
+        return inspectItemService.get(id,getDeptId());
     }
 
     @RequestMapping(value = "query", method = RequestMethod.GET)
@@ -54,30 +55,31 @@ public class ModuleInspectItemController extends BaseController<InspectItem> {
                 e.printStackTrace();
             }
         }
-        List<InspectItem> list = inspectItemService.list(name, page, pageSize);
-        long count = inspectItemService.count(name);
+        Map<String,Object> params = createHashMap("name",name);
+        List<InspectItem> list = inspectItemService.list(params, page, pageSize,getDeptId());
+        long count = inspectItemService.count(params,getDeptId());
         return listResponse(count, list);
     }
     @RequestMapping(value = "comboList", method = RequestMethod.GET)
     @ResponseBody
     public List<InspectItem> comboList(@RequestParam(required = false) String name) {
-
-        List<InspectItem> list = inspectItemService.list(name,null,null);
+        Map<String,Object> params = createHashMap("name",name);
+        List<InspectItem> list = inspectItemService.list(params,null,null,getDeptId());
         return list;
     }
 
     @RequestMapping(value = "post", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject add(@ModelAttribute InspectItem company) {
-        int ret = inspectItemService.add(company);
-        return flagResponse(1);
+        inspectItemService.add(company,getDeptId());
+        return flagResponse(company.getId()>0);
     }
 
     @RequestMapping(value = "put", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject update(@ModelAttribute InspectItem company) {
-        int ret = inspectItemService.update(company);
-        return flagResponse(ret);
+        inspectItemService.update(company,getDeptId());
+        return flagResponse(company.getId()>0);
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)
@@ -85,7 +87,7 @@ public class ModuleInspectItemController extends BaseController<InspectItem> {
     public JSONObject delete(@RequestParam(value = "ids[]") int[] ids) {
         List<Integer> list = new LinkedList<>();
         Arrays.stream(ids).forEach(id -> list.add(id));
-        int ret = inspectItemService.del(list);
+        int ret = inspectItemService.del(list,getDeptId());
         return flagResponse(ret);
     }
 }

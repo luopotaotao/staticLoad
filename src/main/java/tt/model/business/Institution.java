@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "b_institution")
-public class Institution implements java.io.Serializable {
+public class Institution extends BaseModel implements java.io.Serializable {
     private Integer id;
     private String code;
     private String name;

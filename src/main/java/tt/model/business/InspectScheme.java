@@ -8,7 +8,7 @@ import java.util.List;
 @Entity
 @Table(name = "b_inspect_scheme")
 @JsonIgnoreProperties(value = {"project" })
-public class InspectScheme {
+public class InspectScheme extends BaseModel {
     private Integer id;
     private String name;
     private Project project;

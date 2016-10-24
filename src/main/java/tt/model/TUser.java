@@ -1,22 +1,13 @@
 package tt.model;
 
 
+import tt.model.business.Dept;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 
 
 /**
@@ -51,6 +42,8 @@ public class TUser implements java.io.Serializable
     private Date validdatetime;
 
     private Set<Trole> troles = new HashSet<Trole>(0);
+
+    private Dept dept;
 
     // Constructors
     /** default constructor */
@@ -201,5 +194,15 @@ public class TUser implements java.io.Serializable
     public void setTroles(Set<Trole> troles)
     {
         this.troles = troles;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "dept_id")
+    public Dept getDept() {
+        return dept;
+    }
+
+    public void setDept(Dept dept) {
+        this.dept = dept;
     }
 }

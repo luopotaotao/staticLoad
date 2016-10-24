@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import tt.model.business.BaseModel;
+import tt.model.business.Dept;
 import tt.pageModel.SessionInfo;
 import tt.util.ConfigUtil;
 import tt.util.StringDateToDateEditor;
@@ -126,6 +128,20 @@ public class BaseController<T>
     }
 
     /**
+     * 获取所属单位
+     * @return
+     */
+    public Dept getDept(){
+        return getSessionInfo().getDept();
+    }
+
+    public Integer getDeptId(){
+        return getDept().getId();
+    }
+    public void setDeptId(BaseModel instance){
+        instance.setDept_id(getDeptId());
+    }
+    /**
      * 获得当前项目的绝对路径
      * 
      * @return
@@ -188,4 +204,9 @@ public class BaseController<T>
         return ret;
     }
 
+    protected Map<String,Object> createHashMap(String name,Object val){
+        Map<String,Object> ret = new HashMap<>();
+        ret.put(name,val);
+        return ret;
+    }
 }

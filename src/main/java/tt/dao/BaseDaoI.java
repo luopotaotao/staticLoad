@@ -68,6 +68,8 @@ public interface BaseDaoI<T>
      */
     public T getById(Serializable id);
 
+
+    public T getById(Serializable id,Serializable dept_id);
     /**
      * 通过HQL语句获取一个对象
      * 

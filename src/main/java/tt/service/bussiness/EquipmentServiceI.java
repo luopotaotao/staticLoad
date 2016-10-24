@@ -7,10 +7,7 @@ import java.util.List;
 /**
  * Created by tt on 2016/10/2.
  */
-public interface EquipmentServiceI {
-    Equipment get(int id);
-    List<Equipment> list(Integer institution_id, String name);
-    int add(Equipment inspectEquipment);
-    int del(List<Integer> ids);
-    int update(Equipment inspectEquipment);
+public interface EquipmentServiceI extends BaseService<Equipment>{
+//    List<Equipment> list(Integer institution_id, String name,Integer dept_id);
+//TODO 额外参数
 }

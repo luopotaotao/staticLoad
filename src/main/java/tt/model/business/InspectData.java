@@ -6,7 +6,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 
 @Entity
 @Table(name = "b_inspect_data")
-public class InspectData {
+public class InspectData  extends BaseModel{
 
     private Integer id;
 

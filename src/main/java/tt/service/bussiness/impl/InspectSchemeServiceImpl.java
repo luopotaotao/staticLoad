@@ -29,20 +29,22 @@ public class InspectSchemeServiceImpl implements InspectSchemeServiceI {
     private InstitutionDaoI institutionDao;
 
     @Override
-    public InspectScheme get(int id) {
-        return inspectSchemeDao.get(InspectScheme.class, id);
+    public InspectScheme get(Integer id,Integer dept_id) {
+        return inspectSchemeDao.getById(id,dept_id);
     }
 
     @Override
-    public List<InspectScheme> list(String name, Integer page, Integer PageSize) {
-        List<InspectScheme> ret = inspectSchemeDao.list(name, page, PageSize);
+    public List<InspectScheme> list( Map<String,Object> params, Integer page, Integer PageSize,Integer dept_id) {
+        String name= (String) params.get("name");
+        List<InspectScheme> ret = inspectSchemeDao.list(name, page, PageSize,dept_id);
         return ret;
     }
 
     @Override
-    public long count(String name) {
-        StringBuilder hql = new StringBuilder("select count(*) from InspectScheme WHERE 1=1");
-        Map<String,Object> params = new HashMap<>();
+    public long count( Map<String,Object> params, Integer dept_id) {
+        StringBuilder hql = new StringBuilder("select count(*) from InspectScheme WHERE dept_id=:dept_id");
+        String name= (String) params.get("name");
+        params.put("dept_id",dept_id);
         if(name!=null){
             params.put("name","%"+name+"%");
             hql.append(" AND name like :name ");
@@ -52,27 +54,29 @@ public class InspectSchemeServiceImpl implements InspectSchemeServiceI {
     }
 
     @Override
-    public int add(InspectScheme inspectScheme) {
+    public InspectScheme add(InspectScheme inspectScheme, Integer dept_id) {
         resetProject(inspectScheme);
         inspectSchemeDao.save(inspectScheme);
-        return 1;
+        return inspectScheme;
     }
 
     @Override
-    public int del(List<Integer> ids) {
+    public int del(List<Integer> ids, Integer dept_id) {
         if(ids==null||ids.size()<1){
             return 0;
         }
         Map<String, Object> params = new HashMap<>();
+        params.put("dept_id",dept_id);
         params.put("ids", ids);
-        return inspectSchemeDao.executeHql("delete from InspectScheme where id in (:ids)", params);
+        return inspectSchemeDao.executeHql("delete from InspectScheme where id in (:ids) and dept_id=:dept_id", params);
     }
 
     @Override
-    public int update(InspectScheme inspectScheme) {
+    public InspectScheme update(InspectScheme inspectScheme, Integer dept_id) {
         resetProject(inspectScheme);
+        inspectScheme.setDept_id(dept_id);
         inspectSchemeDao.update(inspectScheme);
-        return 1;
+        return inspectScheme;
     }
     private void resetProject(InspectScheme inspectScheme){
         inspectScheme.setProject(projectDao.getById(inspectScheme.getProject().getId()));

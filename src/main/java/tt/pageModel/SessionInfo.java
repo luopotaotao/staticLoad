@@ -1,6 +1,8 @@
 package tt.pageModel;
 
 
+import tt.model.business.Dept;
+
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -38,6 +40,8 @@ public class SessionInfo implements java.io.Serializable {
     private Set<Pattern> resourceSet;// 用户可以访问的资源地址列表
 
     private Map<String, String> resourceMap;
+
+    private Dept dept;
 
     public Set<Pattern> getResourceSet() {
         return resourceSet;
@@ -145,4 +149,11 @@ public class SessionInfo implements java.io.Serializable {
         this.action_time = action_time;
     }
 
+    public Dept getDept() {
+        return dept;
+    }
+
+    public void setDept(Dept dept) {
+        this.dept = dept;
+    }
 }

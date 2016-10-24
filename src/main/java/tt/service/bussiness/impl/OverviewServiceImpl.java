@@ -18,8 +18,8 @@ public class OverviewServiceImpl implements OverviewServiceI {
     @Autowired
     private OverviewDaoI overviewDao;
     @Override
-    public List<Overview> queryOverviews(Integer area_id) {
-        List<Overview> overviews = overviewDao.queryOverview(area_id);
+    public List<Overview> queryOverviews(Integer area_id, Integer dept_id) {
+        List<Overview> overviews = overviewDao.queryOverview(area_id,dept_id);
         return overviews;
     }
 }

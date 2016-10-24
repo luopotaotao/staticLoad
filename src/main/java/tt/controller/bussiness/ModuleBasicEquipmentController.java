@@ -15,6 +15,7 @@ import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by tt on 2016/10/2.
@@ -35,7 +36,7 @@ public class ModuleBasicEquipmentController extends BaseController<Equipment> {
     @RequestMapping(value = "get/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Equipment get(@PathVariable int id) {
-        return equipmentService.get(id);
+        return equipmentService.get(id,getDeptId());
     }
 
     @RequestMapping(value = "{institution_id}/query",method = RequestMethod.GET)
@@ -49,7 +50,9 @@ public class ModuleBasicEquipmentController extends BaseController<Equipment> {
                 e.printStackTrace();
             }
         }
-        List<Equipment> list = equipmentService.list(institution_id,name);
+        Map<String,Object> params = createHashMap("name",name);
+        params.put("institution_id",institution_id);
+        List<Equipment> list = equipmentService.list(params,null,null,getDeptId());
         return listResponse(list);
     }
 
@@ -57,15 +60,15 @@ public class ModuleBasicEquipmentController extends BaseController<Equipment> {
     @RequestMapping(value = "post")
     @ResponseBody
     public JSONObject add(@ModelAttribute Equipment equipment, BindingResult result) {
-        int ret = equipmentService.add(equipment);
-        return flagResponse(1);
+        equipmentService.add(equipment,getDeptId());
+        return flagResponse(equipment.getId()>0);
     }
 
     @RequestMapping(value = "put", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject update(@ModelAttribute Equipment equipment) {
-        int ret = equipmentService.update(equipment);
-        return flagResponse(ret);
+        equipmentService.update(equipment,getDeptId());
+        return flagResponse(equipment.getId()>0);
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)
@@ -73,7 +76,7 @@ public class ModuleBasicEquipmentController extends BaseController<Equipment> {
     public JSONObject delete(@RequestParam(value = "ids[]") int[] ids) {
         List<Integer> list = new LinkedList<>();
         Arrays.stream(ids).forEach(id->list.add(id));
-        int ret = equipmentService.del(list);
+        int ret = equipmentService.del(list,getDeptId());
         return flagResponse(ret);
     }
 }

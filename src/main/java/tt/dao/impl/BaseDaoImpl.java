@@ -39,12 +39,12 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
         return this.sessionFactory.getCurrentSession();
     }
 
-    protected Criteria getCriteria() {
+    public Criteria getCriteria() {
         return getCurrentSession().createCriteria(entityClass);
     }
 
-    protected Criteria getCriteria(Integer page, Integer pageSize) {
-        Criteria c = getCurrentSession().createCriteria(entityClass);
+    public Criteria getCriteria(Integer page, Integer pageSize,Integer dept_id) {
+        Criteria c = getCurrentSession().createCriteria(entityClass).add(Restrictions.eq("dept_id",dept_id));
         if (page != null && pageSize != null) {
             c.setFirstResult((page - 1) * pageSize).setMaxResults(pageSize);
         }
@@ -63,6 +63,11 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
     public T getById(Serializable id) {
         return (T) getCurrentSession().get(entityClass, id);
     }
+    @Override
+    public T getById(Serializable id,Serializable dept_id) {
+        return (T) getCurrentSession().createCriteria(entityClass).add(Restrictions.eq("dept_id",dept_id)).setMaxResults(1).list().get(0);
+    }
+
 
     @Override
     public T get(Class<T> c, Serializable id) {

@@ -10,7 +10,6 @@ import tt.dao.impl.BaseDaoImpl;
 @Repository
 public class BInspectDaoImpl extends BaseDaoImpl<InspectData> implements BInspectDaoI
 {
-
     @Override
     public void addIns(InspectData ins)
     {

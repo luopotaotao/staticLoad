@@ -9,5 +9,5 @@ import java.util.List;
  * Created by taotao on 2016/9/23.
  */
 public interface InspectPlanDaoI extends BaseDaoI<InspectPlan> {
-    List<InspectPlan> list(String name, Integer page, Integer pageSize);
+    List<InspectPlan> list(String name, Integer page, Integer pageSize,Integer dept_id);
 }

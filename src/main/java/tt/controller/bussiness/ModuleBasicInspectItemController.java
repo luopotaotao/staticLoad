@@ -14,6 +14,7 @@ import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by taotao on 2016/9/27.
@@ -41,7 +42,7 @@ public class ModuleBasicInspectItemController extends BaseController<InspectItem
     @RequestMapping(value = "get/{id}", method = RequestMethod.GET)
     @ResponseBody
     public InspectItem get(@PathVariable int id) {
-        return inspectItemService.get(id);
+        return inspectItemService.get(id,getDeptId());
     }
 
     @RequestMapping(value = "query", method = RequestMethod.GET)
@@ -56,8 +57,9 @@ public class ModuleBasicInspectItemController extends BaseController<InspectItem
                 e.printStackTrace();
             }
         }
-        List<InspectItem> list = inspectItemService.list(name, page, pageSize);
-        long count = inspectItemService.count(name);
+        Map<String,Object> params = createHashMap("name",name);
+        List<InspectItem> list = inspectItemService.list(params, page, pageSize,getDeptId());
+        long count = inspectItemService.count(params,getDeptId());
         return listResponse(count, list);
     }
 
@@ -65,22 +67,22 @@ public class ModuleBasicInspectItemController extends BaseController<InspectItem
     @ResponseBody
     public List<InspectItem> comboList(@RequestParam(required = false) String name) {
 
-        List<InspectItem> list = inspectItemService.list(name, null, null);
+        List<InspectItem> list = inspectItemService.list(createHashMap("name",name), null, null,getDeptId());
         return list;
     }
 
     @RequestMapping(value = "post", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject add(@ModelAttribute InspectItem inspectItem) {
-        int ret = inspectItemService.add(inspectItem);
-        return flagResponse(1);
+        inspectItemService.add(inspectItem,getDeptId());
+        return flagResponse(inspectItem.getId()>0);
     }
 
     @RequestMapping(value = "put", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject update(@ModelAttribute InspectItem inspectItem) {
-        int ret = inspectItemService.update(inspectItem);
-        return flagResponse(ret);
+        inspectItemService.update(inspectItem,getDeptId());
+        return flagResponse(inspectItem.getId()>0);
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)
@@ -88,7 +90,7 @@ public class ModuleBasicInspectItemController extends BaseController<InspectItem
     public JSONObject delete(@RequestParam(value = "ids[]") int[] ids) {
         List<Integer> list = new LinkedList<>();
         Arrays.stream(ids).forEach(id -> list.add(id));
-        int ret = inspectItemService.del(list);
+        int ret = inspectItemService.del(list,getDeptId());
         return flagResponse(ret);
     }
 }

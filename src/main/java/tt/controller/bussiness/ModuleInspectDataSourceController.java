@@ -38,7 +38,7 @@ public class ModuleInspectDataSourceController extends BaseController<InspectDat
     @RequestMapping(value = "query/{PRG}/{STZH}",method = RequestMethod.GET)
     @ResponseBody
     public JSONObject list(@PathVariable String PRG,@PathVariable String STZH) {
-        List<InspectData> list = inspectProjectService.list(PRG,STZH);
+        List<InspectData> list = inspectProjectService.list(PRG,STZH,getDeptId());
         return listResponse( list);
     }
 
@@ -47,12 +47,12 @@ public class ModuleInspectDataSourceController extends BaseController<InspectDat
     public JSONObject delete(@RequestParam(value = "ids[]") int[] ids) {
         List<Integer> list = new LinkedList<>();
         Arrays.stream(ids).forEach(id->list.add(id));
-        int ret = inspectProjectService.del(list);
+        int ret = inspectProjectService.del(list,getDeptId());
         return flagResponse(ret);
     }
     @RequestMapping(value = "keys",method = RequestMethod.GET)
     @ResponseBody
     public List<Map<String,Object>> listKeys(){
-       return inspectProjectService.loadKeys();
+       return inspectProjectService.loadKeys(getDeptId());
     }
 }

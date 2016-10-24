@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "b_project")
-public class Project {
+public class Project extends BaseModel {
     private Integer id;
     private String code;
     private String name;

@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "b_company")
-public class Company implements java.io.Serializable{
+public class Company  extends BaseModel implements java.io.Serializable{
     private Integer id;
     private String name;
     private String contacts;

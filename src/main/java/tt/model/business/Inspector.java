@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="b_inspector")
-public class Inspector {
+public class Inspector extends BaseModel {
     private Integer id;
 
     private String name;

@@ -17,8 +17,8 @@ import java.util.List;
 @Repository("inspectorDao")
 public class InspectorDaoImpl extends BaseDaoImpl<Inspector> implements InspectorDaoI {
     @Override
-    public List<Inspector> list(Integer institution_id, String name, Integer page, Integer pageSize) {
-        Criteria criteria = getCriteria()
+    public List<Inspector> list(Integer institution_id, String name, Integer page, Integer pageSize,Integer dept_id) {
+        Criteria criteria = getCriteria(page,pageSize,dept_id)
                 .add(Restrictions.eq("institution_id",institution_id)).addOrder(Order.asc("id"));
         if(name!=null&&!name.trim().isEmpty()){
             criteria.add(Restrictions.like("name","%"+name+"%"));

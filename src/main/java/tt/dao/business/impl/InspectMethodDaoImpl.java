@@ -15,10 +15,10 @@ import java.util.List;
 @Repository("inspectMethodDao")
 public class InspectMethodDaoImpl extends BaseDaoImpl<InspectMethod> implements InspectMethodDaoI {
     @Override
-    public List<InspectMethod> list(Integer inspect_item_id, String name) {
-        Criteria c = getCriteria().add(Restrictions.eq("inspect_item_id",inspect_item_id));
+    public List<InspectMethod> list(Integer inspect_item_id, String name,Integer dept_id) {
+        Criteria c = getCriteria(null,null,dept_id).add(Restrictions.eq("inspect_item_id",inspect_item_id));
         if(!isEmpty(name)){
-            c.add(like("name",name));
+            c.add(like("name","%"+name+"%"));
         }
         return c.list();
     }

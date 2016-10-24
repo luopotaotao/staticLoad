@@ -11,4 +11,8 @@ import tt.model.business.Area;
 @Repository("areaDao")
 public class AreaDaoImpl extends BaseDaoImpl<Area> implements AreaDaoI {
 
+    @Override
+    public Area load(Integer id, Integer dept_id) {
+        return super.getById(id,dept_id);
+    }
 }
