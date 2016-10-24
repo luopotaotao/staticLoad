@@ -178,7 +178,7 @@
                                       class="module_icon">基础信息</a>
             </li>
 
-            <li><a href="javascript:;" id="6" class="menus"><img
+            <li><a href="javascript:openModule('${pageContext.request.contextPath}/moduleConfigController/index.action');" id="6" class="menus"><img
                     src="${pageContext.request.contextPath}/style/images/icons/icon_config.png"
                     class="module_icon">平台设置</a>
             </li>
