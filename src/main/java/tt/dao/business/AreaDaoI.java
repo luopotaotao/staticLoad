@@ -14,5 +14,5 @@ public interface AreaDaoI extends BaseDaoI<Area>{
 //    int update(Area area);
 //
 //
-//    int del(Integer id);
+    int del(Integer id,Integer dept_id);
 }

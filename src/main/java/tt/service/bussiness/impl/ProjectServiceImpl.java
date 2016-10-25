@@ -73,6 +73,7 @@ public class ProjectServiceImpl implements ProjectServiceI {
     @Override
     public Project add(Project project, Integer dept_id) {
         resetProjectComponents(project);
+        project.setDept_id(dept_id);
         projectDao.save(project);
         return project;
     }

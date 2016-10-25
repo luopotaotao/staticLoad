@@ -48,7 +48,7 @@ public class Area extends BaseModel{
     }
 
 
-    @ManyToOne(fetch = FetchType.LAZY,optional = true)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pid")
     @JsonIgnoreProperties(value = { "parent", "children" })
     public Area getParent() {

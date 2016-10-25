@@ -72,6 +72,13 @@ public class UserServiceImpl implements UserServiceI {
     }
 
     @Override
+    public boolean isExist(String id) {
+        Map<String,Object> params = new HashMap<>();
+        params.put("id",id);
+        return userDao.count("from User where id=:id",params)>0;
+    }
+
+    @Override
     public User update(User user, Integer dept_id) {
         Dept dept = deptService.get(dept_id);
         user.setDept(dept);

@@ -12,7 +12,16 @@
     </style>
 </head>
 <body class="easyui-layout">
-<div data-options="region:'west',split:true" title="工程列表" style="width: 200px; overflow: hidden;">
+<div id="project_menu_panel" data-options="region:'west',split:true,tools: [{
+    id:'tools_add_project',
+    iconCls:'icon-add',
+    handler:function(){
+        try{
+            $.project.addProject()
+        }catch(e){
+        }
+    }
+  }] " title="工程列表" style="width: 200px; overflow: hidden;">
     <div class="easyui-panel" style="padding:5px">
         <ul id="tree_menu"></ul>
     </div>
@@ -359,7 +368,6 @@
 
         function addPlan() {
             var node = getNode();
-            debugger;
             showAddDialog({
                 title: '添加计划',
                 params: [{name: 'inspectScheme.id', value: node.id}, {

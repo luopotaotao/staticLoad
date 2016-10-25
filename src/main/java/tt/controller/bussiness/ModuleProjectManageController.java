@@ -44,16 +44,18 @@ public class ModuleProjectManageController extends BaseController<Project> {
                            @RequestParam(required = false) String name,
                            @RequestParam(value = "page",required = false,defaultValue = "1") Integer page,
                            @RequestParam(value = "rows",required = false,defaultValue = "10") Integer pageSize) {
+        Map<String,Object> params = new HashMap<>();
         if(name!=null&&!name.trim().isEmpty()){
             try {
                 name = URLDecoder.decode(name,"utf-8");
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
+            params.put("name",name);
         }
-        Map<String,Object> params = new HashMap<>();
-        params.put("area_id",area_id);
-        params.put("name",name);
+        if(area_id!=null) {
+            params.put("area_id", area_id);
+        }
         List<Project> list = projectService.list(params,page,pageSize,getDeptId());
         long count = projectService.count(params,getDeptId());
         return listResponse(count, list);

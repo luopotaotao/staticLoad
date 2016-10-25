@@ -31,7 +31,7 @@ public class InspectItemServiceImpl implements InspectItemServiceI {
     }
     @Override
     public long count(Map<String,Object> params, Integer dept_id) {
-        StringBuilder hql = new StringBuilder("select count(*) from InspectItem WHERE and dept_id=:dept_id");
+        StringBuilder hql = new StringBuilder("select count(*) from InspectItem WHERE dept_id=:dept_id");
         params.put("dept_id",dept_id);
         String name = (String) params.get("name");
         if(name!=null){

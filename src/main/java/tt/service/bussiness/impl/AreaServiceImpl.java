@@ -27,6 +27,7 @@ public class AreaServiceImpl implements AreaServiceI {
     public Area add(Area area, Integer dept_id) {
         Area parent = areaDao.get(Area.class,area.getParent().getId());
         area.setLevel((byte) (parent.getLevel()+1));
+        area.setParent(parent);
         areaDao.save(area);
         return area;
     }
@@ -39,9 +40,7 @@ public class AreaServiceImpl implements AreaServiceI {
 
     @Override
     public int del(Integer id,Integer dept_id) {
-        Area area = get(id,dept_id);//TODO 添加dept_id
-        areaDao.delete(area);
-        return area.getId();
+        return areaDao.del(id,dept_id);
     }
     @Override
     public int del(List<Integer> ids, Integer dept_id) {
@@ -53,12 +52,27 @@ public class AreaServiceImpl implements AreaServiceI {
         params.put("dept_id",dept_id);
         return areaDao.executeHql("delete from Area where id in (:ids) and dept_id=:dept_id", params);
     }
+
+    /**
+     *
+     * @param pid pid为0时,查找level为0,也就是全国下面的省份
+     * @param dept_id
+     * @return
+     */
     @Override
     public List<Map<String, Object>> queryAreaByPid(Integer pid,Integer dept_id) {
+        String sql = null;
         Map<String,Object> params = new HashMap<>();
-        params.put("pid",pid);
+        if(pid==0){
+            params.put("level",(byte)1);
+            sql = "select new map(a.id as id,a.text as text) from Area a where level=:level and dept_id=:dept_id";
+        }else{
+            params.put("pid",pid);
+            sql = "select new map(a.id as id,a.text as text) from Area a where pid=:pid and dept_id=:dept_id";
+        }
         params.put("dept_id",dept_id);
-        return areaDao.findList("select new map(a.id as id,a.text as text) from Area a where pid=:pid and dept_id=:dept_id",params);
+
+        return areaDao.findList(sql,params);
     }
 
     @Override

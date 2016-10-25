@@ -27,32 +27,32 @@ public class ModuleConfigUserController extends BaseController<User> {
     private UserServiceI userService;
 
     @RequestMapping("index/{dept_id}")
-    public String index(@PathVariable Integer dept_id,Model model){
-        model.addAttribute("baseUrl","moduleConfigUserController");
-        model.addAttribute("dept_id",dept_id);
+    public String index(@PathVariable Integer dept_id, Model model) {
+        model.addAttribute("baseUrl", "moduleConfigUserController");
+        model.addAttribute("dept_id", dept_id);
         return "business/module_config/dept_users";
     }
 
     @RequestMapping(value = "get/{id}", method = RequestMethod.GET)
     @ResponseBody
     public User get(@PathVariable int id) {
-        return userService.get(id,getDeptId());
+        return userService.get(id, getDeptId());
     }
 
-    @RequestMapping(value = "{dept_id}/query",method = RequestMethod.GET)
+    @RequestMapping(value = "{dept_id}/query", method = RequestMethod.GET)
     @ResponseBody
     public JSONObject list(@PathVariable Integer dept_id,
                            @RequestParam(required = false) String name) {
-        if(name!=null&&!name.trim().isEmpty()){
+        if (name != null && !name.trim().isEmpty()) {
             try {
-                name = URLDecoder.decode(name,"utf-8");
+                name = URLDecoder.decode(name, "utf-8");
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
         }
-        Map<String,Object> params = createHashMap("dept_id",dept_id);
-        params.put("name",name);
-        List<User> list = userService.list(params,null,null,dept_id);
+        Map<String, Object> params = createHashMap("dept_id", dept_id);
+        params.put("name", name);
+        List<User> list = userService.list(params, null, null, dept_id);
         return listResponse(list);
     }
 
@@ -60,16 +60,22 @@ public class ModuleConfigUserController extends BaseController<User> {
     @RequestMapping(value = "post")
     @ResponseBody
     public JSONObject add(@ModelAttribute User user, BindingResult result) {
-        user.setLockSymbol((short)0);
-        user.setRemainingLogins((short)5);
-        userService.add(user,user.getDept().getId());
+        if (userService.isExist(user.getId())) {
+            JSONObject ret = jsonResponse("flag", false);
+            ret.put("msg", "exist");
+            return ret;
+        }
+        user.setLockSymbol((short) 0);
+        user.setRemainingLogins((short) 5);
+        userService.add(user, user.getDept().getId());
         return flagResponse(1);
+
     }
 
     @RequestMapping(value = "put", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject update(@ModelAttribute User user) {
-        userService.update(user,getDeptId());
+        userService.update(user, getDeptId());
         return flagResponse(user.getId());
     }
 
@@ -77,7 +83,7 @@ public class ModuleConfigUserController extends BaseController<User> {
     @ResponseBody
     public JSONObject delete(@RequestParam(value = "ids[]") String[] ids) {
         List<String> list = new LinkedList<>();
-        Arrays.stream(ids).forEach(id->list.add(id));
+        Arrays.stream(ids).forEach(id -> list.add(id));
         int ret = userService.del(list);
         return flagResponse(ret);
     }

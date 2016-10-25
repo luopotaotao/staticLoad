@@ -28,13 +28,13 @@ public class InstitutionServiceImpl implements InstitutionServiceI {
         StringBuilder hql = new StringBuilder("from Institution WHERE dept_id=:dept_id");
         params.put("dept_id",dept_id);
         Object typ =  params.get("typ");
-        Object name =   params.get("name");
+        Object name =  params.get("name");
         if(typ!=null&&(Byte)typ!=0){
             params.put("typ",typ);
             hql.append(" AND typ=:typ ");
         }
-        if(name!=null){
-            params.put("name","%"+(String) name+"%");
+        if(name!=null&&!name.toString().isEmpty()){
+            params.put("name","%"+name+"%");
             hql.append(" AND name like :name ");
         }
         List<Institution> ret = institutionDao.find(hql.toString(), params, page, PageSize);

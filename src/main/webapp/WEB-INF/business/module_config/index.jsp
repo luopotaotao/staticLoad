@@ -36,35 +36,30 @@
         </div>
         <div style="margin-bottom:20px">
 
-            <div class="resumable-progress">
-                <table>
-                    <tr>
-                        <td width="100%">
-                            <div class="progress-container">
-                                <div class="progress-bar"></div>
-                            </div>
-                        </td>
-                        <td class="progress-text" nowrap="nowrap"></td>
-                        <td class="progress-pause" nowrap="nowrap">
-                            <a href="#" onclick="r.upload(); return(false);" class="progress-resume-link"><img
-                                    src="${pageContext.request.contextPath}/style/images/resume.png" title="恢复"/></a>
-                            <a href="#" onclick="r.pause(); return(false);" class="progress-pause-link"><img
-                                    src="${pageContext.request.contextPath}/style/images/pause.png" title="暂停"/></a>
-                        </td>
-                    </tr>
-                </table>
 
-            </div>
         </div>
         <div id="img_div" style="margin-bottom:20px;height: 100px;overflow: hidden">
             <img id="img" src="${pageContext.request.contextPath}/logo/blank.png"/>
         </div>
+        <div class="resumable-progress">
+            <table>
+                <tr>
+                    <td width="100%">
+                        <div class="progress-container">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </td>
+                    <td class="progress-text" nowrap="nowrap"></td>
+                    <td class="progress-pause" nowrap="nowrap">
+                        <a href="#" onclick="r.upload(); return(false);" class="progress-resume-link"><img
+                                src="${pageContext.request.contextPath}/style/images/resume.png" title="恢复"/></a>
+                        <a href="#" onclick="r.pause(); return(false);" class="progress-pause-link"><img
+                                src="${pageContext.request.contextPath}/style/images/pause.png" title="暂停"/></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </form>
-    <input id="fileName">
-    <button id="btn_save">保存</button>
-    <div class="resumable-error">
-        抱歉,您的浏览器版本过低,不支持文件上传!
-    </div>
 </div>
 <div id="details"></div>
 
@@ -130,9 +125,10 @@
                 {
                     field: 'logo', title: '公司Logo', width: 80, align: 'right',
                     formatter: function (val, row) {
-                        return '<img src="${pageContext.request.contextPath}/logo/'+val+'">';
+                        return '<img style="max-width:491px;max-height:59px;" src="${pageContext.request.contextPath}/logo/'+val+'">';
                     }
                 },
+                {field: 'note', title: '备注'},
                 {
                     field: 'null', title: '操作', width: 80, align: 'right',
                     formatter: function (val, row) {

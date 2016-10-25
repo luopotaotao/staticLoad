@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface OverviewDaoI extends BaseDaoI<Overview> {
     List<Overview> queryOverview(Integer area_id,Integer dept_id);
-
+    List<Overview> queryAll(Integer dept_id);
 }

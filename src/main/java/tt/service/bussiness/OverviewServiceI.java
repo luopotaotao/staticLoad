@@ -10,4 +10,5 @@ import java.util.List;
  */
 public interface OverviewServiceI {
     List<Overview> queryOverviews(Integer area_id, Integer dept_id);
+    List<Overview> queryAll(Integer dept_id);
 }

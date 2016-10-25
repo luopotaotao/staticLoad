@@ -33,7 +33,7 @@
         initUI();
         function initUI() {
             $('#tree_menu').tree({
-                url: '${pageContext.request.contextPath}/moduleOverviewController/queryOverviews.action',
+                url: '${pageContext.request.contextPath}/moduleOverviewController/queryAll.action',
                 method: 'get',
                 textField:'name',
                 animate: true,

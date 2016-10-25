@@ -22,4 +22,10 @@ public class OverviewServiceImpl implements OverviewServiceI {
         List<Overview> overviews = overviewDao.queryOverview(area_id,dept_id);
         return overviews;
     }
+
+    @Override
+    public List<Overview> queryAll(Integer dept_id) {
+        List<Overview> overviews = overviewDao.queryAll(dept_id);
+        return overviews;
+    }
 }

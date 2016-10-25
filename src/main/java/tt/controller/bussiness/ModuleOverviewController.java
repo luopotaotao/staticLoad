@@ -74,10 +74,10 @@ public class ModuleOverviewController extends BaseController<Overview>{
      *
      * @return [{id:1,text:全国,count:100,children:[{}]}]
      */
-    @RequestMapping("queryOverviews")
+    @RequestMapping("queryAll")
     @ResponseBody
     public List<Overview> queryOverviews() {
-        List<Overview> ret = overviewServiceI.queryOverviews(0,getDeptId());
+        List<Overview> ret = overviewServiceI.queryAll(getDeptId());
         return ret;
     }
 

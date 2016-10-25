@@ -18,7 +18,9 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDaoI {
     @Override
     public List<User> list(Integer dept_id, String name, Integer page, Integer pageSize) {
         Criteria criteria = getCriteria(page,pageSize)
-                .add(Restrictions.eq("dept.id",dept_id)).addOrder(Order.asc("id"));
+                .add(Restrictions.eq("dept.id",dept_id))
+                .add(Restrictions.ne("name","tecom"))
+                .addOrder(Order.asc("id"));
         if(name!=null&&!name.trim().isEmpty()){
             criteria.add(Restrictions.like("name","%"+name+"%"));
         }

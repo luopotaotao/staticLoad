@@ -23,4 +23,12 @@ public class OverviewDaoImpl extends BaseDaoImpl<Overview> implements OverviewDa
         List<Overview> ret = find("from Overview where id=:area_id and dept_id=:dept_id",params);
         return ret;
     }
+
+    @Override
+    public List<Overview> queryAll(Integer dept_id) {
+        Map params = new HashMap();
+        params.put("dept_id",dept_id);
+        List<Overview> ret = find("from Overview where level=0 and dept_id=:dept_id",params);
+        return ret;
+    }
 }

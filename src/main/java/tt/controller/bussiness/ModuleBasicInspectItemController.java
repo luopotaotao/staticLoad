@@ -11,10 +11,7 @@ import tt.service.bussiness.InspectItemServiceI;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by taotao on 2016/9/27.
@@ -50,16 +47,20 @@ public class ModuleBasicInspectItemController extends BaseController<InspectItem
     public JSONObject list(@RequestParam(required = false) String name,
                            @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                            @RequestParam(value = "rows", required = false, defaultValue = "10") Integer pageSize) {
+        Map<String,Object> params = new HashMap<>();
         if(name!=null&&!name.trim().isEmpty()){
             try {
                 name = URLDecoder.decode(name,"utf-8");
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
+            params.put("name",name);
         }
-        Map<String,Object> params = createHashMap("name",name);
-        List<InspectItem> list = inspectItemService.list(params, page, pageSize,getDeptId());
+        List<InspectItem> list = null;
         long count = inspectItemService.count(params,getDeptId());
+        if(count>0){
+            list = inspectItemService.list(params, page, pageSize,getDeptId());
+        }
         return listResponse(count, list);
     }
 
