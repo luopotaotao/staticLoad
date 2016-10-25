@@ -69,7 +69,7 @@ public class RoleServiceImpl implements RoleServiceI
         // 刚刚添加的角色，赋予给当前的用户
         TUser user = userDao.get(TUser.class, sessionInfo.getId());
         user.getTroles().add(t);
-        // 刚刚添加的角色，赋予给系统管理员tecom
+        // 刚刚添加的角色，赋予给系统管理员admin
         // Tuser user1 = userDao.get(Tuser.class, "0");
         // user1.getTroles().add(t);
         j.setSuccess(true);

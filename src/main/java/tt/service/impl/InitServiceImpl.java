@@ -305,7 +305,7 @@ public class InitServiceImpl implements InitServiceI
 
         TUser admin = new TUser();
         admin.setId("0");
-        admin.setName("tecom");
+        admin.setName("admin");
         admin.setPwd(pwd);
         admin.setCreatedatetime(new Date());
         admin.setEmail("zhangzq@bjleisen.com");

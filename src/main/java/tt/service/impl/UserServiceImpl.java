@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserServiceI
     {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("name", user.getName());
-//        params.put("name", "tecom");
+//        params.put("name", "admin");
 //        params.put("dept_id", 11);
         TUser t = userDao.get("from TUser t where t.name = :name", params);
         if (t != null)

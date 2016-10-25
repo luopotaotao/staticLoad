@@ -384,11 +384,11 @@ CREATE TABLE `t_business_config` (
 -- ----------------------------
 -- Records of t_business_config
 -- ----------------------------
-INSERT INTO `t_business_config` VALUES ('RATE_ALYPAY', '支付宝渠道费率', '6', '支付宝渠道费率，单位&permil;', '2016-06-01 14:14:25', 'tecom', '1');
-INSERT INTO `t_business_config` VALUES ('RATE_BAIDUPAY', '百度支付渠道费率', '3', '百度支付渠道费率，单位&permil;', '2016-06-01 14:15:55', 'tecom', '2');
-INSERT INTO `t_business_config` VALUES ('RATE_UNIONPAY', '银联渠道费率', '8', '银联渠道费率，单位&permil;', '2016-06-01 14:17:20', 'tecom', '2');
+INSERT INTO `t_business_config` VALUES ('RATE_ALYPAY', '支付宝渠道费率', '6', '支付宝渠道费率，单位&permil;', '2016-06-01 14:14:25', 'admin', '1');
+INSERT INTO `t_business_config` VALUES ('RATE_BAIDUPAY', '百度支付渠道费率', '3', '百度支付渠道费率，单位&permil;', '2016-06-01 14:15:55', 'admin', '2');
+INSERT INTO `t_business_config` VALUES ('RATE_UNIONPAY', '银联渠道费率', '8', '银联渠道费率，单位&permil;', '2016-06-01 14:17:20', 'admin', '2');
 INSERT INTO `t_business_config` VALUES ('RATE_WEIXIN', '微信支付渠道费率', '3', '微信支付渠道费率，单位&permil;', '2016-06-01 14:16:22', 'zhaoqiaoning', '2');
-INSERT INTO `t_business_config` VALUES ('VERIFICATIONCODE_TIMEOUT', '短信验证码超时时间', '5', '单位为分钟(最大为20)', '2016-06-01 14:23:04', 'tecom', '1');
+INSERT INTO `t_business_config` VALUES ('VERIFICATIONCODE_TIMEOUT', '短信验证码超时时间', '5', '单位为分钟(最大为20)', '2016-06-01 14:23:04', 'admin', '1');
 
 -- ----------------------------
 -- Table structure for `t_online`
@@ -697,10 +697,10 @@ CREATE TABLE `t_system_config` (
 -- ----------------------------
 -- Records of t_system_config
 -- ----------------------------
-INSERT INTO `t_system_config` VALUES ('MAIL_NOTIFICATION', '账户锁定后是否邮件通知', '1', '1:开启   0:关闭', '2016-01-11 13:19:06', 'tecom', '1');
+INSERT INTO `t_system_config` VALUES ('MAIL_NOTIFICATION', '账户锁定后是否邮件通知', '1', '1:开启   0:关闭', '2016-01-11 13:19:06', 'admin', '1');
 INSERT INTO `t_system_config` VALUES ('OPERATE_TIMEOUT', '用户操作超时时间', '20', '单位为分钟(最大为180)，用户超过规定时间不操作将自动退出', '2016-01-11 13:20:04', 'liyunxia', '2');
-INSERT INTO `t_system_config` VALUES ('REMAINING_LOGINS', '账户剩余登录次数', '5', '允许用户每天连续输入密码的错误次数', '2016-01-11 13:21:51', 'tecom', '1');
-INSERT INTO `t_system_config` VALUES ('TO_ADDRESS', '账户锁定后邮件接收人邮箱', 'liyx@bjleisen.com', null, '2016-01-11 13:20:54', 'tecom', '1');
+INSERT INTO `t_system_config` VALUES ('REMAINING_LOGINS', '账户剩余登录次数', '5', '允许用户每天连续输入密码的错误次数', '2016-01-11 13:21:51', 'admin', '1');
+INSERT INTO `t_system_config` VALUES ('TO_ADDRESS', '账户锁定后邮件接收人邮箱', 'liyx@bjleisen.com', null, '2016-01-11 13:20:54', 'admin', '1');
 
 -- ----------------------------
 -- Table structure for `t_user`
@@ -723,7 +723,7 @@ CREATE TABLE `t_user` (
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES ('0', '2015-12-25 11:19:51', 'zhangzq@bjleisen.com', '0', null, 'tecom', '5B42403537626463656162:30DE21804EA6806A325E4A708172D50C51DEE323FA9987DFE8B0DBD4C3E17BE8', '5', null);
+INSERT INTO `t_user` VALUES ('0', '2015-12-25 11:19:51', 'zhangzq@bjleisen.com', '0', null, 'admin', '5B42403537626463656162:30DE21804EA6806A325E4A708172D50C51DEE323FA9987DFE8B0DBD4C3E17BE8', '5', null);
 INSERT INTO `t_user` VALUES ('451f140b-d1b2-4607-b6c2-31ede8e48daa', '2015-12-25 11:44:17', 'zhangzq@bjleisen.com', '0', '2016-03-07 10:30:44', 'zhangziqi', '5B42403431346435343762:72F4AE8102E281B79B452B79BF1465D26AC62EC237DEE97523656192BB73C9FF', '5', '2019-12-31');
 INSERT INTO `t_user` VALUES ('5b072f38-6f61-40d2-93bc-27ae64cecb07', '2016-05-25 16:34:08', 'fanpp@bjleisen.com', '0', '2016-05-25 16:36:02', 'fanpanpan', '5B42403232323238653438:5284C7367BE6CCDE50CE4F9EEF42F75F35C75EC71177E75B0565954C73BC839D', '5', null);
 INSERT INTO `t_user` VALUES ('5b4c01ff-7be0-4eff-84b1-b7ddfdcf45fe', '2016-06-23 15:06:43', 'ningzy@bjleisen.com', '0', '2016-06-23 15:07:26', 'ningzhaoyun', '5B424034313761396339:FC711358BDE7CA4DFBDF3ACC05D2A27F247EB796A82122750E55E3516F5851C1', '5', null);

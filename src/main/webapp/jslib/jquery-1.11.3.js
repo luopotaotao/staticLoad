@@ -1106,7 +1106,7 @@
 
 				// Check if getElementsByTagName("*") returns only elements
 				support.getElementsByTagName = assert(function( div ) {
-					div.appendChild( doc.createComment("") );
+					div.appendChild( doc.creaadminment("") );
 					return !div.getElementsByTagName("*").length;
 				});
 

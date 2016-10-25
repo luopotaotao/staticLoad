@@ -178,10 +178,10 @@
         }
         if(selectedProject&&selectedProject.id){
             showMarkers([selectedProject],function (marker) {
-                var template = '<p><a href="javascript:top.openModule(\'${pageContext.request.contextPath}/moduleProjectController/index.action\');">工程名称:{name}</a></p><p>工程编码:{code}</p><p>地址:{city}{address}</p>';
+                var template = '<p><a href="javascript:top.openModule(\'${pageContext.request.contextPath}/moduleProjectController/index.action?project_id={id}\');">工程名称:{name}</a></p><p>工程编码:{code}</p><p>地址:{city}{address}</p>';
                 var info = marker.info;
                 map.centerAndZoom(marker.M, 11);
-                showInfo(marker.M, template, {name:info.name||'',code:info.code||'',city:info.city?(info.city.text||''):'',address:info.address||''});
+                showInfo(marker.M, template, {id:info.id||'',name:info.name||'',code:info.code||'',city:info.city?(info.city.text||''):'',address:info.address||''});
             });
         }
     });
