@@ -10,6 +10,6 @@ import java.util.List;
 public interface UserServiceI extends BaseService<User> {
     //    List<User> list(Integer institution_id,String name,Integer dept_id);
     int del(List<String> ids);
-    boolean isExist(String id);
+    boolean isExist(String name);
 //TODO 额外参数
 }

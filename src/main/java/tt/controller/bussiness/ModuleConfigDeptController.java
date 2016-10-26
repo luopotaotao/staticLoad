@@ -34,7 +34,7 @@ public class ModuleConfigDeptController extends BaseController<Dept> {
     @RequestMapping("index")
     public String index(Model model) {
         model.addAttribute("baseUrl", "moduleConfigController");
-        return getDeptId() == -1 ? "business/module_config/admin_index" : "business/module_config/index";
+        return getDeptId() == 11 ? "business/module_config/admin_index" : "business/module_config/index";
     }
 
     @RequestMapping("{dept_id}/users")

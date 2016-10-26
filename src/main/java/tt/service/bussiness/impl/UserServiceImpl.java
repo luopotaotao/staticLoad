@@ -72,10 +72,10 @@ public class UserServiceImpl implements UserServiceI {
     }
 
     @Override
-    public boolean isExist(String id) {
+    public boolean isExist(String name) {
         Map<String,Object> params = new HashMap<>();
-        params.put("id",id);
-        return userDao.count("from User where id=:id",params)>0;
+        params.put("name",name);
+        return userDao.count("from User where name=:name",params)>0;
     }
 
     @Override

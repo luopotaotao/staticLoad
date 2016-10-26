@@ -34,7 +34,7 @@
         </div>
 
         <div style="margin-bottom:20px">
-            <input class="easyui-textbox" name="dept_id" style="width:100%"
+            <input class="easyui-textbox" name="note" style="width:100%"
                    data-options="label:'备注:'">
         </div>
         <div style="margin-bottom:20px;display: none;">
@@ -105,7 +105,7 @@
                 {field: 'ck', checkbox: true},
                 {field: 'id', title: 'ID', hidden: true},
                 {field: 'name', title: '姓名'},
-                {field: 'password', title: '密码'},
+                {field: 'pwd', title: '密码'},
                 {field: 'note', title: '备注'}
             ]]
         });

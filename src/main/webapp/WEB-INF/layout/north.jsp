@@ -1,6 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"
          contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page trimDirectiveWhitespaces="true" %>
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/laserCoreCss.css">
 <link id="easyuiTheme" rel="stylesheet"
       href="${pageContext.request.contextPath}/jslib/jquery-easyui-1.3.6/themes/default/easyui.css" type="text/css">
@@ -55,6 +56,7 @@
                 }
             })
         }
+
         openModule('${pageContext.request.contextPath}/moduleOverviewController/index.action');
     });
 
@@ -143,9 +145,11 @@
 </style>
 <div style="background: rgb(38,150,203); height: 59px">
     <div style="float: left;width: 36%;height: 59px;min-width: 460px;">
-        <img src="${pageContext.request.contextPath}/logo/<c:choose><c:when test="${sessionInfo.dept.logo == null}">blank.png</c:when> <c:otherwise>${sessionInfo.dept.logo}</c:otherwise></c:choose>"
-             style="margin:8px 0px 0px 5px">
-        <h2 style="color:white;margin: 5px;">智能无线静荷载试验检测云平台</h2>
+        <c:choose>
+            <c:when test="${sessionInfo.dept.logo eq ''}"><h2 style="color:white;margin: 5px;">
+                智能无线静荷载试验检测云平台</h2></c:when>
+            <c:otherwise><img src="${pageContext.request.contextPath}/logo/${sessionInfo.dept.logo}"></c:otherwise>
+        </c:choose>
     </div>
     <div style="float: left;width: 48%;height: 59px;min-width: 500px;">
 
@@ -164,13 +168,13 @@
                         class="module_icon">工程管理</a>
             </li>
             <%--<li><a href="javascript:openModule('${pageContext.request.contextPath}/moduleInspectDataController/index.action');"--%>
-                   <%--id="1" class="menus onnav"><img--%>
-                    <%--src="${pageContext.request.contextPath}/style/images/icons/icon_about.png"--%>
-                    <%--class="module_icon">检测信息</a>--%>
+            <%--id="1" class="menus onnav"><img--%>
+            <%--src="${pageContext.request.contextPath}/style/images/icons/icon_about.png"--%>
+            <%--class="module_icon">检测信息</a>--%>
             <%--</li>--%>
             <%--<li><a href="javascript:;" id="15" class="menus"><img--%>
-                    <%--src="${pageContext.request.contextPath}/style/images/icons/icon_user.png"--%>
-                    <%--class="module_icon">用户管理</a>--%>
+            <%--src="${pageContext.request.contextPath}/style/images/icons/icon_user.png"--%>
+            <%--class="module_icon">用户管理</a>--%>
             <%--</li>--%>
             <li><a href="javascript:openModule('${pageContext.request.contextPath}/moduleBasicController/index.action')"
                    id="18"
@@ -178,11 +182,12 @@
                                       class="module_icon">基础信息</a>
             </li>
 
-            <li><a href="javascript:openModule('${pageContext.request.contextPath}/moduleConfigController/index.action');" id="6" class="menus"><img
-                    src="${pageContext.request.contextPath}/style/images/icons/icon_config.png"
-                    class="module_icon">平台设置</a>
+            <li>
+                <a href="javascript:openModule('${pageContext.request.contextPath}/moduleConfigController/index.action');"
+                   id="6" class="menus"><img
+                        src="${pageContext.request.contextPath}/style/images/icons/icon_config.png"
+                        class="module_icon">平台设置</a>
             </li>
-
 
 
         </ul>
