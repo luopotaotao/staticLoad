@@ -138,6 +138,10 @@ public class BaseController<T>
     public Integer getDeptId(){
         return getDept().getId();
     }
+
+    public Dept getOriginDept(){
+        return getSessionInfo().getOriginDept();
+    }
     public void setDeptId(BaseModel instance){
         instance.setDept_id(getDeptId());
     }

@@ -1,41 +1,34 @@
 package tt.controller;
 
 
-import java.util.*;
-import java.util.regex.Pattern;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.alibaba.fastjson.JSON;
-
+import org.springframework.web.bind.annotation.*;
 import tt.listener.ServerListener;
 import tt.model.TSystemConfig;
 import tt.model.Tresource;
-import tt.pageModel.DataGrid;
-import tt.pageModel.Json;
-import tt.pageModel.SessionInfo;
-import tt.pageModel.User;
-import tt.pageModel.Userlog;
+import tt.model.business.Dept;
+import tt.pageModel.*;
 import tt.service.OnlineServiceI;
 import tt.service.ResourceServiceI;
 import tt.service.UserServiceI;
 import tt.service.UserlogServiceI;
+import tt.service.bussiness.DeptServiceI;
 import tt.timingTask.OnlineJob;
 import tt.util.ConfigUtil;
 import tt.util.Constant;
 import tt.util.IpUtil;
 import tt.util.annotation.ValidatorAnnotationBean;
 import tt.util.mail.SendMail;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.*;
 
 
 /**
@@ -59,6 +52,8 @@ public class UserController extends BaseController {
 
     @Autowired
     private OnlineServiceI onlineService;
+    @Autowired
+    private DeptServiceI deptService;
 
     // @Autowired
     // private SysConfigServiceI systemConfigService;
@@ -82,9 +77,9 @@ public class UserController extends BaseController {
         Json j = new Json();
         response.setCharacterEncoding("UTF-8");
         // 判断验证码是否存在
-        if (true)//(session.getAttribute("authCode") != null)
+        if(session.getAttribute("authCode") != null)
         {
-            if (true)//(user.getVerifycode().equalsIgnoreCase((String)session.getAttribute("authCode")))
+            if (user.getVerifycode().equalsIgnoreCase((String)session.getAttribute("authCode")))
             {
                 // 默认登录剩余次数
                 short remaining_logins = Constant.REMAINING_LOGINS;
@@ -142,19 +137,20 @@ public class UserController extends BaseController {
                     logger.info("用户名为【" + user.getName() + "】的用户登录成功！");
                     SessionInfo sessionInfo = new SessionInfo();
                     BeanUtils.copyProperties(u, sessionInfo);
+                    sessionInfo.setEmail(u.getEmail());
                     sessionInfo.setIp(IpUtil.getIpAddr(request));
                     // modify by kiky 2014-11-24 09:58:56
                     // 根据用户id查询用户资源的全部信息，用于记录日志
-                    List<Tresource> resourceList = userService.resourceList(u.getId());
+//                    List<Tresource> resourceList = userService.resourceList(u.getId());
 //                    Set<String> l = new HashSet<String>();
-                    Map<String, String> m = new HashMap<String, String>();
-                    if (resourceList != null && resourceList.size() != 0) {
-                        resourceList.stream().forEach((item) -> {
-                            m.put(item.getUrl(), item.getName());
-                        });
-                    }
+//                    Map<String, String> m = new HashMap<String, String>();
+//                    if (resourceList != null && resourceList.size() != 0) {
+//                        resourceList.stream().forEach((item) -> {
+//                            m.put(item.getUrl(), item.getName());
+//                        });
+//                    }
 //                    sessionInfo.setResourceSet(l);
-                    sessionInfo.setResourceMap(m);
+//                    sessionInfo.setResourceMap(m);
                     session1.setAttribute(ConfigUtil.getSessionInfoName(), sessionInfo);
                     // add by kiky 2014-11-21 14:04:06 记录登录日志
                     Userlog userlog = new Userlog();
@@ -227,6 +223,22 @@ public class UserController extends BaseController {
             logger.error("验证码超时，请重新输入。");
         }
         return j;
+    }
+
+    @RequestMapping(value = "switchDept/{id}",method = RequestMethod.GET)
+    @ResponseBody
+    public JSON switchDept(@PathVariable(value = "id") Integer deptId,HttpSession session){
+        Dept dept = deptService.get(deptId);
+        SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.getSessionInfoName());
+        if(sessionInfo!=null){
+            if(sessionInfo.getOriginDept()==null){
+                sessionInfo.setOriginDept(sessionInfo.getDept());
+            }
+            sessionInfo.setDept(dept);
+        }
+        JSONObject ret = jsonResponse("flag", true);
+        ret.put("logo",dept.getLogo());
+        return ret;
     }
 
     /**
@@ -548,5 +560,21 @@ public class UserController extends BaseController {
             throws Exception {
         Json j = userService.resetPwd(id);
         return j;
+    }
+
+    @RequestMapping(value = "userInfo",method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String,Object> userInfo(){
+        Map<String,Object> ret = new HashMap<>();
+        SessionInfo info = getSessionInfo();
+        ret.put("name",info.getName());
+        ret.put("email",info.getEmail());
+        return ret;
+    }
+
+    @RequestMapping(value = "updatePwd",method = RequestMethod.POST)
+    @ResponseBody
+    public Json updatePwd(@RequestParam(name="password") String password,@RequestParam(name="new_password") String new_password) throws Exception {
+        return userService.editCurrentUserPwd(getSessionInfo(),password,new_password);
     }
 }

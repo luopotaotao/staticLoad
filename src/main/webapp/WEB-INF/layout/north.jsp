@@ -35,11 +35,11 @@
         var count = 0;
         var timeout1;
         monitoronline();
-        timeout1 = setInterval(monitoronline, 10000);
+        timeout1 = setInterval(monitoronline, 60000);
         function monitoronline() {
             $.ajax({
                 url: "${pageContext.request.contextPath}/monitorController/monitoronline.action",
-                timeout: 10000,
+                timeout: 60000,
                 success: function () {
 
                 },
@@ -51,7 +51,7 @@
                     }
                     else {
                         clearInterval(timeout1);
-                        window.location = "/";
+                        window.location = "${pageContext.request.contextPath}";
                     }
                 }
             })
@@ -82,7 +82,19 @@
                             }
                         });
     }
-
+    function showUserInfo() {
+        $.ajax({
+            url:'${pageContext.request.contextPath}/userController/userInfo.action',
+            type:'get',
+            dataType:'json'
+        }).done(function (ret) {
+            console.log(ret);
+            $('#ff_user_info').form('load',ret);
+            $('#dlg_user_info').dialog('open');
+        }).fail(function () {
+            $.messager.alert('提示','获取数据失败,请重新尝试或联系管理员!');
+        });
+    }
     function editCurrentUserPwd() {
         parent.$
                 .modalDialog({
@@ -117,7 +129,28 @@
             $iframe.attr('src', url);
         }
     }
-
+    function switchDept(id) {
+        var base_url = '${pageContext.request.contextPath}/logo/';
+        var href = 'userController/switchDept/' + id + '.action';
+        $.ajax({
+            url: href,
+            type: 'get',
+            dataType: 'json'
+        }).done(function (ret) {
+            if (ret.flag) {
+                var logo = null;
+                if(ret.logo){
+                    logo = '<img src="'+base_url+ret.logo+'">'
+                }else{
+                    logo = '<h2 style="color:white;margin: 5px;">智能无线静荷载试验检测云平台</h2>';
+                }
+                $('#logo_div').empty().append(logo);
+                openModule('${pageContext.request.contextPath}/moduleOverviewController/index.action');
+            }
+        }).fail(function () {
+            $.messager.alert('提示', '操作失败，请重新尝试或联系管理员！');
+        });
+    }
 </script>
 <%--<img id="logoimg" src="style/themes/default.jpg"--%>
 <%--style="min-width:681px;cursor:default" />--%>
@@ -144,7 +177,7 @@
     }
 </style>
 <div style="background: rgb(38,150,203); height: 59px">
-    <div style="float: left;width: 36%;height: 59px;min-width: 460px;">
+    <div id="logo_div" style="float: left;width: 36%;height: 59px;max-width: 460px;">
         <c:choose>
             <c:when test="${sessionInfo.dept.logo eq ''}"><h2 style="color:white;margin: 5px;">
                 智能无线静荷载试验检测云平台</h2></c:when>
@@ -167,21 +200,11 @@
                         src="${pageContext.request.contextPath}/style/images/icons/icon_report.png"
                         class="module_icon">工程管理</a>
             </li>
-            <%--<li><a href="javascript:openModule('${pageContext.request.contextPath}/moduleInspectDataController/index.action');"--%>
-            <%--id="1" class="menus onnav"><img--%>
-            <%--src="${pageContext.request.contextPath}/style/images/icons/icon_about.png"--%>
-            <%--class="module_icon">检测信息</a>--%>
-            <%--</li>--%>
-            <%--<li><a href="javascript:;" id="15" class="menus"><img--%>
-            <%--src="${pageContext.request.contextPath}/style/images/icons/icon_user.png"--%>
-            <%--class="module_icon">用户管理</a>--%>
-            <%--</li>--%>
             <li><a href="javascript:openModule('${pageContext.request.contextPath}/moduleBasicController/index.action')"
                    id="18"
                    class="menus"><img src="${pageContext.request.contextPath}/style/images/icons/icon_report.png"
                                       class="module_icon">基础信息</a>
             </li>
-
             <li>
                 <a href="javascript:openModule('${pageContext.request.contextPath}/moduleConfigController/index.action');"
                    id="6" class="menus"><img
@@ -203,7 +226,7 @@
             </div>
 
             <div style="margin-top: 10px">
-                <a href="javascript:;" onclick=""
+                <a href="javascript:;" onclick="showUserInfo()"
                    style="color: white;"><img
                         src="${pageContext.request.contextPath}/style/images/icons/icon_user_sm.png"
                         style="width: 18px;height: 18px;vertical-align: -5px;">账号信息</a>&nbsp;
@@ -215,4 +238,46 @@
     </div>
 
 
+</div>
+
+<div id="dlg_user_info" class="easyui-dialog" style="width:100%;max-width:400px;padding:30px 60px;"
+     data-options="
+            title: '账号信息',
+            closed: true,
+            modal: true,
+            draggable: false,
+            //iconCls: 'icon-add',
+            buttons: [{
+            text: '确定',
+            handler: null
+            },{
+            text: '重置密码',
+            handler: null
+            }]
+        ">
+    <form id="ff_user_info" class="easyui-form" method="post" data-options="novalidate:true"
+          action="../${baseUrl}/post.action">
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox" name="name" style="width:100%"
+                   data-options="label:'账号:',editable:false">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox" name="email" style="width:100%"
+                   data-options="label:'Email:',editable:false">
+        </div>
+
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox" name="password" style="width:100%"
+                   data-options="label:'原始密码:',required:true">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox" name="new_password" style="width:100%"
+                   data-options="label:'新密码:',required:true" validType="length[4,32]" id="new_password" type="password">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox" name="role" style="width:100%"
+                   data-options="label:'确认密码:',required:true" type="password"
+                   validType="equalTo['#new_password']" invalidMessage="两次输入密码不匹配">
+        </div>
+    </form>
 </div>

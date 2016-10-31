@@ -9,6 +9,7 @@ import tt.controller.BaseController;
 import tt.model.business.Dept;
 import tt.model.business.Dept;
 import tt.service.bussiness.DeptServiceI;
+import tt.service.bussiness.UserServiceI;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
@@ -31,10 +32,13 @@ public class ModuleConfigDeptController extends BaseController<Dept> {
     @Autowired
     private DeptServiceI deptService;
 
+    private UserServiceI userService;
+
     @RequestMapping("index")
     public String index(Model model) {
         model.addAttribute("baseUrl", "moduleConfigController");
-        return getDeptId() == 11 ? "business/module_config/admin_index" : "business/module_config/index";
+        Dept dept = getOriginDept()!=null?getOriginDept():getDept();
+        return dept.getName().equals("管理员") ? "business/module_config/admin_index" : "business/module_config/index";
     }
 
     @RequestMapping("{dept_id}/users")
@@ -72,15 +76,20 @@ public class ModuleConfigDeptController extends BaseController<Dept> {
     public JSONObject add(@ModelAttribute Dept dept, HttpSession session) {
 
         boolean isSaved = false;
-        try {
-            isSaved = saveUploadFile(dept.getLogo(), session);
-            if (isSaved) {
-                deptService.add(dept);
-                return flagResponse(1);
+        if(dept.getLogo()!=null&&!dept.getLogo().isEmpty()){
+            try {
+                isSaved = saveUploadFile(dept.getLogo(), session);
+            } catch (IOException e) {
+                return flagResponse(0);
             }
-        } catch (IOException e) {
-            return flagResponse(0);
+        }else{
+            isSaved = true;
         }
+        if (isSaved) {
+            deptService.add(dept);
+            return flagResponse(1);
+        }
+
         return flagResponse(0);
     }
 
@@ -96,7 +105,8 @@ public class ModuleConfigDeptController extends BaseController<Dept> {
             if (Files.exists(nwdir)) {
                 flag = true;
             } else {
-                Files.move(source, nwdir);
+                Path path = Files.move(source, nwdir);
+                flag = path!=null;
             }
         }
         return flag;

@@ -43,6 +43,9 @@ public class SessionInfo implements java.io.Serializable {
 
     private Dept dept;
 
+    private Dept originDept;
+
+    private String email;
     public Set<Pattern> getResourceSet() {
         return resourceSet;
     }
@@ -155,5 +158,21 @@ public class SessionInfo implements java.io.Serializable {
 
     public void setDept(Dept dept) {
         this.dept = dept;
+    }
+
+    public Dept getOriginDept() {
+        return originDept;
+    }
+
+    public void setOriginDept(Dept originDept) {
+        this.originDept = originDept;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

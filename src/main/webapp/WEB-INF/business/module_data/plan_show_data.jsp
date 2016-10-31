@@ -6,7 +6,7 @@
             <ul id="plan_data_tree_menu"></ul>
         </div>
     </div>
-    <div class="easyui-tabs" data-options="region:'center',closable:false,border:false,collapsible:false" style="width: 100%;height: 97%; overflow: hidden;">
+    <div class="easyui-tabs" data-options="region:'center',closable:false,border:true,collapsible:false" style="width: 100%;height: 97%; overflow: hidden;">
         <div title="原始记录">
             <table id="tb_source" class="easyui-datagrid" style="height: 98%;width: 100%;"
                    data-options="

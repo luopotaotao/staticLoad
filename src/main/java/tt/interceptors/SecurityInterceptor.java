@@ -88,9 +88,9 @@ public class SecurityInterceptor implements HandlerInterceptor {
 
             if (sessionInfo != null && sessionInfo.getName() != null
                     && !sessionInfo.getName().equals("")) {
-                if (url.indexOf("/baseController/") > -1 || securityexcludeUrls.contains(url)) {// 如果要访问的资源是不需要验证的
+                if (url.indexOf("/baseController/") > -1) {
                 } else {
-                    logger.info("结束[" + sessionInfo.getResourceMap().get(url) + "]功能");
+                    logger.info("结束[" + url + "]功能");
                     logger.info("耗时：" + (new Date().getTime() - sessionInfo.getAction_time())
                             + "毫秒");
                 }
@@ -106,6 +106,22 @@ public class SecurityInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
                              Object object)
             throws Exception {
+        SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(
+                ConfigUtil.getSessionInfoName());
+        String requestUri = request.getRequestURI();
+        String contextPath = request.getContextPath();
+        String url = requestUri.substring(contextPath.length());
+        if(url.indexOf("userController/login")>-1){
+            return true;
+        }
+        if(sessionInfo!=null&&sessionInfo.getName()!=null){
+            return true;
+        }else{
+            request.setAttribute("msg", "您还没有登录或登录已超时，请重新登录，然后再刷新本功能！");
+            request.getRequestDispatcher("/WEB-INF/error/noSession.jsp").forward(request,
+                    response);
+            return false;
+        }
 
         // HTTP头设置 Referer过滤
 //        String referer = request.getHeader("referer"); // REFRESH
@@ -139,105 +155,110 @@ public class SecurityInterceptor implements HandlerInterceptor {
 //            return false;
 //        }
 
-        String requestUri = request.getRequestURI();
-        String contextPath = request.getContextPath();
-        String url = requestUri.substring(contextPath.length());
-
-        if (sessionexcludeUrls.contains(url)) {
-            return true;
-        } else {
-            SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(
-                    ConfigUtil.getSessionInfoName());
-            if (sessionInfo != null && sessionInfo.getName() != null
-                    && !sessionInfo.getName().equals("")) {
-                MDC.put("username", sessionInfo.getName());
-                if (url.indexOf("/baseController/") > -1 || securityexcludeUrls.contains(url)) {// 如果要访问的资源是不需要验证的
-                    return true;
-                }
-
-//                for(Pattern regex:sessionInfo.getResourceSet()){
-//                    if(regex.matcher(url).matches()){
-//                        break;
+//        String requestUri = request.getRequestURI();
+//        String contextPath = request.getContextPath();
+//        String url = requestUri.substring(contextPath.length());
+//
+//        if (sessionexcludeUrls.contains(url)) {
+//            return true;
+//        } else {
+//            SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(
+//                    ConfigUtil.getSessionInfoName());
+//            if (sessionInfo != null && sessionInfo.getName() != null
+//                    && !sessionInfo.getName().equals("")) {
+//                MDC.put("username", sessionInfo.getName());
+//                if (url.indexOf("/baseController/") > -1 || securityexcludeUrls.contains(url)) {// 如果要访问的资源是不需要验证的
+//                    return true;
+//                }
+//
+////                for(Pattern regex:sessionInfo.getResourceSet()){
+////                    if(regex.matcher(url).matches()){
+////                        break;
+////                    }
+////                }
+//                Object[] stream = sessionInfo.getResourceSet().stream().filter(regex -> regex.matcher(url).matches()).toArray();
+//
+//                if (false)//(stream==null||stream.length<1)
+//                {// 如果当前用户没有访问此资源的权限
+//                    request.setAttribute("msg", "您没有访问此资源的权限！<br/>请联系超管赋予您<br/>[" + url
+//                            + "]<br/>的资源访问权限！");
+//                    request.getRequestDispatcher("/WEB-INF/error/noSecurity.jsp").forward(request,
+//                            response);
+//                    return false;
+//                }
+//                try {
+//                    String resource = ((Pattern) stream[0]).pattern();
+//                    logger.info("开始[" + sessionInfo.getResourceMap().get(resource) + "]功能");
+//                    sessionInfo.setAction_time(new Date().getTime());
+//
+//                    // add by zhangxiaohui 2014-11-26 09:35:55记录用户操作时间
+//                    String name = sessionInfo.getName();
+//                    OnlineJob.getOperateMap().put(name, new Date());
+//
+//                    Map<String, String[]> map = request.getParameterMap();
+//                    StringBuffer sb = new StringBuffer();
+//                    int formlength = request.getContentLength();
+//                    sb.append("长度:" + (formlength == -1 ? "0" : formlength) + " ");
+//                    for (Map.Entry<String, String[]> entry : map.entrySet()) {
+//                        String[] temps = entry.getValue();
+//                        String temp = "";
+//                        for (int i = 0; i < temps.length; i++) {
+//                            temp += temps[i];
+//                        }
+//                        sb.append(entry.getKey() + ":" + temp + ",");
+//                    }
+//                    // add by kiky 2014-11-21 14:04:06 记录登录日志
+//
+//                    Userlog userlog = new Userlog();
+//                    userlog.setUserLogId(UUID.randomUUID().toString());
+//                    userlog.setUserIp(sessionInfo.getIp());
+//                    userlog.setAdminName(sessionInfo.getName());
+//                    userlog.setText(sessionInfo.getResourceMap().get(resource));
+//                    userlog.setUrl(url);
+//                    userlog.setCreateTime(new Date());
+//                    userlog.setFormContentStr(sb.toString());
+//
+//                    userlogService.add(userlog);
+//                } catch (Exception e) {
+//
+//                }
+//
+//
+//            } else {
+//                RequestMapping requestMappingobject = object.getClass().getAnnotation(
+//                        RequestMapping.class);
+//                String objectUrl = null;
+//                boolean is404 = false;
+//                if (requestMappingobject != null && requestMappingobject.value().length > 0) {
+//                    objectUrl = requestMappingobject.value()[0];
+//
+//
+//                    for (Method m : object.getClass().getMethods()) {
+//
+//                        RequestMapping requestmappingmethod = m.getAnnotation(RequestMapping.class);
+//                        if (requestmappingmethod != null) {
+//                            if (url.equals(objectUrl + requestmappingmethod.value()[0])) {
+//                                is404 = true;
+//                                break;
+//                            } else {
+//                                url.startsWith("/baseController/layout/");
+//                                is404 = true;
+//                                break;
+//                            }
+//                        }
 //                    }
 //                }
-                Object[] stream = sessionInfo.getResourceSet().stream().filter(regex -> regex.matcher(url).matches()).toArray();
-
-                if (false)//(stream==null||stream.length<1)
-                {// 如果当前用户没有访问此资源的权限
-                    request.setAttribute("msg", "您没有访问此资源的权限！<br/>请联系超管赋予您<br/>[" + url
-                            + "]<br/>的资源访问权限！");
-                    request.getRequestDispatcher("/WEB-INF/error/noSecurity.jsp").forward(request,
-                            response);
-                    return false;
-                }
-                try {
-                    String resource = ((Pattern) stream[0]).pattern();
-                    logger.info("开始[" + sessionInfo.getResourceMap().get(resource) + "]功能");
-                    sessionInfo.setAction_time(new Date().getTime());
-
-                    // add by zhangxiaohui 2014-11-26 09:35:55记录用户操作时间
-                    String name = sessionInfo.getName();
-                    OnlineJob.getOperateMap().put(name, new Date());
-
-                    Map<String, String[]> map = request.getParameterMap();
-                    StringBuffer sb = new StringBuffer();
-                    int formlength = request.getContentLength();
-                    sb.append("长度:" + (formlength == -1 ? "0" : formlength) + " ");
-                    for (Map.Entry<String, String[]> entry : map.entrySet()) {
-                        String[] temps = entry.getValue();
-                        String temp = "";
-                        for (int i = 0; i < temps.length; i++) {
-                            temp += temps[i];
-                        }
-                        sb.append(entry.getKey() + ":" + temp + ",");
-                    }
-                    // add by kiky 2014-11-21 14:04:06 记录登录日志
-
-                    Userlog userlog = new Userlog();
-                    userlog.setUserLogId(UUID.randomUUID().toString());
-                    userlog.setUserIp(sessionInfo.getIp());
-                    userlog.setAdminName(sessionInfo.getName());
-                    userlog.setText(sessionInfo.getResourceMap().get(resource));
-                    userlog.setUrl(url);
-                    userlog.setCreateTime(new Date());
-                    userlog.setFormContentStr(sb.toString());
-
-                    userlogService.add(userlog);
-                } catch (Exception e) {
-
-                }
-
-
-            } else {
-                RequestMapping requestMappingobject = object.getClass().getAnnotation(
-                        RequestMapping.class);
-                String objectUrl = requestMappingobject.value()[0];
-                boolean is404 = false;
-                for (Method m : object.getClass().getMethods()) {
-
-                    RequestMapping requestmappingmethod = m.getAnnotation(RequestMapping.class);
-                    if (requestmappingmethod != null) {
-                        if (url.equals(objectUrl + requestmappingmethod.value()[0])) {
-                            is404 = true;
-                            break;
-                        } else {
-                            url.startsWith("/baseController/layout/");
-                            is404 = true;
-                            break;
-                        }
-                    }
-                }
-                if (!is404) {
-                    response.sendError(404);
-                    return false;
-                }
-                request.setAttribute("msg", "您还没有登录或登录已超时，请重新登录，然后再刷新本功能！");
-                request.getRequestDispatcher("/WEB-INF/error/noSession.jsp").forward(request,
-                        response);
-                return false;
-            }
-        }
-        return true;
+//                if (!is404) {
+//                    response.sendError(404);
+//                    return false;
+//                }
+//                request.setAttribute("msg", "您还没有登录或登录已超时，请重新登录，然后再刷新本功能！");
+//                request.getRequestDispatcher("/WEB-INF/error/noSession.jsp").forward(request,
+//                        response);
+//                return false;
+//            }
+//        }
+//        return true;
     }
 
 }

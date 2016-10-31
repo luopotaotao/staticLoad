@@ -18,7 +18,7 @@
 
 <table id="dg" style="width:100%"></table>
 <div id="dlg_edit" style="width:100%;max-width:400px;padding:30px 60px;">
-    <form id="ff" class="easyui-form" method="post" data-options="novalidate:true" action="${baseUrl}/post.action">
+    <form id="ff" class="easyui-form" method="post" data-options="novalidate:true">
         <div style="margin-bottom:20px;display: none">
             <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'记录编号:',required:true">
         </div>
@@ -38,8 +38,8 @@
 
 
         </div>
-        <div id="img_div" style="margin-bottom:20px;height: 100px;overflow: hidden">
-            <img id="img"/>
+        <div id="img_div" style="margin-bottom:20px;overflow: hidden">
+            <img id="img" style="width: 300px;height: 59px"/>
         </div>
         <div class="resumable-progress">
             <table>
@@ -50,12 +50,12 @@
                         </div>
                     </td>
                     <td class="progress-text" nowrap="nowrap"></td>
-                    <td class="progress-pause" nowrap="nowrap">
-                        <a href="#" onclick="r.upload(); return(false);" class="progress-resume-link"><img
-                                src="${pageContext.request.contextPath}/style/images/resume.png" title="恢复"/></a>
-                        <a href="#" onclick="r.pause(); return(false);" class="progress-pause-link"><img
-                                src="${pageContext.request.contextPath}/style/images/pause.png" title="暂停"/></a>
-                    </td>
+                    <%--<td class="progress-pause" nowrap="nowrap">--%>
+                        <%--<a href="#" onclick="r.upload(); return(false);" class="progress-resume-link"><img--%>
+                                <%--src="${pageContext.request.contextPath}/style/images/resume.png" title="恢复"/></a>--%>
+                        <%--<a href="#" onclick="r.pause(); return(false);" class="progress-pause-link"><img--%>
+                                <%--src="${pageContext.request.contextPath}/style/images/pause.png" title="暂停"/></a>--%>
+                    <%--</td>--%>
                 </tr>
             </table>
         </div>
@@ -125,7 +125,7 @@
                 {
                     field: 'logo', title: '公司Logo', width: 80, align: 'right',
                     formatter: function (val, row) {
-                        return '<img style="max-width:491px;max-height:59px;" src="${pageContext.request.contextPath}/logo/' + (val || 'blank.png') + '">';
+                        return '<img style="width:300px;height:59px;" src="${pageContext.request.contextPath}/logo/' + (val || 'blank.png') + '">';
                     }
                 },
                 {field: 'note', title: '备注'},
@@ -135,7 +135,9 @@
                         var str_arr = [
                             '<a href="javascript:manageTUsers(',
                             row['id'],
-                            ');">账号管理</a>'
+                            ');">账号管理</a>','<a href="javascript:top.switchDept(',
+                            row['id'],
+                            ');">查看数据</a>'
                         ];
                         return str_arr.join('');
                     }
@@ -185,7 +187,7 @@
         }
 
         $('#dlg_edit').dialog({
-            title: "添加公司",
+            title: "编辑",
             closed: true,
             modal: true,
             draggable: false,
@@ -293,8 +295,6 @@
         var href = '../moduleConfigUserController/index/' + id + '.action';
         openDialog('账号管理', href);
     }
-
-
     var r = null;
     function initResumable() {
         r = new Resumable({
@@ -312,7 +312,6 @@
             // Show a place for dropping/selecting files
             $('.resumable-drop').show();
             $.each($('.resumable-drop'), function (i, item) {
-                debugger
                 r.assignDrop(item);
             });
             $.each($('.resumable-browse'), function (i, item) {

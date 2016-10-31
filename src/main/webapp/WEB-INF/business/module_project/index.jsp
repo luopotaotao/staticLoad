@@ -356,9 +356,10 @@
 
         function addScheme() {
             var node = getNode();
+            console.log(node.id);
             showAddDialog({
                 title: '添加方案',
-                parent: {name: 'project.id', value: node.id}
+                params: [{name: 'project.id', value: node.id}]
             }, '${pageContext.request.contextPath}/moduleProjectManageController/addScheme.action');
         }
 
@@ -460,10 +461,14 @@
             var $target = $forms.eq(level);
             $target.css('display', 'block');
             $target.show();
-            [showProject, showScheme, showPlan][level](obj);
-            $target.form('load', obj);
             console.log(obj);
+            [showProject, showScheme, showPlan][level](obj);
 
+            try{
+                $target.form('load', obj);
+            }catch (e){
+                console.log(e);
+            }
         }
 
         function openTab(title, url) {
@@ -526,7 +531,6 @@
                     }
                 }],
                 onLoad: function () {
-                    debugger;
                     if (options.params) {
                         var p = options.params;
                         p = $.isPlainObject(p) ? [p] : p;
