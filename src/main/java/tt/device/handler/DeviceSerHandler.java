@@ -10,6 +10,7 @@ import tt.service.bussiness.BInspectServiceI;
 
 import java.io.InputStream;
 import java.net.Socket;
+import com.alibaba.fastjson.JSONException;
 
 @Component("deviceSerHandler")
 @Scope("prototype")
@@ -33,7 +34,8 @@ public class DeviceSerHandler implements Runnable {
     }
 
     @Override  
-    public void run() {  
+    public void run() {
+        String addr = socket.getRemoteSocketAddress() + "";
         try {  
             byte[] buf = new byte[1024];
             int len = 0;
@@ -41,18 +43,70 @@ public class DeviceSerHandler implements Runnable {
             while((len = input.read(buf))!=-1){
                 //请求
                 String req = new String(buf,0,len,"gbk");
-//                logger.info("rec:" + req);
+                logger.info("收到【" + addr +"】设备报文:" + req);
+                if("$LRK01$END".equals(req))
+                {
+                    //本次压测结束
+                    logger.info("本次压测结束");
+                    return;
+                }
                 // 请求bean
                 InspectData ins = JSON.parseObject(req, InspectData.class);
-                logger.info(ins.toString());
+//                logger.info(ins.toString());
+                //数据入库
                 bInspectServiceI.add(ins);
-                //响应
-                String res = "" + "OK0x0d";
+                // 响应
+                String res = "$LRK01$OKOK0x0d";
                 socket.getOutputStream().write(res.getBytes("gbk"));
             }
             
-        } catch (Exception e) {  
+        }
+        catch(JSONException j)
+        {
+            // 响应
+            try
+            {
+                socket.getOutputStream().write("报文格式错误！".getBytes("gbk"));
+            }
+            catch (Exception e)
+            {
+                logger.error(e);
+            }
+            logger.error(j);
+        }catch (Exception e) {
+            // 响应
+            try
+            {
+                socket.getOutputStream().write("服务器异常，请查看服务器日志！".getBytes("gbk"));
+            }
+            catch (Exception e1)
+            {
+                logger.error(e1);
+            }
             e.printStackTrace();  
-        }  
-    }  
+        }
+        finally
+        {
+            closeSocket(socket);
+        }
+    }
+
+    void closeSocket(Socket s)
+    {
+        String addr = socket.getRemoteSocketAddress() + "";
+        logger.info("关闭Device addres:" + addr);
+        if (s != null)
+        {
+            try
+            {
+                s.close();
+                s = null;
+            }
+            catch (Exception ex)
+            {
+                ex.printStackTrace();
+            }
+            logger.info("已关闭" + addr);
+        }
+    }
 }  
