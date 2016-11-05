@@ -9,5 +9,7 @@ public interface BInspectServiceI
 
     void add(InspectData ins)
         throws Exception;
+    void updateStatus(String PRG, String STZH, String DevNB)
+            throws Exception;
     DeviceSerHandler getHandler();
 }

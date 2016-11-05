@@ -18,7 +18,12 @@ public class BInspectServiceImpl implements BInspectServiceI,BeanFactoryAware
 
     @Autowired
     private BInspectDaoI inspectDao;
-
+    @Override
+    public void updateStatus(String PRG, String STZH, String DevNB)
+            throws Exception
+    {
+        inspectDao.updateStatus(PRG, STZH, DevNB);
+    }
     @Override
     public void add(InspectData ins)
         throws Exception

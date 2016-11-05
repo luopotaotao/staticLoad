@@ -15,4 +15,11 @@ public class BInspectDaoImpl extends BaseDaoImpl<InspectData> implements BInspec
     {
         this.save(ins);
     }
+    @Override
+    public void updateStatus(String PRG, String STZH, String DevNB)
+    {
+        String sql = "UPDATE `b_inspect_data` t SET t.`status`='2' WHERE t.`DevNB`='"+DevNB+"' AND t.`PRG`='"+PRG+"' AND t.`STZH`='"+STZH+"'";
+        this.executeSql(sql);
+
+    }
 }

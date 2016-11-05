@@ -26,9 +26,9 @@ public class StaticLoadServer
     private ServerSocket serverSocket; //
 
     private ExecutorService servicePool; // 线程池
-    
+
     private int port = 9905;//端口
-    
+
     private int threadPoolSize = 15;
 
     public StaticLoadServer()
@@ -45,7 +45,7 @@ public class StaticLoadServer
         {
             threadPoolSize = Integer.parseInt(devicePoolSize);
         }
-        
+
         try
         {
             logger.info("开启设备服务，监听端口：" + port + ",线程池线程初始数：" + threadPoolSize);
@@ -84,18 +84,16 @@ public class StaticLoadServer
 
     public void service()
     {
-        int i = 1;
         while (true)
         {
             try
             {
                 Socket socket = this.serverSocket.accept(); // 接受到一个连接，并且返回一个客户端的Socket对象实例
+//                DeviceSerHandler handler = new DeviceSerHandler();
                 DeviceSerHandler handler = bInspectServiceI.getHandler();
                 handler.setSocket(socket);
                 this.servicePool.execute(handler);
-                logger.info("Device addres:" + socket.getRemoteSocketAddress());
-                System.out.println("User " + i + " is connecting to the Server");
-                i++ ;
+                logger.info("Device addres:" + socket.getRemoteSocketAddress() +" is connecting to the Server");
             }
             catch (IOException e)
             {
@@ -103,5 +101,11 @@ public class StaticLoadServer
                 this.servicePool.shutdown();
             }
         }
+    }
+
+    public static void main(String[] args)
+    {
+        StaticLoadServer ser = new StaticLoadServer(9905);
+        ser.service();
     }
 }

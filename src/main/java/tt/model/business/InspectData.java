@@ -54,9 +54,37 @@ public class InspectData  extends BaseModel{
 
     @JSONField(name = "LoadFlag")
     private Boolean loadFlag;
-
-    private Integer plan_id;
-
+    
+    @JSONField(name = "TotalTime")
+    private Integer totalTime;
+    @Basic
+    @Column(name = "totalTime")
+    public Integer getTotalTime()
+    {
+        return totalTime;
+    }
+    public void setTotalTime(Integer totalTime)
+    {
+        this.totalTime = totalTime;
+    }
+    /**
+     * 0：未开始检测
+     * 1：正在检测
+     * 2：检测完成
+     */
+    private Integer status;
+    @Basic
+    @Column(name = "status")
+    public Integer getStatus()
+    {
+        return status;
+    }
+    public void setStatus(Integer status)
+    {
+        this.status = status;
+    }
+    
+   
     @Id
     @Column(name = "id")
     @GeneratedValue
@@ -259,13 +287,4 @@ public class InspectData  extends BaseModel{
         this.loadFlag = loadFlag;
     }
 
-    @Basic
-    @Column(name = "plan_id")
-    public Integer getPlan_id() {
-        return plan_id;
-    }
-
-    public void setPlan_id(Integer plan_id) {
-        this.plan_id = plan_id;
-    }
 }

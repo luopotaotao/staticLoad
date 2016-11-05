@@ -13,4 +13,6 @@ import tt.model.business.InspectData;
 public interface BInspectDaoI
 {
     public void addIns(InspectData ins);
+
+    public void updateStatus(String PRG, String STZH, String DevNB);
 }
