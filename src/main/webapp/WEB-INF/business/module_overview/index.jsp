@@ -140,9 +140,12 @@
                     max_lng = item.lng > max_lng ? item.lng : max_lng;
                     min_lat = item.lat < min_lat ? item.lat : min_lat;
                     min_lng = item.lng < min_lng ? item.lng : min_lng;
-
+                    var myIcon = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
+                        offset: new BMap.Size(10, 25), // 指定定位位置
+                        imageOffset: new BMap.Size(0, 0 - 10 * 25) // 设置图片偏移
+                    });
                     var point = new BMap.Point(item.lng,item.lat);
-                    var marker = new BMap.Marker(point);  // 创建标注
+                    var marker = new BMap.Marker(point,{icon:myIcon});  // 创建标注
                     marker.info = item;
                     map.addOverlay(marker);
                     if ($.isFunction(callback)) {

@@ -47,7 +47,6 @@
                     if (count < 2) {
                         count++;
                         parent.$.messager.alert('操作提示', "请求服务器失败...");
-
                     }
                     else {
                         clearInterval(timeout1);
@@ -88,9 +87,21 @@
             type:'get',
             dataType:'json'
         }).done(function (ret) {
-            console.log(ret);
             $('#ff_user_info').form('load',ret);
             $('#dlg_user_info').dialog('open');
+        }).fail(function () {
+            $.messager.alert('提示','获取数据失败,请重新尝试或联系管理员!');
+        });
+    }
+    function showAbout() {
+        $.ajax({
+            url:'${pageContext.request.contextPath}/userController/platformInfo.action',
+            type:'get',
+            dataType:'json'
+        }).done(function (ret) {
+            $('#about_dept_name').text(ret.about_name);
+            $('#about_dept_content').text(ret.about_content);
+            $('#dlg_about').dialog('open');
         }).fail(function () {
             $.messager.alert('提示','获取数据失败,请重新尝试或联系管理员!');
         });
@@ -202,14 +213,14 @@
             </li>
             <li><a href="javascript:openModule('${pageContext.request.contextPath}/moduleBasicController/index.action')"
                    id="18"
-                   class="menus"><img src="${pageContext.request.contextPath}/style/images/icons/icon_report.png"
-                                      class="module_icon">基础信息</a>
+                   class="menus"><img src="${pageContext.request.contextPath}/style/images/icons/icon_config.png"
+                                      class="module_icon">平台设置</a>
             </li>
             <li>
-                <a href="javascript:openModule('${pageContext.request.contextPath}/moduleConfigController/index.action');"
+                <a href="javascript:showAbout()"
                    id="6" class="menus"><img
-                        src="${pageContext.request.contextPath}/style/images/icons/icon_config.png"
-                        class="module_icon">平台设置</a>
+                        src="${pageContext.request.contextPath}/style/images/icons/icon_about.png"
+                        class="module_icon">关于平台</a>
             </li>
 
 
@@ -280,4 +291,22 @@
                    validType="equalTo['#new_password']" invalidMessage="两次输入密码不匹配">
         </div>
     </form>
+</div>
+<div id="dlg_about" class="easyui-dialog" style="width:100%;max-width:400px;padding:30px 60px;"
+     data-options="
+            title: '关于平台',
+            closed: true,
+            modal: true,
+            draggable: false,
+            buttons: [{
+                text: '确定',
+                handler: function(){
+                    $('#dlg_about').dialog('close');
+                }
+            }]
+        ">
+    <i>智能无线静载荷检测云平台</i>
+    <p>测试信息测试信息</p>
+    <i id="about_dept_name"></i>
+    <p id="about_dept_content"></p>
 </div>

@@ -17,12 +17,12 @@
 		<task:scheduled ref="initServiceImpl" method="init" cron="59 59 23 * * ?" />
 	</task:scheduled-tasks> -->
    
-	<task:scheduled-tasks>
-	 <!--每分钟判断用户是否关掉浏览器 -->
-		<task:scheduled ref="onlineJob" method="onlineofuser" cron="0/5 * * * * ?" />
-	 <!--每天定时把用户状态改为解锁状态，用户剩余登录次数改为配置参数中的剩余登录次数 -->
-		<task:scheduled ref="userUnlockJob" method="userUnlock" cron="59 59 23 * * ?" />
-	 <!--每30秒 监控一次系统信息，获取一次系统间连接状态 -->
-		<!--  <task:scheduled ref="monitorSystemJob" method="monitorsystem" cron="0/30 * * * * ?" />-->
-	</task:scheduled-tasks>
+	<!--<task:scheduled-tasks>-->
+	 <!--&lt;!&ndash;每分钟判断用户是否关掉浏览器 &ndash;&gt;-->
+		<!--<task:scheduled ref="onlineJob" method="onlineofuser" cron="* 0/5 * * * ?" />-->
+	 <!--&lt;!&ndash;每天定时把用户状态改为解锁状态，用户剩余登录次数改为配置参数中的剩余登录次数 &ndash;&gt;-->
+		<!--<task:scheduled ref="userUnlockJob" method="userUnlock" cron="59 59 23 * * ?" />-->
+	 <!--&lt;!&ndash;每30秒 监控一次系统信息，获取一次系统间连接状态 &ndash;&gt;-->
+		<!--&lt;!&ndash;  <task:scheduled ref="monitorSystemJob" method="monitorsystem" cron="0/30 * * * * ?" />&ndash;&gt;-->
+	<!--</task:scheduled-tasks>-->
 </beans>

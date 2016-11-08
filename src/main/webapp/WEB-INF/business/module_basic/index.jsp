@@ -39,6 +39,10 @@
                 "id": 13,
                 "text": "行政区划",
                 "url": "${pageContext.request.contextPath}/moduleBasicAreaController/index.action"
+            }, {
+                "id": 14,
+                "text": "组织机构",
+                "url": "${pageContext.request.contextPath}/moduleBasicDeptController/index.action"
             }]
         }];
         initUI();

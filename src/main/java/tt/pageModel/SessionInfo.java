@@ -1,6 +1,8 @@
 package tt.pageModel;
 
 
+import tt.model.*;
+import tt.model.Role;
 import tt.model.business.Dept;
 
 import java.util.*;
@@ -45,6 +47,8 @@ public class SessionInfo implements java.io.Serializable {
 
     private Dept originDept;
 
+    private tt.model.Role role;
+
     private String email;
     public Set<Pattern> getResourceSet() {
         return resourceSet;
@@ -88,8 +92,26 @@ public class SessionInfo implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return this.name;
+        return "SessionInfo{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", ip='" + ip + '\'' +
+                ", ipinfo='" + ipinfo + '\'' +
+                ", action_time=" + action_time +
+                ", userAucCount=" + userAucCount +
+                ", userAucResult=" + userAucResult +
+                ", userAucName='" + userAucName + '\'' +
+                ", resourceSet=" + resourceSet +
+                ", resourceMap=" + resourceMap +
+                ", dept=" + dept +
+                ", originDept=" + originDept +
+                ", role=" + role +
+                ", email='" + email + '\'' +
+                '}';
     }
+
+
+
 
     public String getIpinfo() {
         return ipinfo;
@@ -166,6 +188,14 @@ public class SessionInfo implements java.io.Serializable {
 
     public void setOriginDept(Dept originDept) {
         this.originDept = originDept;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public String getEmail() {

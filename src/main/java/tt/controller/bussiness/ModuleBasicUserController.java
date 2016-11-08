@@ -18,16 +18,16 @@ import java.util.*;
  * Created by tt on 2016/10/2.
  */
 @Controller
-@RequestMapping("moduleConfigUserController")
-public class ModuleConfigUserController extends BaseController<User> {
+@RequestMapping("moduleBasicUserController")
+public class ModuleBasicUserController extends BaseController<User> {
     @Autowired
     private UserServiceI userService;
 
     @RequestMapping("index/{dept_id}")
     public String index(@PathVariable Integer dept_id, Model model) {
-        model.addAttribute("baseUrl", "moduleConfigUserController");
+        model.addAttribute("baseUrl", "moduleBasicUserController");
         model.addAttribute("dept_id", dept_id);
-        return "business/module_config/dept_users";
+        return "business/module_basic/dept_users";
     }
 
     @RequestMapping(value = "get/{id}", method = RequestMethod.GET)

@@ -45,6 +45,7 @@ public class TUser implements java.io.Serializable
 
     private Dept dept;
 
+    private Role role;
     // Constructors
     /** default constructor */
     public TUser()
@@ -204,5 +205,15 @@ public class TUser implements java.io.Serializable
 
     public void setDept(Dept dept) {
         this.dept = dept;
+    }
+
+    @Column(name = "role",columnDefinition = "enum('SUPER','ADMIN',CUSTOM')")
+    @Enumerated(EnumType.ORDINAL)
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

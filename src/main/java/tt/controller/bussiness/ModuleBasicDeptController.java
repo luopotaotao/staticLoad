@@ -25,8 +25,8 @@ import java.util.*;
  * Created by taotao on 2016/9/27.
  */
 @Controller
-@RequestMapping("moduleConfigController")
-public class ModuleConfigDeptController extends BaseController<Dept> {
+@RequestMapping("moduleBasicDeptController")
+public class ModuleBasicDeptController extends BaseController<Dept> {
     public static final String UPLOAD_DIR = "tmp";
     public static final String LOGO_DIR = "logo";
     @Autowired
@@ -36,15 +36,15 @@ public class ModuleConfigDeptController extends BaseController<Dept> {
 
     @RequestMapping("index")
     public String index(Model model) {
-        model.addAttribute("baseUrl", "moduleConfigController");
+        model.addAttribute("baseUrl", "moduleBasicDeptController");
         Dept dept = getOriginDept()!=null?getOriginDept():getDept();
-        return dept.getName().equals("管理员") ? "business/module_config/admin_index" : "business/module_config/index";
+        return "business/module_basic/dept";
     }
 
     @RequestMapping("{dept_id}/users")
     public String listAccounts(@PathVariable Integer dept_id, Model model) {
         model.addAttribute("dept_id", dept_id);
-        return "business/module_config/dept_users";
+        return "business/module_basic/dept_users";
     }
 
     @RequestMapping(value = "get/{id}", method = RequestMethod.GET)

@@ -67,6 +67,7 @@
 				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
 				<prop key="hibernate.use_sql_comments">${hibernate.use_sql_comments}</prop>
 				<prop key="hibernate.default_schema">${hibernate.default_schema}</prop>
+				<prop key="hibernate.cache.use_query_cache">false</prop>
 			</props>
 		</property>
 

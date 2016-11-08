@@ -4,8 +4,6 @@
 <html>
 <head>
     <title>智能无线静荷载试验检测云平台</title>
-
-
 </head>
 <body>
 

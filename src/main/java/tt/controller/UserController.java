@@ -571,6 +571,14 @@ public class UserController extends BaseController {
         ret.put("email",info.getEmail());
         return ret;
     }
+    @RequestMapping(value = "platformInfo",method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String,Object> platformInfo(){
+        Map<String,Object> ret = new HashMap<>();
+        ret.put("about_content",getDept().getNote());
+        ret.put("about_name",getDept().getName());
+        return ret;
+    }
 
     @RequestMapping(value = "updatePwd",method = RequestMethod.POST)
     @ResponseBody

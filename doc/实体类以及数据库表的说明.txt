@@ -1,0 +1,31 @@
+t_user 用户表 
+b_dept 公司表
+
+每个用户属于唯一的一个公司
+所有以b_开头的表,都有一个dept_id 用以区分数据属于哪个公司
+
+
+基础信息部分
+	行政区划 Area b_area
+		Area (level=0)
+			Area(level=1,p_id=父节点id)
+				Area (level=2,p_id=父节点id)
+	
+	公司信息 Company b_company
+	检测机构 Institution b_institution		//检测机构下辖检测设备和检测人员
+		检测设备 Equipment b_equipment(institution_id=所属检测机构id)
+		检测人员 Inspector b_inspector(institution_id=所属检测机构id)
+	检测项目 InspectItem b_inspect_item     //检测项目下辖检测方法
+		检测方法 InspectMethod b_inspect_method(inspect_item_id=所属检测项目id)
+工程信息
+	
+	工程基础信息 b_project					//工程信息需要关联Company作为三种单位
+		建设单位,施工单位,监理单位 Company 
+		检测方案 InspectScheme  b_inspect_scheme  //每个工程下可以建立多个检测方案
+			检测计划 InspectPlan b_inspect_plan   //每个检测方案下可以建立多个检测计划
+				检测数据 InspectData b_inspect_data            //每个检测计划可以关联多组检测数据
+		
+工程概览
+	工程概览 Overview b_overview(视图)	 // 对应的行政区划信息以及该行政区划下的工程数量
+		
+		

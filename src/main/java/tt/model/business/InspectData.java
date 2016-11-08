@@ -9,7 +9,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 public class InspectData  extends BaseModel{
 
     private Integer id;
-
+    private Integer plan_id;
     @JSONField(name = "PRG")
     private String prg;
 
@@ -96,6 +96,15 @@ public class InspectData  extends BaseModel{
         this.id = id;
     }
 
+    @Basic
+    @Column(name = "plan_id")
+    public Integer getPlan_id() {
+        return plan_id;
+    }
+
+    public void setPlan_id(Integer plan_id) {
+        this.plan_id = plan_id;
+    }
     @Basic
     @Column(name = "prg")
     public String getPrg() {

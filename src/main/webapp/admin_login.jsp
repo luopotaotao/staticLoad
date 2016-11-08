@@ -8,7 +8,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
-    <title>模板支撑系统智能监测平台</title>
+    <title>智能无线静荷载试验检测云平台</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="Pragma" content="no-cache"/>
     <meta http-equiv="Cache-Control" content="no-cache"/>
@@ -167,7 +167,7 @@
      style="position: absolute; z-index: 1; width: 100%; height: 408px; background-color: rgb(38, 150, 203);">
     &nbsp;</div>
 <div style="position:absolute;z-index:2;width: 100%">
-    <%--<img src="style/images/logo.png" style="height: 56px;margin-left: 5px;">--%>
+    <img src="style/images/logo.png" style="height: 56px;margin-left: 5px;">
     <div id="title" style="text-align: center; height: 55px; margin-top: 206px">
         <h1 style="color: white;font-size: 40px;font-family: initial;">智能无线静荷载试验检测云平台</h1>
     </div>
