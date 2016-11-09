@@ -47,7 +47,7 @@ public class SessionInfo implements java.io.Serializable {
 
     private Dept originDept;
 
-    private tt.model.Role role;
+    private Integer role;
 
     private String email;
     public Set<Pattern> getResourceSet() {
@@ -190,11 +190,11 @@ public class SessionInfo implements java.io.Serializable {
         this.originDept = originDept;
     }
 
-    public Role getRole() {
+    public Integer getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(Integer role) {
         this.role = role;
     }
 

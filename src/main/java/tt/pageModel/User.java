@@ -47,7 +47,7 @@ public class User extends PageHelper implements java.io.Serializable
 
     private Date validdatetime;
     private Dept dept;
-    private tt.model.Role role;
+    private Integer role;
     // 是否锁定的标志，默认为0:未锁定;1:锁定
     @Validator(accessShortValue = {1, 0})
     private Short lockSymbol;
@@ -227,11 +227,11 @@ public class User extends PageHelper implements java.io.Serializable
         this.dept = dept;
     }
 
-    public Role getRole() {
+    public Integer getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(Integer role) {
         this.role = role;
     }
 }

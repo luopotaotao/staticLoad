@@ -16,10 +16,10 @@ import java.util.List;
 @Repository("userDao")
 public class UserDaoImpl extends BaseDaoImpl<User> implements UserDaoI {
     @Override
-    public List<User> list(Integer dept_id, String name, Integer page, Integer pageSize) {
+    public List<User> list(Integer current_role,Integer dept_id, String name, Integer page, Integer pageSize) {
         Criteria criteria = getCriteria(page,pageSize)
                 .add(Restrictions.eq("dept.id",dept_id))
-                .add(Restrictions.ne("name","admin"))
+                .add(Restrictions.gt("role",current_role))
                 .addOrder(Order.asc("id"));
         if(name!=null&&!name.trim().isEmpty()){
             criteria.add(Restrictions.like("name","%"+name+"%"));

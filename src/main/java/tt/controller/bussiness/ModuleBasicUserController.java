@@ -48,6 +48,7 @@ public class ModuleBasicUserController extends BaseController<User> {
             }
         }
         Map<String, Object> params = createHashMap("dept_id", dept_id);
+        params.put("role",getSessionInfo().getRole());
         params.put("name", name);
         List<User> list = userService.list(params, null, null, dept_id);
         return listResponse(list);
@@ -57,6 +58,7 @@ public class ModuleBasicUserController extends BaseController<User> {
     @ResponseBody
     public JSONObject list(@RequestParam(required = false) String name) {
         Map<String, Object> params = new HashMap<>();
+        params.put("role",getSessionInfo().getRole());
         if (name != null && !name.trim().isEmpty()) {
             try {
                 name = URLDecoder.decode(name, "utf-8");

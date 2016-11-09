@@ -6,383 +6,383 @@
     <title>智能无线静荷载试验检测云平台</title>
     <jsp:include page="../../layout/common.jsp"></jsp:include>
 </head>
-<c:if test="${sessionScope.sessionInfo.role eq 'SUPER'}">
+<c:if test="${sessionScope.sessionInfo.role eq 0}">
     <body>
 
-<div class="easyui-panel" style="width:30%">
-    <input class="easyui-searchbox"
-           data-options="prompt:'请输入公司名称',searcher:function(val){$('#dg').datagrid('load',{name:encodeURIComponent(val)});}"
-           style="width:100%">
-</div>
+    <div class="easyui-panel" style="width:30%">
+        <input class="easyui-searchbox"
+               data-options="prompt:'请输入公司名称',searcher:function(val){$('#dg').datagrid('load',{name:encodeURIComponent(val)});}"
+               style="width:100%">
+    </div>
 
-<table id="dg" style="width:100%"></table>
-<div id="dlg_edit" style="width:100%;max-width:400px;padding:30px 60px;">
-    <form id="ff" class="easyui-form" method="post" data-options="novalidate:true">
-        <div style="margin-bottom:20px;display: none">
-            <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'记录编号:',required:true">
-        </div>
-        <div style="margin-bottom:20px">
-            <input class="easyui-textbox" name="name" style="width:100%"
-                   data-options="label:'公司名称:',required:true">
-        </div>
-        <div style="margin-bottom:20px">
-            <input class="easyui-textbox" name="note" style="width:100%"
-                   data-options="label:'备注信息:'">
-        </div>
-        <div style="margin-bottom:20px;display: none">
-            <input class="easyui-textbox" id="dept_logo" name="logo" style="width:100%"
-                   data-options="label:'logo:'">
-        </div>
-        <div style="margin-bottom:20px">
+    <table id="dg" style="width:100%"></table>
+    <div id="dlg_edit" style="width:100%;max-width:400px;padding:30px 60px;">
+        <form id="ff" class="easyui-form" method="post" data-options="novalidate:true">
+            <div style="margin-bottom:20px;display: none">
+                <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'记录编号:',required:true">
+            </div>
+            <div style="margin-bottom:20px">
+                <input class="easyui-textbox" name="name" style="width:100%"
+                       data-options="label:'公司名称:',required:true">
+            </div>
+            <div style="margin-bottom:20px">
+                <input class="easyui-textbox" name="note" style="width:100%"
+                       data-options="label:'备注信息:'">
+            </div>
+            <div style="margin-bottom:20px;display: none">
+                <input class="easyui-textbox" id="dept_logo" name="logo" style="width:100%"
+                       data-options="label:'logo:'">
+            </div>
+            <div style="margin-bottom:20px">
 
 
-        </div>
-        <div id="img_div" style="margin-bottom:20px;overflow: hidden">
-            <img id="img" style="width: 300px;height: 59px"/>
-        </div>
-        <div class="resumable-progress">
-            <table>
-                <tr>
-                    <td width="100%">
-                        <div class="progress-container">
-                            <div class="progress-bar"></div>
-                        </div>
-                    </td>
-                    <td class="progress-text" nowrap="nowrap"></td>
-                    <%--<td class="progress-pause" nowrap="nowrap">--%>
-                    <%--<a href="#" onclick="r.upload(); return(false);" class="progress-resume-link"><img--%>
-                    <%--src="${pageContext.request.contextPath}/style/images/resume.png" title="恢复"/></a>--%>
-                    <%--<a href="#" onclick="r.pause(); return(false);" class="progress-pause-link"><img--%>
-                    <%--src="${pageContext.request.contextPath}/style/images/pause.png" title="暂停"/></a>--%>
-                    <%--</td>--%>
-                </tr>
-            </table>
-        </div>
-    </form>
-</div>
-<div id="details"></div>
+            </div>
+            <div id="img_div" style="margin-bottom:20px;overflow: hidden">
+                <img id="img" style="width: 300px;height: 59px"/>
+            </div>
+            <div class="resumable-progress">
+                <table>
+                    <tr>
+                        <td width="100%">
+                            <div class="progress-container">
+                                <div class="progress-bar"></div>
+                            </div>
+                        </td>
+                        <td class="progress-text" nowrap="nowrap"></td>
+                            <%--<td class="progress-pause" nowrap="nowrap">--%>
+                            <%--<a href="#" onclick="r.upload(); return(false);" class="progress-resume-link"><img--%>
+                            <%--src="${pageContext.request.contextPath}/style/images/resume.png" title="恢复"/></a>--%>
+                            <%--<a href="#" onclick="r.pause(); return(false);" class="progress-pause-link"><img--%>
+                            <%--src="${pageContext.request.contextPath}/style/images/pause.png" title="暂停"/></a>--%>
+                            <%--</td>--%>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+    <div id="details"></div>
 
-<script type="text/javascript">
-    $(function () {
-        var baseUrl = '/';
-        $('#dg').datagrid({
-            url: '../${baseUrl}/query.action',
-            method: 'get',
-            iconCls: 'icon-save',
+    <script type="text/javascript">
+        $(function () {
+            var baseUrl = '/';
+            $('#dg').datagrid({
+                url: '../${baseUrl}/query.action',
+                method: 'get',
+                iconCls: 'icon-save',
 //            width: 700,
-            height: $('body').height(),
-            fitColumns: true,
-            singleSelect: false,
-            pagination: true,
-            pageSize: 10,
-            toolbar: [{
-                text: '添加',
-                iconCls: 'icon-add',
-                handler: function () {
-                    showEditDialog();
-                }
-            }, {
-                text: '编辑',
-                iconCls: 'icon-edit',
-                handler: function () {
-                    var rows = $('#dg').datagrid('getChecked');
-                    if (!rows || !rows.length) {
-                        $.messager.alert('提示', '请选择要编辑的行!');
-                        return;
+                height: $('body').height(),
+                fitColumns: true,
+                singleSelect: false,
+                pagination: true,
+                pageSize: 10,
+                toolbar: [{
+                    text: '添加',
+                    iconCls: 'icon-add',
+                    handler: function () {
+                        showEditDialog();
                     }
-                    if (rows.length > 1) {
-                        $.messager.alert('提示', '只能选择一行进行编辑!');
-                        return;
-                    } else {
-                        showEditDialog(rows[0]);
-                    }
-                }
-            }, {
-                text: '删除',
-                iconCls: 'icon-remove',
-                handler: function () {
-                    var rows = $('#dg').datagrid('getChecked');
-                    if (!rows || !rows.length) {
-                        $.messager.alert('提示', '请选择要删除的行!');
-                        return;
-                    }
-                    $.messager.confirm('提示', '是否确定删除这' + rows.length + '条数据?', function (r) {
-                        if (r) {
-                            remove($.map(rows, function (row) {
-                                return row.id;
-                            }), function () {
-                                $('#dg').datagrid('reload');
-                            });
+                }, {
+                    text: '编辑',
+                    iconCls: 'icon-edit',
+                    handler: function () {
+                        var rows = $('#dg').datagrid('getChecked');
+                        if (!rows || !rows.length) {
+                            $.messager.alert('提示', '请选择要编辑的行!');
+                            return;
                         }
+                        if (rows.length > 1) {
+                            $.messager.alert('提示', '只能选择一行进行编辑!');
+                            return;
+                        } else {
+                            showEditDialog(rows[0]);
+                        }
+                    }
+                }, {
+                    text: '删除',
+                    iconCls: 'icon-remove',
+                    handler: function () {
+                        var rows = $('#dg').datagrid('getChecked');
+                        if (!rows || !rows.length) {
+                            $.messager.alert('提示', '请选择要删除的行!');
+                            return;
+                        }
+                        $.messager.confirm('提示', '是否确定删除这' + rows.length + '条数据?', function (r) {
+                            if (r) {
+                                remove($.map(rows, function (row) {
+                                    return row.id;
+                                }), function () {
+                                    $('#dg').datagrid('reload');
+                                });
+                            }
+                        });
+                    }
+                }],
+                columns: [[
+                    {field: 'ck', checkbox: true},
+                    {field: 'id', title: 'ID', hidden: true},
+                    {field: 'name', title: '公司名称', width: 80},
+                    {
+                        field: 'logo', title: '公司Logo', width: 80, align: 'right',
+                        formatter: function (val, row) {
+                            return '<img style="width:300px;height:59px;" src="${pageContext.request.contextPath}/logo/' + (val || 'blank.png') + '">';
+                        }
+                    },
+                    {field: 'note', title: '备注'},
+                    {
+                        field: 'null', title: '操作', width: 80, align: 'right',
+                        formatter: function (val, row) {
+                            var str_arr = [
+                                '<a href="javascript:manageTUsers(',
+                                row['id'],
+                                ');">账号管理</a>', '<a href="javascript:top.switchDept(',
+                                row['id'],
+                                ');">查看数据</a>'
+                            ];
+                            return str_arr.join('');
+                        }
+                    }
+                ]],
+                onHeaderContextMenu: function (e, field) {
+                    e.preventDefault();
+                    if (!$.cmenu) {
+                        createColumnMenu();
+                    }
+                    $.cmenu.menu('show', {
+                        left: e.pageX,
+                        top: e.pageY
                     });
                 }
-            }],
-            columns: [[
-                {field: 'ck', checkbox: true},
-                {field: 'id', title: 'ID', hidden: true},
-                {field: 'name', title: '公司名称', width: 80},
-                {
-                    field: 'logo', title: '公司Logo', width: 80, align: 'right',
-                    formatter: function (val, row) {
-                        return '<img style="width:300px;height:59px;" src="${pageContext.request.contextPath}/logo/' + (val || 'blank.png') + '">';
-                    }
-                },
-                {field: 'note', title: '备注'},
-                {
-                    field: 'null', title: '操作', width: 80, align: 'right',
-                    formatter: function (val, row) {
-                        var str_arr = [
-                            '<a href="javascript:manageTUsers(',
-                            row['id'],
-                            ');">账号管理</a>', '<a href="javascript:top.switchDept(',
-                            row['id'],
-                            ');">查看数据</a>'
-                        ];
-                        return str_arr.join('');
-                    }
-                }
-            ]],
-            onHeaderContextMenu: function (e, field) {
-                e.preventDefault();
-                if (!$.cmenu) {
-                    createColumnMenu();
-                }
-                $.cmenu.menu('show', {
-                    left: e.pageX,
-                    top: e.pageY
-                });
-            }
-        });
+            });
 
-        function createColumnMenu() {
-            $.cmenu = $('<div/>').appendTo('body');
-            $.cmenu.menu({
-                onClick: function (item) {
-                    if (item.iconCls == 'icon-ok') {
-                        $('#dg').datagrid('hideColumn', item.name);
-                        $.cmenu.menu('setIcon', {
-                            target: item.target,
-                            iconCls: 'icon-empty'
-                        });
-                    } else {
-                        $('#dg').datagrid('showColumn', item.name);
-                        $.cmenu.menu('setIcon', {
-                            target: item.target,
-                            iconCls: 'icon-ok'
-                        });
+            function createColumnMenu() {
+                $.cmenu = $('<div/>').appendTo('body');
+                $.cmenu.menu({
+                    onClick: function (item) {
+                        if (item.iconCls == 'icon-ok') {
+                            $('#dg').datagrid('hideColumn', item.name);
+                            $.cmenu.menu('setIcon', {
+                                target: item.target,
+                                iconCls: 'icon-empty'
+                            });
+                        } else {
+                            $('#dg').datagrid('showColumn', item.name);
+                            $.cmenu.menu('setIcon', {
+                                target: item.target,
+                                iconCls: 'icon-ok'
+                            });
+                        }
                     }
+                });
+                var fields = $('#dg').datagrid('getColumnFields');
+                for (var i = 0; i < fields.length; i++) {
+                    var field = fields[i];
+                    var col = $('#dg').datagrid('getColumnOption', field);
+                    $.cmenu.menu('appendItem', {
+                        text: col.title,
+                        name: field,
+                        iconCls: 'icon-ok'
+                    });
+                }
+            }
+
+            $('#dlg_edit').dialog({
+                title: "编辑",
+                closed: true,
+                modal: true,
+                draggable: false,
+                iconCls: 'icon-add',
+                buttons: [{
+                    text: '保存',
+                    iconCls: 'icon-ok',
+                    handler: submitForm
+                }, {
+                    text: '取消',
+                    iconCls: 'icon-cancel',
+                    handler: closeEditDialog
+                }],
+                onClose: function () {
+                    r.cancel();
+                    $('#ff_user').form('clear');
+                },
+                onBeforeOpen: function () {
+                    initResumable();
+                    return true;
                 }
             });
-            var fields = $('#dg').datagrid('getColumnFields');
-            for (var i = 0; i < fields.length; i++) {
-                var field = fields[i];
-                var col = $('#dg').datagrid('getColumnOption', field);
-                $.cmenu.menu('appendItem', {
-                    text: col.title,
-                    name: field,
-                    iconCls: 'icon-ok'
-                });
-            }
-        }
 
-        $('#dlg_edit').dialog({
-            title: "编辑",
-            closed: true,
-            modal: true,
-            draggable: false,
-            iconCls: 'icon-add',
-            buttons: [{
-                text: '保存',
-                iconCls: 'icon-ok',
-                handler: submitForm
-            }, {
-                text: '取消',
-                iconCls: 'icon-cancel',
-                handler: closeEditDialog
-            }],
-            onClose: function () {
-                r.cancel();
-                $('#ff_user').form('clear');
-            },
-            onBeforeOpen: function () {
-                initResumable();
-                return true;
-            }
-        });
-
-        function showEditDialog(data) {
-            var $ff = $('#ff'),
-                    $img = $('#img'),
-                    name = 'blank.png';
-            if (data) {
-                $ff.form('load', data);
-                $ff.form({url: 'put.action'});
-                if (data.logo) {
-                    name = data.logo;
-                }
-            } else {
-                $ff.form({url: 'post.action'});
-            }
-            $img.attr('src', '${pageContext.request.contextPath}/logo/' + name);
-
-            $('#dlg_edit').dialog('open');
-        }
-
-        function submitForm() {
-            $.messager.progress();
-            $('#ff').form('submit', {
-                onSubmit: function () {
-                    var isValid = $(this).form('validate');
-                    if (!isValid) {
-                        $.messager.progress('close');
+            function showEditDialog(data) {
+                var $ff = $('#ff'),
+                        $img = $('#img'),
+                        name = 'blank.png';
+                if (data) {
+                    $ff.form('load', data);
+                    $ff.form({url: 'put.action'});
+                    if (data.logo) {
+                        name = data.logo;
                     }
-                    return isValid;
-                },
-                success: function (data) {
-                    $.messager.progress('close');
-                    data = $.parseJSON(data);
-                    if (data.flag) {
-                        $.messager.alert('提示', '保存成功!');
-                        closeEditDialog(true);
-                    } else {
-                        $.messager.alert('提示', data.message || '保存失败,请检查网络连接或者权限!');
-                    }
-                }
-            });
-        }
-
-        function closeEditDialog(needRefresh) {
-            if (needRefresh) {
-                $('#dg').datagrid('reload');
-            }
-            $('#ff').form('clear');
-            $('#dlg_edit').dialog('close');
-        }
-
-        function remove(ids) {
-            $.ajax({
-                url: '../${baseUrl}/delete.action',
-                data: {ids: ids},
-                type: 'post',
-                dataType: 'json'
-            }).done(function (ret) {
-                if (ret && ret.flag) {
-                    $.messager.alert('提示', '删除成功!');
-                    $('#dg').datagrid('reload');
                 } else {
-                    $.messager.alert('提示', ret, msg || '删除失败!');
+                    $ff.form({url: 'post.action'});
                 }
-            }).fail(function () {
-                $.messager.alert('提示', '删除失败!');
+                $img.attr('src', '${pageContext.request.contextPath}/logo/' + name);
+
+                $('#dlg_edit').dialog('open');
+            }
+
+            function submitForm() {
+                $.messager.progress();
+                $('#ff').form('submit', {
+                    onSubmit: function () {
+                        var isValid = $(this).form('validate');
+                        if (!isValid) {
+                            $.messager.progress('close');
+                        }
+                        return isValid;
+                    },
+                    success: function (data) {
+                        $.messager.progress('close');
+                        data = $.parseJSON(data);
+                        if (data.flag) {
+                            $.messager.alert('提示', '保存成功!');
+                            closeEditDialog(true);
+                        } else {
+                            $.messager.alert('提示', data.message || '保存失败,请检查网络连接或者权限!');
+                        }
+                    }
+                });
+            }
+
+            function closeEditDialog(needRefresh) {
+                if (needRefresh) {
+                    $('#dg').datagrid('reload');
+                }
+                $('#ff').form('clear');
+                $('#dlg_edit').dialog('close');
+            }
+
+            function remove(ids) {
+                $.ajax({
+                    url: '../${baseUrl}/delete.action',
+                    data: {ids: ids},
+                    type: 'post',
+                    dataType: 'json'
+                }).done(function (ret) {
+                    if (ret && ret.flag) {
+                        $.messager.alert('提示', '删除成功!');
+                        $('#dg').datagrid('reload');
+                    } else {
+                        $.messager.alert('提示', ret, msg || '删除失败!');
+                    }
+                }).fail(function () {
+                    $.messager.alert('提示', '删除失败!');
+                });
+            }
+        });
+        function openDialog(title, href) {
+            $('#details').dialog({
+                title: title,
+                width: $('body').width() * 0.8,
+                height: $(document).height(),
+                closed: false,
+                cache: false,
+                href: href,
+                modal: true
             });
         }
-    });
-    function openDialog(title, href) {
-        $('#details').dialog({
-            title: title,
-            width: $('body').width() * 0.8,
-            height: $(document).height(),
-            closed: false,
-            cache: false,
-            href: href,
-            modal: true
-        });
-    }
 
 
-    function manageTUsers(id) {
-        var href = '../moduleBasicUserController/index/' + id + '.action';
-        openDialog('账号管理', href);
-    }
-    var r = null;
-    function initResumable() {
-        r = new Resumable({
-            target: '../fileController/upload.action',
-            chunkSize: 1 * 1024 * 1024,
-            simultaneousUploads: 4,
-            testChunks: true,
-            throttleProgressCallbacks: 1,
-            method: "octet"
-        });
-        // Resumable.js isn't supported, fall back on a different method
-        if (!r.support) {
-            $('.resumable-error').show();
-        } else {
-            // Show a place for dropping/selecting files
-            $('.resumable-drop').show();
-            $.each($('.resumable-drop'), function (i, item) {
-                r.assignDrop(item);
+        function manageTUsers(id) {
+            var href = '../moduleBasicUserController/index/' + id + '.action';
+            openDialog('账号管理', href);
+        }
+        var r = null;
+        function initResumable() {
+            r = new Resumable({
+                target: '../fileController/upload.action',
+                chunkSize: 1 * 1024 * 1024,
+                simultaneousUploads: 4,
+                testChunks: true,
+                throttleProgressCallbacks: 1,
+                method: "octet"
             });
-            $.each($('.resumable-browse'), function (i, item) {
-                r.assignBrowse(item);
-            });
+            // Resumable.js isn't supported, fall back on a different method
+            if (!r.support) {
+                $('.resumable-error').show();
+            } else {
+                // Show a place for dropping/selecting files
+                $('.resumable-drop').show();
+                $.each($('.resumable-drop'), function (i, item) {
+                    r.assignDrop(item);
+                });
+                $.each($('.resumable-browse'), function (i, item) {
+                    r.assignBrowse(item);
+                });
 //            r.assignDrop($('.resumable-drop')[0]);
-            r.assignBrowse($('#img_div')[0]);
+                r.assignBrowse($('#img_div')[0]);
 
-            // Handle file add event
-            r.on('fileAdded', function (file) {
-                // Show progress pabr
-                $('.resumable-progress, .resumable-list').show();
-                // Show pause, hide resume
-                $('.resumable-progress .progress-resume-link').hide();
-                $('.resumable-progress .progress-pause-link').show();
-                // Add the file to the list
+                // Handle file add event
+                r.on('fileAdded', function (file) {
+                    // Show progress pabr
+                    $('.resumable-progress, .resumable-list').show();
+                    // Show pause, hide resume
+                    $('.resumable-progress .progress-resume-link').hide();
+                    $('.resumable-progress .progress-pause-link').show();
+                    // Add the file to the list
 //                $('.resumable-list').append('<li class="resumable-file-' + file.uniqueIdentifier + '">Uploading <span class="resumable-file-name"></span> <span class="resumable-file-progress"></span>');
 //                $('.resumable-file-' + file.uniqueIdentifier + ' .resumable-file-name').html(file.fileName);
-                // Actually start the upload
-                r.upload();
-            });
-            r.on('pause', function () {
-                // Show resume, hide pause
-                $('.resumable-progress .progress-resume-link').show();
-                $('.resumable-progress .progress-pause-link').hide();
-            });
-            r.on('complete', function () {
-                // Hide pause/resume when the upload has completed
-                $('.resumable-progress .progress-resume-link, .resumable-progress .progress-pause-link').hide();
-            });
-            r.on('fileSuccess', function (file, message) {
-                message = $.parseJSON(message);
-                $('#dept_logo').textbox('setValue', message.url);
-                $('#img').attr('src', '${pageContext.request.contextPath}/tmp/' + message.url);
-                console.log('完成:' + message);
-                // Reflect that the file upload has completed
-                $('.resumable-file-' + file.uniqueIdentifier + ' .resumable-file-progress').html('(completed)');
-            });
-            r.on('fileError', function (file, message) {
-                // Reflect that the file upload has resulted in error
-                $('.resumable-file-' + file.uniqueIdentifier + ' .resumable-file-progress').html('(file could not be uploaded: ' + message + ')');
-            });
-            r.on('fileProgress', function (file) {
-                // Handle progress for both the file and the overall upload
-                $('.resumable-file-' + file.uniqueIdentifier + ' .resumable-file-progress').html(Math.floor(file.progress() * 100) + '%');
-                $('.progress-bar').css({width: Math.floor(r.progress() * 100) + '%'});
-            });
-        }
-    }
-    $('#btn_save').on('click', function () {
-        $.ajax({
-            url: '../fileController/save.action',
-            type: 'post',
-            dataType: 'json',
-            data: {fileName: $('#fileName').val()}
-        }).done(function (ret) {
-            if (ret.flag) {
-                console.log('保存成功');
-            } else {
-                console.log("保存失败");
+                    // Actually start the upload
+                    r.upload();
+                });
+                r.on('pause', function () {
+                    // Show resume, hide pause
+                    $('.resumable-progress .progress-resume-link').show();
+                    $('.resumable-progress .progress-pause-link').hide();
+                });
+                r.on('complete', function () {
+                    // Hide pause/resume when the upload has completed
+                    $('.resumable-progress .progress-resume-link, .resumable-progress .progress-pause-link').hide();
+                });
+                r.on('fileSuccess', function (file, message) {
+                    message = $.parseJSON(message);
+                    $('#dept_logo').textbox('setValue', message.url);
+                    $('#img').attr('src', '${pageContext.request.contextPath}/tmp/' + message.url);
+                    console.log('完成:' + message);
+                    // Reflect that the file upload has completed
+                    $('.resumable-file-' + file.uniqueIdentifier + ' .resumable-file-progress').html('(completed)');
+                });
+                r.on('fileError', function (file, message) {
+                    // Reflect that the file upload has resulted in error
+                    $('.resumable-file-' + file.uniqueIdentifier + ' .resumable-file-progress').html('(file could not be uploaded: ' + message + ')');
+                });
+                r.on('fileProgress', function (file) {
+                    // Handle progress for both the file and the overall upload
+                    $('.resumable-file-' + file.uniqueIdentifier + ' .resumable-file-progress').html(Math.floor(file.progress() * 100) + '%');
+                    $('.progress-bar').css({width: Math.floor(r.progress() * 100) + '%'});
+                });
             }
-        }).fail(function () {
-            console.log("保存失败");
-        });
-    })
+        }
+        $('#btn_save').on('click', function () {
+            $.ajax({
+                url: '../fileController/save.action',
+                type: 'post',
+                dataType: 'json',
+                data: {fileName: $('#fileName').val()}
+            }).done(function (ret) {
+                if (ret.flag) {
+                    console.log('保存成功');
+                } else {
+                    console.log("保存失败");
+                }
+            }).fail(function () {
+                console.log("保存失败");
+            });
+        })
 
-</script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/jslib/resumable.js" type="text/javascript"
-        charset="utf-8"></script>
-</body>
+    </script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/jslib/resumable.js" type="text/javascript"
+            charset="utf-8"></script>
+    </body>
 </c:if>
-<c:if test="${sessionScope.sessionInfo.role eq 'ADMIN'}">
+<c:if test="${sessionScope.sessionInfo.role eq 1}">
     <body>
 
     <div class="easyui-panel" style="width:30%">
@@ -393,7 +393,8 @@
 
     <table id="dg_user" style="width:100%"></table>
     <div id="dlg_user_edit" style="width:100%;max-width:400px;padding:30px 60px;">
-        <form id="ff_user" class="easyui-form" method="post" data-options="novalidate:true" action="../${baseUrl}/post.action">
+        <form id="ff_user" class="easyui-form" method="post" data-options="novalidate:true"
+              action="../${baseUrl}/post.action">
             <div style="margin-bottom:20px;display: none">
                 <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'企业编号:',required:true">
             </div>
@@ -411,12 +412,13 @@
             </div>
 
             <div style="margin-bottom:20px">
-                <input class="easyui-textbox" name="note" style="width:100%"
-                       data-options="label:'备注:'">
-            </div>
-            <div style="margin-bottom:20px;display: none;">
-                <input id="user_dept_id" class="easyui-textbox" name="dept.id" style="width:100%"
-                       data-options="label:'所属机构id:',required:true">
+                <select class="easyui-combobox" data-options="editable:false" name="role"
+                        label="角色:" style="width:100%">
+                    <c:if test="${sessionScope.sessionInfo.role eq 0}">
+                        <option value="1">管理员</option>
+                    </c:if>
+                    <option value="2">普通用户</option>
+                </select>
             </div>
         </form>
     </div>
@@ -424,7 +426,7 @@
     <script type="text/javascript">
         $(function () {
             var dept_id = '${dept_id}';
-            var baseUrl = '${pageContext.request.contextPath}/${baseUrl}';
+            var baseUrl = '${pageContext.request.contextPath}/moduleBasicUserController';
             $('#dg_user').datagrid({
                 url: '../moduleBasicUserController/queryAll.action',
                 method: 'get',
@@ -482,7 +484,10 @@
                     {field: 'ck', checkbox: true},
                     {field: 'id', title: 'ID', hidden: true},
                     {field: 'name', title: '姓名'},
-                    {field: 'pwd', title: '密码'},
+//                    {field: 'password', title: '密码'},
+                    {field: 'role', title: '角色',formatter:function (val,row) {
+                        return ['超级管理员','管理员','普通用户'][val||2];
+                    }},
                     {field: 'note', title: '备注'}
                 ]]
             });
@@ -508,9 +513,9 @@
                 var $ff = $('#ff_user');
                 if (data) {
                     $ff.form('load', data);
-                    $ff.form({url: '../${baseUrl}/put.action'});
+                    $ff.form({url: '../moduleBasicUserController/put.action'});
                 } else {
-                    $ff.form({url: '../${baseUrl}/post.action'});
+                    $ff.form({url: '../moduleBasicUserController/post.action'});
                 }
                 $('#user_dept_id').textbox('setValue', dept_id);
                 $('#dlg_user_edit').dialog('open');
@@ -550,7 +555,7 @@
 
             function remove(ids) {
                 $.ajax({
-                    url: baseUrl+'/delete.action',
+                    url: baseUrl + '/delete.action',
                     data: {ids: ids},
                     type: 'post',
                     dataType: 'json'

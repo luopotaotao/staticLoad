@@ -39,12 +39,16 @@
                 "id": 13,
                 "text": "行政区划",
                 "url": "${pageContext.request.contextPath}/moduleBasicAreaController/index.action"
-            }, {
+            }]
+        }
+            <c:if test="${sessionScope.sessionInfo.role < 2}">
+            , {
                 "id": 14,
                 "text": "组织机构",
                 "url": "${pageContext.request.contextPath}/moduleBasicDeptController/index.action"
-            }]
-        }];
+            }
+            </c:if>
+        ];
         initUI();
         function initUI() {
             $('#tree_menu').tree({
@@ -64,13 +68,13 @@
         function openTab(title, url) {
             var $tt = $('#tt');
             if (!$tt.tabs('exists', title)) {
-                var $iframe = $('<iframe/>', {src: url, style: 'width:95%;height:95%;',scrolling:'no'});
+                var $iframe = $('<iframe/>', {src: url, style: 'width:95%;height:95%;', scrolling: 'no'});
                 $tt.tabs('add', {
                     title: title,
                     content: $iframe,
                     closable: true,
-                    fit:true,
-                    plain:true
+                    fit: true,
+                    plain: true
                 });
             } else {
                 $tt.tabs('select', title)

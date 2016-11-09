@@ -2,6 +2,7 @@ package tt.model.business;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import tt.model.Role;
 import tt.model.Trole;
 
 import javax.persistence.*;
@@ -35,6 +36,7 @@ public class User implements java.io.Serializable
 
     private Dept dept;
 
+    private Integer role;
     // Constructors
     /** default constructor */
     public User()
@@ -152,5 +154,14 @@ public class User implements java.io.Serializable
 
     public void setDept(Dept dept) {
         this.dept = dept;
+    }
+
+    @Column(name = "role")
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
     }
 }

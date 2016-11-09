@@ -45,12 +45,13 @@
             </div>
 
             <div style="margin-bottom:20px">
-                <input class="easyui-textbox" name="dept_id" style="width:100%"
-                       data-options="label:'备注:'">
-            </div>
-            <div style="margin-bottom:20px;display: none;">
-                <input id="user_dept_id" class="easyui-textbox" name="dept.id" style="width:100%"
-                       data-options="label:'所属机构id:',required:true">
+                <select class="easyui-combobox" data-options="editable:false" name="role"
+                        label="角色:" style="width:100%">
+                    <c:if test="${sessionScope.sessionInfo.role eq 0}">
+                        <option value="1">管理员</option>
+                    </c:if>
+                    <option value="2">普通用户</option>
+                </select>
             </div>
         </form>
     </div>
@@ -115,7 +116,10 @@
                     {field: 'ck', checkbox: true},
                     {field: 'id', title: 'ID', hidden: true},
                     {field: 'name', title: '姓名'},
-                    {field: 'password', title: '密码'},
+//                    {field: 'password', title: '密码'},
+                    {field: 'role', title: '角色',formatter:function (val,row) {
+                        return ['超级管理员','管理员','普通用户'][val||2];
+                    }},
                     {field: 'note', title: '备注'}
                 ]]
             });

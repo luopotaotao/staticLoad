@@ -36,8 +36,9 @@ public class ModuleBasicDeptController extends BaseController<Dept> {
 
     @RequestMapping("index")
     public String index(Model model) {
-        model.addAttribute("baseUrl", "moduleBasicDeptController");
         Dept dept = getOriginDept()!=null?getOriginDept():getDept();
+        model.addAttribute("baseUrl", "moduleBasicDeptController");
+        model.addAttribute("dept_id", dept.getId());
         return "business/module_basic/dept";
     }
 

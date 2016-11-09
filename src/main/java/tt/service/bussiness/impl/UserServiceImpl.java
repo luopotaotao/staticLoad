@@ -25,16 +25,20 @@ public class UserServiceImpl implements UserServiceI {
     @Autowired
     private DeptServiceI deptService;
 
-    @Override
-    public User get(Integer id, Integer dept_id) {
+    public User get(String id, Integer dept_id) {
         return userDao.getById(id,dept_id);
     }
 
+    @Override
+    public User get(Integer id, Integer dept_id) {
+        return null;
+    }
 
     @Override
     public List<User> list(Map<String,Object> params,Integer page,Integer pageSize,Integer dept_id) {
         String name = (String) params.get("name");
-        List<User> ret = userDao.list(dept_id, name, null,null);
+        Integer current_role = (Integer) params.get("role");
+        List<User> ret = userDao.list(current_role,dept_id, name, null,null);
         return ret;
     }
 
@@ -68,6 +72,7 @@ public class UserServiceImpl implements UserServiceI {
         }
         Map<String, Object> params = new HashMap<>();
         params.put("ids", ids);
+        //TODO 校验是否有权限
         return userDao.executeHql("delete from User where id in (:ids)", params);
     }
 
@@ -80,9 +85,12 @@ public class UserServiceImpl implements UserServiceI {
 
     @Override
     public User update(User user, Integer dept_id) {
-        Dept dept = deptService.get(dept_id);
-        user.setDept(dept);
-        userDao.update(user);
+        User oldUser = this.get(user.getId(),dept_id);
+//        Dept dept = deptService.get(dept_id);
+//        user.setDept(dept);
+        oldUser.setEmail(user.getEmail());
+        oldUser.setRole(user.getRole());
+        userDao.update(oldUser);
         return user;
     }
 }
