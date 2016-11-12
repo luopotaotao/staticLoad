@@ -21,22 +21,22 @@
                     <th data-options="field:'prg'">工程</th>
                     <th data-options="field:'stzh'">桩号</th>
                     <th data-options="field:'devnb',align:'center'">设备编号</th>
-                    <th data-options="field:'prs',align:'center'">压力</th>
-                    <th data-options="field:'avg_prs',align:'center'">平均压力</th>
-                    <th data-options="field:'hzjc',align:'center'">荷载</th>
-                    <th data-options="field:'avg_hzjc',align:'center'">平均荷载</th>
-                    <th data-options="field:'wyjc',align:'center'">位移</th>
-                    <th data-options="field:'avg_wyjc',align:'center'">平均位移</th>
+                    <th data-options="field:'prs_str',align:'center'">压力</th>
+                    <th data-options="field:'avgPrs',align:'center'">平均压力</th>
+                    <th data-options="field:'hzjc_str',align:'center'">荷载</th>
+                    <th data-options="field:'avgHzjc',align:'center'">平均荷载</th>
+                    <th data-options="field:'wyjc_str',align:'center'">位移</th>
+                    <th data-options="field:'avgWyjc',align:'center'">平均位移</th>
                     <th data-options="field:'gps',align:'center',formatter:function(obj,row){return row.lat+','+row.lng}">
                         GPS信息
                     </th>
                     <th data-options="field:'devstr',align:'center'">设备代号</th>
                     <th data-options="field:'time',align:'center'">数据上传时间</th>
-                    <th data-options="field:'delay',align:'center'">时间间隔</th>
-                    <th data-options="field:'qjx',align:'center'">倾角数据</th>
-                    <th data-options="field:'avg_qjx',align:'center'">平均倾角数据</th>
-                    <th data-options="field:'ndsj',align:'center'">挠度数据</th>
-                    <th data-options="field:'avg_ndsj',align:'center'">平均挠度数据</th>
+                    <th data-options="field:'interval',align:'center'">时间间隔</th>
+                    <th data-options="field:'qjx_str',align:'center'">倾角数据</th>
+                    <th data-options="field:'avgQjx',align:'center'">平均倾角数据</th>
+                    <th data-options="field:'ndsj_str',align:'center'">挠度数据</th>
+                    <th data-options="field:'avgNdsj',align:'center'">平均挠度数据</th>
                     <th data-options="field:'devst',align:'center'">设备状态</th>
                 </tr>
                 </thead>

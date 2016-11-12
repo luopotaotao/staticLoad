@@ -38,32 +38,21 @@ public class ModuleInspectDataController extends BaseController<InspectData> {
     @ResponseBody
     public JSONObject queryData(@PathVariable String PRG, @PathVariable String STZH) {
         List<InspectData> list = inspectDataService.list(PRG, STZH,getDeptId());
-        Map<String,JSONArray> data = sortData(list);
+        Map<String,Object> data = sortData(list);
         JSONObject ret = new JSONObject();
         ret.put("source",listResponse(list));
         ret.put("statistic","");
-        for(Map.Entry<String,JSONArray> entry:data.entrySet()){
+        for(Map.Entry<String,Object> entry:data.entrySet()){
             ret.put(entry.getKey(),entry.getValue());
         }
         return ret;
     }
 
-    private Map<String,JSONArray> sortData(List<InspectData> source){
+    private Map<String,Object> sortData(List<InspectData> source){
+        //计算本级位移
         //TODO 整理数据,生成统计数据,图表0,1,2的数据
-        String chart0 = "[\n" +
-                "                {x: 0, y: 0.00},\n" +
-                "                {x: 340, y: 0.70},\n" +
-                "                {x: 510, y: 1.42},\n" +
-                "                {x: 680, y: 2.35},\n" +
-                "                {x: 850, y: 3.39},\n" +
-                "                {x: 1020, y: 4.51},\n" +
-                "                {x: 1190, y: 5.78},\n" +
-                "                {x: 1360, y: 6.95},\n" +
-                "                {x: 1530, y: 8.17},\n" +
-                "                {x: 1700, y: 9.47},\n" +
-                "                {x: 1700, y: 9.47},\n" +
-                "                {x: 1700, y: 9.47},\n" +
-                "                {x: 1700, y: 9.47}]";
+
+        List<InspectData> chart0 = inspectDataService.calcChart0(source);;
         String chart1 = "[{\n" +
                 "                name: '340',\n" +
                 "                data: [\n" +
@@ -116,8 +105,8 @@ public class ModuleInspectDataController extends BaseController<InspectData> {
                 "                {y:9.47,x:3.230448921},\n" +
                 "                {y:9.47,x:3.230448921},\n" +
                 "                {y:9.47,x:3.230448921}]";
-        Map<String,JSONArray> ret = new HashMap<>();
-        ret.put("chart0",JSONArray.parseArray(chart0));
+        Map<String,Object> ret = new HashMap<>();
+        ret.put("chart0",chart0);
         ret.put("chart1",JSONArray.parseArray(chart1));
         ret.put("chart2",JSONArray.parseArray(chart2));
         return ret;

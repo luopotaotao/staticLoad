@@ -3,6 +3,11 @@ package tt.model.business;
 import javax.persistence.*;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson.serializer.DoubleSerializer;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Table(name = "b_inspect_data")
@@ -22,11 +27,20 @@ public class InspectData  extends BaseModel{
     @JSONField(name = "PRS")
     private String prs_str;
 
+    private Double avg_prs;
+
     @JSONField(name = "HZJC")
     private String hzjc_str;
 
+    private Double avg_hzjc;
+
     @JSONField(name = "WYJC")
     private String wyjc_str;
+
+    private Double avg_wyjc;
+
+    //本级位移
+    private Double cur_wyjc;
 
     @JSONField(name = "lat")
     private Float lat;
@@ -57,6 +71,11 @@ public class InspectData  extends BaseModel{
     
     @JSONField(name = "TotalTime")
     private Integer totalTime;
+
+    private Integer interval;
+    private Double avg_qjx;
+    private Double avg_ndsj;
+
     @Basic
     @Column(name = "totalTime")
     public Integer getTotalTime()
@@ -143,11 +162,20 @@ public class InspectData  extends BaseModel{
     }
 
     @Transient
-    public String[] getPrs() {
-        if (prs_str != null && prs_str.length() > 0) {
-            return prs_str.split(",");
-        }
+    public List<Double> getPrs() {
+//        if (prs_str != null && prs_str.length() > 0) {
+//            return Arrays.asList(prs_str.split(",")).stream().map(item->{
+//                return Double.parseDouble(item);
+//            });
+//        }
         return null;
+    }
+    @Transient
+    public Double getAvgPrs() {
+        if(this.avg_prs == null){
+            this.avg_prs = calcAvg(getPrs_str());
+        }
+        return this.avg_prs;
     }
 
     public void setPrs_str(String prs_str) {
@@ -167,6 +195,13 @@ public class InspectData  extends BaseModel{
         }
         return null;
     }
+    @Transient
+    public Double getAvgHzjc() {
+        if(this.avg_hzjc == null){
+            this.avg_hzjc = calcAvg(getHzjc_str());
+        }
+        return this.avg_hzjc;
+    }
 
     public void setHzjc_str(String hzjc_str) {
         this.hzjc_str = hzjc_str;
@@ -184,6 +219,13 @@ public class InspectData  extends BaseModel{
             return wyjc_str.split(",");
         }
         return null;
+    }
+    @Transient
+    public Double getAvgWyjc() {
+        if(this.avg_wyjc == null){
+            this.avg_wyjc = calcAvg(getWyjc_str());
+        }
+        return this.avg_wyjc;
     }
 
     public void setWyjc_str(String wyjc_str) {
@@ -244,6 +286,14 @@ public class InspectData  extends BaseModel{
         return null;
     }
 
+    @Transient
+    public Double getAvgQjx() {
+        if(this.avg_qjx == null){
+            this.avg_qjx = calcAvg(getQjx_str());
+        }
+        return this.avg_qjx;
+    }
+
     public void setQjx_str(String qjx_str) {
         this.qjx_str = qjx_str;
     }
@@ -261,7 +311,13 @@ public class InspectData  extends BaseModel{
         }
         return null;
     }
-
+    @Transient
+    public Double getAvgNdsj() {
+        if(this.avg_ndsj == null){
+            this.avg_ndsj = calcAvg(getNdsj_str());
+        }
+        return this.avg_ndsj;
+    }
     public void setNdsj_str(String ndsj_str) {
         this.ndsj_str = ndsj_str;
     }
@@ -294,6 +350,41 @@ public class InspectData  extends BaseModel{
 
     public void setLoadFlag(Boolean loadFlag) {
         this.loadFlag = loadFlag;
+    }
+
+    @Transient
+    public Integer getInterval() {
+        return interval;
+    }
+
+    public void setInterval(Integer interval) {
+        this.interval = interval;
+    }
+
+    @Transient
+    public Double getCur_wyjc() {
+        return cur_wyjc;
+    }
+
+    public void setCur_wyjc(Double cur_wyjc) {
+        this.cur_wyjc = cur_wyjc;
+    }
+
+    /**
+     * 将由逗号分割的数据字符串解析并计算出平均值
+     * @param data_str
+     * @return
+     */
+    private Double calcAvg(String data_str){
+        if(data_str==null||data_str.isEmpty()){
+            return null;
+        }
+        List<String> data_list = Arrays.asList(data_str.split(","));
+        if(data_list!=null&&!data_list.isEmpty()){
+            return data_list.stream().map(item -> Double.parseDouble(item)).reduce((a, b) -> a + b).get()/data_list.size();
+        }else {
+            return null;
+        }
     }
 
 }
