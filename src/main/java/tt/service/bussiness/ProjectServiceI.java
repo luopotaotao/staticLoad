@@ -9,5 +9,6 @@ import java.util.List;
  */
 public interface ProjectServiceI extends BaseService<Project>{
     List<Project> list(Integer area_id, Integer dept_id);
+    List<String> listStzh(String prg);
 // TODO 额外参数
 }

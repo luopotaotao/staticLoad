@@ -46,18 +46,17 @@ public class ModuleProjectManageController extends BaseController<Project> {
                            @RequestParam(value = "rows",required = false,defaultValue = "10") Integer pageSize) {
         Map<String,Object> params = new HashMap<>();
         if(name!=null&&!name.trim().isEmpty()){
-            try {
-                name = URLDecoder.decode(name,"utf-8");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
+            name = decodeStr(name);
             params.put("name",name);
         }
         if(area_id!=null) {
             params.put("area_id", area_id);
         }
-        List<Project> list = projectService.list(params,page,pageSize,getDeptId());
+        List<Project> list = null;
         long count = projectService.count(params,getDeptId());
+        if(count>0){
+            list = projectService.list(params,page,pageSize,getDeptId());
+        }
         return listResponse(count, list);
     }
 
@@ -68,6 +67,14 @@ public class ModuleProjectManageController extends BaseController<Project> {
         return list;
     }
 
+    @RequestMapping(value = "queryStzh/{prg}")
+    @ResponseBody
+    public List<String> listStzh(@PathVariable(value = "prg") String prg){
+        if(prg!=null&&!prg.trim().isEmpty()){
+            return projectService.listStzh(prg);
+        }
+        return null;
+    }
 
 //    @RequestMapping(value = "post", method = RequestMethod.POST)
     @RequestMapping(value = "post")

@@ -6,6 +6,7 @@ import tt.dao.impl.BaseDaoImpl;
 import tt.model.business.Project;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,21 @@ public class ProjectDaoImpl extends BaseDaoImpl<Project> implements ProjectDaoI 
         params.put("area_id",area_id);
 //        List<Project> ret = this.findBySql(Project.class,sql,params);
         List<Project> ret = find(hql,params);
+        return ret;
+    }
+
+    @Override
+    public List<String> queryStzhByProjectCode(String prg) {
+        List<String> ret = null;
+        Map<String,Object> params = new HashMap<>();
+        params.put("prg",prg);
+        List<Object[]> rows = findBySql("select distinct stzh where prg=:prg order by stzh",params);
+        if(rows!=null&&rows.size()>0){
+            ret = new LinkedList<>();
+            for (int i = 0; i < rows.size(); i++) {
+                ret.add((String)rows.get(i)[0]);
+            }
+        }
         return ret;
     }
 }

@@ -1,6 +1,8 @@
 package tt.controller;
 
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -211,6 +213,16 @@ public class BaseController<T>
     protected Map<String,Object> createHashMap(String name,Object val){
         Map<String,Object> ret = new HashMap<>();
         ret.put(name,val);
+        return ret;
+    }
+
+    protected String decodeStr(String str){
+        String ret = null;
+        try {
+            ret = URLDecoder.decode(str,"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         return ret;
     }
 }

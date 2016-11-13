@@ -10,4 +10,5 @@ import java.util.List;
  */
 public interface ProjectDaoI extends BaseDaoI<Project>{
     List<Project> queryProjectsByAreaId(Integer area_id);
+    List<String> queryStzhByProjectCode(String prg);
 }

@@ -115,7 +115,10 @@ public class ProjectServiceImpl implements ProjectServiceI {
         if(inspector!=null&&inspector.getId()>0){
             project.setInspector(companyDao.get(inspector.getId()));
         }
+    }
 
-
+    @Override
+    public List<String> listStzh(String prg) {
+        return projectDao.queryStzhByProjectCode(prg);
     }
 }
