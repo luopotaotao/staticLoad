@@ -48,7 +48,7 @@ public class InspectDataServiceImpl implements InspectDataServiceI {
             for(int i=1;i<list.size();i++){
                 InspectData cur = list.get(i);
                 InspectData pre = list.get(i-1);
-                Integer interval = cur.getSetprs().equals(pre.getSetprs())?cur.getTotalTime()-cur.getTotalTime():0;
+                Integer interval = cur.getSetprs().equals(pre.getSetprs())?cur.getTotalTime()-pre.getTotalTime():0;
                 cur.setInterval(interval);
                 //当当前数据和上一条数据的基准压力值一致时,说明当前数据还是和上一条数据属于同一组,直接计算本级位移即可,
                 // 否则的话说明数据进入下一基准压力值,需要重新设置当前基准值和上一级的最终位移,再进行计算
@@ -106,8 +106,10 @@ public class InspectDataServiceImpl implements InspectDataServiceI {
     }
 
     @Override
-    public List<InspectData> calcChart0(List<InspectData> list) {
-        List<InspectData> ret = new LinkedList<>();
+    public Map<String, Object> calcChart0(List<InspectData> list) {
+        Map<String,Object> ret = new HashMap<>();
+        Map<Object,Object> tick = new HashMap<>();
+        List<Map<String,Object>> data = new LinkedList<>();
         if(list==null||list.isEmpty()){
             return null;
         }
@@ -120,22 +122,147 @@ public class InspectDataServiceImpl implements InspectDataServiceI {
                 //当当前数据和上一条数据的基准压力值一致时,说明当前数据还是和上一条数据属于同一组,直接计算本级位移即可,
                 // 否则的话说明数据进入下一基准压力值,需要重新设置当前基准值和上一级的最终位移,再进行计算
                 if(!cur.getSetprs().equals(current_SETprs)){
+                    InspectData pre = list.get(i-1);
+
+                    Map<String,Object> point = getPoint(current_SETprs,cur.getAvgWyjc());
+                    data.add(point);
+                    Object key = point.get("x");
+                    if(!tick.containsKey(key)){
+                        tick.put(key,current_SETprs);
+                    }
                     current_SETprs = cur.getSetprs();
-                    ret.add(cur);
                 }
             }
+
         }
-        ret.add(list.get(list.size()-1));
+        InspectData lastItem = list.get(list.size()-1);
+        Map<String,Object> point = getPoint(lastItem.getSetprs(),lastItem.getAvgWyjc());
+        data.add(point);
+        Object key = point.get("x");
+        if(!tick.containsKey(key)){
+            tick.put(key,lastItem.getSetprs());
+        }
+
+        ret.put("data",data);
+        ret.put("tick",tick);
         return ret;
     }
 
     @Override
-    public List<InspectData> calcChart1(List<InspectData> list) {
-        return null;
+    public Map<String, Object> calcChart1(List<InspectData> list) {
+        Map<String,Object> ret = new HashMap<>();
+        Map<Double,Integer> tick = new HashMap<>();
+        List<Map<String,Object>> data = new LinkedList<>();
+        if(list==null||list.isEmpty()){
+            return null;
+        }
+        InspectData firstItem = list.get(0);
+        firstItem.setInterval(0);
+        if(list.size()>1){
+            String current_SETprs = firstItem.getSetprs();
+
+            Map<String,Object> firstGroup = new HashMap<>();
+            firstGroup.put("name",current_SETprs);
+            firstGroup.put("data",new LinkedList<Map<String,Object>>());
+            if(firstItem.getTotalTime()>0){
+                Map<String,Double> firstPoint = getChart1Point(firstItem.getTotalTime(),firstItem.getAvgWyjc());
+                ((LinkedList)firstGroup.get("data")).add(firstPoint);
+                Double key = firstPoint.get("x");
+                if(!tick.containsKey(key)){
+                    tick.put(key,firstItem.getTotalTime());
+                }
+            }
+
+            data.add(firstGroup);
+            for(int i=1;i<list.size();i++){
+                InspectData cur = list.get(i);
+                Map<String,Object> group;
+                if(!cur.getSetprs().equals(current_SETprs)){
+                    current_SETprs = cur.getSetprs();
+                    group = new HashMap<>();
+                    group.put("name",current_SETprs);
+                    group.put("data",new LinkedList<Map<String,Object>>());
+                    data.add(group);
+                }else{
+                    group = data.get(data.size()-1);
+                }
+                if (cur.getTotalTime()>0) {
+                    Map<String,Double> point = getChart1Point(cur.getTotalTime(),cur.getAvgWyjc());
+                    ((LinkedList)group.get("data")).add(point);
+                    Double key = point.get("x");
+                    if(!tick.containsKey(key)){
+                        tick.put(key,cur.getTotalTime());
+                    }
+                }
+            }
+        }
+        ret.put("data",data);
+        ret.put("tick",tick);
+        return ret;
     }
 
-    @Override
-    public List<InspectData> calcChart2(List<InspectData> list) {
-        return null;
+
+    private Map<String,Object> getPoint(Object x,Object y){
+        Map<String,Object> ret = new HashMap<>();
+        ret.put("x",x);
+        ret.put("y",y);
+        return ret;
     }
+
+    private Map<String,Double> getChart1Point(Integer x,Double y){
+        Map<String,Double> ret = new HashMap<>();
+        ret.put("x",Math.log10(x)-Math.log10(5));
+        ret.put("y",y);
+        return ret;
+    }
+    @Override
+    public Map<String, Object> calcChart2(List<InspectData> list) {
+        Map<String,Object> ret = new HashMap<>();
+        Map<Double,String> tick = new HashMap<>();
+        List<Map<String,Double>> data = new LinkedList<>();
+        if(list==null||list.isEmpty()){
+            return null;
+        }
+        InspectData firstItem = list.get(0);
+        firstItem.setInterval(0);
+
+        if(list.size()>1){
+            String current_SETprs = firstItem.getSetprs();
+            for(int i=1;i<list.size();i++){
+                InspectData cur = list.get(i);
+                //当当前数据和上一条数据的基准压力值一致时,说明当前数据还是和上一条数据属于同一组,直接计算本级位移即可,
+                // 否则的话说明数据进入下一基准压力值,需要重新设置当前基准值和上一级的最终位移,再进行计算
+                if(!cur.getSetprs().equals(current_SETprs)){
+                    InspectData pre = list.get(i-1);
+                    Map<String,Double> point = getChart2Point(current_SETprs,pre.getAvgWyjc());
+                    data.add(point);
+                    Double key = point.get("x");
+                    if(!tick.containsKey(key)){
+                        tick.put(key,current_SETprs);
+                    }
+                    current_SETprs = cur.getSetprs();
+                }
+            }
+
+        }
+        InspectData lastItem = list.get(list.size()-1);
+
+        Map<String,Double> point = getChart2Point(lastItem.getSetprs(),lastItem.getAvgWyjc());
+        data.add(point);
+        Double key = point.get("x");
+        if(!tick.containsKey(key)){
+            tick.put(key,lastItem.getSetprs());
+        }
+        ret.put("data",data);
+        ret.put("tick",tick);
+        return ret;
+    }
+
+    private Map<String,Double> getChart2Point(String x,Double y){
+        Map<String,Double> ret = new HashMap<>();
+        ret.put("x",Math.log10(Double.parseDouble(x)));
+        ret.put("y",y);
+        return ret;
+    }
+
 }

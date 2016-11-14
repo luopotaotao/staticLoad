@@ -379,9 +379,10 @@ public class InspectData  extends BaseModel{
         if(data_str==null||data_str.isEmpty()){
             return null;
         }
+        Double num_div = Math.pow(10,3);
         List<String> data_list = Arrays.asList(data_str.split(","));
         if(data_list!=null&&!data_list.isEmpty()){
-            return data_list.stream().map(item -> Double.parseDouble(item)).reduce((a, b) -> a + b).get()/data_list.size();
+            return Math.round(data_list.stream().map(item -> Double.parseDouble(item)).reduce((a, b) -> a + b).get()/data_list.size()*num_div)/num_div;
         }else {
             return null;
         }

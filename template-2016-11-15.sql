@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50713
 File Encoding         : 65001
 
-Date: 2016-11-10 01:07:58
+Date: 2016-11-15 02:34:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -92,7 +92,7 @@ CREATE TABLE `b_dept` (
   `note` varchar(128) DEFAULT NULL COMMENT '备注',
   `deleted` tinyint(1) DEFAULT '0' COMMENT '删除标志位',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COMMENT='公司信息';
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='公司信息';
 
 -- ----------------------------
 -- Records of b_dept
@@ -175,32 +175,43 @@ CREATE TABLE `b_inspect_data` (
   `totalTime` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8 COMMENT='传感器原始数据';
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8 COMMENT='传感器原始数据';
 
 -- ----------------------------
 -- Records of b_inspect_data
 -- ----------------------------
-INSERT INTO `b_inspect_data` VALUES ('32', '1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03 17:15', '1.00,2.00', '1.00,2.00', '1', '2360', '1', '15', '0', '11', null, null);
-INSERT INTO `b_inspect_data` VALUES ('33', '1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03 17:15', '1.00,2.00', '1.00,2.00', '1', '2360', '1', '15', '0', '11', null, null);
-INSERT INTO `b_inspect_data` VALUES ('34', '1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03 17:15', '1.00,2.00', '1.00,2.00', '1', '2360', '1', '15', '0', '11', null, null);
-INSERT INTO `b_inspect_data` VALUES ('35', '1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03 17:15', '1.00,2.00', '1.00,2.00', '1', '2360', '1', '15', '0', '11', null, null);
-INSERT INTO `b_inspect_data` VALUES ('36', '1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03 17:15', '1.00,2.00', '1.00,2.00', '1', '2360', '1', '15', '0', '11', null, null);
-INSERT INTO `b_inspect_data` VALUES ('37', '1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03 17:15', '1.00,2.00', '1.00,2.00', '1', '2360', '1', '15', '0', '11', null, null);
-INSERT INTO `b_inspect_data` VALUES ('38', '1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03 17:15', '1.00,2.00', '1.00,2.00', '1', '2360', '1', '15', '0', '11', null, null);
-INSERT INTO `b_inspect_data` VALUES ('39', '1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03 17:15', '1.00,2.00', '1.00,2.00', '1', '2360', '1', '15', '0', '11', null, null);
-INSERT INTO `b_inspect_data` VALUES ('40', '1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03 17:15', '1.00,2.00', '1.00,2.00', '1', '2360', '1', '15', '0', '11', null, null);
-INSERT INTO `b_inspect_data` VALUES ('41', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '1340', '1', '15', '0', '11', null, null);
-INSERT INTO `b_inspect_data` VALUES ('42', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '1340', '1', '15', '0', '11', null, null);
-INSERT INTO `b_inspect_data` VALUES ('43', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '1340', '1', '15', '0', '11', null, null);
-INSERT INTO `b_inspect_data` VALUES ('44', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '1340', '1', '15', '0', '11', null, null);
-INSERT INTO `b_inspect_data` VALUES ('45', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '1340', '1', '15', '0', '11', null, null);
-INSERT INTO `b_inspect_data` VALUES ('46', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '1340', '1', '15', '0', '11', null, null);
-INSERT INTO `b_inspect_data` VALUES ('47', 'PRG2', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '1340', '1', '16', '0', '11', null, null);
-INSERT INTO `b_inspect_data` VALUES ('48', 'PRG2', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '1340', '1', '16', '0', '11', null, null);
-INSERT INTO `b_inspect_data` VALUES ('49', 'PRG2', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '1340', '1', '16', '0', '11', null, null);
-INSERT INTO `b_inspect_data` VALUES ('50', 'PRG3', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '1340', '1', null, '0', '11', null, null);
-INSERT INTO `b_inspect_data` VALUES ('51', 'PRG3', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '1340', '1', null, '0', '11', null, null);
-INSERT INTO `b_inspect_data` VALUES ('52', 'PRG3', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '1340', '1', null, '0', '11', null, null);
+INSERT INTO `b_inspect_data` VALUES ('85', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '0.00,0.00 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', '15', '0', '11', '0', null);
+INSERT INTO `b_inspect_data` VALUES ('86', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '0.43,0.57 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', '15', '0', '11', '5', null);
+INSERT INTO `b_inspect_data` VALUES ('87', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '0.48,0.63 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', '15', '0', '11', '15', null);
+INSERT INTO `b_inspect_data` VALUES ('88', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '0.52,0.68 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', '15', '0', '11', '30', null);
+INSERT INTO `b_inspect_data` VALUES ('89', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '0.55,0.72 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', '15', '0', '11', '45', null);
+INSERT INTO `b_inspect_data` VALUES ('90', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '0.57,0.74 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', '15', '0', '11', '60', null);
+INSERT INTO `b_inspect_data` VALUES ('91', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '0.58,0.76 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', '15', '0', '11', '90', null);
+INSERT INTO `b_inspect_data` VALUES ('92', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '0.63,0.77 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', '15', '0', '11', '120', null);
+INSERT INTO `b_inspect_data` VALUES ('93', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '0.63,0.77 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '510', '1', '15', '0', '11', '0', null);
+INSERT INTO `b_inspect_data` VALUES ('94', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.14,1.29 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '510', '1', '15', '0', '11', '5', null);
+INSERT INTO `b_inspect_data` VALUES ('95', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.21,1.35 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '510', '1', '15', '0', '11', '15', null);
+INSERT INTO `b_inspect_data` VALUES ('96', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.24,1.37 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '510', '1', '15', '0', '11', '30', null);
+INSERT INTO `b_inspect_data` VALUES ('97', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.28,1.42 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '510', '1', '15', '0', '11', '45', null);
+INSERT INTO `b_inspect_data` VALUES ('98', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.31,1.45 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '510', '1', '15', '0', '11', '60', null);
+INSERT INTO `b_inspect_data` VALUES ('99', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.33,1.46 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '510', '1', '15', '0', '11', '90', null);
+INSERT INTO `b_inspect_data` VALUES ('100', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.36,1.48 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '510', '1', '15', '0', '11', '120', null);
+INSERT INTO `b_inspect_data` VALUES ('101', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.36,1.48 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '680', '1', '15', '0', '11', '0', null);
+INSERT INTO `b_inspect_data` VALUES ('102', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '2.07,2.20 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '680', '1', '15', '0', '11', '5', null);
+INSERT INTO `b_inspect_data` VALUES ('103', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '2.13,2.25 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '680', '1', '15', '0', '11', '15', null);
+INSERT INTO `b_inspect_data` VALUES ('104', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '2.17,2.28 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '680', '1', '15', '0', '11', '30', null);
+INSERT INTO `b_inspect_data` VALUES ('105', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '2.21,2.32 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '680', '1', '15', '0', '11', '45', null);
+INSERT INTO `b_inspect_data` VALUES ('106', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '2.24,2.35 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '680', '1', '15', '0', '11', '60', null);
+INSERT INTO `b_inspect_data` VALUES ('107', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '2.27,2.38 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '680', '1', '15', '0', '11', '90', null);
+INSERT INTO `b_inspect_data` VALUES ('108', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '2.29,2.41 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '680', '1', '15', '0', '11', '120', null);
+INSERT INTO `b_inspect_data` VALUES ('109', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '2.30,2.42 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '850', '1', '15', '0', '11', '0', null);
+INSERT INTO `b_inspect_data` VALUES ('110', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '3.11,3.24 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '850', '1', '15', '0', '11', '5', null);
+INSERT INTO `b_inspect_data` VALUES ('111', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '3.18,3.32 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '850', '1', '15', '0', '11', '15', null);
+INSERT INTO `b_inspect_data` VALUES ('112', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '3.22,3.37 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '850', '1', '15', '0', '11', '30', null);
+INSERT INTO `b_inspect_data` VALUES ('113', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '3.25,3.41 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '850', '1', '15', '0', '11', '45', null);
+INSERT INTO `b_inspect_data` VALUES ('114', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '3.28,3.44 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '850', '1', '15', '0', '11', '60', null);
+INSERT INTO `b_inspect_data` VALUES ('115', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '3.30,3.45 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '850', '1', '15', '0', '11', '90', null);
+INSERT INTO `b_inspect_data` VALUES ('116', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '3.31,3.47 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '850', '1', '15', '0', '11', '120', null);
 
 -- ----------------------------
 -- Table structure for `b_inspect_item`
@@ -273,7 +284,7 @@ CREATE TABLE `b_inspect_plan` (
 -- ----------------------------
 INSERT INTO `b_inspect_plan` VALUES ('9', '检测计划', '7', null, null, null, null, null, null, null, '0', '11');
 INSERT INTO `b_inspect_plan` VALUES ('10', '检测计划', '6', null, null, null, null, null, null, null, '0', '11');
-INSERT INTO `b_inspect_plan` VALUES ('15', 'wrwe', '6', '12', '3', '2016-10-13', '2016-10-04', '10', '12', null, '0', '11');
+INSERT INTO `b_inspect_plan` VALUES ('15', '有效数据', '6', '12', '3', '2016-10-13', '2016-10-04', '10', '12', null, '0', '11');
 INSERT INTO `b_inspect_plan` VALUES ('16', 'abc', '6', '12', '3', '2016-10-14', '2016-10-21', '10', '12', null, '0', '11');
 INSERT INTO `b_inspect_plan` VALUES ('17', '123', '8', '17', '5', '2016-10-18', '2016-10-19', '17', '17', null, '0', null);
 
@@ -470,6 +481,7 @@ CREATE TABLE `t_online` (
 -- ----------------------------
 -- Records of t_online
 -- ----------------------------
+INSERT INTO `t_online` VALUES ('887556af-177b-4eca-a2d2-a617a80f05ee', '127.0.0.1', '2016-11-15 02:14:38', 'admin');
 
 -- ----------------------------
 -- Table structure for `t_resource`
@@ -852,8 +864,10 @@ INSERT INTO `t_user_log` VALUES ('21c8242f-21a7-4640-b71a-a1909253d91c', null, '
 INSERT INTO `t_user_log` VALUES ('227eb7e9-8726-4e1c-be3a-6454810156c7', null, 'tecom', '用户正常退出', '2016-10-25 21:41:44', '/userController/logout.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('23fca95b-0982-4f43-886f-e1f46188f805', null, 'admin', '用户登录', '2016-10-30 15:03:58', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('24134716-c512-4cf7-94a0-52639cf1be03', null, '456', '用户正常退出', '2016-10-24 23:29:47', '/userController/logout.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('272e473c-c256-462c-a877-f5b65b0648b5', null, 'admin', '用户登录', '2016-11-13 23:34:33', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('2793ccee-c955-4cb6-b991-1a3aade41db8', null, 'tecom', '用户登录', '2016-10-22 23:40:07', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('28be3d4a-8434-4268-98f9-32b6f95cddeb', null, 'tecom', '用户可能是关闭浏览器等方式非正常退出', '2016-10-18 00:03:14', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('29246520-b020-4e20-96e1-e4fe7ed2ecaf', null, 'admin', '用户登录', '2016-11-15 00:39:42', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('2abe1e20-9ce5-422c-94b2-dae8bcf03dd3', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-08 14:19:30', 'Not a normal exit', null);
 INSERT INTO `t_user_log` VALUES ('2c18d929-eb9a-4a76-a32b-7636de1298b8', null, 'tecom', '用户登录', '2016-10-24 20:38:38', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('2cf6f191-7975-48a7-9523-ae1a73ef9aad', null, 'admin', '用户登录', '2016-10-30 14:24:38', '/userController/login.action', '127.0.0.1');
@@ -874,6 +888,7 @@ INSERT INTO `t_user_log` VALUES ('3dcb25d2-2af4-469c-ab89-c928e6727dfb', null, '
 INSERT INTO `t_user_log` VALUES ('3defd008-e269-4b45-8b81-20e9b7d43e6d', null, 'tecom', '用户可能是长时间没操作，自动退出', '2016-10-18 19:31:18', 'Not a normal exit', null);
 INSERT INTO `t_user_log` VALUES ('3e03689c-7a69-4401-9e70-091be3598796', null, 'tecom', '用户登录', '2016-10-18 19:11:15', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('3eed9533-595b-4f2b-8a3b-6ef10df966d6', null, 'admin', '用户登录', '2016-11-08 15:44:49', '/userController/login.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('421bc1e4-daa7-4c40-8186-91c2c71d60ba', null, 'admin', '用户登录', '2016-11-15 01:43:33', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('424bfb2c-f2e1-4267-b52a-a8987b43ea78', null, '123', '用户可能是长时间没操作，自动退出', '2016-10-25 23:47:30', 'Not a normal exit', null);
 INSERT INTO `t_user_log` VALUES ('430e9420-d4b6-46da-beab-0750549a6a71', null, 'admin', '用户正常退出', '2016-10-31 20:30:22', '/userController/logout.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('45078b66-c7e3-4607-a5e9-38b0c764d8db', null, '123', '用户登录', '2016-10-26 21:58:01', '/userController/login.action', '127.0.0.1');
@@ -881,6 +896,7 @@ INSERT INTO `t_user_log` VALUES ('450a2764-2f9d-4ef2-b193-7d94d878c687', null, '
 INSERT INTO `t_user_log` VALUES ('45316f80-3db0-4396-9565-df09af7cc9d3', null, 'test', '用户可能是关闭浏览器等方式非正常退出', '2016-10-31 21:49:55', 'Not a normal exit', null);
 INSERT INTO `t_user_log` VALUES ('45a85524-9880-4f7c-8404-5e527b3ae7e6', null, 'test', '用户正常退出', '2016-10-31 20:46:18', '/userController/logout.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('45f41b43-03c8-40e4-bc22-30270478d30b', null, 'admin', '用户登录', '2016-11-09 23:17:10', '/userController/login.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('46388e8f-fa78-4967-818d-ee255200c8b3', null, 'admin', '用户登录', '2016-11-15 01:27:39', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('48547fba-8989-46cb-8f65-a7c85af3dfc7', null, 'admin', '用户正常退出', '2016-10-30 14:42:09', '/userController/logout.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('48857d76-a456-4d97-b9f6-d42945623d77', null, 'admin', '用户正常退出', '2016-11-08 15:35:09', '/userController/logout.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('489c0599-908a-43d6-9c1c-e2a61a71bfd3', null, 'test', '用户正常退出', '2016-10-30 15:03:53', '/userController/logout.action', '127.0.0.1');
@@ -924,6 +940,7 @@ INSERT INTO `t_user_log` VALUES ('64c685c6-f92f-437e-b83a-c2d8bbc4f5d8', null, '
 INSERT INTO `t_user_log` VALUES ('66d78989-228d-42c0-8fc0-b5e41926950d', null, 'tecom', '用户可能是长时间没操作，自动退出', '2016-10-18 22:43:15', 'Not a normal exit', null);
 INSERT INTO `t_user_log` VALUES ('674ea4b4-8c82-438b-96c8-aec4e4b42690', null, 'admin', '用户登录', '2016-10-26 22:04:30', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('6761df07-820e-4a30-b6c6-ed9651fc97c2', null, '789', '用户登录', '2016-10-24 23:29:52', '/userController/login.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('67987ff2-c228-458e-8a01-8e3837cee02a', null, 'admin', '用户登录', '2016-11-14 21:49:30', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('68aa0fe7-de10-422e-8136-93a53f2fa5b8', null, 'admin', '用户登录', '2016-11-08 14:39:44', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('69ce0f9f-8c52-4af0-b557-e16558b0ec67', null, 'admin', '用户正常退出', '2016-10-31 20:04:03', '/userController/logout.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('6b7ddc59-321e-46ee-b096-54105295f030', null, 'tecom', '用户登录', '2016-10-17 23:54:59', '/userController/login.action', '127.0.0.1');
@@ -978,8 +995,10 @@ INSERT INTO `t_user_log` VALUES ('9cbfa85a-b15b-4570-b0bf-f4a8f724dbfd', null, '
 INSERT INTO `t_user_log` VALUES ('9d6669cb-352a-4f32-a073-aa347c05fb2c', null, 'test', '用户登录', '2016-10-30 15:02:39', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('9da3da77-d952-4e45-90c9-639178d8e8cc', null, 'tecom', '用户登录', '2016-10-16 02:01:10', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('a0c29c27-3aea-4de1-a1a4-4f6b8ce6723a', null, 'tecom', '用户正常退出', '2016-10-24 23:36:00', '/userController/logout.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('a2345f76-e1ec-402d-8ac8-4fd92876a272', null, 'admin', '用户登录', '2016-11-12 23:19:43', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('a2c1928d-2339-4779-9762-cbdf4684ee43', null, 'tecom', '用户登录', '2016-10-18 21:43:06', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('a4872430-a1c5-49fb-b121-efb0b7eb9f7c', null, '123', '用户正常退出', '2016-10-28 15:00:54', '/userController/logout.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('a4e85350-9ce7-4e86-97b2-345eacc8105c', null, 'admin', '用户登录', '2016-11-15 02:05:16', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('a5c1f731-eede-4d65-add3-8eed0511c7b5', null, 'tecom', '用户登录', '2016-10-25 21:33:51', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('a7894b70-fc6f-44cb-9295-0ff40d1c2257', null, 'test', '用户登录', '2016-10-31 21:49:34', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('a9699bd5-c883-4320-9d06-3f8455f8caf5', null, 'admin', '用户正常退出', '2016-10-31 21:41:08', '/userController/logout.action', '127.0.0.1');
@@ -1015,6 +1034,7 @@ INSERT INTO `t_user_log` VALUES ('c3cdc1a6-1946-46dd-b145-3206d8a6f716', null, '
 INSERT INTO `t_user_log` VALUES ('c3d5a7c7-df05-4b10-9ffa-946cad28f1b2', null, 'test', '用户登录', '2016-10-31 21:46:51', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('c54c0996-6f30-43bc-b73a-6c470f279052', null, '123', '用户登录', '2016-10-25 23:07:08', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('c56030fc-5a95-41e6-bfd8-6ce8d6d187ea', null, 'admin', '用户登录', '2016-10-26 21:09:20', '/userController/login.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('c6bbd567-9593-402f-a070-4c3cb229c241', null, 'admin', '用户登录', '2016-11-15 02:14:38', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('c6e099fd-c39b-4eaa-a404-e1e8257720bc', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-08 15:35:00', 'Not a normal exit', null);
 INSERT INTO `t_user_log` VALUES ('c716e38e-7c4c-446e-a1c6-33ef1b01e812', null, 'test', '用户登录', '2016-11-10 01:04:38', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('c8157827-a72f-464a-8e90-9caf6cf39d91', null, 'admin', '用户登录', '2016-11-08 14:43:01', '/userController/login.action', '127.0.0.1');
@@ -1027,6 +1047,7 @@ INSERT INTO `t_user_log` VALUES ('d0663c16-6319-4b59-9c84-75816cc194e6', null, '
 INSERT INTO `t_user_log` VALUES ('d06bd05e-7211-4994-b05f-7132cd431df5', null, 'test', '用户登录', '2016-10-31 21:44:04', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('d0a41a1e-5fcd-4534-bcfc-3e94527942f1', null, 'admin', '用户登录', '2016-11-08 16:41:43', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('d10509d9-1194-41aa-8afd-3027c4441bf2', null, 'admin', '用户登录', '2016-10-30 14:29:28', '/userController/login.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('d121f904-b39b-4b20-b154-e5e30f448fe4', null, 'admin', '用户登录', '2016-11-14 23:14:01', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('d134b24d-177b-4747-ace2-f38325c2478e', null, 'admin', '用户登录', '2016-11-09 21:06:38', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('d196c40f-ea99-42b8-90a5-9debfa6ca493', null, 'admin', '用户登录', '2016-11-08 14:19:01', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('d1f8f8fa-99c1-40e4-a24b-a46a4c987bc9', null, '123', '用户登录', '2016-10-26 21:05:37', '/userController/login.action', '127.0.0.1');
@@ -1039,6 +1060,7 @@ INSERT INTO `t_user_log` VALUES ('d7b1e0ff-49e5-42be-97c2-1b1694d2fa9d', null, '
 INSERT INTO `t_user_log` VALUES ('d7c261af-20d0-4117-b490-a7c21c737332', null, 'test', '用户正常退出', '2016-10-30 15:02:44', '/userController/logout.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('d7c5f953-e4f0-48e1-89e4-453545ec56db', null, '123', '用户登录', '2016-11-10 01:05:22', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('d890d399-3e86-476d-814c-52d890b1bc43', null, 'admin', '用户正常退出', '2016-10-30 14:24:36', '/userController/logout.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('d8fb2dd9-aa2d-4267-94a6-2239bcfcfc5d', null, 'admin', '用户登录', '2016-11-13 01:08:24', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('d9ae4369-b0bc-4c0e-b4d6-4d27ea996a31', null, 'admin', '用户正常退出', '2016-10-31 19:43:17', '/userController/logout.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('d9ff629f-0c32-417a-9f5a-a803003a8675', null, 'tecom', '用户可能是长时间没操作，自动退出', '2016-10-24 22:04:35', 'Not a normal exit', null);
 INSERT INTO `t_user_log` VALUES ('da448612-349f-4c7d-b8cb-7794eb4a7aa7', null, 'admin', '用户登录', '2016-11-08 14:27:12', '/userController/login.action', '127.0.0.1');
@@ -1054,6 +1076,7 @@ INSERT INTO `t_user_log` VALUES ('e11c445a-f3c0-4c00-a467-f3dd67d45bce', null, '
 INSERT INTO `t_user_log` VALUES ('e1f7e6de-8753-44a6-9451-14ff0398044b', null, 'admin', '用户正常退出', '2016-10-28 14:52:17', '/userController/logout.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('e2295ac3-6df3-49ac-817a-eafd12c27023', null, 'tecom', '用户登录', '2016-10-17 20:34:26', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('e27b1c87-20fe-4c60-a09d-8f02f49939b7', null, 'tecom', '用户登录', '2016-10-24 21:21:30', '/userController/login.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('e2fc766c-e382-4c3f-a641-25285dd078ca', null, 'admin', '用户登录', '2016-11-14 22:49:39', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('e3ded934-1603-4ef7-80c2-f3ec7810fe72', null, 'admin', '用户登录', '2016-11-09 23:12:49', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('e831c10c-4600-4e81-87a6-70ac456408af', null, 'tecom', '用户登录', '2016-10-23 00:20:16', '/userController/login.action', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('e89b740e-76d9-474d-b53b-ddd60d09bb93', null, 'tecom', '用户可能是长时间没操作，自动退出', '2016-10-25 22:41:00', 'Not a normal exit', null);

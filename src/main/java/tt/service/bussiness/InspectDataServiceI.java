@@ -10,9 +10,9 @@ import java.util.Map;
  */
 public interface InspectDataServiceI {
     List<InspectData> list(String PRG,String STZH,Integer dept_id);
-    List<InspectData> calcChart0(List<InspectData> list);
-    List<InspectData> calcChart1(List<InspectData> list);
-    List<InspectData> calcChart2(List<InspectData> list);
+    Map<String, Object> calcChart0(List<InspectData> list);
+    Map<String, Object> calcChart1(List<InspectData> list);
+    Map<String, Object> calcChart2(List<InspectData> list);
     int del(List<Integer> ids,Integer dept_id);
     List<Map<String,Object>> loadKeys(Integer dept_id);
     List<Map<String, Object>> loadUnLinkedKeys(Integer dept_id);

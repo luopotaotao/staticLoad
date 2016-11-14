@@ -8,10 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import tt.controller.BaseController;
 import tt.model.business.InspectData;
-import tt.pageModel.Json;
 import tt.service.bussiness.InspectDataServiceI;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.*;
 
 /**
@@ -49,66 +47,13 @@ public class ModuleInspectDataController extends BaseController<InspectData> {
     }
 
     private Map<String,Object> sortData(List<InspectData> source){
-        //计算本级位移
-        //TODO 整理数据,生成统计数据,图表0,1,2的数据
-
-        List<InspectData> chart0 = inspectDataService.calcChart0(source);;
-        String chart1 = "[{\n" +
-                "                name: '340',\n" +
-                "                data: [\n" +
-                "                    {x: 0, y: 0.50},\n" +
-                "                    {x: 5, y: 0.56},\n" +
-                "                    {x: 15, y: 0.60},\n" +
-                "                    {x: 30, y: 0.64},\n" +
-                "                    {x: 45, y: 0.66},\n" +
-                "                    {x: 60, y: 0.67},\n" +
-                "                    {x: 90, y: 0.70}\n" +
-                "                ]\n" +
-                "            },\n" +
-                "                {\n" +
-                "                    name: '510',\n" +
-                "                    data: [\n" +
-                "                        {x: 0, y: 1.22},\n" +
-                "                        {x: 5, y: 1.28},\n" +
-                "                        {x: 15, y: 1.31},\n" +
-                "                        {x: 30, y: 1.35},\n" +
-                "                        {x: 45, y: 1.38},\n" +
-                "                        {x: 60, y: 1.40},\n" +
-                "                        {x: 90, y: 1.42}\n" +
-                "                    ]\n" +
-                "                },\n" +
-                "\n" +
-                "                {\n" +
-                "                    name: '640',\n" +
-                "                    data: [\n" +
-                "                        {x: 0, y: 2.14},\n" +
-                "                        {x: 5, y: 2.19},\n" +
-                "                        {x: 15, y: 2.23},\n" +
-                "                        {x: 30, y: 2.27},\n" +
-                "                        {x: 45, y: 2.30},\n" +
-                "                        {x: 60, y: 2.33},\n" +
-                "                        {x: 90, y: 2.35}\n" +
-                "                    ]\n" +
-                "                }\n" +
-                "            ]";
-        String chart2 = "[\n" +
-                "                {y:0.00,x:0          },\n" +
-                "                {y:0.70,x:2.531478917},\n" +
-                "                {y:1.42,x:2.707570176},\n" +
-                "                {y:2.35,x:2.832508913},\n" +
-                "                {y:3.39,x:2.929418926},\n" +
-                "                {y:4.51,x:3.008600172},\n" +
-                "                {y:5.78,x:3.075546961},\n" +
-                "                {y:6.95,x:3.133538908},\n" +
-                "                {y:8.17,x:3.184691431},\n" +
-                "                {y:9.47,x:3.230448921},\n" +
-                "                {y:9.47,x:3.230448921},\n" +
-                "                {y:9.47,x:3.230448921},\n" +
-                "                {y:9.47,x:3.230448921}]";
+        Map<String, Object> chart0 = inspectDataService.calcChart0(source);;
+        Map<String, Object> chart1 = inspectDataService.calcChart1(source);
+        Map<String, Object> chart2 = inspectDataService.calcChart2(source);
         Map<String,Object> ret = new HashMap<>();
         ret.put("chart0",chart0);
-        ret.put("chart1",JSONArray.parseArray(chart1));
-        ret.put("chart2",JSONArray.parseArray(chart2));
+        ret.put("chart1",chart1);
+        ret.put("chart2",chart2);
         return ret;
     }
 
