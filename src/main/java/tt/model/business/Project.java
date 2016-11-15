@@ -20,7 +20,7 @@ public class Project extends BaseModel {
     private Company builder;
     private Company inspector;
     private String note;
-
+    private Integer status;
     private List<InspectScheme> children;
 
     @Id
@@ -163,5 +163,14 @@ public class Project extends BaseModel {
     @Transient
     public int getLevel() {
         return 0;
+    }
+
+    @Transient
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

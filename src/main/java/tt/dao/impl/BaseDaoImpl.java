@@ -262,7 +262,11 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
         SQLQuery q = this.getCurrentSession().createSQLQuery(sql);
         if (params != null && !params.isEmpty()) {
             for (String key : params.keySet()) {
-                q.setParameter(key, params.get(key));
+                if (params.get(key) instanceof List) {
+                    q.setParameterList(key, (List) params.get(key));
+                } else {
+                    q.setParameter(key, params.get(key));
+                }
             }
         }
         return q.list();

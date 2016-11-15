@@ -136,13 +136,17 @@
                         min_lat = 91, min_lng = 181;
 
                 $.each(markers, function (i, item) {
+                    console.log(JSON.stringify(item));
                     max_lat = item.lat > max_lat ? item.lat : max_lat;
                     max_lng = item.lng > max_lng ? item.lng : max_lng;
                     min_lat = item.lat < min_lat ? item.lat : min_lat;
                     min_lng = item.lng < min_lng ? item.lng : min_lng;
-                    var myIcon = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
-                        offset: new BMap.Size(10, 25), // 指定定位位置
-                        imageOffset: new BMap.Size(0, 0 - 10 * 25) // 设置图片偏移
+                    var img = '${pageContext.request.contextPath}/style/images/baidu_map/marker_'+(item.status>0?'green':'gray')+'.png';
+                    var myIcon = new BMap.Icon(img, new BMap.Size(35, 35), {
+                        anchor: new BMap.Size(17, 35)
+                    });
+                    var icon = new BMap.Icon('${pageContext.request.contextPath}/style/images/baidu_map/marker_pink.png', new BMap.Size(128, 128), {
+                        anchor: new BMap.Size(10, 30)
                     });
                     var point = new BMap.Point(item.lng,item.lat);
                     var marker = new BMap.Marker(point,{icon:myIcon});  // 创建标注

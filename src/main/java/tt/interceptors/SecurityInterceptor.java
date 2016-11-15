@@ -115,6 +115,8 @@ public class SecurityInterceptor implements HandlerInterceptor {
             return true;
         }
         if(sessionInfo!=null&&sessionInfo.getName()!=null){
+            String name = sessionInfo.getName();
+            OnlineJob.getOperateMap().put(name, new Date());
             return true;
         }else{
             request.setAttribute("msg", "您还没有登录或登录已超时，请重新登录，然后再刷新本功能！");

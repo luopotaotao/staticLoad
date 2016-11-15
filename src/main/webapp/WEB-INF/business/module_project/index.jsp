@@ -9,6 +9,9 @@
         .info_form_hidden {
             display: none;
         }
+        .info_form_hidden form{
+            padding: 20px;
+        }
     </style>
 </head>
 <body class="easyui-layout">
@@ -199,7 +202,7 @@
                 }
             }
          }">
-        <div title="检测计划" style="padding:20px">
+        <div title="检测计划">
             <form class="easyui-form" method="post" data-options="novalidate:true"
                   action="${baseUrl}/post.action">
                 <div style="margin-bottom:20px;display: none">

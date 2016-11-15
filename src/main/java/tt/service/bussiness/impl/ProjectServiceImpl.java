@@ -10,10 +10,9 @@ import tt.model.business.Company;
 import tt.model.business.Project;
 import tt.service.bussiness.ProjectServiceI;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.math.BigInteger;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.bouncycastle.asn1.x500.style.RFC4519Style.name;
 
@@ -61,9 +60,23 @@ public class ProjectServiceImpl implements ProjectServiceI {
             params.put("area_id", area_id);
             hql.append(" AND (province_id=:area_id or city_id=:area_id)");
         }
-        return projectDao.find(hql.toString(),params);
+        List<Project> list = projectDao.find(hql.toString(),params);
+        List<Integer> ids = list.stream().map(p->p.getId()).collect(Collectors.toList());
+        Map<Integer,Integer> statusMap = listStatus(ids);
+        list.stream().forEach(item->item.setStatus(statusMap.get(item.getId())));
+        return list;
     }
-
+    private Map<Integer,Integer> listStatus(List<Integer> ids){
+        Map<Integer,Integer> ret = new HashMap<>();
+        Map<String,Object> params = new HashMap<>();
+        params.put("ids",ids);
+        List<Object[]> list = projectDao.findBySql("SELECT p_id id,COUNT(*) started FROM \n" +
+                "(SELECT id,inspect_scheme_id FROM b_inspect_plan WHERE inspect_scheme_id in(SELECT id FROM b_inspect_scheme WHERE inspect_project_id in(:ids))) p\n" +
+                "LEFT JOIN(SELECT id,inspect_project_id p_id FROM b_inspect_scheme WHERE inspect_project_id in(:ids)) s ON p.inspect_scheme_id=s.id\n" +
+                " GROUP BY p_id;",params);
+        list.stream().forEach(row->{ret.put((Integer) row[0],((BigInteger) row[1]).intValue());});
+        return ret;
+    }
     //TODO delete?
     @Override
     public long count(Map<String,Object> params, Integer dept_id) {
@@ -120,5 +133,16 @@ public class ProjectServiceImpl implements ProjectServiceI {
     @Override
     public List<String> listStzh(String prg) {
         return projectDao.queryStzhByProjectCode(prg);
+    }
+
+
+    public static void main(String[] args) {
+        List<Integer> list= new LinkedList<>();
+        list.add(1);
+        list.add(2);
+
+        List ret = list.stream().map(item->item*2).collect(Collectors.toList());
+        System.out.println(ret.size());
+        ret.stream().forEach(item-> System.out.println(item));
     }
 }
