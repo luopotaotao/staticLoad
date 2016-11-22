@@ -73,8 +73,21 @@ public class DeviceSerHandler implements Runnable {
                 InspectData ins = null;
                 try {
                     ins = JSON.parseObject(req, InspectData.class);
+                    if(ins.getPrg()==null||ins.getPrg().trim().isEmpty()){
+                        dataFormatErr("工程编号","PRG");
+                        return;
+                    }
+                    if(ins.getStzh()==null||ins.getStzh().trim().isEmpty()){
+                        dataFormatErr("桩号","STZH");
+                        return;
+                    }
+                    if(ins.getDevnb()==null||ins.getDevnb().trim().isEmpty()){
+                        dataFormatErr("设备编号","DevNB");
+                        return;
+                    }
                 } catch (JSONException j) {
                     sendMsg("报文格式错误！",j);
+                    return;
                 }
                 ins.setStatus(1);
                 PRG = ins.getPrg();
@@ -123,5 +136,8 @@ public class DeviceSerHandler implements Runnable {
     private void sendMsg(String msg, Exception e) {
         sendMsg(msg);
         logger.error(e.getStackTrace());
+    }
+    private void dataFormatErr(String name,String field){
+        sendMsg(String.format("报文格式错误:需要有字段 %s:%s,且值不能为空", name,field));
     }
 }

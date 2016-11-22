@@ -124,11 +124,11 @@ public class InspectDataServiceImpl implements InspectDataServiceI {
                 if(!cur.getSetprs().equals(current_SETprs)){
                     InspectData pre = list.get(i-1);
 
-                    Map<String,Object> point = getPoint(current_SETprs,cur.getAvgWyjc());
+                    Map<String,Object> point = getChart0Point(current_SETprs,cur.getAvgWyjc());
                     data.add(point);
                     Object key = point.get("x");
                     if(!tick.containsKey(key)){
-                        tick.put(key,current_SETprs);
+                        tick.put(key,key);
                     }
                     current_SETprs = cur.getSetprs();
                 }
@@ -136,11 +136,11 @@ public class InspectDataServiceImpl implements InspectDataServiceI {
 
         }
         InspectData lastItem = list.get(list.size()-1);
-        Map<String,Object> point = getPoint(lastItem.getSetprs(),lastItem.getAvgWyjc());
+        Map<String,Object> point = getChart0Point(lastItem.getSetprs(),lastItem.getAvgWyjc());
         data.add(point);
         Object key = point.get("x");
         if(!tick.containsKey(key)){
-            tick.put(key,lastItem.getSetprs());
+            tick.put(key,key);
         }
 
         ret.put("data",data);
@@ -208,7 +208,12 @@ public class InspectDataServiceImpl implements InspectDataServiceI {
         ret.put("y",y);
         return ret;
     }
-
+    private Map<String,Object> getChart0Point(String x,Double y){
+        Map<String,Object> ret = new HashMap<>();
+        ret.put("x",Double.parseDouble(x));
+        ret.put("y",y);
+        return ret;
+    }
     private Map<String,Double> getChart1Point(Integer x,Double y){
         Map<String,Double> ret = new HashMap<>();
         ret.put("x",Math.log10(x)-Math.log10(5));

@@ -70,16 +70,16 @@
                 </thead>
             </table>
         </div>
-        <div title="Q-s曲线">
-            <div id="qs_chart" style="width: 50%; height: 400px"></div>
-        </div>
+
         <div title="s-lgt曲线">
             <div id="slgt_chart" style="width: 50%; height: 400px;"></div>
         </div>
         <div title="s-lgQ曲线">
             <div id="slgQ_chart" style="width: 50%; height: 400px;"></div>
         </div>
-
+        <div title="Q-s曲线">
+            <div id="qs_chart" style="width: 50%; height: 400px"></div>
+        </div>
 
     </div>
 
@@ -110,6 +110,7 @@
                 $.get('${pageContext.request.contextPath}/moduleInspectDataController/query/' + prg + '/' + stzh + '.action', function (data) {
                     $('#tb_source').datagrid({'data': data.source});
                     $('#tb_load').datagrid({'data': data.source});
+
                     initChart0(data.chart0);
                     initChart1(data.chart1);
                     initChart2(data.chart2);
@@ -118,7 +119,6 @@
             }
 
             function initChart0(data){
-                debugger
                 var tick = data.tick;
                 var tickPositions = $.map(tick,function (val,key) {
                     return key;
