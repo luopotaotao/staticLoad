@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import tt.controller.BaseController;
 import tt.model.business.Company;
 import tt.service.bussiness.CompanyServiceI;
+import tt.util.UrlStringDecoder;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -49,13 +50,9 @@ public class ModuleBasicCompanyController extends BaseController<Company> {
                            @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                            @RequestParam(value = "rows", required = false, defaultValue = "10") Integer pageSize) {
         Map<String, Object> params = new HashMap<>();
-        if (name != null && !name.trim().isEmpty()) {
-            try {
-                name = URLDecoder.decode(name, "utf-8");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-            params.put("name", name);
+        name = UrlStringDecoder.decode(name);
+        if (name!=null) {
+            params.put("name",name);
         }
         if (typ != null) {
             params.put("typ", typ);

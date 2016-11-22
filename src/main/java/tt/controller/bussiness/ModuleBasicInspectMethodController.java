@@ -9,13 +9,11 @@ import tt.controller.BaseController;
 import tt.model.business.InspectItem;
 import tt.model.business.InspectMethod;
 import tt.service.bussiness.InspectMethodServiceI;
+import tt.util.UrlStringDecoder;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by tt on 2016/10/2.
@@ -59,15 +57,11 @@ public class ModuleBasicInspectMethodController extends BaseController<InspectMe
     public JSONObject list(
             @PathVariable Integer inspect_item_id,
             @RequestParam(required = false) String name) {
-        if(name!=null&&!name.trim().isEmpty()){
-            try {
-                name = URLDecoder.decode(name,"utf-8");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-        }
         Map<String,Object> params = createHashMap("inspect_item_id",inspect_item_id);
-        params.put("name",name);
+        name = UrlStringDecoder.decode(name);
+        if (name!=null) {
+            params.put("name",name);
+        }
         List<InspectMethod> list = inspectMethodService.list(params,null,null,getDeptId());
         return listResponse(list);
     }

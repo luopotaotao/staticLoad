@@ -8,13 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import tt.controller.BaseController;
 import tt.model.business.InspectScheme;
 import tt.service.bussiness.InspectSchemeServiceI;
+import tt.util.UrlStringDecoder;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by tt on 2016/10/2.
@@ -52,14 +50,11 @@ public class ModuleInspectSchemeController extends BaseController<InspectScheme>
     public JSONObject list(@RequestParam(required = false) String name,
                            @RequestParam(value = "page", required = false) Integer page,
                            @RequestParam(value = "rows", required = false) Integer pageSize) {
-        if(name!=null&&!name.trim().isEmpty()){
-            try {
-                name = URLDecoder.decode(name,"utf-8");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
+        Map<String,Object> params = new HashMap<>();
+        name = UrlStringDecoder.decode(name);
+        if (name!=null) {
+            params.put("name",name);
         }
-        Map<String,Object> params = createHashMap("name",name);
         List<InspectScheme> list = inspectProjectService.list(params, page, pageSize,getDeptId());
         long count = inspectProjectService.count(params,getDeptId());
         return listResponse(count, list);

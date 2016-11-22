@@ -10,6 +10,7 @@ import tt.model.business.Dept;
 import tt.model.business.Dept;
 import tt.service.bussiness.DeptServiceI;
 import tt.service.bussiness.UserServiceI;
+import tt.util.UrlStringDecoder;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
@@ -59,13 +60,7 @@ public class ModuleBasicDeptController extends BaseController<Dept> {
     public JSONObject list(@RequestParam(required = false) String name,
                            @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                            @RequestParam(value = "rows", required = false, defaultValue = "10") Integer pageSize) {
-        if (name != null && !name.trim().isEmpty()) {
-            try {
-                name = URLDecoder.decode(name, "utf-8");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-        }
+        name = UrlStringDecoder.decode(name);
         List<Dept> list = deptService.list(name, page, pageSize);
         long count = deptService.count(name);
         return listResponse(count, list);

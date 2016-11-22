@@ -7,9 +7,7 @@ import tt.model.business.InspectData;
 public interface BInspectServiceI
 {
 
-    void add(InspectData ins)
-        throws Exception;
-    void updateStatus(String PRG, String STZH, String DevNB)
-            throws Exception;
+    int add(InspectData ins);
+    int updateStatus(String PRG, String STZH, String DevNB);
     DeviceSerHandler getHandler();
 }

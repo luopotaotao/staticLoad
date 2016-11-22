@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import tt.controller.BaseController;
 import tt.model.business.User;
 import tt.service.bussiness.UserServiceI;
+import tt.util.UrlStringDecoder;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -40,13 +41,8 @@ public class ModuleBasicUserController extends BaseController<User> {
     @ResponseBody
     public JSONObject list(@PathVariable Integer dept_id,
                            @RequestParam(required = false) String name) {
-        if (name != null && !name.trim().isEmpty()) {
-            try {
-                name = URLDecoder.decode(name, "utf-8");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-        }
+
+        name = UrlStringDecoder.decode(name);
         Map<String, Object> params = createHashMap("dept_id", dept_id);
         params.put("role",getSessionInfo().getRole());
         params.put("name", name);
@@ -59,12 +55,8 @@ public class ModuleBasicUserController extends BaseController<User> {
     public JSONObject list(@RequestParam(required = false) String name) {
         Map<String, Object> params = new HashMap<>();
         params.put("role",getSessionInfo().getRole());
-        if (name != null && !name.trim().isEmpty()) {
-            try {
-                name = URLDecoder.decode(name, "utf-8");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
+        name = UrlStringDecoder.decode(name);
+        if (name != null) {
             params.put("name", name);
         }
         List<User> list = userService.list(params, null, null, getDeptId());

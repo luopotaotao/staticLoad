@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import tt.controller.BaseController;
 import tt.model.business.Institution;
 import tt.service.bussiness.InstitutionServiceI;
+import tt.util.UrlStringDecoder;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -48,14 +49,8 @@ public class ModuleBasicInstitutionController extends BaseController<Institution
                            @RequestParam(required = false) String name,
                            @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                            @RequestParam(value = "rows", required = false, defaultValue = "10") Integer pageSize) {
-        if (name != null && !name.trim().isEmpty()) {
-            try {
-                name = URLDecoder.decode(name, "utf-8");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-        }
         Map<String, Object> params = new HashMap<>();
+        name = UrlStringDecoder.decode(name);
         if (name != null) {
             params.put("name", name);
         }

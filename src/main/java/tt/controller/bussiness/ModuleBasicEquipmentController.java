@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import tt.controller.BaseController;
 import tt.model.business.Equipment;
 import tt.service.bussiness.EquipmentServiceI;
+import tt.util.UrlStringDecoder;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -43,15 +44,11 @@ public class ModuleBasicEquipmentController extends BaseController<Equipment> {
     @ResponseBody
     public JSONObject list(@PathVariable Integer institution_id,
                            @RequestParam(required = false) String name) {
-        if(name!=null&&!name.trim().isEmpty()){
-            try {
-                name = URLDecoder.decode(name,"utf-8");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
+        name = UrlStringDecoder.decode(name);
+        Map<String,Object> params = createHashMap("institution_id",institution_id);
+        if (name!=null) {
+            params.put("name",name);
         }
-        Map<String,Object> params = createHashMap("name",name);
-        params.put("institution_id",institution_id);
         List<Equipment> list = equipmentService.list(params,null,null,getDeptId());
         return listResponse(list);
     }

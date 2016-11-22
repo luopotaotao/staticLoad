@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import tt.controller.BaseController;
 import tt.model.business.InspectItem;
 import tt.service.bussiness.InspectItemServiceI;
+import tt.util.UrlStringDecoder;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -48,12 +49,8 @@ public class ModuleBasicInspectItemController extends BaseController<InspectItem
                            @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                            @RequestParam(value = "rows", required = false, defaultValue = "10") Integer pageSize) {
         Map<String,Object> params = new HashMap<>();
-        if(name!=null&&!name.trim().isEmpty()){
-            try {
-                name = URLDecoder.decode(name,"utf-8");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
+        name = UrlStringDecoder.decode(name);
+        if (name!=null) {
             params.put("name",name);
         }
         List<InspectItem> list = null;
