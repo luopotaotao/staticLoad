@@ -214,6 +214,10 @@
                            data-options="label:'计划名称:',labelAlign:'right',required:true">
                 </div>
                 <div style="margin-bottom:20px">
+                    <input class="easyui-textbox" name="stzh" style="width:500px"
+                           data-options="label:'桩号:',labelAlign:'right',required:true">
+                </div>
+                <div style="margin-bottom:20px">
                     <input id="project_scheme_plan_inspector" class="easyui-textbox select-inspector"
                            name="inspector.id"
                            style="width:500px"
@@ -468,6 +472,7 @@
             [showProject, showScheme, showPlan][level](obj);
 
             try{
+                debugger
                 $target.form('load', obj);
             }catch (e){
                 console.log(e);

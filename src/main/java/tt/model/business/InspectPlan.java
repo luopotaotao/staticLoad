@@ -16,7 +16,7 @@ public class InspectPlan extends BaseModel {
     //    private List<InspectMethod> inspectMethods;
     private Inspector inspector;
     private Equipment equipment;
-    private String STZH;
+    private String stzh;
     private Date start_time;
     private Date end_time;
     private Inspector majorInspector;
@@ -147,11 +147,11 @@ public class InspectPlan extends BaseModel {
 
     @Basic
     @Column(name = "stzh")
-    public String getSTZH() {
-        return STZH;
+    public String getStzh() {
+        return stzh;
     }
 
-    public void setSTZH(String STZH) {
-        this.STZH = STZH;
+    public void setStzh(String stzh) {
+        this.stzh = stzh;
     }
 }

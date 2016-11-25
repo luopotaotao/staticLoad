@@ -13,7 +13,8 @@
             <input class="easyui-textbox" name="id" style="display: none" data-options="label:'编号:'">
         </div>
         <div style="margin-bottom:20px">
-            <input class="easyui-textbox" name="name" style="width:90%" data-options="label:'计划名称:',labelAlign:'right',required:true">
+            <input class="easyui-textbox" name="name" style="width:45%" data-options="label:'计划名称:',labelAlign:'right',required:true">
+            <input class="easyui-textbox" name="stzh" style="width:45%" data-options="label:'桩号:',labelAlign:'right',required:true">
         </div>
         <div style="margin-bottom:20px;display: none">
             <input class="easyui-textbox select-scheme" name="inspectScheme.id" style="width:45%"
