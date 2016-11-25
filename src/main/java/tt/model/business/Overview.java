@@ -1,10 +1,13 @@
 package tt.model.business;
 
+import tt.annotation.NeedDept;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "b_overview")
+@NeedDept
 public class Overview extends BaseModel {
     private Integer id;
     private String text;

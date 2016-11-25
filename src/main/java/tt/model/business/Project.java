@@ -1,12 +1,14 @@
 package tt.model.business;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import tt.annotation.NeedDept;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "b_project")
+@NeedDept(needUser = true)
 public class Project extends BaseModel {
     private Integer id;
     private String code;

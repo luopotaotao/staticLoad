@@ -1,9 +1,12 @@
 package tt.model.business;
 
+import tt.annotation.NeedDept;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "b_institution")
+@NeedDept
 public class Institution extends BaseModel implements java.io.Serializable {
     private Integer id;
     private String code;

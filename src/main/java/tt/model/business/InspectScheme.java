@@ -1,6 +1,7 @@
 package tt.model.business;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import tt.annotation.NeedDept;
 
 import javax.persistence.*;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
 @Entity
 @Table(name = "b_inspect_scheme")
 @JsonIgnoreProperties(value = {"project" })
+@NeedDept
 public class InspectScheme extends BaseModel {
     private Integer id;
     private String name;

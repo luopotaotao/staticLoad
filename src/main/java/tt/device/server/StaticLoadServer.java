@@ -89,8 +89,8 @@ public class StaticLoadServer
             try
             {
                 Socket socket = this.serverSocket.accept(); // 接受到一个连接，并且返回一个客户端的Socket对象实例
-//                DeviceSerHandler handler = new DeviceSerHandler();
-                DeviceSerHandler handler = bInspectServiceI.getHandler();
+                DeviceSerHandler handler = new DeviceSerHandler();
+//                DeviceSerHandler handler = bInspectServiceI.getHandler();
                 handler.setSocket(socket);
                 this.servicePool.execute(handler);
                 logger.info("Device addres:" + socket.getRemoteSocketAddress() +" is connecting to the Server");

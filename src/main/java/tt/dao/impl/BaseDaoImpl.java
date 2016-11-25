@@ -2,9 +2,11 @@ package tt.dao.impl;
 
 
 import java.io.Serializable;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.math.BigInteger;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -12,11 +14,18 @@ import java.util.Map;
 import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.SimpleExpression;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import tt.annotation.NeedDept;
 import tt.dao.BaseDaoI;
 import tt.pageModel.PageHelper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import tt.pageModel.SessionInfo;
+import tt.util.ConfigUtil;
+
+import javax.servlet.http.HttpSession;
 
 
 public class BaseDaoImpl<T> implements BaseDaoI<T> {
@@ -45,6 +54,22 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
     }
 
     public Criteria getCriteria(Integer page, Integer pageSize) {
+        //TODO 在这获取用用户信息
+
+        HttpSession session = ((ServletRequestAttributes) RequestContextHolder
+                .getRequestAttributes()).getRequest().getSession();
+        SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.getSessionInfoName());
+        if(sessionInfo!=null){
+            System.out.println(String.format("sessionInfo is not null:%s", sessionInfo.getName()));
+        }
+        boolean flag = entityClass.isAnnotationPresent(NeedDept.class);
+        Annotation[] annotations = entityClass.getAnnotations();
+        System.out.println(annotations.length);
+        if(flag){
+            NeedDept item = entityClass.getAnnotation(NeedDept.class);
+            System.out.println(String.format("annotation:%s,value:%s", item.toString(),item.needUser()));
+        }
+
         Criteria c = getCurrentSession().createCriteria(entityClass);
         if (page != null && pageSize != null) {
             c.setFirstResult((page - 1) * pageSize).setMaxResults(pageSize);

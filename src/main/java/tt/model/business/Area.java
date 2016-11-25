@@ -1,6 +1,7 @@
 package tt.model.business;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import tt.annotation.NeedDept;
 
 import javax.persistence.*;
 import java.util.LinkedList;
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "b_area")
+@NeedDept
 public class Area extends BaseModel{
     private Integer id;
     private String text;

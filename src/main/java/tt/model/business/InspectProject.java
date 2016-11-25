@@ -1,9 +1,12 @@
 package tt.model.business;
 
+import tt.annotation.NeedDept;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="b_inspect_project")
+@NeedDept(needUser = true)
 public class InspectProject extends BaseModel {
   private Integer id;
   private Integer project_id;

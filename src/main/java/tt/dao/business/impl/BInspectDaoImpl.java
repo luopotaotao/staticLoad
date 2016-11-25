@@ -22,7 +22,7 @@ public class BInspectDaoImpl extends BaseDaoImpl<InspectData> implements BInspec
     @Override
     public int updateStatus(String PRG, String STZH, String DevNB)
     {
-        String hql = "update InspectData d set d.status=2 where d.DevNB=:DevNB and d.PRG=:PRG and d.STZH = :STZH";
+        String hql = "update InspectData d set d.status=2 where d.devnb=:DevNB and d.prg=:PRG and d.stzh = :STZH";
 //        String sql = "UPDATE `b_inspect_data` t SET t.`status`='2' WHERE t.`DevNB`='"+DevNB+"' AND t.`PRG`='"+PRG+"' AND t.`STZH`='"+STZH+"'";
 //        this.executeSql(sql);
         Map<String,Object> params = new HashMap<>();
