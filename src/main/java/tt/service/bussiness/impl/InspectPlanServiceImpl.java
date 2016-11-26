@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import tt.dao.business.InspectItemDaoI;
 import tt.dao.business.InspectPlanDaoI;
 import tt.dao.business.ProjectDaoI;
+import tt.exception.ExistException;
 import tt.model.business.InspectPlan;
 import tt.service.bussiness.InspectPlanServiceI;
 
@@ -19,11 +20,6 @@ import java.util.Map;
 public class InspectPlanServiceImpl implements InspectPlanServiceI {
     @Autowired
     private InspectPlanDaoI inspectPlanDao;
-    @Autowired
-    private ProjectDaoI projectDao;
-    @Autowired
-    private InspectItemDaoI inspectItemDao;
-
 
     @Override
     public InspectPlan get(Integer id, Integer dept_id) {
@@ -52,7 +48,13 @@ public class InspectPlanServiceImpl implements InspectPlanServiceI {
 
     @Override
     public InspectPlan add(InspectPlan inspectPlan,Integer dept_id) {
+        //TODO 检测是否存在STZH
+        boolean isExist = inspectPlanDao.isExistStzh(inspectPlan.getProject().getId(),inspectPlan.getStzh(),dept_id);
+        if(isExist){
+            throw new ExistException("该工程下已有桩号:"+inspectPlan.getStzh());
+        }
         resetProject(inspectPlan);
+        inspectPlan.setDept_id(dept_id);
         inspectPlanDao.save(inspectPlan);
         return inspectPlan;
     }

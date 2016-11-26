@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface InspectPlanDaoI extends BaseDaoI<InspectPlan> {
     List<InspectPlan> list(String name, Integer page, Integer pageSize,Integer dept_id);
+    InspectPlan getByPrgStzhDevNB(String prg,String stzh, String DevNB);
+    boolean isExistStzh(Integer project_id,String stzh,Integer dept_id);
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "b_inspect_plan")
-@JsonIgnoreProperties(value = {"inspectScheme"})
+@JsonIgnoreProperties(value = {"inspectScheme", "project"})
 public class InspectPlan extends BaseModel {
     private Integer id;
     private String name;
@@ -22,6 +22,7 @@ public class InspectPlan extends BaseModel {
     private Inspector majorInspector;
     private Inspector assistantInspector;
     private String note;
+    private Project project;
 
     @Id
     @Column(name = "id")
@@ -54,7 +55,18 @@ public class InspectPlan extends BaseModel {
         this.inspectScheme = inspectScheme;
     }
 
-//    @ManyToMany
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+
+    //    @ManyToMany
 //    @JoinTable(name = "b_r_inspect_plan_method", joinColumns = @JoinColumn(name = "plan_id"), inverseJoinColumns = @JoinColumn(name = "method_id"))
 //    public List<InspectMethod> getInspectMethods() {
 //        return inspectMethods;

@@ -19,6 +19,8 @@
         <div style="margin-bottom:20px;display: none">
             <input class="easyui-textbox select-scheme" name="inspectScheme.id" style="width:45%"
                    data-options="label:'方案id:',labelAlign:'right',required:true,editable:false">
+            <input class="easyui-textbox select-scheme" name="project.id" style="width:45%"
+                   data-options="label:'工程id:',labelAlign:'right',required:true,editable:false">
         </div>
         <div style="margin-bottom:20px">
             <input class="easyui-textbox select-inspector" name="inspector.id" style="width:45%"

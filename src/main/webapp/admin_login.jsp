@@ -174,7 +174,7 @@
 
     <div style="height: 200px;width: 636px;background: url('style/images/031.gif') no-repeat;margin: 0px auto">
 
-        <div style="float: left;width: 30%;margin-top: 30px;margin-left: 30px;"><img src="style/images/9_03.png"></div>
+        <div style="float: left;width: 30%;margin-top: 30px;margin-left: 30px;"><img src="style/images/logo_login.png"></div>
         <div style="float: right;width: 60%;margin-top: 30px;">
             <table cellpadding="0" cellspacing="10" style="width: 300px;color: white;"
                    onkeydown="if(event.keyCode==13) {getLogin(); return false;}">

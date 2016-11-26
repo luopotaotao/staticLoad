@@ -103,7 +103,6 @@
                         if (true || $.isFunction(callback)) {
                             var data = $div.find('#grid').datagrid('getChecked');
                             if (data && data.length > 0) {
-                                console.log(data);
                                 $div.dialog('close');
                                 callback(data);
                             } else {

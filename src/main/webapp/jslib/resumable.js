@@ -8,7 +8,6 @@
 
     function Resumable(opt) {
       this.opt = opt;
-      console.log('constructor');
       this.support = (typeof File !== "undefined" && File !== null) && (typeof Blob !== "undefined" && Blob !== null) && (typeof FileList !== "undefined" && FileList !== null) && ((Blob.prototype.webkitSlice != null) || (Blob.prototype.mozSlice != null) || (Blob.prototype.slice != null));
       this.files = [];
       this.defaults = {
@@ -82,7 +81,6 @@
     };
 
     Resumable.prototype.stopEvent = function(e) {
-      console.log('stopEvent');
       e.stopPropagation();
       return e.preventDefault();
     };

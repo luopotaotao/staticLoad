@@ -11,7 +11,6 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/jslib/baiduMap/map_api.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/jslib/baiduMap/AreaRestriction_min.js"></script>
 <script>
-    console.log('init');
     $(window).on('resize', function () {
         $('#div_map').width(document.body.clientWidth).height(document.body.clientHeight);
     });

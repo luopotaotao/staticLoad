@@ -179,7 +179,6 @@
                         var str_arr = ['<a href="javascript:showData(',row.id,')">查看</a>',
                                 '&nbsp',
                             '<a href="javascript:linkData(',row.id,')">关联</a>'];
-                        console.log(str_arr.join(''));
                         return str_arr.join('');
                     }
                 }
@@ -251,7 +250,6 @@
                     var item = data[0];
                     $(_this).textbox('setValue', item.id);
                     $(_this).textbox('setText', item.name);
-                    console.log(JSON.stringify(item));
                     var url_method = '${pageContext.request.contextPath}/moduleBasicInspectMethodController/'+item.inspectItem.id+'/comboList.action';
                     var url_inspector = '${pageContext.request.contextPath}/moduleInspectPlanController/selectInspector/'+item.inspectItem.id+'.action';
                     $('#inspect_method').combobox('reload',url);
@@ -397,7 +395,6 @@
                     if (true || $.isFunction(callback)) {
                         var data = $div.find('#grid').datagrid('getChecked');
                         if (data && data.length > 0) {
-                            console.log(data);
                             $div.dialog('close');
                             callback(data);
                         } else {
@@ -428,7 +425,6 @@
     function linkData(plan_id) {
         var url = '${pageContext.request.contextPath}/moduleInspectPlanController/selectData/'+plan_id+'.action';
         selectChild(url, function (data) {
-            console.log(JSON.stringify(data));
             $.ajax({
                 url:'${pageContext.request.contextPath}/moduleInspectDataController/linkData/'+plan_id+'.action',
                 type:'post',

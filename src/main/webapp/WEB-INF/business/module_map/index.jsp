@@ -16,7 +16,6 @@
 
 <script>
     $(function () {
-        console.log('run..............................');
         var tree_data = [{
             "id": 1,
             "text": "基础信息",

@@ -9,7 +9,8 @@
         .info_form_hidden {
             display: none;
         }
-        .info_form_hidden form{
+
+        .info_form_hidden form {
             padding: 20px;
         }
     </style>
@@ -24,7 +25,7 @@
         }catch(e){
         }
     }
-  }] " title="工程列表" style="width: 200px; overflow: hidden;">
+  }],collapsible:false " title="工程列表" style="width: 200px; overflow: hidden;">
     <div class="easyui-panel" style="padding:5px">
         <ul id="tree_menu"></ul>
     </div>
@@ -110,17 +111,20 @@
                 <input id="project_select_constructor" class="easyui-textbox select" name="constructor.id"
                        style="width:250px"
                        data-options="label:'建设单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial.action">
+                   buttonIcon:'icon-search'"
+                       url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial.action">
                 <input id="project_select_builder" class="easyui-textbox select" name="builder.id" style="width:250px"
                        data-options="label:'施工单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial.action">
+                   buttonIcon:'icon-search'"
+                       url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial.action">
 
             </div>
             <div style="margin-bottom:20px">
                 <input id="project_select_inspector" class="easyui-textbox select" name="inspector.id"
                        style="width:250px"
                        data-options="label:'监理单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial.action">
+                   buttonIcon:'icon-search'"
+                       url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial.action">
             </div>
             <div style="margin-bottom:20px">
                 <input class="easyui-textbox" name="note" style="width:500px"
@@ -164,7 +168,8 @@
                 <input id="project_scheme_institution" class="easyui-textbox select" name="institution.id"
                        style="width:500px"
                        data-options="label:'检测单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleInspectSchemeController/selectInstitution.action">
+                   buttonIcon:'icon-search'"
+                       url="${pageContext.request.contextPath}/moduleInspectSchemeController/selectInstitution.action">
             </div>
             <div style="margin-bottom:20px">
                 <input class="easyui-textbox" name="code" style="width:500px"
@@ -228,7 +233,13 @@
                     <input id="project_scheme_plan_equipment" class="easyui-textbox select" name="equipment.id"
                            style="width:500px"
                            data-options="label:'检测设备:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleInspectSchemeController/selectProject.action">
+                   buttonIcon:'icon-search'"
+                           url="${pageContext.request.contextPath}/moduleInspectSchemeController/selectProject.action">
+                </div>
+                <div style="margin-bottom:20px">
+                    <input id="project_scheme_plan_equipment_code" class="easyui-textbox select" name="equipment.code"
+                           style="width:500px"
+                           data-options="label:'设备编号:',labelAlign:'right',required:false,editable:false">
                 </div>
                 <div style="margin-bottom:20px">
                     <input name="start_time" style="width:500px" type="text" class="easyui-datebox"
@@ -272,7 +283,8 @@
 
     </div>
 </div>
-<script type="text/javascript" src="${pageContext.request.contextPath}/jslib/Highcharts-4.1.3/js/highcharts.js" type="text/javascript"
+<script type="text/javascript" src="${pageContext.request.contextPath}/jslib/Highcharts-4.1.3/js/highcharts.js"
+        type="text/javascript"
         charset="utf-8"></script>
 <script>
     $(function () {
@@ -303,6 +315,7 @@
         var $tree_menu = $('#tree_menu');
         initUI();
         var project_id = ${project_id};
+
         function initUI() {
             $tree_menu.tree({
                 url: '${pageContext.request.contextPath}/moduleProjectManageController/tree.action',
@@ -311,12 +324,14 @@
                 textField: 'name',
                 animate: true,
                 onSelect: function (node) {
+                    var root = $tree_menu.tree('getRoot');
+                    node.prg = root.code;
                     showInfo(node.level, node);
                 },
-                onLoadSuccess:function (node, data) {
-                    if($.isNumeric(project_id)){
-                        var node = $('#tree_menu').tree('find',project_id);
-                        $(this).tree('select',node.target);
+                onLoadSuccess: function (node, data) {
+                    if ($.isNumeric(project_id)) {
+                        var node = $('#tree_menu').tree('find', project_id);
+                        $(this).tree('select', node.target);
                     }
                 },
                 onContextMenu: function (e, node) {
@@ -363,7 +378,6 @@
 
         function addScheme() {
             var node = getNode();
-            console.log(node.id);
             showAddDialog({
                 title: '添加方案',
                 params: [{name: 'project.id', value: node.id}]
@@ -376,46 +390,49 @@
 
         function addPlan() {
             var node = getNode();
+            var root = getRoot();
             showAddDialog({
                 title: '添加计划',
-                params: [{name: 'inspectScheme.id', value: node.id}, {
-                    name: 'institution.id',
-                    value: node.institution ? node.institution.id : null
-                }]
+                params: [
+                    {name: 'project.id', value: root.id},
+                    {name: 'inspectScheme.id', value: node.id},
+                    {name: 'institution.id', value: node.institution ? node.institution.id : null}
+                ]
             }, '${pageContext.request.contextPath}/moduleProjectManageController/addPlan.action');
         }
 
 
-        function showPlan(data) {
-            $('#project_scheme_plan_show_data_div').panel('refresh','${pageContext.request.contextPath}/moduleInspectPlanController/showData/'+data.id+'.action');
-            if ($.isNumeric(data.start_time)) {
-                data.start_time = new Date(data.start_time);
+        function showPlan(plan) {
+            $('#project_scheme_plan_show_data_div').panel('refresh', '${pageContext.request.contextPath}/moduleInspectPlanController/showData/' + plan.prg + '/' + plan.id + '.action');
+            if ($.isNumeric(plan.start_time)) {
+                plan.start_time = new Date(plan.start_time);
             }
-            if ($.isNumeric(data.end_time)) {
-                data.end_time = new Date(data.end_time);
+            if ($.isNumeric(plan.end_time)) {
+                plan.end_time = new Date(plan.end_time);
             }
-            setValues('project_scheme_plan_', ['assistantInspector', 'inspector', 'majorInspector', 'equipment'], data);
+            setValues('project_scheme_plan_', ['assistantInspector', 'inspector', 'majorInspector', 'equipment'], plan);
+            $('#project_scheme_plan_equipment_code').textbox('setValue', plan.equipment.code);
         }
+
         function linkData() {
             var node = getNode();
             var plan_id = node.id;
-            var url = '${pageContext.request.contextPath}/moduleInspectPlanController/selectData/'+plan_id+'.action';
+            var url = '${pageContext.request.contextPath}/moduleInspectPlanController/selectData/' + plan_id + '.action';
             selectChild(url, function (data) {
-                console.log(JSON.stringify(data));
                 $.ajax({
-                    url:'${pageContext.request.contextPath}/moduleInspectDataController/linkData/'+plan_id+'.action',
-                    type:'post',
-                    dataType:'json',
-                    data:JSON.stringify(data),
+                    url: '${pageContext.request.contextPath}/moduleInspectDataController/linkData/' + plan_id + '.action',
+                    type: 'post',
+                    dataType: 'json',
+                    data: JSON.stringify(data),
                     contentType: "application/json"
                 }).done(function (ret) {
-                    console.log(ret);
-                    $('#project_scheme_plan_show_data_div').panel('refresh','${pageContext.request.contextPath}/moduleInspectPlanController/showData/'+plan_id+'.action');
+                    $('#project_scheme_plan_show_data_div').panel('refresh', '${pageContext.request.contextPath}/moduleInspectPlanController/showData/' + plan_id + '.action');
                 }).fail(function () {
-                    $.messager.alert('提示','关联数据失败!');
+                    $.messager.alert('提示', '关联数据失败!');
                 });
             });
         }
+
         function selectChild(url, callback) {
             var $doc = $(document);
             var height = screen.availHeight * 0.6, width = screen.availWidth * 0.6;
@@ -432,7 +449,6 @@
                         if (true || $.isFunction(callback)) {
                             var data = $div.find('#grid').datagrid('getChecked');
                             if (data && data.length > 0) {
-                                console.log(data);
                                 $div.dialog('close');
                                 callback(data);
                             } else {
@@ -448,6 +464,7 @@
                 }]
             });
         }
+
         function setValues(prefix, keys, data) {
             $.each(keys, function (i, key) {
                 if (data[key]) {
@@ -468,13 +485,11 @@
             var $target = $forms.eq(level);
             $target.css('display', 'block');
             $target.show();
-            console.log(obj);
             [showProject, showScheme, showPlan][level](obj);
 
-            try{
-                debugger
+            try {
                 $target.form('load', obj);
-            }catch (e){
+            } catch (e) {
                 console.log(e);
             }
         }
@@ -528,6 +543,10 @@
                                     if ($.isFunction(callback)) {
                                         callback(ret);
                                     }
+                                } else {
+                                    if (ret.err) {
+                                        $.messager.alert('提示', ret.msg || "保存失败!");
+                                    }
                                 }
                             }
                         });
@@ -553,6 +572,10 @@
 
         function getNode() {
             return $tree_menu.tree('getSelected');
+        }
+
+        function getRoot() {
+            return $tree_menu.tree('getRoot');
         }
 
         function remove() {
@@ -592,7 +615,7 @@
                 showScheme: showScheme,
                 addPlan: addPlan,
                 showPlan: showPlan,
-                linkData:linkData,
+                linkData: linkData,
                 expandNode: expandNode,
                 remove: remove,
             }

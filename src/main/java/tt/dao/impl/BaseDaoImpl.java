@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.*;
+import org.hibernate.criterion.CriteriaQuery;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.SimpleExpression;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -81,6 +82,9 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
         return getCriteria(page, pageSize).add(Restrictions.eq("dept_id", dept_id));
     }
 
+    public Criteria getCriteria(Integer dept_id){
+        return getCriteria().add(Restrictions.eq("dept_id", dept_id));
+    }
     @Override
     public Serializable save(T o) {
         if (o != null) {
@@ -96,7 +100,10 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
 
     @Override
     public T getById(Serializable id, Serializable dept_id) {
-        return (T) getCurrentSession().createCriteria(entityClass).add(Restrictions.eq("dept_id", dept_id)).setMaxResults(1).list().get(0);
+        return (T) getCurrentSession().createCriteria(entityClass)
+                .add(Restrictions.eq("id",id))
+                .add(Restrictions.eq("dept_id", dept_id))
+                .setMaxResults(1).list().get(0);
     }
 
 

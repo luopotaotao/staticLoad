@@ -345,7 +345,6 @@
                     message = $.parseJSON(message);
                     $('#dept_logo').textbox('setValue', message.url);
                     $('#img').attr('src', '${pageContext.request.contextPath}/tmp/' + message.url);
-                    console.log('完成:' + message);
                     // Reflect that the file upload has completed
                     $('.resumable-file-' + file.uniqueIdentifier + ' .resumable-file-progress').html('(completed)');
                 });

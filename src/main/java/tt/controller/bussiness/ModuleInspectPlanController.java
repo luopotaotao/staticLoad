@@ -41,26 +41,32 @@ public class ModuleInspectPlanController extends BaseController<InspectPlan> {
         model.addAttribute("institution_id", institution_id);
         return "business/module_data/plan_select_inspector";
     }
+
     @RequestMapping("selectEquipment/{institution_id}")
     public String selectEquipment(@PathVariable Integer institution_id, Model model) {
         model.addAttribute("institution_id", institution_id);
         return "business/module_data/plan_select_equipment";
     }
-    @RequestMapping("showData/{plan_id}")
-    public String showData(@PathVariable Integer plan_id,Model model) {
-        model.addAttribute("plan_id",plan_id);
+
+    @RequestMapping("showData/{prg}/{plan_id}")
+    public String showData(@PathVariable String prg, @PathVariable Integer plan_id, Model model) {
+
+        InspectPlan plan = inspectPlanService.get(plan_id, getDeptId());
+        model.addAttribute("prg", prg);
+        model.addAttribute("stzh", plan.getStzh());
         return "business/module_data/plan_show_data";
     }
+
     @RequestMapping("selectData/{plan_id}")
-    public String selectData(@PathVariable Integer plan_id,Model model) {
-        model.addAttribute("plan_id",plan_id);
+    public String selectData(@PathVariable Integer plan_id, Model model) {
+        model.addAttribute("plan_id", plan_id);
         return "business/module_data/plan_select_data";
     }
 
     @RequestMapping(value = "get/{id}", method = RequestMethod.GET)
     @ResponseBody
     public InspectPlan get(@PathVariable int id) {
-        return inspectPlanService.get(id,getDeptId());
+        return inspectPlanService.get(id, getDeptId());
     }
 
     @RequestMapping(value = "query", method = RequestMethod.GET)
@@ -68,29 +74,28 @@ public class ModuleInspectPlanController extends BaseController<InspectPlan> {
     public JSONObject list(@RequestParam(required = false) String name,
                            @RequestParam(value = "page", required = false) Integer page,
                            @RequestParam(value = "rows", required = false) Integer pageSize) {
-        Map<String,Object> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<>();
         name = UrlStringDecoder.decode(name);
-        if (name!=null) {
-            params.put("name",name);
+        if (name != null) {
+            params.put("name", name);
         }
-        List<InspectPlan> list = inspectPlanService.list(params, page, pageSize,getDeptId());
-        long count = inspectPlanService.count(params,getDeptId());
+        List<InspectPlan> list = inspectPlanService.list(params, page, pageSize, getDeptId());
+        long count = inspectPlanService.count(params, getDeptId());
         return listResponse(count, list);
     }
 
-    //    @RequestMapping(value = "post", method = RequestMethod.POST)
-    @RequestMapping(value = "post")
+    @RequestMapping(value = "post", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject add(@ModelAttribute InspectPlan plan, BindingResult result) {
-        inspectPlanService.add(plan,getDeptId());
-        return flagResponse(plan.getId()>0);
+        inspectPlanService.add(plan, getDeptId());
+        return flagResponse(plan.getId() > 0);
     }
 
     @RequestMapping(value = "put", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject update(@ModelAttribute InspectPlan plan) {
-        inspectPlanService.update(plan,getDeptId());
-        return flagResponse(plan.getId()>0);
+        inspectPlanService.update(plan, getDeptId());
+        return flagResponse(plan.getId() > 0);
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)
@@ -98,7 +103,7 @@ public class ModuleInspectPlanController extends BaseController<InspectPlan> {
     public JSONObject delete(@RequestParam(value = "ids[]") int[] ids) {
         List<Integer> list = new LinkedList<>();
         Arrays.stream(ids).forEach(id -> list.add(id));
-        int ret = inspectPlanService.del(list,getDeptId());
+        int ret = inspectPlanService.del(list, getDeptId());
         return flagResponse(ret);
     }
 }
