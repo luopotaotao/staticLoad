@@ -6,6 +6,7 @@ import tt.dao.business.EquipmentDaoI;
 import tt.model.business.Equipment;
 import tt.service.bussiness.EquipmentServiceI;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,7 @@ public class EquipmentServiceImpl implements EquipmentServiceI {
     private EquipmentDaoI equipmentDao;
 
     @Override
-    public Equipment get(Integer id, Integer dept_id) {
+    public Equipment get(Serializable id, Integer dept_id) {
         return equipmentDao.getById(id, dept_id);
     }
 

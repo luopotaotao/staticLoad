@@ -10,6 +10,7 @@ import tt.model.business.Company;
 import tt.model.business.Project;
 import tt.service.bussiness.ProjectServiceI;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -28,7 +29,7 @@ public class ProjectServiceImpl implements ProjectServiceI {
     @Autowired
     private CompanyDaoI companyDao;
     @Override
-    public Project get(Integer id, Integer dept_id) {
+    public Project get(Serializable id, Integer dept_id) {
         return projectDao.getById(id,dept_id);
     }
 

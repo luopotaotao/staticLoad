@@ -9,6 +9,7 @@ import tt.exception.ExistException;
 import tt.model.business.InspectPlan;
 import tt.service.bussiness.InspectPlanServiceI;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,7 @@ public class InspectPlanServiceImpl implements InspectPlanServiceI {
     private InspectPlanDaoI inspectPlanDao;
 
     @Override
-    public InspectPlan get(Integer id, Integer dept_id) {
+    public InspectPlan get(Serializable id, Integer dept_id) {
         return inspectPlanDao.getById(id,dept_id);
     }
 

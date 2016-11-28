@@ -5,6 +5,7 @@ import tt.dao.business.AreaDaoI;
 import tt.model.business.Area;
 import tt.service.bussiness.AreaServiceI;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,7 @@ public class AreaServiceImpl implements AreaServiceI {
     private AreaDaoI areaDao;
 
     @Override
-    public Area get(Integer id,Integer dept_id) {
+    public Area get(Serializable id, Integer dept_id) {
         Area ret = areaDao.getById(id,dept_id);
         return ret;
     }

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2016-11-26 16:15:54
+Date: 2016-11-27 09:25:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -175,59 +175,43 @@ CREATE TABLE `b_inspect_data` (
   `totalTime` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=utf8 COMMENT='传感器原始数据';
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8 COMMENT='传感器原始数据';
 
 -- ----------------------------
 -- Records of b_inspect_data
 -- ----------------------------
-INSERT INTO `b_inspect_data` VALUES ('85', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '0.00,0.00 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', '15', '0', '11', '0', null);
-INSERT INTO `b_inspect_data` VALUES ('86', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '0.43,0.57 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', '15', '0', '11', '5', null);
-INSERT INTO `b_inspect_data` VALUES ('87', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '0.48,0.63 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', '15', '0', '11', '15', null);
-INSERT INTO `b_inspect_data` VALUES ('88', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '0.52,0.68 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', '15', '0', '11', '30', null);
-INSERT INTO `b_inspect_data` VALUES ('89', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '0.55,0.72 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', '15', '0', '11', '45', null);
-INSERT INTO `b_inspect_data` VALUES ('90', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '0.57,0.74 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', '15', '0', '11', '60', null);
-INSERT INTO `b_inspect_data` VALUES ('91', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '0.58,0.76 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', '15', '0', '11', '90', null);
-INSERT INTO `b_inspect_data` VALUES ('92', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '0.63,0.77 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', '15', '0', '11', '120', null);
-INSERT INTO `b_inspect_data` VALUES ('93', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '0.63,0.77 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '510', '1', '15', '0', '11', '0', null);
-INSERT INTO `b_inspect_data` VALUES ('94', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.14,1.29 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '510', '1', '15', '0', '11', '5', null);
-INSERT INTO `b_inspect_data` VALUES ('95', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.21,1.35 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '510', '1', '15', '0', '11', '15', null);
-INSERT INTO `b_inspect_data` VALUES ('96', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.24,1.37 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '510', '1', '15', '0', '11', '30', null);
-INSERT INTO `b_inspect_data` VALUES ('97', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.28,1.42 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '510', '1', '15', '0', '11', '45', null);
-INSERT INTO `b_inspect_data` VALUES ('98', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.31,1.45 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '510', '1', '15', '0', '11', '60', null);
-INSERT INTO `b_inspect_data` VALUES ('99', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.33,1.46 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '510', '1', '15', '0', '11', '90', null);
-INSERT INTO `b_inspect_data` VALUES ('100', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.36,1.48 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '510', '1', '15', '0', '11', '120', null);
-INSERT INTO `b_inspect_data` VALUES ('101', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.36,1.48 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '680', '1', '15', '0', '11', '0', null);
-INSERT INTO `b_inspect_data` VALUES ('102', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '2.07,2.20 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '680', '1', '15', '0', '11', '5', null);
-INSERT INTO `b_inspect_data` VALUES ('103', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '2.13,2.25 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '680', '1', '15', '0', '11', '15', null);
-INSERT INTO `b_inspect_data` VALUES ('104', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '2.17,2.28 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '680', '1', '15', '0', '11', '30', null);
-INSERT INTO `b_inspect_data` VALUES ('105', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '2.21,2.32 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '680', '1', '15', '0', '11', '45', null);
-INSERT INTO `b_inspect_data` VALUES ('106', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '2.24,2.35 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '680', '1', '15', '0', '11', '60', null);
-INSERT INTO `b_inspect_data` VALUES ('107', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '2.27,2.38 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '680', '1', '15', '0', '11', '90', null);
-INSERT INTO `b_inspect_data` VALUES ('108', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '2.29,2.41 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '680', '1', '15', '0', '11', '120', null);
-INSERT INTO `b_inspect_data` VALUES ('109', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '2.30,2.42 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '850', '1', '15', '0', '11', '0', null);
-INSERT INTO `b_inspect_data` VALUES ('110', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '3.11,3.24 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '850', '1', '15', '0', '11', '5', null);
-INSERT INTO `b_inspect_data` VALUES ('111', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '3.18,3.32 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '850', '1', '15', '0', '11', '15', null);
-INSERT INTO `b_inspect_data` VALUES ('112', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '3.22,3.37 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '850', '1', '15', '0', '11', '30', null);
-INSERT INTO `b_inspect_data` VALUES ('113', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '3.25,3.41 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '850', '1', '15', '0', '11', '45', null);
-INSERT INTO `b_inspect_data` VALUES ('114', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '3.28,3.44 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '850', '1', '15', '0', '11', '60', null);
-INSERT INTO `b_inspect_data` VALUES ('115', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '3.30,3.45 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '850', '1', '15', '0', '11', '90', null);
-INSERT INTO `b_inspect_data` VALUES ('116', 'PRG1', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '3.31,3.47 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '850', '1', '15', '0', '11', '120', null);
-INSERT INTO `b_inspect_data` VALUES ('117', 'aa', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '1340', '1', null, '0', '11', '12', '2');
-INSERT INTO `b_inspect_data` VALUES ('118', 'aa', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '1340', '1', null, '0', '11', '12', '2');
-INSERT INTO `b_inspect_data` VALUES ('119', 'aa', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '1340', '1', null, '0', '11', '12', '2');
-INSERT INTO `b_inspect_data` VALUES ('120', 'aa', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '1340', '1', null, '0', '11', '12', '2');
-INSERT INTO `b_inspect_data` VALUES ('121', 'aa', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '1340', '1', null, '0', '11', '12', '2');
-INSERT INTO `b_inspect_data` VALUES ('122', 'aa', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '1340', '1', null, '0', '11', '12', '2');
-INSERT INTO `b_inspect_data` VALUES ('123', 'aa', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '1340', '1', null, '0', '11', '12', '2');
-INSERT INTO `b_inspect_data` VALUES ('124', 'a', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '1340', '1', null, '0', '11', '12', '1');
-INSERT INTO `b_inspect_data` VALUES ('125', 'aa', 'SH00001', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '1340', '1', null, '0', '11', '12', '2');
-INSERT INTO `b_inspect_data` VALUES ('126', 'PRG1', 'ttt', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', null, '0', '11', '12', null);
-INSERT INTO `b_inspect_data` VALUES ('127', 'PRG1', 'ttt', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', null, '0', '11', '24', null);
-INSERT INTO `b_inspect_data` VALUES ('128', 'PRG1', 'ttt', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', null, '0', '11', '36', null);
-INSERT INTO `b_inspect_data` VALUES ('129', 'PRG1', 'ttt', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', null, '0', '11', '48', null);
-INSERT INTO `b_inspect_data` VALUES ('130', 'PRG1', 'ttt', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '610', '1', null, '0', '11', '60', null);
-INSERT INTO `b_inspect_data` VALUES ('131', 'PRG1', 'ttt', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '610', '1', null, '0', '11', '72', null);
-INSERT INTO `b_inspect_data` VALUES ('132', 'PRG1', 'ttt', 'GD110', '1.00,2.00', '1.00,2.00', '1.00,2.00', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '610', '1', null, '0', '11', '84', null);
+INSERT INTO `b_inspect_data` VALUES ('85', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '0.00,0.00 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', '21', '0', '11', '0', null);
+INSERT INTO `b_inspect_data` VALUES ('86', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '0.43,0.57 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', '21', '0', '11', '5', null);
+INSERT INTO `b_inspect_data` VALUES ('87', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '0.48,0.63 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', '21', '0', '11', '15', null);
+INSERT INTO `b_inspect_data` VALUES ('88', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '0.52,0.68 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', '21', '0', '11', '30', null);
+INSERT INTO `b_inspect_data` VALUES ('89', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '0.55,0.72 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', '21', '0', '11', '45', null);
+INSERT INTO `b_inspect_data` VALUES ('90', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '0.57,0.74 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', '21', '0', '11', '60', null);
+INSERT INTO `b_inspect_data` VALUES ('91', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '0.58,0.76 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', '21', '0', '11', '90', null);
+INSERT INTO `b_inspect_data` VALUES ('92', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '0.63,0.77 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '340', '1', '21', '0', '11', '120', null);
+INSERT INTO `b_inspect_data` VALUES ('93', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '0.63,0.77 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '510', '1', '21', '0', '11', '0', null);
+INSERT INTO `b_inspect_data` VALUES ('94', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '1.14,1.29 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '510', '1', '21', '0', '11', '5', null);
+INSERT INTO `b_inspect_data` VALUES ('95', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '1.21,1.35 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '510', '1', '21', '0', '11', '15', null);
+INSERT INTO `b_inspect_data` VALUES ('96', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '1.24,1.37 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '510', '1', '21', '0', '11', '30', null);
+INSERT INTO `b_inspect_data` VALUES ('97', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '1.28,1.42 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '510', '1', '21', '0', '11', '45', null);
+INSERT INTO `b_inspect_data` VALUES ('98', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '1.31,1.45 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '510', '1', '21', '0', '11', '60', null);
+INSERT INTO `b_inspect_data` VALUES ('99', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '1.33,1.46 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '510', '1', '21', '0', '11', '90', null);
+INSERT INTO `b_inspect_data` VALUES ('100', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '1.36,1.48 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '510', '1', '21', '0', '11', '120', null);
+INSERT INTO `b_inspect_data` VALUES ('101', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '1.36,1.48 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '680', '1', '21', '0', '11', '0', null);
+INSERT INTO `b_inspect_data` VALUES ('102', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '2.07,2.20 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '680', '1', '21', '0', '11', '5', null);
+INSERT INTO `b_inspect_data` VALUES ('103', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '2.13,2.25 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '680', '1', '21', '0', '11', '15', null);
+INSERT INTO `b_inspect_data` VALUES ('104', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '2.17,2.28 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '680', '1', '21', '0', '11', '30', null);
+INSERT INTO `b_inspect_data` VALUES ('105', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '2.21,2.32 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '680', '1', '21', '0', '11', '45', null);
+INSERT INTO `b_inspect_data` VALUES ('106', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '2.24,2.35 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '680', '1', '21', '0', '11', '60', null);
+INSERT INTO `b_inspect_data` VALUES ('107', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '2.27,2.38 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '680', '1', '21', '0', '11', '90', null);
+INSERT INTO `b_inspect_data` VALUES ('108', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '2.29,2.41 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '680', '1', '21', '0', '11', '120', null);
+INSERT INTO `b_inspect_data` VALUES ('109', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '2.30,2.42 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '850', '1', '21', '0', '11', '0', null);
+INSERT INTO `b_inspect_data` VALUES ('110', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '3.11,3.24 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '850', '1', '21', '0', '11', '5', null);
+INSERT INTO `b_inspect_data` VALUES ('111', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '3.18,3.32 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '850', '1', '21', '0', '11', '15', null);
+INSERT INTO `b_inspect_data` VALUES ('112', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '3.22,3.37 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '850', '1', '21', '0', '11', '30', null);
+INSERT INTO `b_inspect_data` VALUES ('113', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '3.25,3.41 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '850', '1', '21', '0', '11', '45', null);
+INSERT INTO `b_inspect_data` VALUES ('114', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '3.28,3.44 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '850', '1', '21', '0', '11', '60', null);
+INSERT INTO `b_inspect_data` VALUES ('115', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '3.30,3.45 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '850', '1', '21', '0', '11', '90', null);
+INSERT INTO `b_inspect_data` VALUES ('116', 'PRG0001', 'SH00001', 'EQP030303', '1.00,2.00', '1.00,2.00', '3.31,3.47 ', '1.23432', '2.12312', 'JZCS ', '2016-10-03-16-29', '1.00,2.00', '1.00,2.00', '1', '850', '1', '21', '0', '11', '120', null);
 
 -- ----------------------------
 -- Table structure for `b_inspect_item`
@@ -295,19 +279,12 @@ CREATE TABLE `b_inspect_plan` (
   `dept_id` int(11) DEFAULT NULL COMMENT '所属公司',
   `stzh` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='检测计划';
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='检测计划';
 
 -- ----------------------------
 -- Records of b_inspect_plan
 -- ----------------------------
-INSERT INTO `b_inspect_plan` VALUES ('9', '检测计划', null, '7', null, null, null, null, null, null, null, '0', '11', '1');
-INSERT INTO `b_inspect_plan` VALUES ('10', '检测计划', null, '6', null, null, null, null, null, null, null, '0', '11', '1');
-INSERT INTO `b_inspect_plan` VALUES ('15', '有效数据', null, '6', '12', '3', '2016-10-13', '2016-10-04', '10', '12', null, '0', '11', 'SH00001');
-INSERT INTO `b_inspect_plan` VALUES ('16', 'abc', null, '6', '12', '3', '2016-10-14', '2016-10-21', '10', '12', null, '0', '11', '1');
-INSERT INTO `b_inspect_plan` VALUES ('17', '123', null, '8', '17', '5', '2016-10-18', '2016-10-19', '17', '17', null, '0', null, '1');
-INSERT INTO `b_inspect_plan` VALUES ('18', '123', null, '6', '10', '3', '2016-11-09', '2016-11-25', '12', '12', null, '0', null, null);
-INSERT INTO `b_inspect_plan` VALUES ('19', 'aaa', null, '6', '10', '3', '2016-11-18', '2016-11-25', '12', '15', null, '0', null, '123');
-INSERT INTO `b_inspect_plan` VALUES ('20', 'ttt', '11', '6', '12', '3', '2016-11-18', '2016-11-17', '10', '15', null, '0', '11', 'ttt');
+INSERT INTO `b_inspect_plan` VALUES ('21', '测试计划1', '14', '10', '10', '3', '2016-11-14', '2016-11-30', '12', '12', null, '0', '11', 'SH00001');
 
 -- ----------------------------
 -- Table structure for `b_inspect_project`
@@ -342,15 +319,12 @@ CREATE TABLE `b_inspect_scheme` (
   `deleted` tinyint(1) DEFAULT '0' COMMENT '删除标志位',
   `dept_id` int(11) DEFAULT NULL COMMENT '所属公司',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='检测方案';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='检测方案';
 
 -- ----------------------------
 -- Records of b_inspect_scheme
 -- ----------------------------
-INSERT INTO `b_inspect_scheme` VALUES ('5', '检测方案1', '12', '1', '2', '456', '1', null, null, '0', '11');
-INSERT INTO `b_inspect_scheme` VALUES ('6', '检测方案2', '11', '1', '1', '123', '1', null, null, '0', '11');
-INSERT INTO `b_inspect_scheme` VALUES ('7', '检测方案3', '11', '2', '2', '123', '1', null, null, '0', '11');
-INSERT INTO `b_inspect_scheme` VALUES ('8', '123', '13', '1', '1', '123', '4', null, null, '0', null);
+INSERT INTO `b_inspect_scheme` VALUES ('10', '测试方案1', '14', '1', '1', '5', '1', null, null, '0', null);
 
 -- ----------------------------
 -- Table structure for `b_institution`
@@ -420,14 +394,12 @@ CREATE TABLE `b_project` (
   `deleted` tinyint(1) DEFAULT '0' COMMENT '删除标志位',
   `dept_id` int(11) DEFAULT NULL COMMENT '所属公司',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='工程信息';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='工程信息';
 
 -- ----------------------------
 -- Records of b_project
 -- ----------------------------
-INSERT INTO `b_project` VALUES ('11', 'PRG1', '测试工程1', '2', '6', '高阳县', '38.6875', '115.768', '2', '1', '2', '测试工程1', '0', '11');
-INSERT INTO `b_project` VALUES ('12', 'PRG0002', '测试工程2', '3', '8', 'xx街道', '36.113', '114.528', '2', '3', '1', '无', '0', '11');
-INSERT INTO `b_project` VALUES ('13', '123', '123', '39', '40', '123', '26.6073', '106.745', '5', '5', '5', '123', '0', '19');
+INSERT INTO `b_project` VALUES ('14', 'PRG0001', '测试工程1', '2', '6', '高阳县', '38.5955', '115.752', '2', '1', '3', '测试工程1', '0', '11');
 
 -- ----------------------------
 -- Table structure for `b_r_inspect_plan_method`
@@ -453,7 +425,7 @@ CREATE TABLE `b_r_inspect_scheme_item` (
   `inspect_scheme_id` int(11) NOT NULL COMMENT '检测方案id',
   `inspect_item_id` int(11) NOT NULL COMMENT '检测项目id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='检测方案-检测项目关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='检测方案-检测项目关联表';
 
 -- ----------------------------
 -- Records of b_r_inspect_scheme_item
@@ -462,6 +434,8 @@ INSERT INTO `b_r_inspect_scheme_item` VALUES ('4', '5', '4');
 INSERT INTO `b_r_inspect_scheme_item` VALUES ('5', '6', '3');
 INSERT INTO `b_r_inspect_scheme_item` VALUES ('6', '7', '3');
 INSERT INTO `b_r_inspect_scheme_item` VALUES ('7', '8', '11');
+INSERT INTO `b_r_inspect_scheme_item` VALUES ('8', '9', '3');
+INSERT INTO `b_r_inspect_scheme_item` VALUES ('9', '10', '3');
 
 -- ----------------------------
 -- Table structure for `test_user`
@@ -862,362 +836,60 @@ CREATE TABLE `t_user_log` (
 -- ----------------------------
 -- Records of t_user_log
 -- ----------------------------
-INSERT INTO `t_user_log` VALUES ('008342d4-5508-4308-95f6-8cd95f5489c4', null, 'admin', '用户登录', '2016-11-09 22:04:10', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('00dc6d99-4057-48aa-a7e0-971bc5f93735', null, 'admin', '用户登录', '2016-11-08 15:35:58', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('0181c7f7-4970-47d4-ae6d-01be5acea6b4', null, 'admin', '用户登录', '2016-11-26 14:36:33', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('01b24dd3-72cb-4a4b-9b5b-7a8c84ef7f7d', null, '123', '用户登录', '2016-10-24 23:40:35', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('03072bfc-8894-4d4c-b818-131a441084db', null, 'admin', '用户登录', '2016-11-08 14:30:33', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('03bb3e91-01b1-467c-851c-b14d0d82a38c', null, 'admin', '用户登录', '2016-11-09 22:20:32', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('03bf1934-c37d-4201-82e8-a27d21b61637', null, 'admin', '用户登录', '2016-10-25 23:56:01', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('03e38e0a-7cb9-47d4-8a27-d2920ef76425', null, 'admin', '用户正常退出', '2016-10-26 21:03:49', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('03e5192b-ce84-44ba-a4f6-3491ee2d37f8', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-10-31 19:57:57', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('04b4eb7f-cffb-4b2d-985b-5beadf35be18', null, '123', '用户登录', '2016-10-26 21:47:50', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('07b35170-5371-45fa-85cc-17b4ac5fdd10', null, '123', '用户正常退出', '2016-10-24 23:29:03', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('07dbcd51-5485-43ce-a4e3-e1f3fea485e1', null, 'admin', '用户登录', '2016-10-31 20:05:36', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('091b2906-e8c4-42a5-ad0c-8400f6dd23b4', null, 'tecom', '用户登录', '2016-10-24 22:34:11', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('0975228d-8840-4699-aa5f-b1dea7d811bd', null, 'admin', '用户可能是长时间没操作，自动退出', '2016-10-26 22:24:30', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('0aa7f79f-8752-4101-811a-3190a563a7aa', null, 'admin', '用户登录', '2016-10-30 14:32:21', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('0c60a8c4-d838-4930-9f4b-ff1a6bc56ff2', null, 'admin', '用户登录', '2016-10-31 20:00:04', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('0c8a6d61-202a-480e-b429-50dacc681afb', null, 'test', '用户登录', '2016-11-10 00:16:45', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('0d2c3dde-d476-4ca0-82ce-f72f59f89def', null, 'admin', '用户登录', '2016-11-08 15:33:46', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('0f7002ea-ec33-488c-99c7-bd9c959001b2', null, 'admin', '用户登录', '2016-11-08 15:34:39', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('104f5bd3-6f6c-4f4e-936f-e6573b09658b', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-24 21:50:24', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('1159c958-ddd9-4f30-9a6b-057e80ad39e0', null, 'admin', '用户登录', '2016-10-30 15:01:21', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('11c6938d-2fcf-4188-907a-4305074c0e67', null, '123', '用户正常退出', '2016-10-28 15:00:18', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('12bbbd90-9811-4d4d-bc19-b5724e6e84a4', null, 'tecom', '用户登录', '2016-10-17 23:59:10', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('132ce144-d76a-44c1-9181-c02e56549478', null, 'test', '用户登录', '2016-10-31 21:50:59', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('146d8381-9295-4b34-bb6f-472e55992b46', null, 'tecom', '用户正常退出', '2016-10-18 22:48:08', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('165f5566-33de-4298-a35c-0ee50b4de8db', null, 'tecom', '用户登录', '2016-10-24 22:21:33', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('1768bb8b-76de-405c-baf1-c3b86f1564a1', null, 'admin', '用户可能是长时间没操作，自动退出', '2016-10-28 14:10:45', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('17b8a833-ce69-448a-be16-27b16c258962', null, '123', '用户正常退出', '2016-10-25 22:20:50', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('1811ddf1-44c2-4a2b-836d-14447a9f3bba', null, '123', '用户登录', '2016-10-28 13:48:52', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('186d694c-6631-4e06-a7b7-deaf44ede689', null, 'admin', '用户正常退出', '2016-10-31 21:13:41', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('19900d14-b986-4752-b015-49cc2d9a7ad9', null, 'tecom', '用户可能是长时间没操作，自动退出', '2016-10-16 01:47:35', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('1a48df30-1037-40cc-ac6f-9fa5ed73b61a', null, 'tecom', '用户登录', '2016-10-25 22:20:56', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('1ae77a70-f015-41b7-9df2-df534a4403e1', null, 'admin', '用户登录', '2016-11-09 23:24:17', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('1d2c042c-7a2a-48f4-b6e5-a68ca8869cc6', null, 'admin', '用户登录', '2016-10-26 20:56:20', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('203b849a-fa27-487f-b51b-69526c414120', null, 'test', '用户正常退出', '2016-11-10 01:05:13', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('20c32f84-942d-4d15-8acd-c01528aa245b', null, 'admin', '用户正常退出', '2016-11-10 00:16:26', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('211fd6b3-9820-402b-bf81-e26d034246e5', null, 'admin', '用户登录', '2016-10-30 14:42:17', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('2122a157-91ef-48f5-a476-d14eaec65e1e', null, 'admin', '用户登录', '2016-11-08 14:24:05', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('21c8242f-21a7-4640-b71a-a1909253d91c', null, '123', '用户登录', '2016-10-26 22:00:54', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('225edb37-1779-43ed-91f9-8e36fa114e3c', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 14:00:23', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('227eb7e9-8726-4e1c-be3a-6454810156c7', null, 'tecom', '用户正常退出', '2016-10-25 21:41:44', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('23fca95b-0982-4f43-886f-e1f46188f805', null, 'admin', '用户登录', '2016-10-30 15:03:58', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('24134716-c512-4cf7-94a0-52639cf1be03', null, '456', '用户正常退出', '2016-10-24 23:29:47', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('24bf9e56-2d78-4fa6-be6d-c8d2cb9bcbc0', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 14:40:25', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('2533d637-c6b1-408c-8890-7c8452107f36', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-24 21:00:24', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('272e473c-c256-462c-a877-f5b65b0648b5', null, 'admin', '用户登录', '2016-11-13 23:34:33', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('2793ccee-c955-4cb6-b991-1a3aade41db8', null, 'tecom', '用户登录', '2016-10-22 23:40:07', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('28be3d4a-8434-4268-98f9-32b6f95cddeb', null, 'tecom', '用户可能是关闭浏览器等方式非正常退出', '2016-10-18 00:03:14', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('29246520-b020-4e20-96e1-e4fe7ed2ecaf', null, 'admin', '用户登录', '2016-11-15 00:39:42', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('2abe1e20-9ce5-422c-94b2-dae8bcf03dd3', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-08 14:19:30', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('2c18d929-eb9a-4a76-a32b-7636de1298b8', null, 'tecom', '用户登录', '2016-10-24 20:38:38', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('2cf6f191-7975-48a7-9523-ae1a73ef9aad', null, 'admin', '用户登录', '2016-10-30 14:24:38', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('2d227acf-8c80-44e8-919e-6dfb629e6e68', null, 'abc', '用户登录', '2016-10-28 14:52:22', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('2f32192e-6205-4378-9ff9-81a0ee1406cc', null, 'admin', '用户登录', '2016-11-09 23:32:12', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('30981076-7cff-46c5-9e72-b6efaaa8f655', null, 'admin', '用户登录', '2016-10-31 21:41:03', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('315929aa-586b-4842-830b-8c7e2505c42e', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 14:10:25', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('31d043f4-1057-44e6-b26e-174ff3292f66', null, 'tecom', '用户可能是长时间没操作，自动退出', '2016-10-24 21:41:30', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('31e26b97-8387-4cd9-b3b3-f2693be7a369', null, 'admin', '用户登录', '2016-11-26 00:55:48', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('3314fc49-afbf-4714-a94b-7e67f5dd8140', null, 'tecom', '用户登录', '2016-10-24 20:49:39', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('33297257-550d-4cb9-8732-eba44cd4acce', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-22 23:30:09', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('336396c8-1246-46a6-9b17-bbc42eead1f0', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-23 01:10:13', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('349b2274-c85b-401e-a7dc-13f3c9a3571f', null, 'tecom', '用户登录', '2016-10-16 01:54:33', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('360ae940-c4e6-4602-a05b-5b5618ad7954', null, 'admin', '用户正常退出', '2016-10-26 21:17:55', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('3633a703-6159-44d0-a703-761969d1de35', null, 'admin', '用户登录', '2016-10-31 18:47:30', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('389520bc-c2e7-4280-85aa-693e0d33755a', null, 'tecom', '用户可能是关闭浏览器等方式非正常退出', '2016-10-18 22:02:38', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('38bd4e07-9ca2-4acb-a9ed-5d4336ee706a', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 14:20:00', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('38c59653-d048-4532-befe-d0c26485a47c', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 00:50:09', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('38e0138e-ad21-4781-a489-34108130fa7f', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 14:20:25', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('395e104a-63dd-4742-9fbb-3496970abdc9', null, 'admin', '用户登录', '2016-10-26 21:03:57', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('39875ca1-fdda-480e-84b6-25eca43c23f6', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 15:20:00', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('3a9e6bac-3bf7-4307-94d8-98431a313bb0', null, 'tecom', '用户可能是长时间没操作，自动退出', '2016-10-16 01:26:25', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('3afe5965-87b8-4d10-a25f-17579c96a1b4', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-08 14:32:30', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('3d54c04e-9f04-4079-953d-b15f6e533cb2', null, '123', '用户可能是长时间没操作，自动退出', '2016-10-25 23:27:10', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('3dcb25d2-2af4-469c-ab89-c928e6727dfb', null, 'tecom', '用户登录', '2016-10-24 22:56:19', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('3dcc100c-9eb4-4dd9-91dc-565aeb1f67df', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 16:10:40', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('3defd008-e269-4b45-8b81-20e9b7d43e6d', null, 'tecom', '用户可能是长时间没操作，自动退出', '2016-10-18 19:31:18', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('3e03689c-7a69-4401-9e70-091be3598796', null, 'tecom', '用户登录', '2016-10-18 19:11:15', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('3eed9533-595b-4f2b-8a3b-6ef10df966d6', null, 'admin', '用户登录', '2016-11-08 15:44:49', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('41217091-44f1-4ea8-a7b6-9ec16e8a587a', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 15:20:23', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('421bc1e4-daa7-4c40-8186-91c2c71d60ba', null, 'admin', '用户登录', '2016-11-15 01:43:33', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('424bfb2c-f2e1-4267-b52a-a8987b43ea78', null, '123', '用户可能是长时间没操作，自动退出', '2016-10-25 23:47:30', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('430e9420-d4b6-46da-beab-0750549a6a71', null, 'admin', '用户正常退出', '2016-10-31 20:30:22', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('43320702-17c4-48a8-a32e-1296c310e259', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 14:41:10', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('4351ee0b-abf4-475b-ab72-f7f173cc15c5', null, 'admin', '用户登录', '2016-11-26 15:53:31', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('45078b66-c7e3-4607-a5e9-38b0c764d8db', null, '123', '用户登录', '2016-10-26 21:58:01', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('450a2764-2f9d-4ef2-b193-7d94d878c687', null, 'admin', '用户登录', '2016-10-25 23:54:57', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('45316f80-3db0-4396-9565-df09af7cc9d3', null, 'test', '用户可能是关闭浏览器等方式非正常退出', '2016-10-31 21:49:55', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('45a85524-9880-4f7c-8404-5e527b3ae7e6', null, 'test', '用户正常退出', '2016-10-31 20:46:18', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('45f41b43-03c8-40e4-bc22-30270478d30b', null, 'admin', '用户登录', '2016-11-09 23:17:10', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('46388e8f-fa78-4967-818d-ee255200c8b3', null, 'admin', '用户登录', '2016-11-15 01:27:39', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('46e7c168-6359-4500-883e-fe82dffad043', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-24 20:50:24', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('48547fba-8989-46cb-8f65-a7c85af3dfc7', null, 'admin', '用户正常退出', '2016-10-30 14:42:09', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('48857d76-a456-4d97-b9f6-d42945623d77', null, 'admin', '用户正常退出', '2016-11-08 15:35:09', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('489c0599-908a-43d6-9c1c-e2a61a71bfd3', null, 'test', '用户正常退出', '2016-10-30 15:03:53', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('49334e9c-5284-4684-855b-c2ac57789459', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-23 01:30:13', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('4a0b23be-cf0c-4785-93b0-6d4098be3587', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 15:30:00', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('4a4e8dfa-82f8-4031-b41e-9de4ce0353f7', null, 'tecom', '用户可能是关闭浏览器等方式非正常退出', '2016-10-16 02:21:10', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('4c6a2de7-9afb-44e7-bb08-2728011fa1f1', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-08 14:31:30', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('4ce73680-5cf8-4ab2-bc00-78299f4f4d1b', null, 'admin', '用户可能是长时间没操作，自动退出', '2016-10-31 21:06:30', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('4d24a146-8814-4919-8700-d19614d8b103', null, 'admin', '用户正常退出', '2016-10-31 19:59:57', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('4f330ffd-50de-4aee-97db-d05aed78fa3e', null, '123', '用户正常退出', '2016-10-26 21:57:59', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('4f8ebe8b-815b-4561-81e7-03447b1765c8', null, 'admin', '用户登录', '2016-10-31 21:33:34', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('4fcfebbe-9675-4d31-a1e7-bd5b5d47f9b8', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-23 00:10:13', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('5089f0ed-8b0c-44b1-964a-af278beea8e4', null, 'admin', '用户登录', '2016-10-31 20:34:26', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('50cf1332-27ef-49d5-b374-10e628a9bca1', null, 'admin', '用户登录', '2016-10-31 19:14:41', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('5116a37c-88f1-47dc-9060-2df83935ada6', null, '123', '用户登录', '2016-10-25 21:41:47', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('51798738-3d7c-4b53-9035-faba897ced7e', null, '123', '用户登录', '2016-10-25 22:41:31', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('52ca82da-808f-4d02-81ea-b25ba8248d21', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-24 21:30:24', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('547aa10b-6dcc-42ce-aaf5-2c70b51b7c05', null, 'tecom', '用户登录', '2016-10-18 20:25:45', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('552351eb-e781-4592-a01d-592c2bf653a9', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-08 14:39:30', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('5540a3af-e77e-4d72-9f9c-70bcedf86d64', null, 'admin', '用户正常退出', '2016-10-30 14:43:22', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('55462225-0223-4ae6-bf1a-a4d9ebf6217c', null, 'tecom', '用户登录', '2016-10-24 23:22:38', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('562e5e73-0add-4b58-bc64-edbf0299bbf7', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 15:10:00', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('5649f6ef-c725-4885-add3-ee695a0fa0e6', null, 'tecom', '用户登录', '2016-10-16 01:27:30', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('568041ff-421b-4dd9-83cc-210b99b2ca60', null, '123', '用户登录', '2016-10-28 15:00:12', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('574f3c08-e30c-4769-a0ba-43d76f5952a8', null, 'tecom', '用户登录', '2016-10-18 21:53:46', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('58739efc-33d1-4b76-b527-3cffc7e11a58', null, '123', '用户正常退出', '2016-11-10 01:05:39', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('58860f45-5e54-4f0a-b262-f0fd36c69698', null, 'admin', '用户登录', '2016-10-30 14:43:33', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('5895996a-072c-435e-b226-a65785f1c057', null, 'admin', '用户正常退出', '2016-10-26 21:05:35', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('58e8acf4-0f65-47c8-9efb-b085bfe472c6', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 14:50:06', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('593e7234-4faa-48b5-9cd8-b15778349296', null, 'admin', '用户正常退出', '2016-10-30 15:02:35', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('5981885f-316b-4548-94ea-906adbfc328f', null, 'tecom', '用户登录', '2016-10-24 23:33:46', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('59990308-9e1d-4b08-aebb-6ccd46a0da03', null, 'admin', '用户登录', '2016-10-30 14:22:51', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('5a6f0808-5d7b-4789-9940-d6a0615818ca', null, 'admin', '用户登录', '2016-11-22 23:27:44', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('5aff0948-b8c7-45e2-aabe-0d5de0737473', null, 'admin', '用户可能是长时间没操作，自动退出', '2016-10-31 19:14:10', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('5bcc5ecb-9baf-411e-a3c8-860224a1ee0c', null, 'tecom', '用户登录', '2016-10-16 01:06:25', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('5bf11971-2e42-49ea-88c4-bac1b1946b4f', null, 'admin', '用户登录', '2016-11-08 13:01:59', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('5c0dbe5f-9b61-47b7-b249-8ed489819141', null, 'admin', '用户正常退出', '2016-10-31 20:05:26', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('5d34fa41-10b6-41db-b4a5-e49193e9dfc6', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-24 20:20:24', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('5d6dfcf0-5c46-483f-b11c-5069e5b2679c', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 14:40:00', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('5dc5248a-3325-438e-9a48-d768134f6ea8', null, 'test', '用户登录', '2016-10-30 15:04:25', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('5e5624cd-0c08-4219-9c40-0736d27dfb62', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 15:10:23', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('5ed77b30-3dba-418a-b646-80daee912100', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-08 13:02:25', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('5efdb3fa-1b40-46e9-a40a-44ed3286db64', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 15:00:59', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('604065f5-c665-4610-b119-7661f1eacbf7', null, 'admin', '用户登录', '2016-11-08 14:22:51', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('6064592e-43c3-4d0f-bc73-1317e511818d', null, '456', '用户登录', '2016-10-24 23:29:08', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('60734082-dfb9-456f-84d1-ae3f1c2ae79b', null, 'test', '用户登录', '2016-10-31 20:35:26', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('614fb33f-c1a9-4065-851d-d388bdd342ae', null, 'tecom', '用户可能是关闭浏览器等方式非正常退出', '2016-10-18 21:53:01', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('61e2feb0-fa97-46b3-b118-5c156332438b', null, 'admin', '用户登录', '2016-10-28 13:50:41', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('6288a237-a0b5-4c39-a824-84b7d4bd726e', null, 'admin', '用户正常退出', '2016-10-31 20:35:15', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('62fd1118-de59-411e-8ec9-a921f9a6ddd1', null, 'admin', '用户登录', '2016-11-09 22:49:00', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('6319b039-0d25-4d28-a574-6e2108f7b52d', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 14:30:00', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('64c685c6-f92f-437e-b83a-c2d8bbc4f5d8', null, '123', '用户登录', '2016-10-24 23:28:30', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('66d78989-228d-42c0-8fc0-b5e41926950d', null, 'tecom', '用户可能是长时间没操作，自动退出', '2016-10-18 22:43:15', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('674ea4b4-8c82-438b-96c8-aec4e4b42690', null, 'admin', '用户登录', '2016-10-26 22:04:30', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('6761df07-820e-4a30-b6c6-ed9651fc97c2', null, '789', '用户登录', '2016-10-24 23:29:52', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('67987ff2-c228-458e-8a01-8e3837cee02a', null, 'admin', '用户登录', '2016-11-14 21:49:30', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('68aa0fe7-de10-422e-8136-93a53f2fa5b8', null, 'admin', '用户登录', '2016-11-08 14:39:44', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('69ce0f9f-8c52-4af0-b557-e16558b0ec67', null, 'admin', '用户正常退出', '2016-10-31 20:04:03', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('6b24fbde-4183-4308-acc0-bc9a2084e89b', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-22 23:50:12', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('6b7ddc59-321e-46ee-b096-54105295f030', null, 'tecom', '用户登录', '2016-10-17 23:54:59', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('6bffa53a-b271-4769-b3c4-2752aa6aeeeb', null, 'admin', '用户登录', '2016-10-31 19:43:25', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('6c875582-4fc6-492a-b8d7-5b49de85f745', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 14:50:26', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('6d3aeb27-3847-46a8-919b-9950b85baaf9', null, 'admin', '用户正常退出', '2016-10-30 15:01:39', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('6e7e4dd0-bc58-4926-a464-435fe8d6b5b8', null, '123', '用户正常退出', '2016-10-26 22:04:19', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('704acee1-876b-4f13-92e9-f05c85d11cb8', null, 'abc', '用户正常退出', '2016-10-28 14:53:34', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('714260f9-28a4-4390-b590-36ab24d47a6b', null, 'test', '用户可能是关闭浏览器等方式非正常退出', '2016-10-31 21:51:25', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('722abbdc-b883-4876-bd39-1a6943deb6ba', null, 'tecom', '用户登录', '2016-10-23 00:02:42', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('7403bbc1-acd9-447b-8b10-c46273f174b5', null, 'tecom', '用户登录', '2016-10-23 22:52:57', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('7415266e-ed4e-4f48-ae54-8a6d61e9b07b', null, 'tecom', '用户登录', '2016-10-18 21:51:29', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('769f2011-d7be-4461-97d3-bb405eeb981d', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 01:00:38', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('76d9aefd-0ca7-4d63-8a38-7b3276844b8c', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-23 00:20:13', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('787a4a64-4146-41f2-98f5-341bfc5edbf3', null, 'tecom', '用户登录', '2016-10-24 23:25:04', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('791ad975-d374-4894-90ed-243cab1e81c4', null, 'admin', '用户登录', '2016-11-08 14:25:46', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('7966fae1-dd2a-40ad-940f-7ddac37c5e16', null, 'admin', '用户正常退出', '2016-11-08 15:34:13', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('796ebc8d-875b-4297-b840-62f9fd8dcb1c', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 14:10:02', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('79a897a7-6086-43bb-ac15-87968f765a05', null, 'admin', '用户正常退出', '2016-10-25 23:55:54', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('79bf4b66-346c-46c2-ad5d-8bc9a9b5ea56', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-23 00:30:13', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('79de3adf-66a8-47a0-bc71-820992c1ff07', null, '123', '用户登录', '2016-10-25 22:13:36', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('7a3cce0e-1546-4c41-bec1-040d07e1bae8', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-08 15:36:20', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('7c146632-e506-477d-a0d0-54788a6581b7', null, 'admin', '用户登录', '2016-11-23 01:27:15', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('7e13da0b-bbca-49c8-934b-2eac004c1a0c', null, '123', '用户登录', '2016-10-25 23:48:13', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('7e25c595-2142-478b-9f36-1c5e89ebd8bd', null, 'admin', '用户登录', '2016-10-30 15:19:47', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('7e5a4390-6d09-4c01-bb5a-c37328345634', null, 'admin', '用户登录', '2016-11-26 00:44:46', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('7e6b489d-a0be-49ca-9019-44750351afb5', null, 'tecom', '用户登录', '2016-10-18 19:53:03', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('7ee42b96-052c-4313-ac2e-b1433f921230', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-24 20:10:24', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('7f4870ee-0f2f-450e-8391-0384e867bd61', null, '123', '用户登录', '2016-10-26 22:00:36', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('7fcd8eea-1ce1-4307-b89f-a6a95e1a2382', null, 'admin', '用户登录', '2016-10-31 18:54:08', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('80f5c351-da77-407b-ab40-eaa3640b32a7', null, 'admin', '用户登录', '2016-11-08 15:48:31', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('815bdfd7-240b-45be-a374-6a91a7dab760', null, 'test', '用户可能是关闭浏览器等方式非正常退出', '2016-10-31 21:47:15', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('8255870b-9ddf-4f37-af52-762428fdb15d', null, 'admin', '用户登录', '2016-11-24 19:56:42', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('83d0207f-88ea-4ef0-8977-8ab081d24e59', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 15:00:00', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('8451897c-5853-429a-a56c-977d7f17dd5a', null, 'tecom', '用户登录', '2016-10-18 22:17:46', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('858a03be-2525-40f7-9e6a-504152eccb55', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-24 21:40:24', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('86239567-2b32-438a-a4b3-d805e90c6151', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 14:30:25', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('878dbd2b-8cae-4207-9754-2d74b707cac4', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-08 14:23:30', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('88ef3d9f-a211-47ef-8eac-fb8b8de41557', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 13:50:00', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('895376c2-ed47-48bc-9045-8d950cc7d015', null, 'admin', '用户正常退出', '2016-10-30 15:20:10', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('8b11bec8-84cb-491c-a7b1-04155beee13f', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-24 20:00:26', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('8b17262c-502f-46f8-9791-4c7663be8408', null, 'admin', '用户正常退出', '2016-10-30 15:04:21', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('8b493c99-0f3e-4bff-bf4e-29e67c66ba64', null, 'admin', '用户正常退出', '2016-10-31 20:34:16', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('8b5171f8-a48c-4af2-9573-d248f6af3a00', null, 'admin', '用户登录', '2016-10-31 20:11:58', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('8b9ab158-1bd2-431f-87e1-525deccdd524', null, 'admin', '用户登录', '2016-11-10 00:02:25', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('8d38b913-9660-417b-a4f3-71fc0c18fee3', null, 'tecom', '用户登录', '2016-10-24 21:44:34', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('8d410a34-df35-4c7e-b88b-fdccdc110f39', null, 'admin', '用户登录', '2016-10-31 21:07:31', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('8e117fbd-719f-44eb-9c9b-61f7b126fa1b', null, 'tecom', '用户登录', '2016-10-24 20:46:57', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('8e1d4182-ab56-4fcc-8c86-69e50392ff2b', null, 'admin', '用户登录', '2016-11-26 16:08:17', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('9031f038-aa43-48bd-be1a-d57c007593c8', null, 'admin', '用户登录', '2016-10-31 20:32:22', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('912b3829-21d9-4c53-bcec-5c7bf23ddd50', null, 'admin', '用户登录', '2016-10-31 20:46:28', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('914f5778-f4f0-4e74-b3ee-ab7684453929', null, 'admin', '用户正常退出', '2016-10-31 19:56:12', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('916bbda1-e584-4e33-88c5-0a59c9a036fd', null, 'admin', '用户登录', '2016-11-09 23:28:33', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('91d69a56-4719-4679-b2a2-f13660c0837b', null, 'admin', '用户正常退出', '2016-10-31 20:09:32', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('91e5d7e5-a9da-4e2e-94a4-d9db9bd05468', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-24 21:10:24', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('944fecba-73d7-4ccc-a74a-0efe8c2c9b69', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 16:10:00', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('961482b7-fcbd-4c3b-9606-be87360f2291', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-08 15:45:13', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('96b04011-e31b-41f3-8b21-49bcc183ce96', null, 'admin', '用户登录', '2016-10-31 20:04:11', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('96b23dbc-6cbe-4414-abf8-8519ab2f616f', null, '123', '用户正常退出', '2016-10-26 22:00:52', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('96c42394-553a-435d-accd-0609385c5da5', null, '123', '用户正常退出', '2016-10-24 23:42:49', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('97f43418-234c-4f61-94cb-918b98b12205', null, 'admin', '用户登录', '2016-11-22 23:47:49', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('981d21fb-f795-49fe-93bc-64dee7bcb9c7', null, 'admin', '用户正常退出', '2016-10-26 21:06:56', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('996a89af-a4e0-40cd-a0c9-21066354e093', null, '123', '用户登录', '2016-10-26 21:06:58', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('9a5c8468-ef1b-4879-8747-3bcc2a93fd30', null, 'tecom', '用户可能是关闭浏览器等方式非正常退出', '2016-10-18 23:39:10', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('9b34a127-ec15-4311-96b7-1fa4977c1ab9', null, '123', '用户登录', '2016-10-25 23:27:25', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('9be15770-ae82-46df-82eb-2a0704b6c2ef', null, 'admin', '用户登录', '2016-10-30 15:01:44', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('9c39505f-e463-4123-aa29-e24fab0a7c43', null, 'test', '用户可能是关闭浏览器等方式非正常退出', '2016-10-31 21:44:25', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('9c3a8934-77c1-403e-896f-3cb7559133bb', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-24 21:20:24', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('9cae3ee1-a54f-4bcc-96e9-a462c8cd74fb', null, 'tecom', '用户登录', '2016-10-18 22:48:11', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('9cbfa85a-b15b-4570-b0bf-f4a8f724dbfd', null, 'tecom', '用户登录', '2016-10-18 20:31:37', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('9d6669cb-352a-4f32-a073-aa347c05fb2c', null, 'test', '用户登录', '2016-10-30 15:02:39', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('9da3da77-d952-4e45-90c9-639178d8e8cc', null, 'tecom', '用户登录', '2016-10-16 02:01:10', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('9e0fc778-974c-4a65-9bad-c40f9e4c075c', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-22 23:40:10', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('9ebb07f8-03d0-4882-8c85-68339c0ed64d', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 13:50:23', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('9fad335e-988a-4de2-a910-28d596d3b8b0', null, 'admin', '用户正常退出', '2016-11-23 01:27:09', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('a03cff90-9819-4754-9c7d-740e1c88d297', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-23 00:10:46', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('a0c29c27-3aea-4de1-a1a4-4f6b8ce6723a', null, 'tecom', '用户正常退出', '2016-10-24 23:36:00', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('a2345f76-e1ec-402d-8ac8-4fd92876a272', null, 'admin', '用户登录', '2016-11-12 23:19:43', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('a2c1928d-2339-4779-9762-cbdf4684ee43', null, 'tecom', '用户登录', '2016-10-18 21:43:06', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('a4872430-a1c5-49fb-b121-efb0b7eb9f7c', null, '123', '用户正常退出', '2016-10-28 15:00:54', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('a4e85350-9ce7-4e86-97b2-345eacc8105c', null, 'admin', '用户登录', '2016-11-15 02:05:16', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('a5c1f731-eede-4d65-add3-8eed0511c7b5', null, 'tecom', '用户登录', '2016-10-25 21:33:51', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('a64b0cbb-b6fe-4276-993f-1ad281629430', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-23 01:20:13', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('a7894b70-fc6f-44cb-9295-0ff40d1c2257', null, 'test', '用户登录', '2016-10-31 21:49:34', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('a79d54fb-4c32-470a-a8b3-66c23c80d5ec', null, 'admin', '用户登录', '2016-11-23 00:03:22', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('a7cfd058-795d-4a15-94d1-227079b84fb5', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 15:30:58', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('a8f740f9-be52-4400-a5cc-604bbcaf267d', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-24 20:40:24', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('a9699bd5-c883-4320-9d06-3f8455f8caf5', null, 'admin', '用户正常退出', '2016-10-31 21:41:08', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('ab32849b-7d15-453a-bfa1-2ad826185617', null, 'admin', '用户登录', '2016-10-31 20:32:09', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('abd17b5f-3788-45a3-b26d-211d6b6598b8', null, 'tecom', '用户正常退出', '2016-10-24 23:28:25', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('ac70a9ea-55d2-402a-87f7-3a83f1e39d85', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 01:00:09', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('ad29e7b1-775a-4405-9127-214abb0a53bd', null, '123', '用户正常退出', '2016-10-26 21:59:16', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('ad522746-d83b-4fed-bd69-adfeb7626c65', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-10-30 14:58:55', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('aee3d9ae-d614-4761-8680-9608ff07c55c', null, '123', '用户登录', '2016-10-28 15:00:21', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('af120e12-f39c-4880-af8f-b14c765b4056', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-08 14:21:45', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('afa3a3c5-7772-40bc-9c01-1b6d8367e785', null, 'admin', '用户正常退出', '2016-11-08 16:09:48', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('b09a748a-6dca-4b82-9889-6e1a45867202', null, 'tecom', '用户登录', '2016-10-24 22:44:03', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('b09fc287-fc20-4865-9d4f-839cdeed83f4', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-10-31 19:18:25', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('b2c3528c-3bbb-47ce-bed6-22835740faba', null, '123', '用户正常退出', '2016-10-28 13:50:34', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('b3397cdf-69c5-44a9-bb1f-dd6e8122bae5', null, 'tecom', '用户登录', '2016-10-24 22:39:37', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('b49803fd-7296-455f-9d54-b959bc670c03', null, 'admin', '用户登录', '2016-10-31 19:58:25', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('b49a9c48-a4dc-4d54-8d77-f693d2d116c3', null, 'admin', '用户可能是长时间没操作，自动退出', '2016-10-30 15:40:16', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('b587e7cb-1164-4661-9510-932664567390', null, 'admin', '用户正常退出', '2016-11-08 16:46:35', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('b5d53c1d-c5d6-483a-a093-1b39fb60e53f', null, 'test', '用户登录', '2016-10-30 15:02:49', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('b60c61d6-7df0-4b26-a827-6e03ab659878', null, 'tecom', '用户可能是关闭浏览器等方式非正常退出', '2016-10-16 02:34:40', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('b649e52f-5391-4529-ad52-1ed80ad92e7d', null, 'tecom', '用户可能是长时间没操作，自动退出', '2016-10-18 20:13:06', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('b6d06914-6793-4a7c-bd1d-4c790c21a273', null, 'admin', '用户登录', '2016-11-24 20:00:02', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('b8761651-0a21-4f0e-aecc-3430337b72ca', null, 'tecom', '用户登录', '2016-10-18 22:03:36', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('ba19a179-f250-4852-9b1f-4ffee9272a14', null, 'admin', '用户正常退出', '2016-10-30 14:32:15', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('bae8a2cc-6a65-4d1a-9ab6-9381020175b5', null, 'tecom', '用户正常退出', '2016-10-24 23:34:23', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('bbef11ef-3845-4015-9142-34b195d70dec', null, 'admin', '用户登录', '2016-11-08 16:02:19', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('bc215779-458d-48fd-962d-7b926354118b', null, '123', '用户正常退出', '2016-10-26 21:05:55', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('bde881ed-3e72-48e1-829a-bc4297809eff', null, 'tecom', '用户正常退出', '2016-10-18 20:31:35', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('c1fc4520-5834-464d-8fa2-1296692bdfba', null, 'tecom', '用户可能是长时间没操作，自动退出', '2016-10-24 23:16:20', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('c2ac7164-3e5a-4dc4-8343-a54a1bda3e03', null, '123', '用户正常退出', '2016-10-26 21:09:15', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('c2dad05a-48ce-448c-9f7b-f7380ab0a592', null, 'tecom', '用户登录', '2016-10-18 23:38:08', '/userController/login.action', '120.2.144.12');
-INSERT INTO `t_user_log` VALUES ('c36d9549-74de-49bc-bbcf-6bc71a23cac7', null, 'test', '用户可能是关闭浏览器等方式非正常退出', '2016-10-31 21:41:53', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('c3bb8587-c4bd-405a-9797-904d1bd696f5', null, 'admin', '用户登录', '2016-11-08 16:47:00', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('c3cdc1a6-1946-46dd-b145-3206d8a6f716', null, 'tecom', '用户登录', '2016-10-16 02:28:05', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('c3d5a7c7-df05-4b10-9ffa-946cad28f1b2', null, 'test', '用户登录', '2016-10-31 21:46:51', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('c54c0996-6f30-43bc-b73a-6c470f279052', null, '123', '用户登录', '2016-10-25 23:07:08', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('c56030fc-5a95-41e6-bfd8-6ce8d6d187ea', null, 'admin', '用户登录', '2016-10-26 21:09:20', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('c6a9b8d2-2b45-4977-9532-b704d5beb471', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-23 00:40:13', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('c6bbd567-9593-402f-a070-4c3cb229c241', null, 'admin', '用户登录', '2016-11-15 02:14:38', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('c6e099fd-c39b-4eaa-a404-e1e8257720bc', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-08 15:35:00', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('c716e38e-7c4c-446e-a1c6-33ef1b01e812', null, 'test', '用户登录', '2016-11-10 01:04:38', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('c7f87d5e-ec39-43ca-a56f-677d032f8d46', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 15:30:23', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('c8157827-a72f-464a-8e90-9caf6cf39d91', null, 'admin', '用户登录', '2016-11-08 14:43:01', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('c9778f3c-8079-4a4f-a334-e8adfbdb2530', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-23 00:00:13', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('c9911e43-e52b-4612-85ce-ba05a36f4e9b', null, 'admin', '用户正常退出', '2016-10-28 15:00:10', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('c99887f2-dafd-41a9-aac4-1d06f16df318', null, 'admin', '用户正常退出', '2016-11-09 23:31:38', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('ca447c68-68e1-44fe-8fdb-128479125c02', null, 'admin', '用户登录', '2016-10-28 14:33:34', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('cb592968-ba89-47d7-9426-2eecf5228fa6', null, 'tecom', '用户登录', '2016-10-18 23:20:15', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('cc967bfe-7b89-4451-ac4a-6cba8100af7b', null, 'tecom', '用户登录', '2016-10-24 23:37:41', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('cf4fabac-e298-4c1c-be03-3c486ceda223', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-24 20:30:24', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('d013e7c6-f86f-4a94-8f28-cdf8b9bcb03b', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 15:10:58', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('d0663c16-6319-4b59-9c84-75816cc194e6', null, 'test', '用户正常退出', '2016-10-30 15:04:42', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('d06bd05e-7211-4994-b05f-7132cd431df5', null, 'test', '用户登录', '2016-10-31 21:44:04', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('d0a41a1e-5fcd-4534-bcfc-3e94527942f1', null, 'admin', '用户登录', '2016-11-08 16:41:43', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('d10509d9-1194-41aa-8afd-3027c4441bf2', null, 'admin', '用户登录', '2016-10-30 14:29:28', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('d121f904-b39b-4b20-b154-e5e30f448fe4', null, 'admin', '用户登录', '2016-11-14 23:14:01', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('d134b24d-177b-4747-ace2-f38325c2478e', null, 'admin', '用户登录', '2016-11-09 21:06:38', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('d196c40f-ea99-42b8-90a5-9debfa6ca493', null, 'admin', '用户登录', '2016-11-08 14:19:01', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('d1f8f8fa-99c1-40e4-a24b-a46a4c987bc9', null, '123', '用户登录', '2016-10-26 21:05:37', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('d4043944-37c0-4e1a-b0fb-7f4433528332', null, 'admin', '用户正常退出', '2016-10-31 19:39:08', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('d434b5bd-7ab3-46d4-91f5-d192bae1babd', null, 'admin', '用户登录', '2016-11-26 14:54:35', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('d5242eda-d28b-4e8d-ba7b-1d011896ab2f', null, 'admin', '用户登录', '2016-10-26 21:06:02', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('d606af05-02df-4552-85d7-3f44d03b795a', null, 'test', '用户登录', '2016-10-31 21:41:28', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('d685d008-2f05-4662-94bd-f28584e47fc3', null, 'admin', '用户登录', '2016-10-31 19:56:21', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('d7774f7e-e35e-4249-a3d8-ee78a7fa979a', null, 'tecom', '用户登录', '2016-10-18 00:04:32', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('d7b1e0ff-49e5-42be-97c2-1b1694d2fa9d', null, 'admin', '用户登录', '2016-10-28 14:53:41', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('d7c261af-20d0-4117-b490-a7c21c737332', null, 'test', '用户正常退出', '2016-10-30 15:02:44', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('d7c5f953-e4f0-48e1-89e4-453545ec56db', null, '123', '用户登录', '2016-11-10 01:05:22', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('d890d399-3e86-476d-814c-52d890b1bc43', null, 'admin', '用户正常退出', '2016-10-30 14:24:36', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('d8fb2dd9-aa2d-4267-94a6-2239bcfcfc5d', null, 'admin', '用户登录', '2016-11-13 01:08:24', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('d9ae4369-b0bc-4c0e-b4d6-4d27ea996a31', null, 'admin', '用户正常退出', '2016-10-31 19:43:17', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('d9ff629f-0c32-417a-9f5a-a803003a8675', null, 'tecom', '用户可能是长时间没操作，自动退出', '2016-10-24 22:04:35', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('da448612-349f-4c7d-b8cb-7794eb4a7aa7', null, 'admin', '用户登录', '2016-11-08 14:27:12', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('da6a82ac-8fe2-43af-8008-bbebb976b8c0', null, 'admin', '用户正常退出', '2016-10-30 14:29:18', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('dbbf1cde-406a-48e5-b5aa-55b201f13ae3', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-23 01:00:13', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('dca15afd-eff2-4095-b901-34734c77a830', null, 'admin', '用户登录', '2016-11-08 14:38:52', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('dcb8d272-880e-47fd-aafd-320e53091ac6', null, 'tecom', '用户登录', '2016-10-24 23:35:46', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('dcedfe94-8e48-4124-9709-be2a49348ceb', null, 'admin', '用户正常退出', '2016-10-26 00:01:46', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('deafff57-71c8-407f-9cca-578b4bb4a477', null, '123', '用户可能是长时间没操作，自动退出', '2016-10-26 21:38:00', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('df05be94-c287-4fe3-b9d2-ce9f8771a1c2', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-08 14:26:30', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('dfd5d9e9-d397-4d6f-86c4-e933ea4bc695', null, 'tecom', '用户登录', '2016-10-18 21:30:43', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('dff9272e-a5d5-4bd8-a8d7-8ab6f069f15b', null, 'tecom', '用户登录', '2016-10-18 21:53:40', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('e11c445a-f3c0-4c00-a467-f3dd67d45bce', null, 'admin', '用户登录', '2016-11-08 14:21:19', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('e1f7e6de-8753-44a6-9451-14ff0398044b', null, 'admin', '用户正常退出', '2016-10-28 14:52:17', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('e2295ac3-6df3-49ac-817a-eafd12c27023', null, 'tecom', '用户登录', '2016-10-17 20:34:26', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('e27b1c87-20fe-4c60-a09d-8f02f49939b7', null, 'tecom', '用户登录', '2016-10-24 21:21:30', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('e2fc766c-e382-4c3f-a641-25285dd078ca', null, 'admin', '用户登录', '2016-11-14 22:49:39', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('e3ded934-1603-4ef7-80c2-f3ec7810fe72', null, 'admin', '用户登录', '2016-11-09 23:12:49', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('e4559260-2bea-4d3b-8b42-4258758eac1f', null, 'admin', '用户登录', '2016-11-26 01:07:11', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('e72013ac-e7e2-4628-b93a-464d7e1af09a', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-23 00:50:13', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('e7450cae-f06f-4cdb-9182-05467c8110f3', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-23 00:20:46', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('e831c10c-4600-4e81-87a6-70ac456408af', null, 'tecom', '用户登录', '2016-10-23 00:20:16', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('e89b740e-76d9-474d-b53b-ddd60d09bb93', null, 'tecom', '用户可能是长时间没操作，自动退出', '2016-10-25 22:41:00', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('e94b5ed2-df92-42bc-89d6-de93c871e777', null, 'tecom', '用户登录', '2016-10-18 22:43:53', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('e99ff886-e72e-4868-8dd6-e32933486f83', null, '123', '用户可能是长时间没操作，自动退出', '2016-10-25 23:01:35', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('eb5de739-771b-4fe5-838a-9f6e79073d11', null, 'admin', '用户登录', '2016-11-26 16:05:12', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('ebcb5d82-2b13-4d02-86e5-f0e1685efebd', null, 'admin', '用户登录', '2016-11-08 16:53:16', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('ebcd5ec2-757b-433e-b66e-f0931a74556c', null, 'tecom', '用户登录', '2016-10-18 22:23:14', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('ec545ba8-7c15-4ed2-a809-b98707a84e79', null, 'tecom', '用户可能是关闭浏览器等方式非正常退出', '2016-10-18 21:32:40', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('ed77071d-dc0a-436a-8111-e30f4a080859', null, '123', '用户正常退出', '2016-10-25 23:54:50', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('eda6eee8-a280-4be9-a4d3-3e81f359f8d9', null, 'admin', '用户正常退出', '2016-10-31 18:53:26', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('efb2f6ec-0384-4c47-a982-f3f2ae1135d6', null, 'admin', '用户登录', '2016-10-30 15:20:15', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('f05ca8bf-cecc-4089-a1ea-cba58216a63b', null, '123', '用户登录', '2016-10-26 21:17:56', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('f2c1e6bb-e4bf-4d81-83dc-1a2d081997da', null, 'tecom', '用户正常退出', '2016-10-24 23:38:10', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('f3ad3c60-065e-4699-baf6-ac1be07ea5c7', null, 'tecom', '用户可能是长时间没操作，自动退出', '2016-10-23 00:00:11', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('f4c69acf-c58a-483a-81bb-a60b8656717f', null, 'admin', '用户登录', '2016-11-26 13:41:05', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('f4ed271c-3afa-4b9d-8521-98647cad7d12', null, 'admin', '用户登录', '2016-11-08 14:31:44', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('f4f8a3d8-7da1-4e57-af5f-327689264346', null, 'tecom', '用户可能是长时间没操作，自动退出', '2016-10-17 21:07:30', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('f5f99e44-2a0a-489d-bb10-eaefd90185d4', null, 'admin', '用户正常退出', '2016-11-08 16:53:02', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('f62b4f89-c76e-4702-82aa-c39db0e865e3', null, 'admin', '用户登录', '2016-10-31 19:39:15', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('f6664f3e-d703-4c54-92f6-813fde2612c6', null, 'tecom', '用户登录', '2016-10-17 20:47:28', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('f69716ec-5f0c-4da4-aa25-b467a92b436f', null, 'tecom', '用户登录', '2016-10-18 22:58:19', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('f6ad6c3e-3f71-4edb-8eb3-e0d188f8c95a', null, 'admin', '用户正常退出', '2016-11-08 14:39:36', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('f796793d-6e69-46ff-9d08-0e486fc1bd00', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-08 14:24:30', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('f8c9cea7-ad2c-437e-abc4-41e12d654f60', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-08 14:43:30', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('fa35ba26-ed61-4fd7-b7a6-b211bf326227', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-10-31 21:38:06', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('fb183416-28c2-48c2-a681-41e20b049cca', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 15:20:58', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('fc30c2fe-821d-4fe3-ac5a-1e109de016ca', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 14:00:00', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('fc3f9683-d21f-40ab-92e6-26a48a09e057', null, 'admin', '用户正常退出', '2016-10-31 19:43:54', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('fcd24ddb-ce40-4f57-89b8-6ecb4fd0bbb6', null, 'admin', '用户登录', '2016-10-31 19:44:02', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('fd98b50c-a71d-41d9-a014-fd8078c49bc4', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-08 14:27:35', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('fdb87c7e-c8ef-4641-8968-ecac8c16343e', null, 'admin', '用户登录', '2016-10-31 19:36:01', '/userController/login.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('fddf92fb-c6b1-426e-a14d-774ccb823ebf', null, 'admin', '用户登录', '2016-11-23 00:21:30', '/userController/login.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('10cb91f0-6b59-4cf3-8b6b-d335e316ad14', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-27 09:20:04', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('10ee46de-c91f-4059-a02e-ed1596626e6c', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 17:50:52', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('15a4f985-41d5-468a-9330-0f312866487a', null, 'admin', '用户正常退出', '2016-11-26 16:58:02', '/userController/logout.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('21aa4175-ff58-44b5-a349-29d771bbe282', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 20:30:00', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('25660248-cc90-40d4-a73d-b870b2823bb8', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 16:40:40', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('26df1215-8bf4-4bb2-8a6b-3e3d82e68591', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 17:50:26', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('2a043d32-7765-40d8-aa6c-b67c6e451191', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 18:10:52', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('2e7ed7cb-5f6c-4865-8d40-174ca8683eee', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 18:10:00', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('31af32f8-4c3d-46c5-a4a9-23106d77bfbd', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 18:40:19', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('364b6b30-591d-4b99-8b13-a9ec05970a40', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 16:20:00', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('3b137d63-5606-4bdf-998b-b04800bd7eef', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 19:50:00', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('3f6c649d-c03f-4268-8c1a-471b2eec5a6a', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 18:30:57', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('3fc095f9-6401-4d08-aabd-f7ead0efcc87', null, 'admin', '用户登录', '2016-11-26 19:00:21', '/userController/login.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('41d73a6f-d968-42a1-a146-0f00b42da228', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 20:10:52', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('528b0397-568e-4994-b630-5761ecc836a2', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 18:50:00', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('555c9513-6a36-4b16-a3bf-6b8f5df3c7fe', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 18:00:52', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('5599b2cd-367a-454f-8ff0-eec4e011e23f', null, 'admin', '用户登录', '2016-11-26 17:32:29', '/userController/login.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('586d7bb1-aedf-4efc-89de-3fabff85df30', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 20:00:52', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('58a2fa1d-d210-4751-84de-be2b9301cfef', null, 'admin', '用户登录', '2016-11-26 17:42:01', '/userController/login.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('676fc1c9-d08a-407a-bf78-34e4f4b983a8', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 17:50:00', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('82099c4d-96e3-4587-b796-9eb688bc3a29', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 17:20:17', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('8270c104-12e1-4c26-8ca9-0c33fe05d902', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 19:50:52', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('86655697-b882-4818-bc45-7c7a26c4e26b', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 19:20:00', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('8a571c4c-0461-4f4c-be6b-b2362ca9a559', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 16:20:40', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('93490637-f2ee-4e80-99d0-e2e19ebf018c', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 18:20:52', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('97b8d6a7-5318-4af9-8275-97a5500fabb6', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-27 09:20:35', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('9972e241-3345-442f-805b-8c9af0c1fae6', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 19:20:52', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('9bb91d89-3546-488f-8d04-d7ad67a22a12', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 16:40:00', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('9d1c7f16-524c-41ec-b513-a917a1414836', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 18:20:00', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('9de45e86-cbeb-4994-a571-5447a58ee5e5', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 20:20:00', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('9e8e6a9b-d9fa-47da-b854-b4407be9b00b', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 19:40:52', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('a219f0ff-703f-4390-a981-cfb462db4bb8', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 20:00:00', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('a2b2c9e2-3e5b-4c6f-adca-f063f2048648', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 18:50:52', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('a9b661c5-0739-4588-93d3-5518d192bf86', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 16:50:00', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('b0db6270-cd3d-4569-a6f7-138475562c80', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 16:30:40', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('b7d96704-e0ef-4029-b0b1-4a979d1d63e1', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 16:50:27', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('b952c111-340c-4637-b6b3-722756cdb9b2', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 19:30:00', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('c27042f4-ef97-4ae1-afd8-27a02c843eca', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 18:40:52', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('c2d8aff8-04c4-4766-aa71-35b9f587a173', null, 'admin', '用户登录', '2016-11-27 09:17:41', '/userController/login.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('cc2b973b-1305-43a7-871e-d0c3ee0d1b5e', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 18:30:06', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('cd113edc-bd0c-4371-9808-8f109fbeace7', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 19:30:52', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('cd21046e-3fe0-40b3-8554-b633feaa1ac7', null, 'admin', '用户登录', '2016-11-26 16:43:40', '/userController/login.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('d04d71be-c5f5-481d-854e-889a5c66c543', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 19:10:52', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('d29f7249-667b-4298-93f4-f4c3c8c47352', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 19:00:52', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('db1f40bf-cc45-4340-a6a4-77d64ef1ad44', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 20:10:00', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('e4a4f0b7-f7fb-4b5e-a339-bd6febd2c0ac', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 20:20:52', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('e7553081-2239-4a00-96a6-27e1ce2e94ef', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 19:40:00', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('f1cfbfb1-a9a9-4b21-90a4-e5dac66fd8c1', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 16:30:00', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('f7737b21-e50f-431c-a996-5ccb11759200', null, 'admin', '用户正常退出', '2016-11-26 18:59:40', '/userController/logout.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('f9c5b9fa-8472-4d20-895f-2b2b52a2ffbf', null, 'admin', '用户登录', '2016-11-26 17:12:16', '/userController/login.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('fbdd0423-cfb7-443d-9850-463f3780013a', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 17:40:00', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('fc95fe43-e39f-45cc-a648-292a4b180cdc', null, 'admin', '用户登录', '2016-11-26 17:23:09', '/userController/login.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('fcfcda0e-b51a-452f-a0a9-16662d24971f', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 19:10:00', 'Not a normal exit', null);
+INSERT INTO `t_user_log` VALUES ('fff2af67-a14f-475f-b134-de48d37b1faf', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 18:00:00', 'Not a normal exit', null);
 
 -- ----------------------------
 -- Table structure for `t_user_trole`

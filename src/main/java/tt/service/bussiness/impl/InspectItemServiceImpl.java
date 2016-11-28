@@ -6,6 +6,7 @@ import tt.dao.business.InspectItemDaoI;
 import tt.model.business.InspectItem;
 import tt.service.bussiness.InspectItemServiceI;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,7 @@ public class InspectItemServiceImpl implements InspectItemServiceI {
     private InspectItemDaoI inspectItemDao;
 
     @Override
-    public InspectItem get(Integer id, Integer dept_id) {
+    public InspectItem get(Serializable id, Integer dept_id) {
         return inspectItemDao.getById(id,dept_id);
     }
 

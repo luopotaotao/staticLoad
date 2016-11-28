@@ -7,6 +7,7 @@ import tt.service.bussiness.CompanyServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +22,7 @@ public class CompanyServiceImpl implements CompanyServiceI {
     private CompanyDaoI companyDao;
 
     @Override
-    public Company get(Integer id, Integer dept_id) {
+    public Company get(Serializable id, Integer dept_id) {
         return companyDao.getById(id,dept_id);
     }
 

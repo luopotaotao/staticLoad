@@ -5,7 +5,9 @@
 <head>
     <title>智能无线静荷载试验检测云平台</title>
     <jsp:include page="../../layout/common.jsp"></jsp:include>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/jslib/resumable.js" type="text/javascript"
+    <script type="text/javascript" src="<c:url value="/jslib/resumable.js"/>" type="text/javascript"
+            charset="utf-8"></script>
+    <script type="text/javascript" src="<c:url value="/jslib/my_resumble.js"/>" type="text/javascript"
             charset="utf-8"></script>
 </head>
 <body>
@@ -50,12 +52,12 @@
                         </div>
                     </td>
                     <td class="progress-text" nowrap="nowrap"></td>
-                    <%--<td class="progress-pause" nowrap="nowrap">--%>
+                        <%--<td class="progress-pause" nowrap="nowrap">--%>
                         <%--<a href="#" onclick="r.upload(); return(false);" class="progress-resume-link"><img--%>
-                                <%--src="${pageContext.request.contextPath}/style/images/resume.png" title="恢复"/></a>--%>
+                        <%--src="${pageContext.request.contextPath}/style/images/resume.png" title="恢复"/></a>--%>
                         <%--<a href="#" onclick="r.pause(); return(false);" class="progress-pause-link"><img--%>
-                                <%--src="${pageContext.request.contextPath}/style/images/pause.png" title="暂停"/></a>--%>
-                    <%--</td>--%>
+                        <%--src="${pageContext.request.contextPath}/style/images/pause.png" title="暂停"/></a>--%>
+                        <%--</td>--%>
                 </tr>
             </table>
         </div>
@@ -295,72 +297,18 @@
         var href = '../moduleBasicUserController/index/' + id + '.action';
         openDialog('账号管理', href);
     }
-    var r = null;
-    function initResumable() {
-        r = new Resumable({
-            target: '../fileController/upload.action',
-            chunkSize: 1 * 1024 * 1024,
-            simultaneousUploads: 4,
-            testChunks: true,
-            throttleProgressCallbacks: 1,
-            method: "octet"
-        });
-        // Resumable.js isn't supported, fall back on a different method
-        if (!r.support) {
-            $('.resumable-error').show();
-        } else {
-            // Show a place for dropping/selecting files
-            $('.resumable-drop').show();
-            $.each($('.resumable-drop'), function (i, item) {
-                r.assignDrop(item);
-            });
-            $.each($('.resumable-browse'), function (i, item) {
-                r.assignBrowse(item);
-            });
-//            r.assignDrop($('.resumable-drop')[0]);
-            r.assignBrowse($('#img_div')[0]);
-
-            // Handle file add event
-            r.on('fileAdded', function (file) {
-                // Show progress pabr
-                $('.resumable-progress, .resumable-list').show();
-                // Show pause, hide resume
-                $('.resumable-progress .progress-resume-link').hide();
-                $('.resumable-progress .progress-pause-link').show();
-                // Add the file to the list
-//                $('.resumable-list').append('<li class="resumable-file-' + file.uniqueIdentifier + '">Uploading <span class="resumable-file-name"></span> <span class="resumable-file-progress"></span>');
-//                $('.resumable-file-' + file.uniqueIdentifier + ' .resumable-file-name').html(file.fileName);
-                // Actually start the upload
-                r.upload();
-            });
-            r.on('pause', function () {
-                // Show resume, hide pause
-                $('.resumable-progress .progress-resume-link').show();
-                $('.resumable-progress .progress-pause-link').hide();
-            });
-            r.on('complete', function () {
-                // Hide pause/resume when the upload has completed
-                $('.resumable-progress .progress-resume-link, .resumable-progress .progress-pause-link').hide();
-            });
-            r.on('fileSuccess', function (file, message) {
-                message = $.parseJSON(message);
-                $('#dept_logo').textbox('setValue', message.url);
-                $('#img').attr('src', '${pageContext.request.contextPath}/tmp/' + message.url);
-                console.log('完成:' + message);
-                // Reflect that the file upload has completed
-                $('.resumable-file-' + file.uniqueIdentifier + ' .resumable-file-progress').html('(completed)');
-            });
-            r.on('fileError', function (file, message) {
-                // Reflect that the file upload has resulted in error
-                $('.resumable-file-' + file.uniqueIdentifier + ' .resumable-file-progress').html('(file could not be uploaded: ' + message + ')');
-            });
-            r.on('fileProgress', function (file) {
-                // Handle progress for both the file and the overall upload
-                $('.resumable-file-' + file.uniqueIdentifier + ' .resumable-file-progress').html(Math.floor(file.progress() * 100) + '%');
-                $('.progress-bar').css({width: Math.floor(r.progress() * 100) + '%'});
-            });
+    var r = $.getResumble({
+        url:'<c:url value="/file/upload"/>',
+        fileType:['png'],
+        successHandler:function (uuid) {
+            alert('成功保存文件:'+uuid);
+            $('#dept_logo').textbox('setValue', message.uuid);
+            $('#img').attr('src', '<c:url value="/file/upload"/>'+message.uuid);
+        },
+        fileTypeErrorHandler:function () {
+            alert("文件类型错误...");
         }
-    }
+    }) ;
     $('#btn_save').on('click', function () {
         $.ajax({
             url: '../fileController/save.action',
@@ -376,7 +324,7 @@
         }).fail(function () {
             console.log("保存失败");
         });
-    })
+    });
 
 </script>
 </body>

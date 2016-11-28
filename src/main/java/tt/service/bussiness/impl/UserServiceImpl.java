@@ -11,6 +11,7 @@ import tt.util.Encrypt;
 import tt.util.PBKDF2;
 import tt.util.RandomUtil;
 
+import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
@@ -30,7 +31,7 @@ public class UserServiceImpl implements UserServiceI {
     }
 
     @Override
-    public User get(Integer id, Integer dept_id) {
+    public User get(Serializable id, Integer dept_id) {
         return null;
     }
 

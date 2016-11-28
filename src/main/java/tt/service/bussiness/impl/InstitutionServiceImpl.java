@@ -6,6 +6,7 @@ import tt.dao.business.InstitutionDaoI;
 import tt.model.business.Institution;
 import tt.service.bussiness.InstitutionServiceI;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,7 @@ public class InstitutionServiceImpl implements InstitutionServiceI {
     private InstitutionDaoI institutionDao;
 
     @Override
-    public Institution get(Integer id, Integer dept_id) {
+    public Institution get(Serializable id, Integer dept_id) {
         return institutionDao.getById(id,dept_id);
     }
 

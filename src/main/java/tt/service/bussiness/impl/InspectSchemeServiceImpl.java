@@ -10,6 +10,7 @@ import tt.model.business.InspectScheme;
 import tt.service.bussiness.InspectItemServiceI;
 import tt.service.bussiness.InspectSchemeServiceI;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,7 @@ public class InspectSchemeServiceImpl implements InspectSchemeServiceI {
     private InstitutionDaoI institutionDao;
 
     @Override
-    public InspectScheme get(Integer id,Integer dept_id) {
+    public InspectScheme get(Serializable id, Integer dept_id) {
         return inspectSchemeDao.getById(id,dept_id);
     }
 
