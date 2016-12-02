@@ -5,12 +5,12 @@
 
     <div class="easyui-panel" style="width:30%">
         <input class="easyui-searchbox"
-               data-options="prompt:'请输入姓名',searcher:function(val,typ){$('#dg_inspector').datagrid('load',{typ:typ,name:encodeURIComponent(val)});}"
+               data-options="prompt:'请输入姓名',searcher:function(val,typ){$('#dg_user').datagrid('load',{typ:typ,name:encodeURIComponent(val)});}"
                style="width:100%">
     </div>
 
-    <table id="dg_inspector" style="width:100%"></table>
-    <div id="dlg_inspector_edit" class="easyui-dialog" style="width:100%;max-width:400px;padding:30px 60px;"
+    <table id="dg_user" style="width:100%"></table>
+    <div id="dlg_user_edit" class="easyui-dialog" style="width:100%;max-width:400px;padding:30px 60px;"
             data-options="
             //title: '添加人员',
             closed: true,
@@ -20,14 +20,14 @@
             buttons: [{
             text: '保存',
             iconCls: 'icon-ok',
-            handler: $.submitInspectorForm
+            handler: $.submitUserForm
             }, {
             text: '取消',
             iconCls: 'icon-cancel',
-            handler: $.closeInspectorEditDialog
+            handler: $.closeUserEditDialog
             }]
         ">
-        <form id="ff_inspector" class="easyui-form" method="post" data-options="novalidate:true" action="../${baseUrl}/post.action">
+        <form id="ff_user" class="easyui-form" method="post" data-options="novalidate:true" action="../${baseUrl}/post.action">
             <div style="margin-bottom:20px;display: none">
                 <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'企业编号:',required:true">
             </div>
@@ -47,17 +47,17 @@
                        data-options="label:'备注:',multiline:true,height:120">
             </div>
             <div style="margin-bottom:20px;display: none;">
-                <input id="inspector_institution_id" class="easyui-textbox" name="institution_id" style="width:100%"
+                <input id="user_dept_id" class="easyui-textbox" name="dept_id" style="width:100%"
                        data-options="label:'所属机构id:',required:true">
             </div>
         </form>
     </div>
     <script type="text/javascript">
         $(function () {
-            var institution_id = '${institution_id}';
+            var dept_id = '${dept_id}';
             var baseUrl = '${pageContext.request.contextPath}/${baseUrl}';
-            $('#dg_inspector').datagrid({
-                url: '../${baseUrl}/${institution_id}/query.action',
+            $('#dg_user').datagrid({
+                url: '../${baseUrl}/${dept_id}/query.action',
                 method: 'get',
 //                title: '人员管理',
 //                iconCls: 'icon-save',
@@ -77,7 +77,7 @@
                     text: '编辑',
                     iconCls: 'icon-edit',
                     handler: function () {
-                        var rows = $('#dg_inspector').datagrid('getChecked');
+                        var rows = $('#dg_user').datagrid('getChecked');
                         if (!rows || !rows.length) {
                             $.messager.alert('提示', '请选择要编辑的行!');
                             return;
@@ -93,7 +93,7 @@
                     text: '删除',
                     iconCls: 'icon-remove',
                     handler: function () {
-                        var rows = $('#dg_inspector').datagrid('getChecked');
+                        var rows = $('#dg_user').datagrid('getChecked');
                         if (!rows || !rows.length) {
                             $.messager.alert('提示', '请选择要删除的行!');
                             return;
@@ -103,7 +103,7 @@
                                 remove($.map(rows, function (row) {
                                     return row.id;
                                 }), function () {
-                                    $('#dg_inspector').datagrid('reload');
+                                    $('#dg_user').datagrid('reload');
                                 });
                             }
                         });
@@ -137,13 +137,13 @@
                 $.cmenu.menu({
                     onClick: function (item) {
                         if (item.iconCls == 'icon-ok') {
-                            $('#dg_inspector').datagrid('hideColumn', item.name);
+                            $('#dg_user').datagrid('hideColumn', item.name);
                             $.cmenu.menu('setIcon', {
                                 target: item.target,
                                 iconCls: 'icon-empty'
                             });
                         } else {
-                            $('#dg_inspector').datagrid('showColumn', item.name);
+                            $('#dg_user').datagrid('showColumn', item.name);
                             $.cmenu.menu('setIcon', {
                                 target: item.target,
                                 iconCls: 'icon-ok'
@@ -151,10 +151,10 @@
                         }
                     }
                 });
-                var fields = $('#dg_inspector').datagrid('getColumnFields');
+                var fields = $('#dg_user').datagrid('getColumnFields');
                 for (var i = 0; i < fields.length; i++) {
                     var field = fields[i];
-                    var col = $('#dg_inspector').datagrid('getColumnOption', field);
+                    var col = $('#dg_user').datagrid('getColumnOption', field);
                     $.cmenu.menu('appendItem', {
                         text: col.title,
                         name: field,
@@ -163,7 +163,7 @@
                 }
             }
 
-//            $('#dlg_inspector_edit').dialog({
+//            $('#dlg_user_edit').dialog({
 //                title: "添加人员",
 //                closed: true,
 //                modal: true,
@@ -181,21 +181,21 @@
 //            })
 
             function showEditDialog(data) {
-                var $ff = $('#ff_inspector');
+                var $ff = $('#ff_user');
                 if (data) {
                     $ff.form('load', data);
                     $ff.form({url: '../${baseUrl}/put.action'});
                 } else {
                     $ff.form({url: '../${baseUrl}/post.action'});
                 }
-                $('#inspector_institution_id').textbox('setValue', institution_id);
-                $('#dlg_inspector_edit').dialog('open');
+                $('#user_dept_id').textbox('setValue', dept_id);
+                $('#dlg_user_edit').dialog('open');
             }
 
 
             function submitForm() {
                 $.messager.progress();	// display the progress bar
-                $('#ff_inspector').form('submit', {
+                $('#ff_user').form('submit', {
                     onSubmit: function () {
                         var isValid = $(this).form('validate');
                         if (!isValid) {
@@ -222,13 +222,13 @@
 
             function closeEditDialog(needRefresh) {
                 if (needRefresh) {
-                    $('#dg_inspector').datagrid('reload');
+                    $('#dg_user').datagrid('reload');
                 }
-                $('#ff_inspector').form('clear');
-                $('#dlg_inspector_edit').dialog('close');
+                $('#ff_user').form('clear');
+                $('#dlg_user_edit').dialog('close');
             }
-            $.submitInspectorForm = submitForm;
-            $.closeInspectorEditDialog = closeEditDialog;
+            $.submitUserForm = submitForm;
+            $.closeUserEditDialog = closeEditDialog;
             function remove(ids) {
                 $.ajax({
                     url: '../${baseUrl}/delete.action',
@@ -238,7 +238,7 @@
                 }).done(function (ret) {
                     if (ret && ret.flag) {
                         $.messager.alert('提示', '删除成功!');
-                        $('#dg_inspector').datagrid('reload');
+                        $('#dg_user').datagrid('reload');
                     } else {
                         $.messager.alert('提示', ret, msg || '删除失败!');
                     }

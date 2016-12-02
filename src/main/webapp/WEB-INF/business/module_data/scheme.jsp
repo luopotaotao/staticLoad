@@ -52,9 +52,9 @@
                    data-options="label:'总桩数:',labelAlign:'right',required:true">
         </div>
         <div style="margin-bottom:20px">
-            <input class="easyui-textbox select" name="institution.id" style="width:100%"
+            <input class="easyui-textbox select" name="dept.id" style="width:100%"
                    data-options="label:'检测单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleInspectSchemeController/selectInstitution.action">
+                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleInspectSchemeController/selectDept.action">
         </div>
         <div style="margin-bottom:20px">
             <input class="easyui-textbox" name="code" style="width:100%"
@@ -159,7 +159,7 @@
                 },
 
                 {field: 'pile_count', title: '总桩数', width: 80},
-                {field: 'institution', title: '检测单位', width: 80, align: 'right',formatter:function(val){return val.name;}}
+                {field: 'dept', title: '检测单位', width: 80, align: 'right',formatter:function(val){return val.name;}}
             ]],
             onHeaderContextMenu: function (e, field) {
                 e.preventDefault();

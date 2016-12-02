@@ -21,10 +21,6 @@
             "text": "单位管理",
             "url": "${pageContext.request.contextPath}/moduleBasicCompanyController/index.action"
         }, {
-            "id": 12,
-            "text": "检测机构",
-            "url": "${pageContext.request.contextPath}/moduleBasicInstitutionController/index.action"
-        }, {
             "id": 13,
             "text": "检测项目",
             "url": "${pageContext.request.contextPath}/moduleBasicInspectItemController/index.action"
@@ -36,7 +32,7 @@
             <c:if test="${sessionScope.sessionInfo.role < 2}">
             , {
                 "id": 15,
-                "text": "组织机构",
+                "text": "检测机构",
                 "url": "${pageContext.request.contextPath}/moduleBasicDeptController/index.action"
             }
             </c:if>

@@ -22,7 +22,7 @@
         <th data-options="field: 'lng', title: '经度', width: 80"></th>
         <th data-options="field: 'constructor_id', title: '建设单位', width: 80"></th>
         <th data-options="field: 'builder_id', title: '施工单位', width: 80"></th>
-        <th data-options="field: 'inspector_id', title: '监理单位', width: 80"></th>
+        <th data-options="field: 'user_id', title: '监理单位', width: 80"></th>
     </tr>
     </thead>
 </table>

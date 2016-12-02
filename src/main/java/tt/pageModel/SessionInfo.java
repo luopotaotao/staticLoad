@@ -21,7 +21,7 @@ public class SessionInfo implements java.io.Serializable {
      */
     private static final long serialVersionUID = 6561812689378348235L;
 
-    private String id;// 用户ID
+    private Integer id;// 用户ID
 
     private String name;// 用户登录名
 
@@ -82,11 +82,11 @@ public class SessionInfo implements java.io.Serializable {
         this.ip = ip;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

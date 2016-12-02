@@ -10,18 +10,21 @@ import java.util.List;
 @Table(name = "b_inspect_scheme")
 @JsonIgnoreProperties(value = {"project" })
 @NeedDept
-public class InspectScheme extends BaseModel {
+public class InspectScheme {
     private Integer id;
     private String name;
     private Project project;
     private Byte basement_lev;
     private Byte safety_lev;
     private Integer pile_count;
-    private Institution institution;
+    private Dept dept;
     private Integer approval_file_id;
     private Integer inspect_file_id;
     private InspectItem inspectItem;
     private List<InspectPlan> children;
+    private boolean isDeleted;
+
+
     @Id
     @Column(name = "id")
     @GeneratedValue
@@ -84,13 +87,13 @@ public class InspectScheme extends BaseModel {
     }
 
     @ManyToOne
-    @JoinColumn(name = "institution_id")
-    public Institution getInstitution() {
-        return institution;
+    @JoinColumn(name = "dept_id")
+    public Dept getDept() {
+        return dept;
     }
 
-    public void setInstitution(Institution institution) {
-        this.institution = institution;
+    public void setDept(Dept dept) {
+        this.dept = dept;
     }
 
     @Basic
@@ -139,5 +142,14 @@ public class InspectScheme extends BaseModel {
     @Transient
     public int getLevel() {
         return 1;
+    }
+    @Basic
+    @Column(name = "deleted")
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 }

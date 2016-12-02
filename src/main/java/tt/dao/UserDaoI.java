@@ -39,7 +39,7 @@ public interface UserDaoI extends BaseDaoI<TUser>
      * @param id
      * @return
      */
-    public TUser getUser(String id)
+    public TUser getUser(Integer id)
         throws Exception;
 
     /**
@@ -47,7 +47,7 @@ public interface UserDaoI extends BaseDaoI<TUser>
      * 
      * @param id
      */
-    public void delete(String id)
+    public void delete(Integer id)
         throws Exception;
 
     /**

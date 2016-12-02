@@ -56,7 +56,6 @@ public class UserServiceImpl implements UserServiceI {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        user.setId(UUID.randomUUID().toString());
         userDao.save(user);
         return user;
     }

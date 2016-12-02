@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div style="width:100%;max-width:600px;padding:30px 60px;">
-    <input id="project_add_plan_institution_id" type="hidden" name="institution.id">
+    <input id="project_add_plan_dept_id" type="hidden" name="dept.id">
     <form class="easyui-form" method="post" data-options="novalidate:true" action="${pageContext.request.contextPath}/moduleInspectPlanController/post.action">
         <div style="margin-bottom:20px;display: none">
             <input class="easyui-textbox" name="id" style="display: none" data-options="label:'编号:'">
@@ -23,7 +23,7 @@
                    data-options="label:'工程id:',labelAlign:'right',required:true,editable:false">
         </div>
         <div style="margin-bottom:20px">
-            <input class="easyui-textbox select-inspector" name="inspector.id" style="width:45%"
+            <input class="easyui-textbox select-user" name="user.id" style="width:45%"
                    data-options="label:'检测负责人:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
                    buttonIcon:'icon-search'">
             <input class="easyui-textbox select-equipment" name="equipment.id" style="width:45%"
@@ -37,10 +37,10 @@
                    data-options="label:'结束日期:',labelAlign:'right',required:true,editable:false">
         </div>
         <div style="margin-bottom:20px">
-            <input class="easyui-textbox select-inspector" name="majorInspector.id" style="width:45%"
+            <input class="easyui-textbox select-user" name="majorUser.id" style="width:45%"
                    data-options="label:'主检人:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
                    buttonIcon:'icon-search'">
-            <input class="easyui-textbox select-inspector" name="assistantInspector.id" style="width:45%"
+            <input class="easyui-textbox select-user" name="assistantUser.id" style="width:45%"
                    data-options="label:'副检人:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
                    buttonIcon:'icon-search'">
         </div>
@@ -64,8 +64,8 @@
         $('input.select-equipment').textbox({
             onClickButton: function () {
                 var _this = this;
-                var institution_id = $('#project_add_plan_institution_id').val();
-                var  url="${pageContext.request.contextPath}/moduleInspectPlanController/selectEquipment/"+institution_id+'.action';
+                var dept_id = $('#project_add_plan_dept_id').val();
+                var  url="${pageContext.request.contextPath}/moduleInspectPlanController/selectEquipment/"+dept_id+'.action';
                 selectChild(url, function (data) {
                     var names = [];
                     var ids = [];
@@ -78,11 +78,11 @@
                 });
             }
         });
-        $('input.select-inspector').textbox({
+        $('input.select-user').textbox({
             onClickButton: function () {
                 var _this = this;
-                var institution_id = $('#project_add_plan_institution_id').val();
-                var  url="${pageContext.request.contextPath}/moduleInspectPlanController/selectInspector/"+institution_id+'.action';
+                var dept_id = $('#project_add_plan_dept_id').val();
+                var  url="${pageContext.request.contextPath}/moduleInspectPlanController/selectUser/"+dept_id+'.action';
                 selectChild(url, function (data) {
                     var names = [];
                     var ids = [];

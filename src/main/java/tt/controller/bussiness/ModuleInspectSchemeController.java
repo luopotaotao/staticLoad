@@ -34,9 +34,9 @@ public class ModuleInspectSchemeController extends BaseController<InspectScheme>
         return "business/module_data/scheme_select_project";
     }
 
-    @RequestMapping("selectInstitution")
-    public String selectInstitution() {
-        return "business/module_data/scheme_select_institution";
+    @RequestMapping("selectDept")
+    public String selectDept() {
+        return "business/module_data/scheme_select_dept";
     }
 
     @RequestMapping(value = "get/{id}", method = RequestMethod.GET)

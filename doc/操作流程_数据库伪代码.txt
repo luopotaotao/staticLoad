@@ -31,7 +31,7 @@
 ---------------------------------------------------------------------------------------------------
 
 检测机构
-institution(
+dept(
 	id int auto increment primary key, 
 	机构编号
 	机构名称
@@ -41,12 +41,12 @@ institution(
 	...等详细信息
 )
 检测人员
-inspector(
+user(
 	id,
 	name,
 	gender,
 	....,
-	institution_id --检测机构id
+	dept_id --检测机构id
 )
 
 检测设备
@@ -55,7 +55,7 @@ equipment(
 	name,
 	code,
 	...,
-	institution_id --检测机构
+	dept_id --检测机构
 )
 
 
@@ -104,7 +104,7 @@ inspect_scheme(
 	basement_lev --低级基础设计等级(甲级,乙级,丙级)
 	safety_lev --建筑安全等级(一级,二级,三级),
 	pile_count --总桩数,
-	institution_id --检测单位,
+	dept_id --检测单位,
 	approval_file_id --检测方案审批表(attachement_id)
 	inspect_file_id --检测方案附件(attachement_id)
 
@@ -133,12 +133,12 @@ inspect_plan(
 	inspect_scheme_id,--流水号(检测方案id)
 	inspect_plan_item_id --检测方案-检测项目关联表id,
 	inspect_method_id,--检测方法id 
-	inspector_id,--检测负责人id
+	user_id,--检测负责人id
 	equipment_id,--检测设备id
 	start_time,
 	end_time,
-	marjor_inspector_id,主检人id(需要关联取电话)
-	assistant_inspector_id,副检人id(需要关联取电话)
+	marjor_user_id,主检人id(需要关联取电话)
+	assistant_user_id,副检人id(需要关联取电话)
 	note --备注
 	
 )

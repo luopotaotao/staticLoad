@@ -30,7 +30,7 @@
                    buttonIcon:'icon-search'" url="${baseUrl}/selectScheme.action">
         </div>
         <div style="margin-bottom:20px">
-            <input class="easyui-textbox select-inspector" name="inspector.id" style="width:100%"
+            <input class="easyui-textbox select-user" name="user.id" style="width:100%"
                    data-options="label:'检测负责人:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
                    buttonIcon:'icon-search'">
         </div>
@@ -48,12 +48,12 @@
                    data-options="label:'结束日期:',labelAlign:'right',required:true,editable:false">
         </div>
         <div style="margin-bottom:20px">
-            <input class="easyui-textbox select" name="majorInspector.id" style="width:100%"
+            <input class="easyui-textbox select" name="majorUser.id" style="width:100%"
                    data-options="label:'主检人:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
                    buttonIcon:'icon-search'">
         </div>
         <div style="margin-bottom:20px">
-            <input class="easyui-textbox select" name="assistantInspector.id" style="width:100%"
+            <input class="easyui-textbox select" name="assistantUser.id" style="width:100%"
                    data-options="label:'副检人:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
                    buttonIcon:'icon-search'">
         </div>
@@ -142,7 +142,7 @@
                 }
                 },
                 {
-                    field: 'inspector', title: '检测负责人', width: 80, align: 'center',
+                    field: 'user', title: '检测负责人', width: 80, align: 'center',
                     formatter: function (val, row) {
                         return val?val.name:'';
                     }
@@ -161,13 +161,13 @@
                     return $.isNumeric(val)?$.DateUtil.format(new Date(val),'yyyy/MM/dd'):'';
                 }},
                 {
-                    field: 'majorInspector', title: '主检人', width: 80, align: 'center',
+                    field: 'majorUser', title: '主检人', width: 80, align: 'center',
                     formatter: function (val, row) {
                         return val?val.name:'';
                     }
                 },
                 {
-                    field: 'assistantInspector', title: '副检人', width: 80, align: 'center',
+                    field: 'assistantUser', title: '副检人', width: 80, align: 'center',
                     formatter: function (val, row) {
                         return val?val.name:'';
                     }
@@ -251,13 +251,13 @@
                     $(_this).textbox('setValue', item.id);
                     $(_this).textbox('setText', item.name);
                     var url_method = '${pageContext.request.contextPath}/moduleBasicInspectMethodController/'+item.inspectItem.id+'/comboList.action';
-                    var url_inspector = '${pageContext.request.contextPath}/moduleInspectPlanController/selectInspector/'+item.inspectItem.id+'.action';
+                    var url_user = '${pageContext.request.contextPath}/moduleInspectPlanController/selectUser/'+item.inspectItem.id+'.action';
                     $('#inspect_method').combobox('reload',url);
-                    $('input.select-inspector').attr('url',url_inspector);
+                    $('input.select-user').attr('url',url_user);
                 });
             }
         });
-        $('input.select-inspector').textbox({
+        $('input.select-user').textbox({
             onClickButton: function () {
                 var _this = this;
                 var url = $(_this).attr('url');

@@ -10,7 +10,6 @@ public class Equipment  extends BaseModel{
   private String code;
   private String name;
   private String note;
-  private Integer institution_id;
   private Date expiredDate;
 
   @Id
@@ -51,16 +50,6 @@ public class Equipment  extends BaseModel{
 
   public void setNote(String note) {
     this.note = note;
-  }
-
-  @Basic
-  @Column(name = "institution_id")
-  public Integer getInstitution_id() {
-    return institution_id;
-  }
-
-  public void setInstitution_id(Integer institution_id) {
-    this.institution_id = institution_id;
   }
 
   @Basic

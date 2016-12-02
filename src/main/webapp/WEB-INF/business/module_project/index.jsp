@@ -120,7 +120,7 @@
 
             </div>
             <div style="margin-bottom:20px">
-                <input id="project_select_inspector" class="easyui-textbox select" name="inspector.id"
+                <input id="project_select_user" class="easyui-textbox select" name="user.id"
                        style="width:250px"
                        data-options="label:'监理单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
                    buttonIcon:'icon-search'"
@@ -165,11 +165,11 @@
                        data-options="label:'总桩数:',labelAlign:'right',required:true">
             </div>
             <div style="margin-bottom:20px">
-                <input id="project_scheme_institution" class="easyui-textbox select" name="institution.id"
+                <input id="project_scheme_dept" class="easyui-textbox select" name="dept.id"
                        style="width:500px"
                        data-options="label:'检测单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
                    buttonIcon:'icon-search'"
-                       url="${pageContext.request.contextPath}/moduleInspectSchemeController/selectInstitution.action">
+                       url="${pageContext.request.contextPath}/moduleInspectSchemeController/selectDept.action">
             </div>
             <div style="margin-bottom:20px">
                 <input class="easyui-textbox" name="code" style="width:500px"
@@ -223,8 +223,8 @@
                            data-options="label:'桩号:',labelAlign:'right',required:true">
                 </div>
                 <div style="margin-bottom:20px">
-                    <input id="project_scheme_plan_inspector" class="easyui-textbox select-inspector"
-                           name="inspector.id"
+                    <input id="project_scheme_plan_user" class="easyui-textbox select-user"
+                           name="user.id"
                            style="width:500px"
                            data-options="label:'检测负责人:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
                    buttonIcon:'icon-search'">
@@ -250,15 +250,15 @@
                            data-options="label:'结束日期:',labelAlign:'right',required:true,editable:false">
                 </div>
                 <div style="margin-bottom:20px">
-                    <input id="project_scheme_plan_majorInspector" class="easyui-textbox select"
-                           name="majorInspector.id"
+                    <input id="project_scheme_plan_majorUser" class="easyui-textbox select"
+                           name="majorUser.id"
                            style="width:500px"
                            data-options="label:'主检人:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
                    buttonIcon:'icon-search'">
                 </div>
                 <div style="margin-bottom:20px">
-                    <input id="project_scheme_plan_assistantInspector" class="easyui-textbox select"
-                           name="assistantInspector.id" style="width:500px"
+                    <input id="project_scheme_plan_assistantUser" class="easyui-textbox select"
+                           name="assistantUser.id" style="width:500px"
                            data-options="label:'副检人:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
                    buttonIcon:'icon-search'">
                 </div>
@@ -371,7 +371,7 @@
             $('#project_province_id').combobox('select', data.province.id);
             $('#project_city_id').combobox('select', data.city.id);
             $('#project_select_coordinate').textbox('setText', [data.lng, data.lat].join(','));
-            setValues('project_select_', ['constructor', 'builder', 'inspector'], data);
+            setValues('project_select_', ['constructor', 'builder', 'user'], data);
         }
 
         function addScheme() {
@@ -383,7 +383,7 @@
         }
 
         function showScheme(data) {
-            $('#project_scheme_institution').textbox('setText', data.institution ? data.institution.name : '');
+            $('#project_scheme_dept').textbox('setText', data.dept ? data.dept.name : '');
         }
 
         function addPlan() {
@@ -394,7 +394,7 @@
                 params: [
                     {name: 'project.id', value: root.id},
                     {name: 'inspectScheme.id', value: node.id},
-                    {name: 'institution.id', value: node.institution ? node.institution.id : null}
+                    {name: 'dept.id', value: node.dept ? node.dept.id : null}
                 ]
             }, '${pageContext.request.contextPath}/moduleProjectManageController/addPlan.action');
         }
@@ -408,7 +408,7 @@
             if ($.isNumeric(plan.end_time)) {
                 plan.end_time = new Date(plan.end_time);
             }
-            setValues('project_scheme_plan_', ['assistantInspector', 'inspector', 'majorInspector', 'equipment'], plan);
+            setValues('project_scheme_plan_', ['assistantUser', 'user', 'majorUser', 'equipment'], plan);
             $('#project_scheme_plan_equipment_code').textbox('setValue', plan.equipment.code);
         }
 

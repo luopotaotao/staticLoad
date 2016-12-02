@@ -67,7 +67,7 @@ public class ModuleBasicUserController extends BaseController<User> {
     @RequestMapping(value = "post", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject add(@ModelAttribute User user, BindingResult result) {
-        if (userService.isExist(user.getId())) {
+        if (userService.isExist(user.getName())) {
             JSONObject ret = jsonResponse("flag", false);
             ret.put("msg", "exist");
             return ret;

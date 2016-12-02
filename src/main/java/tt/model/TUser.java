@@ -23,7 +23,7 @@ public class TUser implements java.io.Serializable
     private static final long serialVersionUID = 7722912427892614566L;
 
     // Fields
-    private String id;
+    private Integer id;
 
     private Date createdatetime;
 
@@ -52,7 +52,7 @@ public class TUser implements java.io.Serializable
     {}
 
     /** minimal constructor */
-    public TUser(String id, String email, Short lockSymbol, String name, String pwd,
+    public TUser(Integer id, String email, Short lockSymbol, String name, String pwd,
                  Short remainingLogins)
     {
         this.id = id;
@@ -64,7 +64,7 @@ public class TUser implements java.io.Serializable
     }
 
     /** full constructor */
-    public TUser(String id, Date createdatetime, String email, Short lockSymbol,
+    public TUser(Integer id, Date createdatetime, String email, Short lockSymbol,
                  Date modifydatetime, String name, String pwd, Short remainingLogins,
                  Date validdatetime)
     {
@@ -81,13 +81,13 @@ public class TUser implements java.io.Serializable
 
     // Property accessors
     @Id
-    @Column(name = "ID", unique = true, nullable = false, length = 36)
-    public String getId()
+    @Column(name = "ID", unique = true, nullable = false)
+    public Integer getId()
     {
         return this.id;
     }
 
-    public void setId(String id)
+    public void setId(Integer id)
     {
         this.id = id;
     }

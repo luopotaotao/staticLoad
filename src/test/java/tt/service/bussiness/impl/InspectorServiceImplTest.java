@@ -5,8 +5,8 @@
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.test.context.ContextConfiguration;
 //import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-//import tt.model.business.Inspector;
-//import tt.service.bussiness.InspectorServiceI;
+//import tt.model.business.User;
+//import tt.service.bussiness.UserServiceI;
 //
 //import java.util.List;
 //
@@ -18,9 +18,9 @@
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration(locations = { "classpath:spring.xml", "classpath:spring-ehcache.xml",
 //        "classpath:spring-hibernate.xml", "classpath:spring-druid.xml", "classpath:spring-tasks.xml" })
-//public class InspectorServiceImplTest {
+//public class UserServiceImplTest {
 //    @Autowired
-//    private InspectorServiceI service;
+//    private UserServiceI service;
 //    @Test
 //    public void get() throws Exception {
 //
@@ -28,8 +28,8 @@
 //
 //    @Test
 //    public void list() throws Exception {
-//        List<Inspector> inspectors = service.list(1,null);
-//        System.out.println(inspectors.size());
+//        List<User> users = service.list(1,null);
+//        System.out.println(users.size());
 //    }
 //
 //    @Test

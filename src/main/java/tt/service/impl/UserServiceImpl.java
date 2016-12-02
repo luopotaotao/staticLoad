@@ -1,29 +1,18 @@
 package tt.service.impl;
 
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
+import com.crb.util.CrbUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.crb.util.CrbUtil;
-
 import tt.dao.RoleDaoI;
 import tt.dao.UserDaoI;
 import tt.listener.ServerListener;
-import tt.model.Tresource;
-import tt.model.Trole;
 import tt.model.TSystemConfig;
 import tt.model.TUser;
+import tt.model.Tresource;
+import tt.model.Trole;
 import tt.pageModel.DataGrid;
 import tt.pageModel.Json;
 import tt.pageModel.SessionInfo;
@@ -34,6 +23,8 @@ import tt.util.Encrypt;
 import tt.util.PBKDF2;
 import tt.util.RandomUtil;
 import tt.util.mail.SendMail;
+
+import java.util.*;
 
 
 @Service
@@ -172,7 +163,7 @@ public class UserServiceImpl implements UserServiceI
     }
 
     @Override
-    public User getUser(String id)
+    public User getUser(Integer id)
         throws Exception
     {
         TUser t = userDao.getUser(id);
@@ -208,7 +199,7 @@ public class UserServiceImpl implements UserServiceI
     }
 
     @Override
-    public synchronized void edit(User user, String operateId)
+    public synchronized void edit(User user, Integer operateId)
         throws Exception
     {
         List<Trole> roles = new ArrayList<Trole>();
@@ -251,7 +242,7 @@ public class UserServiceImpl implements UserServiceI
     }
 
     @Override
-    public void delete(String id)
+    public void delete(Integer id)
         throws Exception
     {
 
@@ -479,7 +470,7 @@ public class UserServiceImpl implements UserServiceI
         return j;
     }
 
-    public Json resetPwd(String id)
+    public Json resetPwd(Integer id)
         throws Exception
     {
         Json j = new Json();

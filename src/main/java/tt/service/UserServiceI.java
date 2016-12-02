@@ -52,7 +52,7 @@ public interface UserServiceI
      * @param id
      * @return
      */
-    public User getUser(String id)
+    public User getUser(Integer id)
         throws Exception;
 
     /**
@@ -60,7 +60,7 @@ public interface UserServiceI
      * 
      * @param user
      */
-    public void edit(User user, String operateId)
+    public void edit(User user, Integer operateId)
         throws Exception;
 
     /**
@@ -68,7 +68,7 @@ public interface UserServiceI
      * 
      * @param id
      */
-    public void delete(String id)
+    public void delete(Integer id)
         throws Exception;
 
     /**
@@ -166,7 +166,7 @@ public interface UserServiceI
      * @return
      * @throws Exception
      */
-    public Json resetPwd(String id)
+    public Json resetPwd(Integer id)
         throws Exception;
 
 }

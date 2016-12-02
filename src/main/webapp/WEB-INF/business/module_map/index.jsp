@@ -29,7 +29,7 @@
                 "children": [{
                     "id": 121,
                     "text": "检测机构",
-                    "url": "${pageContext.request.contextPath}/moduleBasicInstitutionController/index.action"
+                    "url": "${pageContext.request.contextPath}/moduleBasicDeptController/index.action"
                 }, {
                     "id": 122,
                     "text": "检测项目",

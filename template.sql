@@ -109,7 +109,7 @@ CREATE TABLE `b_equipment` (
   `code` varchar(64) DEFAULT NULL COMMENT '设备编号',
   `name` varchar(128) DEFAULT NULL COMMENT '设备名称',
   `note` varchar(128) DEFAULT NULL COMMENT '备注',
-  `institution_id` int(11) DEFAULT NULL COMMENT '所属机构id',
+  `dept_id` int(11) DEFAULT NULL COMMENT '所属机构id',
   `deleted` tinyint(1) DEFAULT '0' COMMENT '删除标志位',
   `dept_id` int(11) DEFAULT NULL COMMENT '所属公司',
   PRIMARY KEY (`id`)
@@ -123,30 +123,30 @@ INSERT INTO `b_equipment` VALUES ('4', '123', '123', '123', '3', '0', '15');
 INSERT INTO `b_equipment` VALUES ('5', '123', '123', '123', '4', '0', '19');
 
 -- ----------------------------
--- Table structure for `b_inspector`
+-- Table structure for `b_user`
 -- ----------------------------
-DROP TABLE IF EXISTS `b_inspector`;
-CREATE TABLE `b_inspector` (
+DROP TABLE IF EXISTS `b_user`;
+CREATE TABLE `b_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) DEFAULT NULL COMMENT '姓名',
   `gender` tinyint(1) DEFAULT NULL COMMENT '性别(1男0女)',
   `note` varchar(128) DEFAULT NULL COMMENT '备注',
-  `institution_id` int(11) DEFAULT NULL COMMENT '所属机构id',
+  `dept_id` int(11) DEFAULT NULL COMMENT '所属机构id',
   `deleted` tinyint(1) DEFAULT '0' COMMENT '删除标志位',
   `dept_id` int(11) DEFAULT NULL COMMENT '所属公司',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='设备信息';
 
 -- ----------------------------
--- Records of b_inspector
+-- Records of b_user
 -- ----------------------------
-INSERT INTO `b_inspector` VALUES ('10', '张亮', '1', '主管', '1', '0', '11');
-INSERT INTO `b_inspector` VALUES ('11', '123', '0', '123', null, '0', '11');
-INSERT INTO `b_inspector` VALUES ('12', '舒淇', '0', '测试', '1', '0', '11');
-INSERT INTO `b_inspector` VALUES ('13', '', '1', '', null, '0', '11');
-INSERT INTO `b_inspector` VALUES ('15', '黎明', '1', '监管员', '1', '0', '11');
-INSERT INTO `b_inspector` VALUES ('16', '123', '1', '123', '3', '0', '15');
-INSERT INTO `b_inspector` VALUES ('17', '123', '1', '123', '4', '0', '19');
+INSERT INTO `b_user` VALUES ('10', '张亮', '1', '主管', '1', '0', '11');
+INSERT INTO `b_user` VALUES ('11', '123', '0', '123', null, '0', '11');
+INSERT INTO `b_user` VALUES ('12', '舒淇', '0', '测试', '1', '0', '11');
+INSERT INTO `b_user` VALUES ('13', '', '1', '', null, '0', '11');
+INSERT INTO `b_user` VALUES ('15', '黎明', '1', '监管员', '1', '0', '11');
+INSERT INTO `b_user` VALUES ('16', '123', '1', '123', '3', '0', '15');
+INSERT INTO `b_user` VALUES ('17', '123', '1', '123', '4', '0', '19');
 
 -- ----------------------------
 -- Table structure for `b_inspect_data`
@@ -256,12 +256,12 @@ CREATE TABLE `b_inspect_plan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
   `inspect_scheme_id` int(11) DEFAULT NULL COMMENT '流水号(检测方案id)',
-  `inspector_id` int(11) DEFAULT NULL COMMENT '检测负责人id',
+  `user_id` int(11) DEFAULT NULL COMMENT '检测负责人id',
   `equipment_id` int(11) DEFAULT NULL COMMENT '检测设备id',
   `start_time` date DEFAULT NULL,
   `end_time` date DEFAULT NULL,
-  `major_inspector_id` int(11) DEFAULT NULL COMMENT '主检人id(需要关联取电话)',
-  `assistant_inspector_id` int(11) DEFAULT NULL COMMENT '副检人id(需要关联取电话)',
+  `major_user_id` int(11) DEFAULT NULL COMMENT '主检人id(需要关联取电话)',
+  `assistant_user_id` int(11) DEFAULT NULL COMMENT '副检人id(需要关联取电话)',
   `note` varchar(128) DEFAULT NULL COMMENT '备注',
   `deleted` tinyint(1) DEFAULT '0' COMMENT '删除标志位',
   `dept_id` int(11) DEFAULT NULL COMMENT '所属公司',
@@ -304,7 +304,7 @@ CREATE TABLE `b_inspect_scheme` (
   `basement_lev` tinyint(4) DEFAULT NULL COMMENT '低级基础设计等级(甲级,乙级,丙级)',
   `safety_lev` tinyint(4) DEFAULT NULL COMMENT '建筑安全等级(一级,二级,三级)',
   `pile_count` int(11) DEFAULT NULL COMMENT '总桩数',
-  `institution_id` int(11) DEFAULT NULL COMMENT '检测单位',
+  `dept_id` int(11) DEFAULT NULL COMMENT '检测单位',
   `approval_file_id` int(11) DEFAULT NULL COMMENT '检测方案审批表(attachment_id)',
   `inspect_file_id` int(11) DEFAULT NULL COMMENT '检测方案附件(attachment_id)',
   `deleted` tinyint(1) DEFAULT '0' COMMENT '删除标志位',
@@ -321,10 +321,10 @@ INSERT INTO `b_inspect_scheme` VALUES ('7', '检测方案3', '11', '2', '2', '12
 INSERT INTO `b_inspect_scheme` VALUES ('8', '123', '13', '1', '1', '123', '4', null, null, '0', null);
 
 -- ----------------------------
--- Table structure for `b_institution`
+-- Table structure for `b_dept`
 -- ----------------------------
-DROP TABLE IF EXISTS `b_institution`;
-CREATE TABLE `b_institution` (
+DROP TABLE IF EXISTS `b_dept`;
+CREATE TABLE `b_dept` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(64) DEFAULT NULL COMMENT '机构编号',
   `name` varchar(128) DEFAULT NULL COMMENT '机构名称',
@@ -336,7 +336,7 @@ CREATE TABLE `b_institution` (
   `national_lib_certificate_code` varchar(128) DEFAULT NULL COMMENT '国家实验室认可证书号',
   `website` varchar(128) DEFAULT NULL COMMENT '网址',
   `measure_certificate_code` varchar(128) DEFAULT NULL COMMENT '计量认证书号',
-  `certificate_institution` varchar(128) DEFAULT NULL COMMENT '发证机关',
+  `certificate_dept` varchar(128) DEFAULT NULL COMMENT '发证机关',
   `certificate_attachment` varchar(128) DEFAULT NULL COMMENT '计量认证合格证书及附件',
   `register_money` varchar(128) DEFAULT NULL COMMENT '注册资金(万元)',
   `register_type` tinyint(4) DEFAULT NULL COMMENT '注册类型',
@@ -361,12 +361,12 @@ CREATE TABLE `b_institution` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='机构信息';
 
 -- ----------------------------
--- Records of b_institution
+-- Records of b_dept
 -- ----------------------------
-INSERT INTO `b_institution` VALUES ('1', 'JC8888', '检测机构1', '1', '13444444444', null, null, null, null, null, null, null, null, null, '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0', '11');
-INSERT INTO `b_institution` VALUES ('2', '123', '123', '1', '123', null, null, null, null, null, null, null, null, null, '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0', '11');
-INSERT INTO `b_institution` VALUES ('3', '123', '测试机构', '2', '123', null, null, null, null, null, null, null, null, null, '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0', '15');
-INSERT INTO `b_institution` VALUES ('4', 't1', 't', '1', 't', null, null, null, null, null, null, null, null, null, '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0', '19');
+INSERT INTO `b_dept` VALUES ('1', 'JC8888', '检测机构1', '1', '13444444444', null, null, null, null, null, null, null, null, null, '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0', '11');
+INSERT INTO `b_dept` VALUES ('2', '123', '123', '1', '123', null, null, null, null, null, null, null, null, null, '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0', '11');
+INSERT INTO `b_dept` VALUES ('3', '123', '测试机构', '2', '123', null, null, null, null, null, null, null, null, null, '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0', '15');
+INSERT INTO `b_dept` VALUES ('4', 't1', 't', '1', 't', null, null, null, null, null, null, null, null, null, '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0', '19');
 
 -- ----------------------------
 -- Table structure for `b_project`
@@ -383,7 +383,7 @@ CREATE TABLE `b_project` (
   `lng` float DEFAULT NULL COMMENT '经度',
   `constructor_id` int(11) DEFAULT NULL COMMENT '建设单位id',
   `builder_id` int(11) DEFAULT NULL COMMENT '施工单位id',
-  `inspector_id` int(11) DEFAULT NULL COMMENT '监理单位id',
+  `user_id` int(11) DEFAULT NULL COMMENT '监理单位id',
   `note` varchar(128) DEFAULT NULL COMMENT '备注',
   `deleted` tinyint(1) DEFAULT '0' COMMENT '删除标志位',
   `dept_id` int(11) DEFAULT NULL COMMENT '所属公司',

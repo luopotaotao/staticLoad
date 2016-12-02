@@ -29,7 +29,7 @@
         }
         "></th>
         <th data-options="field: 'pile_count', title: '总桩数', width: 80"></th>
-        <th data-options="field: 'institution', title: '检测单位', width: 80, align: 'right',formatter:function(val){return val.name;}"></th>
+        <th data-options="field: 'dept', title: '检测单位', width: 80, align: 'right',formatter:function(val){return val.name;}"></th>
     </tr>
     </thead>
 </table>

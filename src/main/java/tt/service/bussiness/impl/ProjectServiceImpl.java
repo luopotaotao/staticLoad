@@ -112,7 +112,7 @@ public class ProjectServiceImpl implements ProjectServiceI {
         AreaObj city = project.getCity();
         Company builder = project.getBuilder();
         Company constructor = project.getConstructor();
-        Company inspector = project.getInspector();
+        Company user = project.getUser();
 
         if(province!=null&&province.getId()>0){
             project.setProvince(areaObjDao.get(province.getId()));
@@ -126,8 +126,8 @@ public class ProjectServiceImpl implements ProjectServiceI {
         if(constructor!=null&&constructor.getId()>0){
             project.setConstructor(companyDao.get(constructor.getId()));
         }
-        if(inspector!=null&&inspector.getId()>0){
-            project.setInspector(companyDao.get(inspector.getId()));
+        if(user!=null&&user.getId()>0){
+            project.setUser(companyDao.get(user.getId()));
         }
     }
 

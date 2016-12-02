@@ -11,12 +11,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-
 @Entity
-@Table(name = "t_user", uniqueConstraints = @UniqueConstraint(columnNames = "NAME") )
-public class User implements java.io.Serializable
-{
-    private String id;
+@Table(name = "t_user", uniqueConstraints = @UniqueConstraint(columnNames = "NAME"))
+public class User implements java.io.Serializable {
+    private Integer id;
 
     private Date createdatetime;
 
@@ -27,6 +25,7 @@ public class User implements java.io.Serializable
     private Date modifydatetime;
 
     private String name;
+    private String real_name;
 
     private String pwd;
 
@@ -37,113 +36,132 @@ public class User implements java.io.Serializable
     private Dept dept;
 
     private Integer role;
+
+    private Boolean gender;
+    private String note;
     // Constructors
-    /** default constructor */
-    public User()
-    {}
+
+    /**
+     * default constructor
+     */
+    public User() {
+    }
 
     // Property accessors
     @Id
-    @Column(name = "ID", unique = true, nullable = false, length = 36)
-    public String getId()
-    {
+    @GeneratedValue
+    @Column(name = "ID")
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(String id)
-    {
+    public void setId(Integer id) {
         this.id = id;
     }
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CREATEDATETIME", length = 19)
-    public Date getCreatedatetime()
-    {
+    public Date getCreatedatetime() {
         return this.createdatetime;
     }
 
-    public void setCreatedatetime(Date createdatetime)
-    {
+    public void setCreatedatetime(Date createdatetime) {
         this.createdatetime = createdatetime;
     }
 
     @Column(name = "EMAIL", nullable = false, length = 64)
-    public String getEmail()
-    {
+    public String getEmail() {
         return this.email;
     }
 
-    public void setEmail(String email)
-    {
+    public void setEmail(String email) {
         this.email = email;
     }
 
     @Column(name = "LOCK_SYMBOL", nullable = false)
-    public Short getLockSymbol()
-    {
+    public Short getLockSymbol() {
         return this.lockSymbol;
     }
 
-    public void setLockSymbol(Short lockSymbol)
-    {
+    public void setLockSymbol(Short lockSymbol) {
         this.lockSymbol = lockSymbol;
     }
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "MODIFYDATETIME", length = 19)
-    public Date getModifydatetime()
-    {
+    public Date getModifydatetime() {
         return this.modifydatetime;
     }
 
-    public void setModifydatetime(Date modifydatetime)
-    {
+    public void setModifydatetime(Date modifydatetime) {
         this.modifydatetime = modifydatetime;
     }
 
     @Column(name = "NAME", unique = true, nullable = false, length = 20)
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 
-    public void setName(String name)
-    {
+
+    public void setName(String name) {
         this.name = name;
     }
 
+    @Column(name = "real_name")
+    public String getReal_name() {
+        return real_name;
+    }
+
+    public void setReal_name(String real_name) {
+        this.real_name = real_name;
+    }
+
     @Column(name = "PWD", nullable = false, length = 100)
-    public String getPwd()
-    {
+    public String getPwd() {
         return this.pwd;
     }
 
-    public void setPwd(String pwd)
-    {
+    public void setPwd(String pwd) {
         this.pwd = pwd;
     }
 
     @Column(name = "REMAINING_LOGINS", nullable = false)
-    public Short getRemainingLogins()
-    {
+    public Short getRemainingLogins() {
         return this.remainingLogins;
     }
 
-    public void setRemainingLogins(Short remainingLogins)
-    {
+    public void setRemainingLogins(Short remainingLogins) {
         this.remainingLogins = remainingLogins;
     }
 
     @Temporal(TemporalType.DATE)
     @Column(name = "VALIDDATETIME", length = 10)
-    public Date getValiddatetime()
-    {
+    public Date getValiddatetime() {
         return this.validdatetime;
     }
 
-    public void setValiddatetime(Date validdatetime)
-    {
+    public void setValiddatetime(Date validdatetime) {
         this.validdatetime = validdatetime;
+    }
+
+    @Basic
+    @Column(name = "gender")
+    public Boolean getGender() {
+        return gender;
+    }
+
+    public void setGender(Boolean gender) {
+        this.gender = gender;
+    }
+
+    @Basic
+    @Column(name = "note")
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     @ManyToOne

@@ -4,10 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tt.dao.business.InspectItemDaoI;
 import tt.dao.business.InspectSchemeDaoI;
-import tt.dao.business.InstitutionDaoI;
+import tt.dao.business.DeptDaoI;
 import tt.dao.business.ProjectDaoI;
 import tt.model.business.InspectScheme;
-import tt.service.bussiness.InspectItemServiceI;
 import tt.service.bussiness.InspectSchemeServiceI;
 
 import java.io.Serializable;
@@ -27,7 +26,7 @@ public class InspectSchemeServiceImpl implements InspectSchemeServiceI {
     @Autowired
     private InspectItemDaoI inspectItemDao;
     @Autowired
-    private InstitutionDaoI institutionDao;
+    private DeptDaoI deptDao;
 
     @Override
     public InspectScheme get(Serializable id, Integer dept_id) {
@@ -75,13 +74,12 @@ public class InspectSchemeServiceImpl implements InspectSchemeServiceI {
     @Override
     public InspectScheme update(InspectScheme inspectScheme, Integer dept_id) {
         resetProject(inspectScheme);
-        inspectScheme.setDept_id(dept_id);
         inspectSchemeDao.update(inspectScheme);
         return inspectScheme;
     }
     private void resetProject(InspectScheme inspectScheme){
         inspectScheme.setProject(projectDao.getById(inspectScheme.getProject().getId()));
         inspectScheme.setInspectItem(inspectItemDao.getById(inspectScheme.getInspectItem().getId()));
-        inspectScheme.setInstitution(institutionDao.getById(inspectScheme.getInstitution().getId()));
+        inspectScheme.setDept(deptDao.getById(inspectScheme.getDept().getId()));
     }
 }

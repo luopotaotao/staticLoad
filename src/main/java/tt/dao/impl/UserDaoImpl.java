@@ -17,7 +17,7 @@ public class UserDaoImpl extends BaseDaoImpl<TUser> implements UserDaoI
 {
 
     @Override
-    public TUser getUser(String id)
+    public TUser getUser(Integer id)
         throws Exception
     {
         String hql = "select distinct t from TUser t left join fetch t.troles role where t.id = :id";
@@ -28,7 +28,7 @@ public class UserDaoImpl extends BaseDaoImpl<TUser> implements UserDaoI
     }
 
     @Override
-    public void delete(String id)
+    public void delete(Integer id)
         throws Exception
     {
         TUser t = get(TUser.class, id);

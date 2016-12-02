@@ -9,6 +9,6 @@ import java.util.List;
  */
 public interface EquipmentServiceI extends BaseService<Equipment>{
     Equipment loadEquipmentByCode(String code);
-//    List<Equipment> list(Integer institution_id, String name,Integer dept_id);
+//    List<Equipment> list(Integer dept_id, String name,Integer dept_id);
 //TODO 额外参数
 }

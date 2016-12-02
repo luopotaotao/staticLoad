@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import tt.listener.ServerListener;
 import tt.model.TSystemConfig;
-import tt.model.Tresource;
 import tt.model.business.Dept;
 import tt.pageModel.*;
 import tt.service.OnlineServiceI;
@@ -322,7 +321,7 @@ public class UserController extends BaseController {
         String url = "/userController/add.action";
         getSessionInfo().addToResourceSet(url, "添加用户功能");
         User u = new User();
-        u.setId(UUID.randomUUID().toString());
+//        u.setId(UUID.randomUUID().toString());
         request.setAttribute("user", u);
         return "/admin/user/userAdd";
     }
@@ -368,11 +367,11 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
-    public Json delete(String id)
+    public Json delete(Integer id)
             throws Exception {
         SessionInfo sessionInfo = getSessionInfo();
         Json j = new Json();
-        if (id != null && !id.equalsIgnoreCase(sessionInfo.getId())) {// 不能删除自己
+        if (id != null && id!=sessionInfo.getId()) {// 不能删除自己
             userService.delete(id);
         }
         j.setMsg("删除成功！");
@@ -494,7 +493,7 @@ public class UserController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/editPage", method = RequestMethod.POST)
-    public String editPage(HttpServletRequest request, String id)
+    public String editPage(HttpServletRequest request, Integer id)
             throws Exception {
         User u = userService.getUser(id);
         if (u == null) {
@@ -533,7 +532,7 @@ public class UserController extends BaseController {
                 j.setObj(user);
                 logger.error("该管理员信息不存在，请刷新页面！");
             } else {
-                String operateId = this.getSessionInfo().getId();
+                Integer operateId = this.getSessionInfo().getId();
                 userService.edit(user, operateId);
                 j.setSuccess(true);
                 j.setMsg("修改成功！");
@@ -556,7 +555,7 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/resetPwd", method = RequestMethod.POST)
     @ResponseBody
-    public Json resetPwd(String id)
+    public Json resetPwd(Integer id)
             throws Exception {
         Json j = userService.resetPwd(id);
         return j;

@@ -19,8 +19,8 @@ public class User extends PageHelper implements java.io.Serializable
      */
     private static final long serialVersionUID = -4788978650996048050L;
 
-    @Validator(length_Max = 36, length_Min = 36, notEmpty = true, notNull = true)
-    private String id;
+    @Validator( notEmpty = true, notNull = true)
+    private Integer id;
 
     @Validator(notEmpty = true, notNull = true, length_Min = 4, length_Max = 20, regex = "[a-zA-z]+")
     private String name;
@@ -118,12 +118,12 @@ public class User extends PageHelper implements java.io.Serializable
         this.roleNames = roleNames;
     }
 
-    public String getId()
+    public Integer getId()
     {
         return id;
     }
 
-    public void setId(String id)
+    public void setId(Integer id)
     {
         this.id = id;
     }

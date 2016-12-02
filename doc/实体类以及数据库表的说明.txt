@@ -12,9 +12,9 @@ b_dept 公司表
 				Area (level=2,p_id=父节点id)
 	
 	公司信息 Company b_company
-	检测机构 Institution b_institution		//检测机构下辖检测设备和检测人员
-		检测设备 Equipment b_equipment(institution_id=所属检测机构id)
-		检测人员 Inspector b_inspector(institution_id=所属检测机构id)
+	检测机构 Dept b_dept		//检测机构下辖检测设备和检测人员
+		检测设备 Equipment b_equipment(dept_id=所属检测机构id)
+		检测人员 User b_user(dept_id=所属检测机构id)
 	检测项目 InspectItem b_inspect_item     //检测项目下辖检测方法
 		检测方法 InspectMethod b_inspect_method(inspect_item_id=所属检测项目id)
 工程信息

@@ -45,7 +45,7 @@
 //        project.setName("测试工程1");
 //        project.setCode("code1");
 //        project.setBuilder(company);
-//        project.setInspector(company);
+//        project.setUser(company);
 //        project.setConstructor(company);
 //        project.setAddress("test address");
 //        project.setLat(200.0f);

@@ -27,11 +27,11 @@ public class ModuleBasicEquipmentController extends BaseController<Equipment> {
     @Autowired
     private EquipmentServiceI equipmentService;
 
-    @RequestMapping("index/{institution_id}")
-    public String index(@PathVariable Integer institution_id,Model model){
+    @RequestMapping("index/{dept_id}")
+    public String index(@PathVariable Integer dept_id,Model model){
         model.addAttribute("baseUrl","moduleBasicEquipmentController");
-        model.addAttribute("institution_id",institution_id);
-        return "business/module_basic/institution_equipment";
+        model.addAttribute("dept_id",dept_id);
+        return "business/module_basic/dept_equipment";
     }
 
     @RequestMapping(value = "get/{id}", method = RequestMethod.GET)
@@ -40,12 +40,12 @@ public class ModuleBasicEquipmentController extends BaseController<Equipment> {
         return equipmentService.get(id,getDeptId());
     }
 
-    @RequestMapping(value = "{institution_id}/query",method = RequestMethod.GET)
+    @RequestMapping(value = "{dept_id}/query",method = RequestMethod.GET)
     @ResponseBody
-    public JSONObject list(@PathVariable Integer institution_id,
+    public JSONObject list(@PathVariable Integer dept_id,
                            @RequestParam(required = false) String name) {
         name = UrlStringDecoder.decode(name);
-        Map<String,Object> params = createHashMap("institution_id",institution_id);
+        Map<String,Object> params = createHashMap("dept_id",dept_id);
         if (name!=null) {
             params.put("name",name);
         }

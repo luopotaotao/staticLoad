@@ -304,7 +304,7 @@ public class InitServiceImpl implements InitServiceI
         String pwd = PBKDF2.generateStorngPasswordHash256ByBCP(salt, Encrypt.sha("123456"));
 
         TUser admin = new TUser();
-        admin.setId("0");
+//        admin.setId("0");
         admin.setName("admin");
         admin.setPwd(pwd);
         admin.setCreatedatetime(new Date());
@@ -315,7 +315,7 @@ public class InitServiceImpl implements InitServiceI
         userDao.saveOrUpdate(admin);
 
         TUser admin1 = new TUser();
-        admin1.setId("1");
+//        admin1.setId("1");
         admin1.setName("admin");
         admin1.setPwd(pwd);
         admin1.setCreatedatetime(new Date());
@@ -326,7 +326,7 @@ public class InitServiceImpl implements InitServiceI
         userDao.saveOrUpdate(admin1);
 
         TUser guest = new TUser();
-        guest.setId("guest");
+//        guest.setId("guest");
         guest.setName("guest");
         guest.setPwd(pwd);
         guest.setCreatedatetime(new Date());

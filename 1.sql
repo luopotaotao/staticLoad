@@ -118,8 +118,8 @@ CREATE TABLE `t_user_log` (
   PRIMARY KEY (`USER_LOG_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-drop table b_institution;
-CREATE TABLE `b_institution` (
+drop table b_dept;
+CREATE TABLE `b_dept` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(64) DEFAULT NULL COMMENT '机构编号',
   `name` varchar(128) DEFAULT NULL COMMENT '机构名称',
@@ -131,7 +131,7 @@ CREATE TABLE `b_institution` (
 	`national_lib_certificate_code` varchar(128) DEFAULT NULL COMMENT '国家实验室认可证书号',
 	`website` varchar(128) DEFAULT NULL COMMENT '网址',
 	`measure_certificate_code` varchar(128) DEFAULT NULL COMMENT '计量认证书号',
-	`certificate_institution` varchar(128) DEFAULT NULL COMMENT '发证机关',
+	`certificate_dept` varchar(128) DEFAULT NULL COMMENT '发证机关',
 	`certificate_attachment` varchar(128) DEFAULT NULL COMMENT '计量认证合格证书及附件',
 	`register_money` varchar(128) DEFAULT NULL COMMENT '注册资金(万元)',
 	`register_type` tinyint DEFAULT NULL COMMENT '注册类型',
@@ -158,15 +158,15 @@ CREATE TABLE b_equipment(
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
   code VARCHAR(64) COMMENT '设备编号',
   name VARCHAR(128) COMMENT '设备名称',
-  institution_id INT COMMENT '所属机构id'
+  dept_id INT COMMENT '所属机构id'
 ) COMMENT '设备信息';
 
-CREATE TABLE b_inspector(
+CREATE TABLE b_user(
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
   name VARCHAR(128) COMMENT '姓名',
   gender TINYINT COMMENT '姓名(1男0女)',
   note VARCHAR(128) COMMENT '备注',
-  institution_id INT COMMENT '所属机构id'
+  dept_id INT COMMENT '所属机构id'
 ) COMMENT '设备信息';
 
 CREATE TABLE `b_inspect_item` (
@@ -202,7 +202,7 @@ CREATE TABLE `b_project` (
   `lng` float DEFAULT NULL COMMENT '经度',
   `constructor_id` int(11) DEFAULT NULL COMMENT '建设单位id',
   `builder_id` int(11) DEFAULT NULL COMMENT '施工单位id',
-  `inspector_id` int(11) DEFAULT NULL COMMENT '监理单位id',
+  `user_id` int(11) DEFAULT NULL COMMENT '监理单位id',
   `note` varchar(128) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='工程信息';
@@ -221,7 +221,7 @@ create table b_inspect_scheme(
   basement_lev tinyint  COMMENT '低级基础设计等级(甲级,乙级,丙级)',
   safety_lev tinyint COMMENT '建筑安全等级(一级,二级,三级)',
   pile_count  int(11) COMMENT '总桩数',
-  institution_id  int(11) COMMENT '检测单位',
+  dept_id  int(11) COMMENT '检测单位',
   approval_file_id  int(11) COMMENT '检测方案审批表(attachment_id)',
   inspect_file_id  int(11) COMMENT '检测方案附件(attachment_id)'
 )  ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='检测方案';
@@ -250,12 +250,12 @@ create table b_inspect_plan(
 	inspect_scheme_id int(11) COMMENT '流水号(检测方案id)',
 	inspect_plan_item_id  int(11) COMMENT '检测方案-检测项目关联表id',
 	inspect_method_id int(11) COMMENT '检测方法id',
-	inspector_id int(11) COMMENT '检测负责人id',
+	user_id int(11) COMMENT '检测负责人id',
 	equipment_id int(11) COMMENT '检测设备id',
 	start_time date,
 	end_time date,
-	marjor_inspector_id int(11) COMMENT '主检人id(需要关联取电话)',
-	assistant_inspector_id int(11) COMMENT '副检人id(需要关联取电话)',
+	marjor_user_id int(11) COMMENT '主检人id(需要关联取电话)',
+	assistant_user_id int(11) COMMENT '副检人id(需要关联取电话)',
 	note varchar(128) COMMENT '备注'
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='检测计划';
 --	检测方法

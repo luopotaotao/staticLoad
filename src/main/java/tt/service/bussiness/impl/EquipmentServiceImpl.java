@@ -27,9 +27,8 @@ public class EquipmentServiceImpl implements EquipmentServiceI {
 
     @Override
     public List<Equipment> list(Map<String, Object> params,Integer page,Integer pageSize, Integer dept_id) {
-        Integer institution_id = (Integer) params.get("institution_id");
         String name = (String) params.get("name");
-        List<Equipment> ret = equipmentDao.list(institution_id, name,dept_id);
+        List<Equipment> ret = equipmentDao.list( name,dept_id);
         return ret;
     }
 

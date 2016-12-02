@@ -14,13 +14,13 @@ public class InspectPlan extends BaseModel {
     private String name;
     private InspectScheme inspectScheme;
     //    private List<InspectMethod> inspectMethods;
-    private Inspector inspector;
+    private User user;
     private Equipment equipment;
     private String stzh;
     private Date start_time;
     private Date end_time;
-    private Inspector majorInspector;
-    private Inspector assistantInspector;
+    private User majorUser;
+    private User assistantUser;
     private String note;
     private Project project;
 
@@ -78,12 +78,12 @@ public class InspectPlan extends BaseModel {
 
     @ManyToOne
     @JoinColumn(name = "inspector_id")
-    public Inspector getInspector() {
-        return inspector;
+    public User getUser() {
+        return user;
     }
 
-    public void setInspector(Inspector inspector) {
-        this.inspector = inspector;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @ManyToOne
@@ -119,22 +119,22 @@ public class InspectPlan extends BaseModel {
 
     @ManyToOne
     @JoinColumn(name = "major_inspector_id")
-    public Inspector getMajorInspector() {
-        return majorInspector;
+    public User getMajorUser() {
+        return majorUser;
     }
 
-    public void setMajorInspector(Inspector majorInspector) {
-        this.majorInspector = majorInspector;
+    public void setMajorUser(User majorUser) {
+        this.majorUser = majorUser;
     }
 
     @ManyToOne
     @JoinColumn(name = "assistant_inspector_id")
-    public Inspector getAssistantInspector() {
-        return assistantInspector;
+    public User getAssistantUser() {
+        return assistantUser;
     }
 
-    public void setAssistantInspector(Inspector assistantInspector) {
-        this.assistantInspector = assistantInspector;
+    public void setAssistantUser(User assistantUser) {
+        this.assistantUser = assistantUser;
     }
 
     @Basic

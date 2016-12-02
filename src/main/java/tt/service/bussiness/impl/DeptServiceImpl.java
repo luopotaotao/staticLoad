@@ -6,7 +6,7 @@ import tt.dao.business.DeptDaoI;
 import tt.model.business.Dept;
 import tt.service.bussiness.DeptServiceI;
 
-import java.util.Arrays;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,30 +20,37 @@ public class DeptServiceImpl implements DeptServiceI {
     private DeptDaoI deptDao;
 
     @Override
-    public Dept get(int id) {
-        System.out.println("run get");
-        return deptDao.get(Dept.class, id);
+    public Dept get(Serializable id, Integer dept_id) {
+        return deptDao.getById(id,dept_id);
     }
 
     @Override
-    public List<Dept> list(String name, Integer page, Integer PageSize) {
-        Map<String,Object> params = new HashMap<>();
-        List<Dept> ret = null;
-        if(name!=null){
-            params.put(":like_name",name);
+    public List<Dept> list(Map<String,Object> params, Integer page, Integer PageSize, Integer dept_id) {
+        StringBuilder hql = new StringBuilder("from Dept WHERE dept_id=:dept_id");
+        params.put("dept_id",dept_id);
+        Object typ =  params.get("typ");
+        Object name =  params.get("name");
+        if(typ!=null&&(Byte)typ!=0){
+            params.put("typ",typ);
+            hql.append(" AND typ=:typ ");
         }
-        if(page!=null&&PageSize!=null){
-            ret =deptDao.find(params, page, PageSize);
-        }else{
-            ret =deptDao.find(params);
+        if(name!=null&&!name.toString().isEmpty()){
+            params.put("name","%"+name+"%");
+            hql.append(" AND name like :name ");
         }
+        List<Dept> ret = deptDao.find(hql.toString(), params, page, PageSize);
         return ret;
     }
 
     @Override
-    public long count(String name) {
-        StringBuilder hql = new StringBuilder("select count(*) from Dept WHERE 1=1");
-        Map<String,Object> params = new HashMap<>();
+    public long count(Map<String,Object> params, Integer dept_id) {
+        StringBuilder hql = new StringBuilder("select count(*) from Dept WHERE dept_id=:dept_id");
+        params.put("dept_id",dept_id);
+        Byte typ = (Byte) params.get("typ");
+        Byte name = (Byte) params.get("name");
+        if(typ!=null&&typ!=0){
+            hql.append(" AND typ=:typ ");
+        }
         if(name!=null){
             params.put("name","%"+name+"%");
             hql.append(" AND name like :name ");
@@ -53,24 +60,33 @@ public class DeptServiceImpl implements DeptServiceI {
     }
 
     @Override
-    public int add(Dept dept) {
+    public Dept add(Dept dept, Integer dept_id) {
+        dept.setDept_id(dept_id);
         deptDao.save(dept);
-        return dept.getId()>0?1:0;
+        return dept;
     }
 
     @Override
-    public int del(List<Integer> ids) {
+    public int del(List<Integer> ids, Integer dept_id) {
         if(ids==null||ids.size()<1){
             return 0;
         }
         Map<String, Object> params = new HashMap<String, Object>();
-        params.put("id", ids);
-        return deptDao.logicDelete("b_dept", params);
+        params.put("dept_id",dept_id);
+        params.put("ids", ids);
+        return deptDao.executeHql("delete from Dept where id in (:ids) and dept_id=:dept_id", params);
     }
 
     @Override
-    public int update(Dept dept) {
+    public Dept update(Dept dept, Integer dept_id) {
+        dept.setDept_id(dept_id);
         deptDao.update(dept);
-        return 1;
+        return dept;
+    }
+
+    @Override
+    public Dept get(int id) {
+        System.out.println("run get");
+        return deptDao.get(Dept.class, id);
     }
 }
