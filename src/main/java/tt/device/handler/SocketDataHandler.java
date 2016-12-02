@@ -1,5 +1,6 @@
 package tt.device.handler;
 
+import com.alibaba.druid.sql.visitor.functions.Char;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import org.apache.log4j.Logger;
@@ -17,7 +18,7 @@ import java.util.Date;
 
 
 public class SocketDataHandler extends IoHandlerAdapter {
-    private static final Logger logger = Logger.getLogger(DeviceSerHandler.class);
+    private static final Logger logger = Logger.getLogger(SocketDataHandler.class);
 
     @Autowired
     private BInspectServiceI bInspectServiceI;
@@ -73,9 +74,6 @@ public class SocketDataHandler extends IoHandlerAdapter {
         }else{
             session.write("empty msg");
         }
-//        session.close(true);
-
-        System.out.println("Message written..." + str);
     }
 
     @Override
@@ -122,12 +120,9 @@ public class SocketDataHandler extends IoHandlerAdapter {
     }
 
     private void sendMsg(IoSession session,String msg){
-        WriteFuture w = session.write("123");
-
-        session.write(msg+ LineDelimiter.UNIX);
+        session.write(msg+ "\r\n");
     }
     private void sendOK(IoSession session){
-        sendMsg(session,"$LRK01$OK0x0d\n");
+        sendMsg(session,"$LRK01$OK0x0d\r\n");
     }
-
 }
