@@ -53,20 +53,20 @@
             <input id="project_add_project_select_coordinate" class="easyui-textbox" style="width:45%;height:32px;">
             <input id="select_constructor" class="easyui-textbox select" name="constructor.id" style="width:45%"
                    data-options="label:'建设单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial.action">
+                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial.action?typ=1">
         </div>
         <div style="margin-bottom:20px">
             <input id="project_add_project_select_builder" class="easyui-textbox select" name="builder.id" style="width:45%"
                    data-options="label:'施工单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial.action">
+                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial.action?typ=2">
 
             <input id="project_add_project_select_inspector" class="easyui-textbox select" name="inspector.id" style="width:45%"
                    data-options="label:'监理单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial.action">
+                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial.action?typ=3">
         </div>
         <div style="margin-bottom:20px">
             <input class="easyui-textbox" name="note" style="width:90%"
-                   data-options="label:'备注信息:',labelAlign:'right'">
+                   data-options="label:'备注信息:',labelAlign:'right',multiline:true,height:120">
         </div>
     </form>
 </div>

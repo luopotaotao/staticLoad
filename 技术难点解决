@@ -84,3 +84,6 @@ class Area{
         public Area getParent() {
             return parent;
         }
+
+mina 接受回车作为换行符
+c语言中为0D0A,其中 0D代表回车键,0A代表换行键,以byte表示就是new byte[]{1,3,1,0}

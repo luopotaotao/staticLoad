@@ -30,7 +30,7 @@ public class CompanyServiceImpl implements CompanyServiceI {
     public List<Company> list(Map<String,Object> params, Integer page, Integer PageSize, Integer dept_id) {
         params.put("dept_id",dept_id);
         Byte typ = (Byte) params.get("typ");
-        Byte name = (Byte) params.get("name");
+        String name = (String) params.get("name");
         StringBuilder hql = new StringBuilder("from Company WHERE dept_id=:dept_id");
         if(typ!=null&&typ!=0){
             params.put("typ",typ);
@@ -48,7 +48,7 @@ public class CompanyServiceImpl implements CompanyServiceI {
     public long count(Map<String,Object> params, Integer dept_id) {
         StringBuilder hql = new StringBuilder("select count(*) from Company WHERE dept_id=:dept_id");
         Byte typ = (Byte) params.get("typ");
-        Byte name = (Byte) params.get("name");
+        String name = (String) params.get("name");
         params.put("dept_id",dept_id);
         if(typ!=null&&typ!=0){
             params.put("typ",typ);

@@ -93,19 +93,19 @@
             $.messager.alert('提示','获取数据失败,请重新尝试或联系管理员!');
         });
     }
-    function showAbout() {
-        $.ajax({
-            url:'${pageContext.request.contextPath}/userController/platformInfo.action',
-            type:'get',
-            dataType:'json'
-        }).done(function (ret) {
-            $('#about_dept_name').text(ret.about_name);
-            $('#about_dept_content').text(ret.about_content);
-            $('#dlg_about').dialog('open');
-        }).fail(function () {
-            $.messager.alert('提示','获取数据失败,请重新尝试或联系管理员!');
-        });
-    }
+    <%--function showAbout() {--%>
+        <%--$.ajax({--%>
+            <%--url:'${pageContext.request.contextPath}/userController/platformInfo.action',--%>
+            <%--type:'get',--%>
+            <%--dataType:'json'--%>
+        <%--}).done(function (ret) {--%>
+            <%--$('#about_dept_name').text(ret.about_name);--%>
+            <%--$('#about_dept_content').text(ret.about_content);--%>
+            <%--$('#dlg_about').dialog('open');--%>
+        <%--}).fail(function () {--%>
+            <%--$.messager.alert('提示','获取数据失败,请重新尝试或联系管理员!');--%>
+        <%--});--%>
+    <%--}--%>
     function editCurrentUserPwd() {
         parent.$
                 .modalDialog({
@@ -216,14 +216,11 @@
                    class="menus"><img src="${pageContext.request.contextPath}/style/images/icons/icon_config.png"
                                       class="module_icon">平台设置</a>
             </li>
-            <li>
-                <a href="javascript:showAbout()"
-                   id="6" class="menus"><img
-                        src="${pageContext.request.contextPath}/style/images/icons/icon_about.png"
-                        class="module_icon">关于平台</a>
+            <li><a href="javascript:openModule('${pageContext.request.contextPath}/userController/platformInfo.action')"
+                   id="20"
+                   class="menus"><img src="${pageContext.request.contextPath}/style/images/icons/icon_about.png"
+                                      class="module_icon">关于平台</a>
             </li>
-
-
         </ul>
 
     </div>
@@ -292,21 +289,4 @@
         </div>
     </form>
 </div>
-<div id="dlg_about" class="easyui-dialog" style="width:100%;max-width:400px;padding:30px 60px;"
-     data-options="
-            title: '关于平台',
-            closed: true,
-            modal: true,
-            draggable: false,
-            buttons: [{
-                text: '确定',
-                handler: function(){
-                    $('#dlg_about').dialog('close');
-                }
-            }]
-        ">
-    <i>智能无线静载荷检测云平台</i>
-    <p>测试信息测试信息</p>
-    <i id="about_dept_name"></i>
-    <p id="about_dept_content"></p>
-</div>
+

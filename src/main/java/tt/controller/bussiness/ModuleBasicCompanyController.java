@@ -32,7 +32,10 @@ public class ModuleBasicCompanyController extends BaseController<Company> {
     }
 
     @RequestMapping("partial")
-    public String partial(Model model) {
+    public String partial(@RequestParam(name="typ") Byte type,Model model) {
+        if(type!=null){
+            model.addAttribute("typ",type);
+        }
         model.addAttribute("baseUrl", "/moduleBasicCompanyController");
         return "business/module_basic/company_partial";
     }

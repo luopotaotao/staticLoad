@@ -75,7 +75,7 @@
         </div>
         <div style="margin-bottom:20px">
             <input class="easyui-textbox" name="note" style="width:90%"
-                   data-options="label:'备注信息:',labelAlign:'right'">
+                   data-options="label:'备注信息:',labelAlign:'right',multiline:true,height:120">
         </div>
     </form>
 </div>

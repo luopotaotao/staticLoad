@@ -27,7 +27,7 @@
             </div>
             <div style="margin-bottom:20px">
                 <input class="easyui-textbox" name="note" style="width:100%"
-                       data-options="label:'备注信息:'">
+                       data-options="label:'备注信息:',multiline:true,height:120">
             </div>
             <div style="margin-bottom:20px;display: none">
                 <input class="easyui-textbox" id="dept_logo" name="logo" style="width:100%"

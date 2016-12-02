@@ -3,10 +3,7 @@ package tt.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -156,7 +153,7 @@ public class BaseController<T>
     protected JSONObject listResponse(long count, List<T> list){
         JSONObject ret = new JSONObject();
         ret.put("total",count);
-        ret.put("rows",list);
+        ret.put("rows",list==null?new LinkedList<>():list);
         return ret;
     }
     /**

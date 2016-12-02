@@ -35,7 +35,7 @@
 
         <div style="margin-bottom:20px">
             <input class="easyui-textbox" name="note" style="width:100%"
-                   data-options="label:'备注:'">
+                   data-options="label:'备注:',multiline:true,height:120">
         </div>
         <div style="margin-bottom:20px;display: none;">
             <input id="user_dept_id" class="easyui-textbox" name="dept.id" style="width:100%"
