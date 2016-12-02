@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import tt.controller.BaseController;
+import tt.exception.ParameterException;
 import tt.model.business.InspectData;
 import tt.service.bussiness.InspectDataServiceI;
 
@@ -89,5 +90,13 @@ public class ModuleInspectDataController extends BaseController<InspectData> {
     public JSONObject linkData(@PathVariable(value = "plan_id") Integer plan_id, @RequestBody List<Map<String,Object>> data) {
         int count = inspectDataService.linkData(plan_id,data,getDeptId());
         return flagResponse(count>0);
+    }
+    @RequestMapping("loadLatestData/{PRG}/{STZH}")
+    @ResponseBody
+    public InspectData loadLatestData(@PathVariable String PRG,@PathVariable String STZH){
+        if(PRG==null||STZH==null){
+            throw new ParameterException("参数异常,请设置工程号和桩号!");
+        }
+        return inspectDataService.loadLatestData(PRG,STZH,getDeptId());
     }
 }

@@ -278,9 +278,7 @@
             </form>
         </div>
         <div id="project_scheme_plan_show_data_div" title="检测数据" data-options="closable:false" style="overflow:auto">
-            <%--<jsp:include page="../module_data/plan_show_data.jsp"/>--%>
         </div>
-
     </div>
 </div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/jslib/Highcharts-4.1.3/js/highcharts.js"

@@ -21,7 +21,6 @@ public class InspectDataServiceImpl implements InspectDataServiceI {
 
     @Override
     public List<InspectData> list(String PRG,String STZH, Integer dept_id) {
-        inspectDataDao.find(new HashMap<>());
         String hql = "from InspectData WHERE PRG=:PRG and STZH=:STZH and dept_id=:dept_id order by SETprs ASC,totalTime ASC";
         Map<String,Object> params = new HashMap<>();
         params.put("dept_id",dept_id);
@@ -103,6 +102,11 @@ public class InspectDataServiceImpl implements InspectDataServiceI {
             ret+=inspectDataDao.executeSql(sql,item);
         }
         return ret;
+    }
+
+    @Override
+    public InspectData loadLatestData(String PRG, String STZH, Integer dept_id) {
+        return inspectDataDao.loadLatestData(PRG,STZH,dept_id);
     }
 
     @Override

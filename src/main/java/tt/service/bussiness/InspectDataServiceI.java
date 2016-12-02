@@ -18,5 +18,5 @@ public interface InspectDataServiceI {
     List<Map<String, Object>> loadUnLinkedKeys(Integer dept_id);
     List<Map<String, Object>> loadLinkedKeys(Integer plan_id,Integer dept_id);
     int linkData(Integer plan_id,List<Map<String,Object>> data,Integer dept_id);
-
+    InspectData loadLatestData(String PRG,String STZH,Integer dept_id);
 }
