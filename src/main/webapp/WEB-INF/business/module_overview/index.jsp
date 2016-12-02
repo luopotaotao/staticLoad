@@ -7,7 +7,8 @@
     <jsp:include page="../../layout/common.jsp"></jsp:include>
 
     <script type="text/javascript" src="${pageContext.request.contextPath}/jslib/baiduMap/map_api.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/jslib/baiduMap/AreaRestriction_min.js"></script>
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath}/jslib/baiduMap/AreaRestriction_min.js"></script>
 
 </head>
 <body class="easyui-layout">
@@ -35,7 +36,7 @@
             $('#tree_menu').tree({
                 url: '${pageContext.request.contextPath}/moduleOverviewController/queryAll.action',
                 method: 'get',
-                textField:'name',
+                textField: 'name',
                 animate: true,
                 onClick: function (node) {
                     removeAllOverlays();
@@ -43,11 +44,11 @@
                         getProjectsAndShow(node.id);
                     }
                 },
-                formatter:function(node){
-                    if($.isNumeric(node.count)){
-                        var str_arr = [node.text,' (',node.count,')'];
+                formatter: function (node) {
+                    if ($.isNumeric(node.count)) {
+                        var str_arr = [node.text, ' (', node.count, ')'];
                         return str_arr.join('');
-                    }else{
+                    } else {
                         return node.text;
                     }
 
@@ -59,16 +60,25 @@
         function getProjectsAndShow(area_id) {
             var url = '${pageContext.request.contextPath}/moduleOverviewController/' + area_id + '/queryProjects.action';
             $.getJSON(url, function (ret) {
-                showMarkers(ret,function (marker) {
-                    var template = '<p><a href="javascript:top.openModule(\'${pageContext.request.contextPath}/moduleProjectController/index.action?project_id={id}\');">工程名称:{name}</a></p><p>工程编码:{code}</p><p>地址:{city}{address}</p>';
-
-//                    var template = '<p>工程名称:{name}<a href="">123</a></p><p>工程编码:{code}</p><p>地址:{city}{address}</p>';
+                showMarkers(ret, function (marker) {
+                    var template_arr = [
+                        '<p>工程名称:{name}</p>',
+                        '<p>工程编码:{code}</p>',
+                        '<p>地址:{city}{address}</p>',
+                        '<div><button onclick="top.openModule(\'${pageContext.request.contextPath}/moduleProjectController/index.action?project_id={id}\')"> 工程详情</button> </div>'];
                     var info = marker.info;
                     map.centerAndZoom(marker.M, 11);
-                    showInfo(marker.M, template, {id:info.id||'',name:info.name||'',code:info.code||'',city:info.city?(info.city.text||''):'',address:info.address||''});
+                    showInfo(marker.M, template_arr.join(''), {
+                        id: info.id || '',
+                        name: info.name || '',
+                        code: info.code || '',
+                        city: info.city ? (info.city.text || '') : '',
+                        address: info.address || ''
+                    });
                 });
             });
         }
+
         var map = initializeMap();
         $.extend({
             Map: {
@@ -96,8 +106,8 @@
 //        $.Map.showMarkers(markers);
         function initializeMap() {
             var $div = $('#div_map');
-            $div.height($(document).height()*0.92);
-            $div.width($(document).width()*0.85);
+            $div.height($(document).height() * 0.92);
+            $div.width($(document).width() * 0.85);
             var map = new BMap.Map("div_map");
 //            var point = new BMap.Point(113.276, 23.117);
             map.centerAndZoom("西安", 4);
@@ -141,15 +151,15 @@
                     max_lng = item.lng > max_lng ? item.lng : max_lng;
                     min_lat = item.lat < min_lat ? item.lat : min_lat;
                     min_lng = item.lng < min_lng ? item.lng : min_lng;
-                    var img = '${pageContext.request.contextPath}/style/images/baidu_map/marker_'+(item.status>0?'green':'gray')+'.png';
+                    var img = '${pageContext.request.contextPath}/style/images/baidu_map/marker_' + (item.status > 0 ? 'green' : 'gray') + '.png';
                     var myIcon = new BMap.Icon(img, new BMap.Size(35, 35), {
                         anchor: new BMap.Size(17, 35)
                     });
                     var icon = new BMap.Icon('${pageContext.request.contextPath}/style/images/baidu_map/marker_pink.png', new BMap.Size(128, 128), {
                         anchor: new BMap.Size(10, 30)
                     });
-                    var point = new BMap.Point(item.lng,item.lat);
-                    var marker = new BMap.Marker(point,{icon:myIcon});  // 创建标注
+                    var point = new BMap.Point(item.lng, item.lat);
+                    var marker = new BMap.Marker(point, {icon: myIcon});  // 创建标注
                     marker.info = item;
                     map.addOverlay(marker);
                     if ($.isFunction(callback)) {
@@ -170,7 +180,7 @@
         function showInfo(point, template, info) {
             if ($.isPlainObject(info)) {
                 $.each(info, function (key, val) {
-                    template = template.replace(new RegExp('{' + key+'}', 'g'), val);
+                    template = template.replace(new RegExp('{' + key + '}', 'g'), val);
                 });
             }
             var infoWindow = new BMap.InfoWindow(template);
@@ -179,16 +189,23 @@
 
         function removeAllOverlays() {
             var allOverlay = map.getOverlays();
-            $.each(allOverlay,function (i,item) {
+            $.each(allOverlay, function (i, item) {
                 map.removeOverlay(item);
             });
         }
-        if(selectedProject&&selectedProject.id){
-            showMarkers([selectedProject],function (marker) {
+
+        if (selectedProject && selectedProject.id) {
+            showMarkers([selectedProject], function (marker) {
                 var template = '<p><a href="javascript:top.openModule(\'${pageContext.request.contextPath}/moduleProjectController/index.action?project_id={id}\');">工程名称:{name}</a></p><p>工程编码:{code}</p><p>地址:{city}{address}</p>';
                 var info = marker.info;
                 map.centerAndZoom(marker.M, 11);
-                showInfo(marker.M, template, {id:info.id||'',name:info.name||'',code:info.code||'',city:info.city?(info.city.text||''):'',address:info.address||''});
+                showInfo(marker.M, template, {
+                    id: info.id || '',
+                    name: info.name || '',
+                    code: info.code || '',
+                    city: info.city ? (info.city.text || '') : '',
+                    address: info.address || ''
+                });
             });
         }
     });
