@@ -23,52 +23,6 @@
 	<!-- 自动扫描controller包下的所有类，使其认为spring mvc的控制器 -->
 	<context:component-scan base-package="tt.controller" />
 
-	<!-- Spring MVC JSON配置 -->
-	<!--<bean id="fastJsonConfig" class="com.alibaba.fastjson.support.config.FastJsonConfig">-->
-		<!--&lt;!&ndash; Default charset &ndash;&gt;-->
-		<!--<property name="charset" value="UTF-8" />-->
-		<!--&lt;!&ndash; Default dateFormat &ndash;&gt;-->
-		<!--<property name="dateFormat" value="yyyy-MM-dd HH:mm:ss" />-->
-		<!--&lt;!&ndash; Feature &ndash;&gt;-->
-		<!--&lt;!&ndash;<property name="features">&ndash;&gt;-->
-			<!--&lt;!&ndash;<list>&ndash;&gt;-->
-				<!--&lt;!&ndash;<value>Your feature</value>&ndash;&gt;-->
-			<!--&lt;!&ndash;</list>&ndash;&gt;-->
-		<!--&lt;!&ndash;</property>&ndash;&gt;-->
-		<!--&lt;!&ndash;&lt;!&ndash; SerializerFeature &ndash;&gt;&ndash;&gt;-->
-		<!--&lt;!&ndash;<property name="serializerFeatures">&ndash;&gt;-->
-			<!--&lt;!&ndash;<list>&ndash;&gt;-->
-				<!--&lt;!&ndash;<value>Your serializer feature</value>&ndash;&gt;-->
-			<!--&lt;!&ndash;</list>&ndash;&gt;-->
-		<!--&lt;!&ndash;</property>&ndash;&gt;-->
-		<!--&lt;!&ndash;&lt;!&ndash; Global SerializeFilter &ndash;&gt;&ndash;&gt;-->
-		<!--&lt;!&ndash;<property name="serializeFilters">&ndash;&gt;-->
-			<!--&lt;!&ndash;<list>&ndash;&gt;-->
-				<!--&lt;!&ndash;<ref bean="Your serializer filter"/>&ndash;&gt;-->
-			<!--&lt;!&ndash;</list>&ndash;&gt;-->
-		<!--&lt;!&ndash;</property>&ndash;&gt;-->
-		<!--&lt;!&ndash;&lt;!&ndash; Class Level SerializeFilter &ndash;&gt;&ndash;&gt;-->
-		<!--&lt;!&ndash;<property name="classSerializeFilters">&ndash;&gt;-->
-			<!--&lt;!&ndash;<map>&ndash;&gt;-->
-				<!--&lt;!&ndash;<entry key="Your filter class" value-ref="Your serializer filter"/>&ndash;&gt;-->
-			<!--&lt;!&ndash;</map>&ndash;&gt;-->
-		<!--&lt;!&ndash;</property>&ndash;&gt;-->
-	<!--</bean>-->
-    <!--<mvc:annotation-driven>-->
-        <!--<mvc:message-converters>-->
-            <!--<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">-->
-                <!--&lt;!&ndash; MediaTypes &ndash;&gt;-->
-                <!--<property name="supportedMediaTypes">-->
-                    <!--<list>-->
-                        <!--<value>application/json</value>-->
-                        <!--<value>text/html;charset=UTF-8</value>&lt;!&ndash; 避免IE出现下载JSON文件的情况 &ndash;&gt;-->
-                    <!--</list>-->
-                <!--</property>-->
-                <!--&lt;!&ndash; FastJsonConfig &ndash;&gt;-->
-                <!--<property name="fastJsonConfig" ref="fastJsonConfig" />-->
-            <!--</bean>-->
-        <!--</mvc:message-converters>-->
-    <!--</mvc:annotation-driven>-->
     <mvc:annotation-driven/>
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="messageConverters">
@@ -82,10 +36,6 @@
                         </list>
                     </property>
                 </bean>
-                <bean class="org.springframework.http.converter.ResourceHttpMessageConverter"/>
-                <bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>
-                <!--<bean class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter"/>-->
-                <bean class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter"/>
                 <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
                     <property name="supportedMediaTypes">
                         <list>
@@ -93,26 +43,19 @@
                             <value>application/json; charset=utf-8</value>
                         </list>
                     </property>
-                </bean>
+					<property name="objectMapper">
+						<bean class="com.fasterxml.jackson.databind.ObjectMapper">
+							<property name="dateFormat">
+								<bean class="java.text.SimpleDateFormat">
+									<constructor-arg value="yyyy-MM-dd HH:mm:ss" />
+								</bean>
+							</property>
+						</bean>
+					</property>
+				</bean>
             </list>
         </property>
     </bean>
-    <!--<bean-->
-		<!--class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">-->
-		<!--<property name="messageConverters">-->
-			<!--<list>-->
-				<!--&lt;!&ndash; <bean id="fastJsonHttpMessageConverter" class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"> &ndash;&gt;-->
-				<!--<bean id="fastJsonHttpMessageConverter" class="tt.util.FastJsonHttpMessageConverter">-->
-					<!--<property name="supportedMediaTypes">-->
-						<!--<list>-->
-							<!--<value>text/html;charset=UTF-8</value>&lt;!&ndash; 避免IE出现下载JSON文件的情况 &ndash;&gt;-->
-						<!--</list>-->
-					<!--</property>-->
-                    <!--<property name="fastJsonConfig" ref="fastJsonConfig" />-->
-				<!--</bean>-->
-			<!--</list>-->
-		<!--</property>-->
-	<!--</bean>-->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="defaultEncoding">

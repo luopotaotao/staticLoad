@@ -57,4 +57,9 @@ public class EquipmentServiceImpl implements EquipmentServiceI {
         equipmentDao.update(equipment);
         return equipment;
     }
+
+    @Override
+    public Equipment loadEquipmentByCode(String code) {
+        return equipmentDao.loadByCode(code);
+    }
 }

@@ -17,33 +17,25 @@
 <script>
     $(function () {
         var tree_data = [{
-            "id": 1,
-            "text": "基础信息",
-            "children": [{
-                "id": 11,
-                "text": "单位管理",
-                "url": "${pageContext.request.contextPath}/moduleBasicCompanyController/index.action"
-            }, {
-                "id": 12,
-                "text": "检测信息",
-                "children": [{
-                    "id": 121,
-                    "text": "检测机构",
-                    "url": "${pageContext.request.contextPath}/moduleBasicInstitutionController/index.action"
-                }, {
-                    "id": 122,
-                    "text": "检测项目",
-                    "url": "${pageContext.request.contextPath}/moduleBasicInspectItemController/index.action"
-                }]
-            }, {
-                "id": 13,
-                "text": "行政区划",
-                "url": "${pageContext.request.contextPath}/moduleBasicAreaController/index.action"
-            }]
+            "id": 11,
+            "text": "单位管理",
+            "url": "${pageContext.request.contextPath}/moduleBasicCompanyController/index.action"
+        }, {
+            "id": 12,
+            "text": "检测机构",
+            "url": "${pageContext.request.contextPath}/moduleBasicInstitutionController/index.action"
+        }, {
+            "id": 13,
+            "text": "检测项目",
+            "url": "${pageContext.request.contextPath}/moduleBasicInspectItemController/index.action"
+        }, {
+            "id": 14,
+            "text": "行政区划",
+            "url": "${pageContext.request.contextPath}/moduleBasicAreaController/index.action"
         }
             <c:if test="${sessionScope.sessionInfo.role < 2}">
             , {
-                "id": 14,
+                "id": 15,
                 "text": "组织机构",
                 "url": "${pageContext.request.contextPath}/moduleBasicDeptController/index.action"
             }

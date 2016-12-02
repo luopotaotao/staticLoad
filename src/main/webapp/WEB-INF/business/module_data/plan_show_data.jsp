@@ -142,7 +142,7 @@
                 </form>
                 <div style="margin-left: 49px">
                     <label id="current_data_msg" style="width:45%"></label>
-                    <a id="refresh_data" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="margin-left: 128px">立即刷新</a>
+                    <a id="refresh_data" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="margin-left: 128px">刷新</a>
                 </div>
             </div>
         </div>

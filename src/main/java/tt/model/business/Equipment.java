@@ -1,6 +1,7 @@
 package tt.model.business;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "b_equipment")
@@ -10,6 +11,7 @@ public class Equipment  extends BaseModel{
   private String name;
   private String note;
   private Integer institution_id;
+  private Date expiredDate;
 
   @Id
   @Column(name = "id")
@@ -59,5 +61,15 @@ public class Equipment  extends BaseModel{
 
   public void setInstitution_id(Integer institution_id) {
     this.institution_id = institution_id;
+  }
+
+  @Basic
+  @Column(name = "expired_date")
+  public Date getExpiredDate() {
+    return expiredDate;
+  }
+
+  public void setExpiredDate(Date expiredDate) {
+    this.expiredDate = expiredDate;
   }
 }

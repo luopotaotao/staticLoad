@@ -28,4 +28,9 @@ public class EquipmentDaoImpl extends BaseDaoImpl<Equipment> implements Equipmen
 //        }
         return criteria.list();
     }
+
+    @Override
+    public Equipment loadByCode(String code) {
+        return (Equipment) getCriteria().add(Restrictions.eq("code",code)).uniqueResult();
+    }
 }

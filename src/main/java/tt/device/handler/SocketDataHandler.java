@@ -11,8 +11,10 @@ import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.textline.LineDelimiter;
 import org.springframework.beans.factory.annotation.Autowired;
 import tt.device.model.EndData;
+import tt.model.business.Equipment;
 import tt.model.business.InspectData;
 import tt.service.bussiness.BInspectServiceI;
+import tt.service.bussiness.EquipmentServiceI;
 
 import java.util.Date;
 
@@ -22,7 +24,8 @@ public class SocketDataHandler extends IoHandlerAdapter {
 
     @Autowired
     private BInspectServiceI bInspectServiceI;
-
+    @Autowired
+    private EquipmentServiceI equipmentServiceI;
     @Override
     public void exceptionCaught(IoSession session, Throwable cause) throws Exception {
         cause.printStackTrace();
@@ -108,14 +111,24 @@ public class SocketDataHandler extends IoHandlerAdapter {
 
     private String validate(InspectData item) {
         String ret = null;
-        String template = "报文格式错误:需要有字段 %s:%s,且值不能为空";
-        if (item.getPrg() == null || item.getPrg().trim().isEmpty()) {
-            ret = String.format(template, "工程编号", "PRG");
-        } else if (item.getStzh() == null || item.getStzh().trim().isEmpty()) {
-            ret = String.format(template, "桩号", "STZH");
-        } else if (item.getDevnb() == null || item.getDevnb().trim().isEmpty()) {
-            ret = String.format(template, "设备编号", "DevNB");
+        Equipment equipment = equipmentServiceI.loadEquipmentByCode(item.getDevnb());
+        if(equipment!=null){
+            if(equipment.getExpiredDate().after(new Date())){
+                String template = "报文格式错误:需要有字段 %s:%s,且值不能为空";
+                if (item.getPrg() == null || item.getPrg().trim().isEmpty()) {
+                    ret = String.format(template, "工程编号", "PRG");
+                } else if (item.getStzh() == null || item.getStzh().trim().isEmpty()) {
+                    ret = String.format(template, "桩号", "STZH");
+                } else if (item.getDevnb() == null || item.getDevnb().trim().isEmpty()) {
+                    ret = String.format(template, "设备编号", "DevNB");
+                }
+            }else {
+                ret = "DevNB expired";
+            }
+        }else{
+            ret = "no DevNB registered";
         }
+
         return ret;
     }
 

@@ -40,6 +40,10 @@
                        data-options="label:'设备名称:'">
             </div>
             <div style="margin-bottom:20px">
+                <input class="easyui-datebox" name="expiredDate" style="width:100%"
+                       data-options="label:'有效日期:'">
+            </div>
+            <div style="margin-bottom:20px">
                 <input class="easyui-textbox" name="note" style="width:100%"
                        data-options="label:'备注:',multiline:true,height:120">
             </div>
@@ -111,6 +115,7 @@
                     {field: 'id', title: 'ID', hidden:true},
                     {field: 'code', title: '设备编号'},
                     {field: 'name', title: '设备名称'},
+                    {field: 'expiredDate', title: '有效日期'},
                     {field: 'note', title: '备注'}
                 ]],
                 onHeaderContextMenu: function (e, field) {
@@ -176,6 +181,7 @@
             function showEditDialog(data) {
                 var $ff = $('#ff_equipment');
                 if (data) {
+                    console.log(data);
                     $ff.form('load', data);
                     $ff.form({url: '../${baseUrl}/put.action'});
                 } else {

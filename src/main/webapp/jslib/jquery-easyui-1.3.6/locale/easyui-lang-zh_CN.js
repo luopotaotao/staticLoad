@@ -46,6 +46,9 @@ if ($.fn.datebox){
 		if(s instanceof Date){
 			return s;
 		}
+		if($.isNumeric(s)){
+			return new Date(s);
+		}
 		var ss = s.split('-');
 		var y = parseInt(ss[0],10);
 		var m = parseInt(ss[1],10);

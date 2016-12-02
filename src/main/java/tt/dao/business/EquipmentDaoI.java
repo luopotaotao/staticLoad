@@ -10,4 +10,5 @@ import java.util.List;
  */
 public interface EquipmentDaoI extends BaseDaoI<Equipment> {
     List<Equipment> list(Integer institution_id, String name,Integer dept_id);
+    Equipment loadByCode(String coded);
 }

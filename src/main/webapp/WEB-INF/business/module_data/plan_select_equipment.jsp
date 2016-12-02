@@ -14,6 +14,7 @@
         <th data-options="field: 'ck', checkbox: true"></th>
         <th data-options="field: 'id', title: 'ID', hidden: true"></th>
         <th data-options="field: 'code', title: '设备编号'"></th>
+        <th data-options="field: 'expiredDate', title: '有效日期'"></th>
         <th data-options="field: 'name', title: '设备名称'"></th>
         <th data-options="field: 'note', title: '备注', width: 80"></th>
     </tr>
