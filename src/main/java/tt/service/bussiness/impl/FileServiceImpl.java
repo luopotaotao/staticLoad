@@ -43,4 +43,9 @@ public class FileServiceImpl implements FileService {
     public File update(File instance, Integer dept_id) {
         return null;
     }
+
+    @Override
+    public File getById(String id) {
+        return fileDao.getById(id);
+    }
 }

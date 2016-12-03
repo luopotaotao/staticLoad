@@ -443,27 +443,13 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/editCurrentUserPwd", method = RequestMethod.POST)
     @ResponseBody
-    public Json editCurrentUserPwd(HttpSession session, String oldPwd, String pwd,
-                                   String editpwdcode)
+    public Json editCurrentUserPwd(HttpSession session, String oldPwd, String pwd)
             throws Exception {
         Json j = new Json();
         if (session != null) {
             SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.getSessionInfoName());
             if (sessionInfo != null) {
-                // 判断验证码是否存在
-                if (session.getAttribute("authCode") != null) {
-                    if (editpwdcode.equalsIgnoreCase((String) session.getAttribute("authCode"))) {
-                        j = userService.editCurrentUserPwd(sessionInfo, oldPwd, pwd);
-                        session.removeAttribute("authCode");
-                    } else {
-                        j.setMsg("您输入的验证码不正确，请重新输入。");
-                        j.setSuccess(false);
-                    }
-                } else {
-                    j.setMsg("验证码超时，请重新输入。");
-                    j.setSuccess(false);
-                    logger.error("验证码超时。");
-                }
+                j = userService.editCurrentUserPwd(sessionInfo, oldPwd, pwd);
             } else {
                 j.setMsg("登录超时，请重新登录！");
             }

@@ -6,8 +6,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript" src="<c:url value="/resources/jslib/resumable.js"/>" type="text/javascript"
+        charset="utf-8"></script>
+<script type="text/javascript" src="<c:url value="/resources/jslib/my_resumble.js"/>" type="text/javascript"
+        charset="utf-8"></script>
 <div style="width:100%;max-width:600px;padding:30px 60px;">
-    <form id="ff" class="easyui-form" method="post" data-options="novalidate:true" action="${pageContext.request.contextPath}/moduleInspectSchemeController/post">
+    <form id="ff" class="easyui-form" method="post" data-options="novalidate:true"
+          action="<c:url value="/moduleInspectSchemeController/post"/>">
         <div style="margin-bottom:20px;display: none">
             <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'编号:'">
         </div>
@@ -42,22 +48,24 @@
         <div style="margin-bottom:20px">
             <input class="easyui-textbox select" name="dept.id" style="width:100%"
                    data-options="label:'检测单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleInspectSchemeController/selectDept">
+                   buttonIcon:'icon-search'" url="<c:url value="/moduleInspectSchemeController/selectDept"/>">
+        </div>
+        <div id="approval_file_id_div" style="margin-bottom:20px">
+            <input class="easyui-textbox" id="approval_file_id" name="approval_file.uuid" style="width:100%"
+                   data-options="label:'检测方案审批表:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
+                   buttonIcon:'icon-search'">
         </div>
         <div style="margin-bottom:20px">
-            <input class="easyui-textbox" name="approval_file.id" style="width:100%"
-                   data-options="label:'检测方案审批表:',labelAlign:'right',required:true">
-        </div>
-        <div style="margin-bottom:20px">
-            <input class="easyui-textbox" name="inspect_file.id" style="width:100%"
-                   data-options="label:'检测方案附件:',labelAlign:'right'">
+            <input class="easyui-textbox" id="inspect_file_id" name="inspect_file.uuid" style="width:100%"
+                   data-options="label:'检测方案附件:',labelAlign:'right',editable:false,buttonText:'选择',
+                   buttonIcon:'icon-search'">
         </div>
         <div style="margin-bottom:20px">
             <div style="margin-bottom:20px">
                 <select id="inspectItem_id" class="easyui-combobox" name="inspectItem.id" style="width:100%"
                         data-options="label:'检测项目:',
             labelAlign:'right',
-            url:'${pageContext.request.contextPath}/moduleBasicInspectItemController/comboList',
+            url:'<c:url value="/moduleBasicInspectItemController/comboList"/>',
             method:'get',
             valueField: 'id',
             textField: 'name'
@@ -70,6 +78,27 @@
 
 <script>
     $(function () {
+//        initResumable();
+        initResumable('#approval_file_id');
+
+        function initResumable(input,selector) {
+
+            var r = $.getResumble({
+                url: '<c:url value="/file/upload"/>',
+                fileType: ['doc', 'docx', 'ppt', 'xls', 'xlsx'],
+                selectors:['#approval_file_id_div'],
+                successHandler: function (ret) {
+                    console.log(ret.uuid);
+                    debugger
+                    $(input).textbox('setValue', ret.uuid);
+                    $(input).textbox('setText', ret.fileName);
+                },
+                fileTypeErrorHandler: function () {
+                    alert("文件类型错误...");
+                }
+            });
+        }
+
         $('input.select').textbox({
             onClickButton: function () {
                 var _this = this;

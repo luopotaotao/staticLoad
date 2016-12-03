@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:c="http://www.springframework.org/schema/c" xmlns:cache="http://www.springframework.org/schema/cache"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
-	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:p="http://www.springframework.org/schema/p" xmlns:task="http://www.springframework.org/schema/task"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:c="http://www.springframework.org/schema/c" xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:lang="http://www.springframework.org/schema/lang" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
 		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
@@ -19,9 +19,9 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-	<bean class="tt.config.GlobalErrorHandler"/>
-	<!-- 自动扫描controller包下的所有类，使其认为spring mvc的控制器 -->
-	<context:component-scan base-package="tt.controller" />
+    <bean class="tt.config.GlobalErrorHandler"/>
+    <!-- 自动扫描controller包下的所有类，使其认为spring mvc的控制器 -->
+    <context:component-scan base-package="tt.controller"/>
 
     <mvc:annotation-driven/>
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
@@ -43,76 +43,75 @@
                             <value>application/json; charset=utf-8</value>
                         </list>
                     </property>
-					<property name="objectMapper">
-						<bean class="com.fasterxml.jackson.databind.ObjectMapper">
-							<property name="dateFormat">
-								<bean class="java.text.SimpleDateFormat">
-									<constructor-arg value="yyyy-MM-dd HH:mm:ss" />
-								</bean>
-							</property>
-						</bean>
-					</property>
-				</bean>
+                    <property name="objectMapper">
+                        <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                            <property name="dateFormat">
+                                <bean class="java.text.SimpleDateFormat">
+                                    <constructor-arg value="yyyy-MM-dd HH:mm:ss"/>
+                                </bean>
+                            </property>
+                        </bean>
+                    </property>
+                </bean>
             </list>
         </property>
     </bean>
-	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="defaultEncoding">
-			<value>UTF-8</value>
-		</property>
-		<!-- <property name="maxUploadSize">
-			<value>16777216</value>上传文件大小限制为10M，31*1024*1024
-		</property> -->
-		<property name="maxInMemorySize">
-			<value>2048</value>
-		</property>
-	</bean>
+    <bean id="multipartResolver" class="tt.ext.web.MultipartFileResolver">
+        <property name="defaultEncoding">
+            <value>UTF-8</value>
+        </property>
+        <property name="maxUploadSize">
+            <value>16777216</value><!--上传文件大小限制为10M，31*1024*1024-->
+        </property>
+        <property name="maxInMemorySize">
+            <value>2048</value>
+        </property>
+    </bean>
 
-	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-		p:prefix="/WEB-INF/" p:suffix=".jsp" />
+    <!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
+    <bean
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+            p:prefix="/WEB-INF/" p:suffix=".jsp"/>
 
-	<!-- 文件上传配置 -->
-	<!-- <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
-		<property name="defaultEncoding"> <value>UTF-8</value> </property> <property 
-		name="maxUploadSize"> <value>32505856</value> </property> <property name="maxInMemorySize"> 
-		<value>4096</value> </property> </bean> -->
-	<!-- 拦截器 -->
-	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<bean class="tt.interceptors.SecurityInterceptor">
-				<property name="sessionexcludeUrls">
-					<list>
-						<!-- 用户登录 -->
-						<value>/userController/login.action</value>
-						<!-- 用户退出 -->
-						<value>/userController/logout.action</value>
-						<!-- 初始化数据库 -->
-						<value>/initController/init.action</value>
-					</list>
-				</property>
-				<!-- 不需要权限验证的地址 -->
-				<property name="securityexcludeUrls">
-					<list>
-						<value>/userController/login.action</value><!-- 用户登录 -->
-						<value>/userController/logout.action</value><!-- 注销登录 -->
-						<!--<value>/roleController/tree</value> 用户访问角色树(只能看到自己拥有的角色) -->
-						<!-- ***** ***** ***** 首页不需要权限验证的功能 ***** ***** ***** -->
-						<value>/userController/editCurrentUserPwdPage.action</value><!-- 用户修改自己的密码页面 -->
-						<value>/userController/editCurrentUserPwd.action</value><!-- 用户修改自己的密码 -->
-						<value>/userController/currentUserResourcePage.action</value><!-- 查看自己的权限页面 -->
-						
-						<value>/resourceController/tree.action</value><!-- 首页左侧功能菜单 -->
+    <!-- 文件上传配置 -->
+    <!-- <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding"> <value>UTF-8</value> </property> <property
+        name="maxUploadSize"> <value>32505856</value> </property> <property name="maxInMemorySize">
+        <value>4096</value> </property> </bean> -->
+    <!-- 拦截器 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="tt.interceptors.SecurityInterceptor">
+                <property name="sessionexcludeUrls">
+                    <list>
+                        <!-- 用户登录 -->
+                        <value>/userController/login.action</value>
+                        <!-- 用户退出 -->
+                        <value>/userController/logout.action</value>
+                        <!-- 初始化数据库 -->
+                        <value>/initController/init.action</value>
+                    </list>
+                </property>
+                <!-- 不需要权限验证的地址 -->
+                <property name="securityexcludeUrls">
+                    <list>
+                        <value>/userController/login.action</value><!-- 用户登录 -->
+                        <value>/userController/logout.action</value><!-- 注销登录 -->
+                        <!--<value>/roleController/tree</value> 用户访问角色树(只能看到自己拥有的角色) -->
+                        <!-- ***** ***** ***** 首页不需要权限验证的功能 ***** ***** ***** -->
+                        <value>/userController/editCurrentUserPwdPage.action</value><!-- 用户修改自己的密码页面 -->
+                        <value>/userController/editCurrentUserPwd.action</value><!-- 用户修改自己的密码 -->
+                        <value>/userController/currentUserResourcePage.action</value><!-- 查看自己的权限页面 -->
 
-						<!--不断向后台发ajax请求 -->
-						<value>/monitorController/monitoronline.action</value>
-					</list>
-				</property>
-			</bean>
-		</mvc:interceptor>
-	</mvc:interceptors>
-	<mvc:resources mapping="/resources/**" location="WEB-INF/resources/"/>
+                        <value>/resourceController/tree.action</value><!-- 首页左侧功能菜单 -->
+
+                        <!--不断向后台发ajax请求 -->
+                        <value>/monitorController/monitoronline.action</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+    <mvc:resources mapping="/resources/**" location="WEB-INF/resources/"/>
 </beans>

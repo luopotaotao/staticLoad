@@ -246,7 +246,22 @@
             handler: null
             },{
             text: '重置密码',
-            handler: null
+            handler: function(){
+                $('#ff_user_info').form('enableValidation').form('submit', {
+                    url: '<c:url value="/userController/editCurrentUserPwd"/>',
+                    onSubmit: function(){
+                        var isValid = $(this).form('validate');
+                        if (!isValid){
+                            $.messager.alert('系统提示','请修正表单中的错误!');
+                        }
+                        return isValid;	// 返回false终止表单提交
+                    },
+                    success: function(ret){
+                        $.messager.alert('系统提示',JSON.stringify(ret));
+                    }
+                });
+
+            }
             }]
         ">
     <form id="ff_user_info" class="easyui-form" method="post" data-options="novalidate:true"
@@ -262,7 +277,7 @@
 
         <div style="margin-bottom:20px">
             <input class="easyui-textbox" name="password" style="width:100%"
-                   data-options="label:'原始密码:',required:true">
+                   data-options="label:'原始密码:',required:true"  type="password">
         </div>
         <div style="margin-bottom:20px">
             <input class="easyui-textbox" name="new_password" style="width:100%"

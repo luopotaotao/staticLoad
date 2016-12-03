@@ -302,8 +302,8 @@
         fileType:['png'],
         successHandler:function (uuid) {
             alert('成功保存文件:'+uuid);
-            $('#dept_logo').textbox('setValue', message.uuid);
-            $('#img').attr('src', '<c:url value="/inspect_file/upload"/>'+message.uuid);
+            $('#dept_logo').textbox('setValue', uuid);
+            $('#img').attr('src', '<c:url value="/inspect_file/upload"/>'+uuid);
         },
         fileTypeErrorHandler:function () {
             alert("文件类型错误...");

@@ -105,9 +105,9 @@
 	</session-config>
 
 	<!-- 设置欢迎页面 -->
-	<welcome-inspect_file-list>
-		<welcome-inspect_file>/admin_login.jsp</welcome-inspect_file>
-	</welcome-inspect_file-list>
+	<welcome-file-list>
+		<welcome-file>/admin_login.jsp</welcome-file>
+	</welcome-file-list>
 
 	<!-- 找不到页错误转向 -->
 	<error-page>

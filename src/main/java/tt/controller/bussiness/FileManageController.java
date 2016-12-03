@@ -2,19 +2,23 @@ package tt.controller.bussiness;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import tt.controller.BaseController;
+import tt.exception.NotFoundException;
 import tt.ext.web.FileUploadProgressListener;
 import tt.model.business.File;
 import tt.service.bussiness.FileService;
 import tt.util.FileUtil;
 import tt.util.SessionUtil;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -24,30 +28,55 @@ import java.util.UUID;
  */
 @Controller
 @RequestMapping("file")
-public class FileManageController extends BaseController{
+public class FileManageController extends BaseController {
 
     @Autowired
     private FileService fileService;
-    @RequestMapping(value = "/upload",method = RequestMethod.POST)
+
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> upload(MultipartFile file){
-        String filePath = SessionUtil.get().getServletContext().getRealPath("/")+"WEB-INF/resources/upload/";
+    public Map<String, Object> upload(MultipartFile file, @RequestParam(name = "resumableFilename") String resumableFilename) {
+        System.out.println(resumableFilename);
+        String filePath = SessionUtil.get().getServletContext().getRealPath("/") + "WEB-INF/resources/upload/";
         UUID id = null;
         try {
-            id = FileUtil.saveFile(file,filePath, uuid->{
-                fileService.add(new File(uuid.toString(),file.getOriginalFilename(),getDeptId()),getDeptId());
+            id = FileUtil.saveFile(file, filePath, uuid -> {
+                fileService.add(new File(uuid.toString(), resumableFilename, getDeptId()), getDeptId());
                 System.out.println(uuid.toString());
             });
         } catch (IOException e) {
             e.printStackTrace();
         }
         SessionUtil.removeAttribute(FileUploadProgressListener.SESSION_PROGRESS_KEY);
-        Map<String,Object> ret = new HashMap<>();
-        ret.put("uuid",id);
+        Map<String, Object> ret = new HashMap<>();
+        ret.put("uuid", id);
+        ret.put("fileName", resumableFilename);
         return ret;
     }
-    @RequestMapping(value = "/get/{uuid}",method = RequestMethod.GET)
-    public File get(@PathVariable String uuid){
-        return fileService.get(uuid,getDeptId());
+
+    @RequestMapping(value = "/get/{uuid}", method = RequestMethod.GET)
+    public File get(@PathVariable String uuid) {
+        return fileService.get(uuid, getDeptId());
+    }
+
+    @RequestMapping(value = "/download/{uuid}", method = RequestMethod.GET)
+    public void download(HttpServletResponse response, @PathVariable("uuid") String uuid) throws IOException {
+        File file = fileService.getById(uuid);
+        if (file != null) {
+            String filePath = SessionUtil.get().getServletContext().getRealPath("/") + "WEB-INF/resources/upload/";
+            String mimeType = URLConnection.guessContentTypeFromName(file.getName());
+
+            if (mimeType == null) {
+                mimeType = "application/octet-stream";
+            }
+            java.io.File f = new java.io.File(filePath + file.getUuid());
+            response.setContentType(mimeType);
+            response.setHeader("Content-Disposition", String.format("afttachment; filename=\"%s\"", file.getName()));
+            response.setContentLength((int) f.length());
+            InputStream inputStream = new BufferedInputStream(new java.io.FileInputStream(f));
+            FileCopyUtils.copy(inputStream, response.getOutputStream());
+        } else {
+            throw new NotFoundException();
+        }
     }
 }

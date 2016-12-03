@@ -2,10 +2,8 @@ package tt.service.bussiness.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tt.dao.business.InspectItemDaoI;
-import tt.dao.business.InspectSchemeDaoI;
-import tt.dao.business.DeptDaoI;
-import tt.dao.business.ProjectDaoI;
+import tt.dao.business.*;
+import tt.model.business.File;
 import tt.model.business.InspectScheme;
 import tt.service.bussiness.InspectSchemeServiceI;
 
@@ -28,6 +26,8 @@ public class InspectSchemeServiceImpl implements InspectSchemeServiceI {
     @Autowired
     private DeptDaoI deptDao;
 
+    @Autowired
+    private FileDaoI fileDao;
     @Override
     public InspectScheme get(Serializable id, Integer dept_id) {
         return inspectSchemeDao.getById(id,dept_id);
@@ -55,7 +55,7 @@ public class InspectSchemeServiceImpl implements InspectSchemeServiceI {
 
     @Override
     public InspectScheme add(InspectScheme inspectScheme, Integer dept_id) {
-        resetProject(inspectScheme);
+        resetScheme(inspectScheme);
         inspectSchemeDao.save(inspectScheme);
         return inspectScheme;
     }
@@ -73,13 +73,25 @@ public class InspectSchemeServiceImpl implements InspectSchemeServiceI {
 
     @Override
     public InspectScheme update(InspectScheme inspectScheme, Integer dept_id) {
-        resetProject(inspectScheme);
+        resetScheme(inspectScheme);
         inspectSchemeDao.update(inspectScheme);
         return inspectScheme;
     }
-    private void resetProject(InspectScheme inspectScheme){
+    private void resetScheme(InspectScheme inspectScheme){
         inspectScheme.setProject(projectDao.getById(inspectScheme.getProject().getId()));
         inspectScheme.setInspectItem(inspectItemDao.getById(inspectScheme.getInspectItem().getId()));
         inspectScheme.setDept(deptDao.getById(inspectScheme.getDept().getId()));
+        File approval_file = inspectScheme.getApproval_file();
+        if(approval_file!=null&&approval_file.getUuid()!=null){
+            inspectScheme.setApproval_file(fileDao.getById(approval_file.getUuid()));
+        }else{
+            inspectScheme.setApproval_file(null);
+        }
+        File inspect_file = inspectScheme.getInspect_file();
+        if(inspect_file!=null&&inspect_file.getUuid()!=null){
+            inspectScheme.setInspect_file(fileDao.getById(approval_file.getUuid()));
+        }else{
+            inspectScheme.setInspect_file(null);
+        }
     }
 }

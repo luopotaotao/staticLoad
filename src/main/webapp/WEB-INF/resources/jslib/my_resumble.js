@@ -33,6 +33,14 @@ $.extend({
         } else {
             // Show a place for dropping/selecting files
             $('.resumable-drop').show();
+            //根据传入的selectors数组选择文件
+            if(opts.selectors&&$.isArray(opts.selectors)){
+                $.each(opts.selectors,function (i,selector) {
+                    $(selector).each(function (i,item) {
+                        r.assignBrowse(item);
+                    });
+                })
+            }
             $('.resumable-browse').each(function (i,item) {
                 r.assignBrowse(item);
             });
@@ -68,7 +76,7 @@ $.extend({
             });
             r.on('fileSuccess', function(file,message){
                 if($.isFunction(opts.successHandler)){
-                    opts.successHandler($.parseJSON(message).uuid);
+                    opts.successHandler($.parseJSON(message));
                 }
                 $('.resumable-file-'+file.uniqueIdentifier+' .resumable-file-progress').html('(completed)');
             });

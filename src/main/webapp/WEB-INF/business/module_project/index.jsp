@@ -172,12 +172,12 @@
                        url="${pageContext.request.contextPath}/moduleInspectSchemeController/selectDept">
             </div>
             <div style="margin-bottom:20px">
-                <input class="easyui-textbox" name="code" style="width:500px"
-                       data-options="label:'检测方案审批表:',labelAlign:'right',required:true">
+                <input class="easyui-textbox" id="approval_file_uuid" name="approval_file.uuid" style="width:500px"
+                       data-options="label:'检测方案审批表:',labelAlign:'right',required:true"><a id="approval_file_uuid_download">下载</a>
             </div>
             <div style="margin-bottom:20px">
-                <input class="easyui-textbox" name="name" style="width:500px"
-                       data-options="label:'检测方案附件:',labelAlign:'right'">
+                <input class="easyui-textbox" id="inspect_file_uuid" name="inspect_file.uuid" style="width:500px"
+                       data-options="label:'检测方案附件:',labelAlign:'right'"><a id="inspect_file_uuid_download">下载</a>
             </div>
             <div style="margin-bottom:20px">
                 <div style="margin-bottom:20px">
@@ -383,7 +383,23 @@
         }
 
         function showScheme(data) {
+            console.log(JSON.stringify(data));
             $('#project_scheme_dept').textbox('setText', data.dept ? data.dept.name : '');
+            setFileField('approval_file');
+            setFileField('inspect_file');
+
+            function setFileField(field) {
+                var file = data[field];
+                var name = file?file.name:'';
+                var uuid = file?file.uuid:'';
+                if(name&&uuid){
+                    $('#'+field+'_uuid').textbox('setText',name);
+                    $('#'+field+'_uuid_download').attr('href','<c:url value="/file/download/"/>'+uuid );
+                    $('#'+field+'_uuid_download').show();
+                }else{
+                    $('#'+field+'_uuid_download').hide();
+                }
+            }
         }
 
         function addPlan() {
