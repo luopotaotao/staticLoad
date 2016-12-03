@@ -20,6 +20,7 @@ public class GlobalErrorHandler {
     @ExceptionHandler(value = {RuntimeException.class})
     @ResponseBody
     public ErrorMsg handleErr(RuntimeException e){
+        e.printStackTrace();
         return new ErrorMsg(e.getMessage());
     }
     @ExceptionHandler

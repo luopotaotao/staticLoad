@@ -45,7 +45,7 @@ public class RoleController extends BaseController {
      */
     @RequestMapping("/manager")
     public String manager() {
-        String url = "/roleController/treeGrid.action";
+        String url = "/roleController/treeGrid";
         getSessionInfo().addToResourceSet(url, "角色表格");
         return "/admin/role/role";
     }
@@ -59,7 +59,7 @@ public class RoleController extends BaseController {
     public String addPage(HttpServletRequest request) {
         Role r = new Role();
         r.setId(UUID.randomUUID().toString());
-        String url = "/roleController/add.action";
+        String url = "/roleController/add";
         getSessionInfo().addToResourceSet(url, "角色添加功能");
         request.setAttribute("role", r);
         return "/admin/role/roleAdd";
@@ -105,7 +105,7 @@ public class RoleController extends BaseController {
             logger.info("该角色信息不存在，请刷新页面！");
             return "/error/noInfo";
         } else {
-            String url = "/roleController/edit.action";
+            String url = "/roleController/edit";
             getSessionInfo().addToResourceSet(url, "角色编辑功能");
             request.setAttribute("role", r);
             return "/admin/role/roleEdit";
@@ -227,7 +227,7 @@ public class RoleController extends BaseController {
             logger.error("该角色信息不存在，请刷新页面！");
             return "/error/noInfo";
         } else {
-            String allTreeUrl = "/resourceController/allTree.action";
+            String allTreeUrl = "/resourceController/allTree";
             String grantUrl = "grant";//TODO 这个地址对不对？
             getSessionInfo().addToResourceSet(allTreeUrl, "角色授权-资源下拉列表");
             getSessionInfo().addToResourceSet(grantUrl, "角色授权功能");

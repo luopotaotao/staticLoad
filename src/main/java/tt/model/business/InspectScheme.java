@@ -18,8 +18,8 @@ public class InspectScheme {
     private Byte safety_lev;
     private Integer pile_count;
     private Dept dept;
-    private Integer approval_file_id;
-    private Integer inspect_file_id;
+    private File approval_file;
+    private File inspect_file;
     private InspectItem inspectItem;
     private List<InspectPlan> children;
     private boolean isDeleted;
@@ -96,24 +96,24 @@ public class InspectScheme {
         this.dept = dept;
     }
 
-    @Basic
-    @Column(name = "approval_file_id")
-    public Integer getApproval_file_id() {
-        return approval_file_id;
+    @OneToOne
+    @JoinColumn(name = "approval_file_id")
+    public File getApproval_file() {
+        return approval_file;
     }
 
-    public void setApproval_file_id(Integer approval_file_id) {
-        this.approval_file_id = approval_file_id;
+    public void setApproval_file(File approval_file) {
+        this.approval_file = approval_file;
     }
 
-    @Basic
-    @Column(name = "inspect_file_id")
-    public Integer getInspect_file_id() {
-        return inspect_file_id;
+    @OneToOne
+    @JoinColumn(name = "inspect_file_id")
+    public File getInspect_file() {
+        return inspect_file;
     }
 
-    public void setInspect_file_id(Integer inspect_file_id) {
-        this.inspect_file_id = inspect_file_id;
+    public void setInspect_file(File inspect_file) {
+        this.inspect_file = inspect_file;
     }
 
     @ManyToOne
@@ -127,6 +127,7 @@ public class InspectScheme {
     }
 
     @OneToMany(mappedBy = "inspectScheme",fetch = FetchType.EAGER)
+//    @OrderColumn(name = "id")
     public List<InspectPlan> getChildren() {
         return children;
     }

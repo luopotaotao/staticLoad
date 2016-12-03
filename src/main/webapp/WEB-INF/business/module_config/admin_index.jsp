@@ -5,9 +5,9 @@
 <head>
     <title>智能无线静荷载试验检测云平台</title>
     <jsp:include page="../../layout/common.jsp"></jsp:include>
-    <script type="text/javascript" src="<c:url value="/jslib/resumable.js"/>" type="text/javascript"
+    <script type="text/javascript" src="<c:url value="/resources/jslib/resumable.js"/>" type="text/javascript"
             charset="utf-8"></script>
-    <script type="text/javascript" src="<c:url value="/jslib/my_resumble.js"/>" type="text/javascript"
+    <script type="text/javascript" src="<c:url value="/resources/jslib/my_resumble.js"/>" type="text/javascript"
             charset="utf-8"></script>
 </head>
 <body>
@@ -54,9 +54,9 @@
                     <td class="progress-text" nowrap="nowrap"></td>
                         <%--<td class="progress-pause" nowrap="nowrap">--%>
                         <%--<a href="#" onclick="r.upload(); return(false);" class="progress-resume-link"><img--%>
-                        <%--src="${pageContext.request.contextPath}/style/images/resume.png" title="恢复"/></a>--%>
+                        <%--src="<c:url value="/resources/style/images/resume.png"/>" title="恢复"/></a>--%>
                         <%--<a href="#" onclick="r.pause(); return(false);" class="progress-pause-link"><img--%>
-                        <%--src="${pageContext.request.contextPath}/style/images/pause.png" title="暂停"/></a>--%>
+                        <%--src="<c:url value="/resources/style/images/pause.png"/>" title="暂停"/></a>--%>
                         <%--</td>--%>
                 </tr>
             </table>
@@ -69,7 +69,7 @@
     $(function () {
         var baseUrl = '/';
         $('#dg').datagrid({
-            url: '../${baseUrl}/query.action',
+            url: '../${baseUrl}/query',
             method: 'get',
             iconCls: 'icon-save',
 //            width: 700,
@@ -127,7 +127,7 @@
                 {
                     field: 'logo', title: '公司Logo', width: 80, align: 'right',
                     formatter: function (val, row) {
-                        return '<img style="width:300px;height:59px;" src="${pageContext.request.contextPath}/logo/' + (val || 'blank.png') + '">';
+                        return '<img style="width:300px;height:59px;" src="<c:url value="/resources/upload/"/>' + (val || 'blank.png') + '">';
                     }
                 },
                 {field: 'note', title: '备注'},
@@ -219,14 +219,14 @@
                     name = 'blank.png';
             if (data) {
                 $ff.form('load', data);
-                $ff.form({url: 'put.action'});
+                $ff.form({url: 'put'});
                 if (data.logo) {
                     name = data.logo;
                 }
             } else {
-                $ff.form({url: 'post.action'});
+                $ff.form({url: 'post'});
             }
-            $img.attr('src', '${pageContext.request.contextPath}/logo/' + name);
+            $img.attr('src', '<c:url value="/resources/upload/"/>' + name);
 
             $('#dlg_edit').dialog('open');
         }
@@ -264,7 +264,7 @@
 
         function remove(ids) {
             $.ajax({
-                url: '../${baseUrl}/delete.action',
+                url: '../${baseUrl}/delete',
                 data: {ids: ids},
                 type: 'post',
                 dataType: 'json'
@@ -294,16 +294,16 @@
 
 
     function manageTUsers(id) {
-        var href = '../moduleBasicUserController/index/' + id + '.action';
+        var href = '../moduleBasicUserController/index/' + id;
         openDialog('账号管理', href);
     }
     var r = $.getResumble({
-        url:'<c:url value="/file/upload"/>',
+        url:'<c:url value="/inspect_file/upload"/>',
         fileType:['png'],
         successHandler:function (uuid) {
             alert('成功保存文件:'+uuid);
             $('#dept_logo').textbox('setValue', message.uuid);
-            $('#img').attr('src', '<c:url value="/file/upload"/>'+message.uuid);
+            $('#img').attr('src', '<c:url value="/inspect_file/upload"/>'+message.uuid);
         },
         fileTypeErrorHandler:function () {
             alert("文件类型错误...");
@@ -311,7 +311,7 @@
     }) ;
     $('#btn_save').on('click', function () {
         $.ajax({
-            url: '../fileController/save.action',
+            url: '../fileController/save',
             type: 'post',
             dataType: 'json',
             data: {fileName: $('#fileName').val()}

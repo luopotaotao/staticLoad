@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     HttpSession s = request.getSession();
     s.setMaxInactiveInterval(300);
@@ -12,18 +13,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="Pragma" content="no-cache"/>
     <meta http-equiv="Cache-Control" content="no-cache"/>
-
-    <%--<jsp:include page="inc.jsp"></jsp:include>--%>
-    <%--<link href="${pageContext.request.contextPath}/style/admin_login.css"--%>
-    <%--rel="stylesheet" type="text/css"/>--%>
     <script type="text/javascript"
-            src="${pageContext.request.contextPath}/jslib/jquery-1.11.3.js"></script>
+            src="<c:url value="/resources/jslib/jquery-1.11.3.js"/>"></script>
     <%--<script type="text/javascript"--%>
-            <%--src="${pageContext.request.contextPath}/jslib/extBrowser.js"></script>--%>
+            <%--src="<c:url value="/resources/jslib/extBrowser.js"></script>--%>
     <script type="text/javascript"
-            src="${pageContext.request.contextPath}/jslib/sha256.js"></script>
+            src="<c:url value="/resources/jslib/sha256.js"/>"></script>
     <script type="text/javascript"
-            src="${pageContext.request.contextPath}/jslib/artDialog/artDialog.js"></script>
+            src="<c:url value="/resources/jslib/artDialog/artDialog.js"/>"></script>
     <script type="text/javascript" charset="utf-8">
         $(function () {
             bindHandlers();
@@ -35,7 +32,7 @@
                 if (true) {//validate(name,pwd,verifycode)) {
                     pwd = $("#pwd").val();
                     $.ajax({
-                        url: "${pageContext.request.contextPath}/userController/login.action",
+                        url: "${pageContext.request.contextPath}/userController/login",
                         dataType: 'json',
                         type: 'post',
                         data: {name: name, pwd: pwd, verifycode: verifycode}
@@ -109,7 +106,7 @@
             }
         });
     </script>
-    <link rel="stylesheet" href="jslib/artDialog/skins/blue.css">
+    <link rel="stylesheet" href="<c:url value="/resources/jslib/artDialog/skins/blue.css"/>"/>
     <style type="text/css">
         html, body {
             overflow: hidden;
@@ -133,7 +130,7 @@
         }
 
         .btn input {
-            background: url(style/images/d9_03.png) no-repeat;
+            background: url(<c:url value="/resources/style/images/d9_03.png"/>) no-repeat;
             border: none;
             width: 213px;
             height: 26px;
@@ -167,14 +164,14 @@
      style="position: absolute; z-index: 1; width: 100%; height: 408px; background-color: rgb(38, 150, 203);">
     &nbsp;</div>
 <div style="position:absolute;z-index:2;width: 100%">
-    <img src="style/images/logo.png" style="height: 56px;margin-left: 5px;">
+    <img src="<c:url value="/resources/style/images/logo.png"/>" style="height: 56px;margin-left: 5px;">
     <div id="title" style="text-align: center; height: 55px; margin-top: 206px">
         <h1 style="color: white;font-size: 40px;font-family: initial;">智能无线静荷载试验检测云平台</h1>
     </div>
 
-    <div style="height: 200px;width: 636px;background: url('style/images/031.gif') no-repeat;margin: 0px auto">
+    <div style="height: 200px;width: 636px;background: url(<c:url value="/resources/style/images/031.gif"/>) no-repeat;margin: 0px auto">
 
-        <div style="float: left;width: 30%;margin-top: 30px;margin-left: 30px;"><img src="style/images/logo_login.png"></div>
+        <div style="float: left;width: 30%;margin-top: 30px;margin-left: 30px;"><img src="<c:url value="/resources/style/images/logo_login.png"/>"></div>
         <div style="float: right;width: 60%;margin-top: 30px;">
             <table cellpadding="0" cellspacing="10" style="width: 300px;color: white;"
                    onkeydown="if(event.keyCode==13) {getLogin(); return false;}">

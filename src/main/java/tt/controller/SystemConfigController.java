@@ -45,7 +45,7 @@ public class SystemConfigController extends BaseController {
      */
     @RequestMapping(value = "/manager")
     public String manager() {
-        String url = "/systemConfigController/datagrid.action";
+        String url = "/systemConfigController/datagrid";
         getSessionInfo().addToResourceSet(url, "业务参数管理列表");
         return "/admin/systemConfig/systemConfig";
     }
@@ -79,7 +79,7 @@ public class SystemConfigController extends BaseController {
      */
     @RequestMapping(value = "/addPage")
     public String addPage() {
-        String url = "/systemConfigController/add.action";
+        String url = "/systemConfigController/add";
         getSessionInfo().addToResourceSet(url, "业务参数信息配置添加功能");
         return "admin/systemConfig/systemConfigAdd";
     }
@@ -132,7 +132,7 @@ public class SystemConfigController extends BaseController {
         if (s == null) {
             return "/error/noInfo";
         }
-        String url = "/systemConfigController/edit.action";
+        String url = "/systemConfigController/edit";
         getSessionInfo().addToResourceSet(url, "业务参数信息配置修改功能");
         request.setAttribute("s", s);
         return "admin/systemConfig/systemConfigEdit";

@@ -13,7 +13,7 @@
 		});
 
 		$('#pid').combotree({
-			url : '${pageContext.request.contextPath}/resourceController/tree.action',
+			url : '${pageContext.request.contextPath}/resourceController/tree',
 			parentField : 'pid',
 			lines : true,
 			value : '${resource.pid}',
@@ -23,7 +23,7 @@
 		});
 
 		$('#form').form({
-			url : '${pageContext.request.contextPath}/resourceController/edit.action',
+			url : '${pageContext.request.contextPath}/resourceController/edit',
 			onSubmit : function() {
 				parent.$.messager.progress({
 					title : '提示',

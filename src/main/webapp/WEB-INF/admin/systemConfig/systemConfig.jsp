@@ -9,13 +9,13 @@
 <title>系统参数配置</title>
 <jsp:include page="/inc.jsp"></jsp:include>
 <c:if
-	test="${fn:contains(sessionInfo.resourceSet, '/systemConfigController/editPage.action')}">
+	test="${fn:contains(sessionInfo.resourceSet, '/systemConfigController/editPage')}">
 	<script type="text/javascript">
 		$.canEdit = true;
 	</script>
 </c:if>
 <c:if
-	test="${fn:contains(sessionInfo.resourceSet, '/systemConfigController/delete.action')}">
+	test="${fn:contains(sessionInfo.resourceSet, '/systemConfigController/delete')}">
 	<script type="text/javascript">
 		$.canDelete = true;
 	</script>
@@ -26,7 +26,7 @@
 		systemConfigGrid = $("#systemConfigGrid")
 				.datagrid(
 						{
-							url : "${pageContext.request.contextPath}/systemConfigController/datagrid.action",
+							url : "${pageContext.request.contextPath}/systemConfigController/datagrid",
 							fit : true,
 							fitColumns : true,
 							border : false,
@@ -72,7 +72,7 @@
 														.formatString(
 																'<img onclick="editFun(\'{0}\');" src="{1}" title="{2}"/>',
 																row.confId,
-																'${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png',
+																'<c:url value="/resources/style/images/extjs_icons/pencil.png"/>',
 																'修改系统参数');
 											}
 											str += "&nbsp;";
@@ -81,7 +81,7 @@
 														.formatString(
 																'<img onclick="deleteFun(\'{0}\');" src="{1}" title="{2}"/>',
 																row.confId,
-																'${pageContext.request.contextPath}/style/images/extjs_icons/delete.png',
+																'<c:url value="/resources/style/images/extjs_icons/delete.png"/>',
 																'删除系统参数');
 											}
 											return str;
@@ -139,7 +139,7 @@
 									}
 									$
 											.ajax({
-												url : '${pageContext.request.contextPath}/systemConfigController/delete.action',
+												url : '${pageContext.request.contextPath}/systemConfigController/delete',
 												data : {
 													ids : ids.join(',')
 												},
@@ -184,7 +184,7 @@
 					title : "添加系统参数",
 					width : 600,
 					height : 250,
-					href : '${pageContext.request.contextPath}/systemConfigController/addPage.action',
+					href : '${pageContext.request.contextPath}/systemConfigController/addPage',
 					buttons : [ {
 						text : '添加',
 						handler : function() {
@@ -222,7 +222,7 @@
 					</tr>
 					<tr>
 						<td><c:if
-								test="${fn:contains(sessionInfo.resourceSet, '/systemConfigController/addPage.action')}">
+								test="${fn:contains(sessionInfo.resourceSet, '/systemConfigController/addPage')}">
 								<a onclick="addFun();" href="javascript:void(0);"
 									class="easyui-linkbutton"
 									data-options="plain:true,iconCls:'edit_add'">添加</a>

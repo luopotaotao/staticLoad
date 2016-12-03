@@ -9,7 +9,7 @@
 		$('#editCurrentUserPwdForm')
 				.form(
 						{
-							url : '${pageContext.request.contextPath}/userController/editCurrentUserPwd.action',
+							url : '${pageContext.request.contextPath}/userController/editCurrentUserPwd',
 							onSubmit : function() {
 								parent.$.messager.progress({
 									title : '提示',
@@ -87,7 +87,7 @@
 		style="overflow: hidden;">
 		<c:if test="${sessionInfo.name == null}">
 			<img
-				src="${pageContext.request.contextPath}/style/images/blue_face/bluefaces_35.png"
+				src="<c:url value="/resources/style/images/blue_face/bluefaces_35.png"/>"
 				alt="" />
 			<div>登录已超时，请重新登录，然后再刷新本功能！</div>
 			<script type="text/javascript" charset="utf-8">

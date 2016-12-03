@@ -21,7 +21,7 @@
 
 <table id="dg" style="width:100%"></table>
 <div id="dlg_edit" style="width:100%;max-width:400px;padding:30px 60px;">
-    <form id="ff" class="easyui-form" method="post" data-options="novalidate:true" action="${baseUrl}/post.action">
+    <form id="ff" class="easyui-form" method="post" data-options="novalidate:true" action="${baseUrl}/post">
         <div style="margin-bottom:20px;display: none">
             <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'企业编号:',required:true">
         </div>
@@ -51,7 +51,7 @@
     $(function () {
         var baseUrl = '/';
         $('#dg').datagrid({
-            url: '../${baseUrl}/query.action',
+            url: '../${baseUrl}/query',
             method: 'get',
             iconCls: 'icon-save',
 //            width: 700,
@@ -178,9 +178,9 @@
             var $ff = $('#ff');
             if (data) {
                 $ff.form('load', data);
-                $ff.form({url: 'put.action'});
+                $ff.form({url: 'put'});
             } else {
-                $ff.form({url: 'post.action'});
+                $ff.form({url: 'post'});
             }
             $('#dlg_edit').dialog('open');
         }
@@ -222,7 +222,7 @@
 
         function remove(ids) {
             $.ajax({
-                url: '../${baseUrl}/delete.action',
+                url: '../${baseUrl}/delete',
                 data: {ids: ids},
                 type: 'post',
                 dataType: 'json'

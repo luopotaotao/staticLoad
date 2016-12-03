@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div style="width:100%;max-width:600px;padding:30px 60px;">
-    <form id="ff" class="easyui-form" method="post" data-options="novalidate:true" action="${pageContext.request.contextPath}/moduleInspectSchemeController/post.action">
+    <form id="ff" class="easyui-form" method="post" data-options="novalidate:true" action="${pageContext.request.contextPath}/moduleInspectSchemeController/post">
         <div style="margin-bottom:20px;display: none">
             <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'编号:'">
         </div>
@@ -42,14 +42,14 @@
         <div style="margin-bottom:20px">
             <input class="easyui-textbox select" name="dept.id" style="width:100%"
                    data-options="label:'检测单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleInspectSchemeController/selectDept.action">
+                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleInspectSchemeController/selectDept">
         </div>
         <div style="margin-bottom:20px">
-            <input class="easyui-textbox" name="code" style="width:100%"
+            <input class="easyui-textbox" name="approval_file.id" style="width:100%"
                    data-options="label:'检测方案审批表:',labelAlign:'right',required:true">
         </div>
         <div style="margin-bottom:20px">
-            <input class="easyui-textbox" name="attachement" style="width:100%"
+            <input class="easyui-textbox" name="inspect_file.id" style="width:100%"
                    data-options="label:'检测方案附件:',labelAlign:'right'">
         </div>
         <div style="margin-bottom:20px">
@@ -57,7 +57,7 @@
                 <select id="inspectItem_id" class="easyui-combobox" name="inspectItem.id" style="width:100%"
                         data-options="label:'检测项目:',
             labelAlign:'right',
-            url:'${pageContext.request.contextPath}/moduleBasicInspectItemController/comboList.action',
+            url:'${pageContext.request.contextPath}/moduleBasicInspectItemController/comboList',
             method:'get',
             valueField: 'id',
             textField: 'name'

@@ -64,13 +64,4 @@ public class SocketConfig {
         return new SocketDataHandler();
     }
 
-//    @Bean
-//    public TimeServerHandler timeServerHandler() {
-//        return new TimeServerHandler();
-//    }
-//    @Bean
-//    public InetSocketAddress inetSocketAddress(){
-//        return new InetSocketAddress(PORT);
-//    }
-
 }

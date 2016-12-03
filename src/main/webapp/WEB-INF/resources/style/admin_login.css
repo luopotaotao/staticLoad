@@ -24,7 +24,7 @@ a {
     height:400px;
     margin-left:auto;
     margin-right:auto;
-    background:url(./images/login/pic_1.png) no-repeat;
+    background:url(images/login/pic_1.png) no-repeat;
 }
 .login_box
 {
@@ -35,7 +35,7 @@ a {
 
 .bg_pic {
 	width:1000px;
-	background-image:url(./images/bg_pic.png);
+	background-image:url(images/bg_pic.png);
 	background-repeat:no-repeat;
 	height:550px;
 	margin-left:auto;
@@ -45,7 +45,7 @@ a {
 }
 /*login_box*/
 .login_box_u {
-	background-image:url(./images/login_box_u.png);
+	background-image:url(images/login_box_u.png);
 	background-repeat:no-repeat;
 	background-position: center;
 	width:400px;
@@ -65,7 +65,7 @@ a {
 	padding-top:30px;
 }
 .login_box_c {
-	background-image:url(./images/login_box_c.png);
+	background-image:url(images/login_box_c.png);
 	background-repeat:repeat-y;
 	width:400px;
 	background-position: center;
@@ -85,7 +85,7 @@ a {
 
 .login_btn {
 	position:relative;
-	background-image:url(./images/login_box_c.png);
+	background-image:url(images/login_box_c.png);
 	background-repeat:repeat-y;
 	height:46px;
 }
@@ -102,7 +102,7 @@ a {
 }*/
 
 .login_box_d {
-	background-image:url(./images/login_box_d.png);
+	background-image:url(images/login_box_d.png);
 	background-repeat:no-repeat;
 	height:15px;
 	width:400px;

@@ -8,7 +8,7 @@
 <title>用户日志信息</title>
 <jsp:include page="/inc.jsp"></jsp:include>
 <c:if
-	test="${fn:contains(sessionInfo.resourceSet, '/busiLogController/search.action')}">
+	test="${fn:contains(sessionInfo.resourceSet, '/busiLogController/search')}">
 	<script type="text/javascript">
         $.canSearch = true;
     </script>
@@ -19,7 +19,7 @@
         busiLogDataGrid = $('#busiLogDataGrid')
                 .datagrid(
                         {
-                            url : '${pageContext.request.contextPath}/busiLogController/datagrid.action',
+                            url : '${pageContext.request.contextPath}/busiLogController/datagrid',
                             fit : true,
                             fitColumns : true,
                             border : false,
@@ -102,7 +102,7 @@
                                                         .formatString(
                                                                 '<img onclick="detailFun(\'{0}\');" src="{1}" title="{2}"/>',
                                                                 row.logId,
-                                                                '${pageContext.request.contextPath}/jslib/jquery-easyui-1.3.6/themes/icons/search.png',
+                                                                '<c:url value="/resources/jslib/jquery-easyui-1.3.6/themes/icons/search.png"/>',
                                                                 '查看业务操作日志信息');
                                             }
                                             return str;

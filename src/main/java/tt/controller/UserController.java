@@ -284,7 +284,7 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/manager")
     public String manager() {
-        String url = "/userController/dataGrid.action";
+        String url = "/userController/dataGrid";
         getSessionInfo().addToResourceSet(url, "用户表格");
         return "/admin/user/user";
     }
@@ -318,7 +318,7 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/addPage", method = RequestMethod.POST)
     public String addPage(HttpServletRequest request) {
-        String url = "/userController/add.action";
+        String url = "/userController/add";
         getSessionInfo().addToResourceSet(url, "添加用户功能");
         User u = new User();
 //        u.setId(UUID.randomUUID().toString());
@@ -500,8 +500,8 @@ public class UserController extends BaseController {
             logger.error("该管理员信息不存在，请刷新页面！");
             return "/error/noInfo";
         }
-        String editUrl = "/userController/edit.action";
-        String grantUrl = "/roleController/grantRoleTree.action";
+        String editUrl = "/userController/edit";
+        String grantUrl = "/roleController/grantRoleTree";
 
         getSessionInfo().addToResourceSet(editUrl, "用户修改功能");
         getSessionInfo().addToResourceSet(grantUrl, "用户修改-角色下拉列表");

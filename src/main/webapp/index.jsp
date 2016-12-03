@@ -9,11 +9,11 @@
 
 <div id="index_layout">
     <div data-options="region:'north'"
-         style="height: 59px; overflow: hidden;background:#b6c6f5 url('${pageContext.request.contextPath}/style/themes/default.jpg') repeat-y"
+         style="height: 59px; overflow: hidden;background:#b6c6f5 url('<c:url value="/resources/style/themes/default.jpg"/>') repeat-y"
          id="bannerbg">
         <jsp:include page="./WEB-INF/layout/north.jsp"></jsp:include>
     </div>
-    <%--<div data-options="region:'west',href:'${pageContext.request.contextPath}/baseController/layout/west.action',split:true" title="功能导航" style="width: 200px; overflow: hidden;"></div>--%>
+    <%--<div data-options="region:'west',href:'${pageContext.request.contextPath}/baseController/layout/west',split:true" title="功能导航" style="width: 200px; overflow: hidden;"></div>--%>
     <%--<div data-options="region:'center'" title="欢迎使用智能无线静荷载试验检测云平台" style="overflow: hidden;">--%>
     <%--<div id="index_tabs" style="overflow: hidden;">--%>
     <%--<div title="首页" data-options="border:false" style="overflow: hidden; " align="center">--%>
@@ -22,13 +22,13 @@
     <%--</div>--%>
     <%--</div>--%>
     <%--</div>--%>
-    <%--<div data-options="region:'east',href:'${pageContext.request.contextPath}/baseController/layout/east.action'" title="日历" style="width: 230px; overflow: hidden;"></div>--%>
+    <%--<div data-options="region:'east',href:'${pageContext.request.contextPath}/baseController/layout/east'" title="日历" style="width: 230px; overflow: hidden;"></div>--%>
     <%----%>
     <div data-options="region:'center'" style="overflow: hidden;width: 100%;height: 100%">
-        <%--<iframe src="${pageContext.request.contextPath}/moduleBasicController/index.action" style="width: 100%;height: 100%"></iframe>--%>
+        <%--<iframe src="${pageContext.request.contextPath}/moduleBasicController/index" style="width: 100%;height: 100%"></iframe>--%>
         <iframe id="panel_main" style="height: 100%;width: 100%;" scrolling="no"
-                src="${pageContext.request.contextPath}/baseController/portal/index.action"></iframe>
-        <%--<iframe id="panel_main" style="height: 100%;width: 100%;" scrolling="no" src="${pageContext.request.contextPath}/moduleBasicController/index.action"></iframe>--%>
+                src="${pageContext.request.contextPath}/baseController/portal/index"></iframe>
+        <%--<iframe id="panel_main" style="height: 100%;width: 100%;" scrolling="no" src="${pageContext.request.contextPath}/moduleBasicController/index"></iframe>--%>
     </div>
 
 
@@ -144,11 +144,11 @@
             }
         });
 
-        <%--var url = '${pageContext.request.contextPath}/moduleBasicController/index.action';--%>
+        <%--var url = '${pageContext.request.contextPath}/moduleBasicController/index';--%>
         <%--$.get(url,function (html) {--%>
         <%--$('#panel_main').html(html);--%>
         <%--});--%>
-        <%--$('#panel_main').attr('src','${pageContext.request.contextPath}/moduleBasicController/index.action');--%>
+        <%--$('#panel_main').attr('src','${pageContext.request.contextPath}/moduleBasicController/index');--%>
     });
 </script>
 </body>

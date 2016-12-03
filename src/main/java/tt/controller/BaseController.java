@@ -63,11 +63,11 @@ public class BaseController<T>
      *            JSP名称(不加后缀)
      * @return 指定JSP页面
      */
-    @RequestMapping("/{folder}/{jspName}")
-    public String redirectJsp(@PathVariable String folder, @PathVariable String jspName)
-    {
-        return "/" + folder + "/" + jspName;
-    }
+//    @RequestMapping("/{folder}/{jspName}")
+//    public String redirectJsp(@PathVariable String folder, @PathVariable String jspName)
+//    {
+//        return "/" + folder + "/" + jspName;
+//    }
 
 
 

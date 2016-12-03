@@ -6,9 +6,9 @@
     <title>智能无线静荷载试验检测云平台</title>
     <jsp:include page="../../layout/common.jsp"></jsp:include>
 
-    <script type="text/javascript" src="${pageContext.request.contextPath}/jslib/baiduMap/map_api.js"></script>
+    <script type="text/javascript" src="<c:url value="/resources/jslib/baiduMap/map_api.js"/>"></script>
     <script type="text/javascript"
-            src="${pageContext.request.contextPath}/jslib/baiduMap/AreaRestriction_min.js"></script>
+            src="<c:url value="/resources/jslib/baiduMap/AreaRestriction_min.js"/>"></script>
 
 </head>
 <body class="easyui-layout">
@@ -28,13 +28,13 @@
         var tree_data = [{
             "id": 1,
             "text": "基础信息",
-            "url": '${pageContext.request.contextPath}/moduleOverviewController/index.action'
+            "url": '${pageContext.request.contextPath}/moduleOverviewController/index'
         }];
 
         initUI();
         function initUI() {
             $('#tree_menu').tree({
-                url: '${pageContext.request.contextPath}/moduleOverviewController/queryAll.action',
+                url: '${pageContext.request.contextPath}/moduleOverviewController/queryAll',
                 method: 'get',
                 textField: 'name',
                 animate: true,
@@ -58,7 +58,7 @@
         }
 
         function getProjectsAndShow(area_id) {
-            var url = '${pageContext.request.contextPath}/moduleOverviewController/' + area_id + '/queryProjects.action';
+            var url = '${pageContext.request.contextPath}/moduleOverviewController/' + area_id + '/queryProjects';
             $.getJSON(url, function (ret) {
                 showMarkers(ret, function (marker) {
                     var template_arr = [
@@ -151,11 +151,11 @@
                     max_lng = item.lng > max_lng ? item.lng : max_lng;
                     min_lat = item.lat < min_lat ? item.lat : min_lat;
                     min_lng = item.lng < min_lng ? item.lng : min_lng;
-                    var img = '${pageContext.request.contextPath}/style/images/baidu_map/marker_' + (item.status > 0 ? 'green' : 'gray') + '.png';
+                    var img = '<c:url value="/resources/style/images/baidu_map/marker_"/>' + (item.status > 0 ? 'green' : 'gray') + '.png';
                     var myIcon = new BMap.Icon(img, new BMap.Size(35, 35), {
                         anchor: new BMap.Size(17, 35)
                     });
-                    var icon = new BMap.Icon('${pageContext.request.contextPath}/style/images/baidu_map/marker_pink.png', new BMap.Size(128, 128), {
+                    var icon = new BMap.Icon('<c:url value="/resources/style/images/baidu_map/marker_pink.png"/>', new BMap.Size(128, 128), {
                         anchor: new BMap.Size(10, 30)
                     });
                     var point = new BMap.Point(item.lng, item.lat);

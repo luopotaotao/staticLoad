@@ -7,7 +7,7 @@
 		$('#systemConfigAddForm')
 				.form(
 						{
-							url : '${pageContext.request.contextPath}/systemConfigController/add.action',
+							url : '${pageContext.request.contextPath}/systemConfigController/add',
 							onSubmit : function() {
 								parent.$.messager.progress({
 									title : "提示",

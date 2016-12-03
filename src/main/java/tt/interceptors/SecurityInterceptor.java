@@ -111,7 +111,7 @@ public class SecurityInterceptor implements HandlerInterceptor {
         String requestUri = request.getRequestURI();
         String contextPath = request.getContextPath();
         String url = requestUri.substring(contextPath.length());
-        if(url.indexOf("userController/login")>-1){
+        if(url.indexOf("userController/login")>-1 || url.indexOf("resources")>-1){
             return true;
         }
         if(sessionInfo!=null&&sessionInfo.getName()!=null){

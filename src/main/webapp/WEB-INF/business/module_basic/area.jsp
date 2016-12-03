@@ -26,7 +26,7 @@
     function initUI() {
 
         $('#tree_area').tree({
-            url: baseUrl + '/query/0.action',
+            url: baseUrl + '/query/0',
             method: 'get',
             animate: true,
             dnd: false,
@@ -35,7 +35,7 @@
                     if (txt) {
 //                        $(this).tree('beginEdit', node.target);
                         $.ajax({
-                            url: baseUrl + '/put.action',
+                            url: baseUrl + '/put',
                             type: 'post',
                             dataType: 'json',
                             data: {
@@ -85,7 +85,7 @@
                 var $tree = $('#tree_area');
                 var node = $tree.tree('getSelected');
                 $.ajax({
-                    url: baseUrl + '/post.action',
+                    url: baseUrl + '/post',
                     type: 'post',
                     dataType: 'json',
                     data: {'parent.id': node ? node.id : null, text: txt}
@@ -121,7 +121,7 @@
         var node = $('#tree_area').tree('getSelected');
 
         $.ajax({
-            url: baseUrl + '/delete/' + node.id + '.action',
+            url: baseUrl + '/delete/' + node.id,
             type: 'post',
             dateType: 'json'
         }).done(function () {

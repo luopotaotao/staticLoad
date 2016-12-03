@@ -7,7 +7,7 @@
 		resourceTree = $('#resourceTree')
 				.tree(
 						{
-							url : '${pageContext.request.contextPath}/resourceController/allTree.action',
+							url : '${pageContext.request.contextPath}/resourceController/allTree',
 							parentField : 'pid',
 							//lines : true,
 							autoCheckParent : true,
@@ -44,7 +44,7 @@
 		$('#form')
 				.form(
 						{
-							url : '${pageContext.request.contextPath}/roleController/grant.action',
+							url : '${pageContext.request.contextPath}/roleController/grant',
 							onSubmit : function() {
 								parent.$.messager.progress({
 									title : '提示',

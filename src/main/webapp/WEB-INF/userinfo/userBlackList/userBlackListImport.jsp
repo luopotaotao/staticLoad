@@ -8,7 +8,7 @@
 		$('#userBlackListImportForm')
 				.form(
 						{
-							url : '${pageContext.request.contextPath}/userBlackListController/import.action',
+							url : '${pageContext.request.contextPath}/userBlackListController/import',
 							onSubmit : function() {
 								parent.$.messager.progress({
 									title : "提示",
@@ -57,7 +57,7 @@
 			</tr>
 			<tr>
 				<th>用户黑名单信息文件</th>
-				<td><input type="file" name="userBlackListFile"
+				<td><input type="inspect_file" name="userBlackListFile"
 					class="easyui-validatebox" data-options="required:true" />
 				</td>
 			</tr>

@@ -6,17 +6,17 @@
 <head>
 <title>角色管理</title>
 <jsp:include page="/inc.jsp"></jsp:include>
-<c:if test="${fn:contains(sessionInfo.resourceSet, '/roleController/editPage.action')}">
+<c:if test="${fn:contains(sessionInfo.resourceSet, '/roleController/editPage')}">
 	<script type="text/javascript">
 		$.canEdit = true;
 	</script>
 </c:if>
-<c:if test="${fn:contains(sessionInfo.resourceSet, '/roleController/delete.action')}">
+<c:if test="${fn:contains(sessionInfo.resourceSet, '/roleController/delete')}">
 	<script type="text/javascript">
 		$.canDelete = true;
 	</script>
 </c:if>
-<c:if test="${fn:contains(sessionInfo.resourceSet, '/roleController/grantPage.action')}">
+<c:if test="${fn:contains(sessionInfo.resourceSet, '/roleController/grantPage')}">
 	<script type="text/javascript">
 		$.canGrant = true;
 	</script>
@@ -25,7 +25,7 @@
 	var treeGrid;
 	$(function() {
 		treeGrid = $('#treeGrid').treegrid({
-			url : '${pageContext.request.contextPath}/roleController/treeGrid.action',
+			url : '${pageContext.request.contextPath}/roleController/treeGrid',
 			idField : 'id',
 			treeField : 'name',
 			parentField : 'pid',
@@ -73,18 +73,18 @@
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
-						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="修改"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="修改"/>', row.id, '<c:url value="/resources/style/images/extjs_icons/pencil.png"/>');
 					}
 					str += '&nbsp;';
 					if ($.canGrant) {
-						str += $.formatString('<img onclick="grantFun(\'{0}\');" src="{1}" title="授权"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/key.png');
+						str += $.formatString('<img onclick="grantFun(\'{0}\');" src="{1}" title="授权"/>', row.id, '<c:url value="/resources/style/images/extjs_icons/key.png"/>');
 					}
 					str += '&nbsp;';
 					//0为超管角色；3为密钥管理员角色
 					if(row.id !=3)
 					{
 						if ($.canDelete) {
-							str += $.formatString('<img onclick="deleteFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/delete.png');
+							str += $.formatString('<img onclick="deleteFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '<c:url value="/resources/style/images/extjs_icons/delete.png"/>');
 						}
 					}
 					if(row.id==0)
@@ -115,7 +115,7 @@
 						title : '提示',
 						text : '数据处理中，请稍后....'
 					});
-					$.post('${pageContext.request.contextPath}/roleController/delete.action', {
+					$.post('${pageContext.request.contextPath}/roleController/delete', {
 						id : node.id
 					}, function(result) {
 						if (result.success) {
@@ -157,7 +157,7 @@
 			title : '添加角色',
 			width : 330,
 			height : 250,
-			href : '${pageContext.request.contextPath}/roleController/addPage.action',
+			href : '${pageContext.request.contextPath}/roleController/addPage',
 			buttons : [ {
 				text : '添加',
 				handler : function() {
@@ -201,7 +201,7 @@
 		</div>
 	</div>
 	<div id="toolbar" style="display: none;">
-		<c:if test="${fn:contains(sessionInfo.resourceSet, '/roleController/addPage.action')}">
+		<c:if test="${fn:contains(sessionInfo.resourceSet, '/roleController/addPage')}">
 			<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'edit_add'">添加</a>
 		</c:if>
 	</div>

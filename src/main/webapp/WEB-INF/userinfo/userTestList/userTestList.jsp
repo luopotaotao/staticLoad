@@ -9,7 +9,7 @@
 <title>测试用户管理</title>
 <jsp:include page="/inc.jsp"></jsp:include>
 <c:if
-	test="${fn:contains(sessionInfo.resourceSet, '/userTestListController/delete.action')}">
+	test="${fn:contains(sessionInfo.resourceSet, '/userTestListController/delete')}">
 	<script type="text/javascript">
 		$.canDelete = true;
 	</script>
@@ -20,7 +20,7 @@
 		userTestListGrid = $("#userTestListGrid")
 				.datagrid(
 						{
-							url : "${pageContext.request.contextPath}/userTestListController/datagrid.action",
+							url : "${pageContext.request.contextPath}/userTestListController/datagrid",
 							fit : true,
 							fitColumns : true,
 							border : false,
@@ -67,7 +67,7 @@
 														.formatString(
 																'<img onclick="deleteFun(\'{0}\');" src="{1}" title="{2}"/>',
 																row.seId,
-																'${pageContext.request.contextPath}/style/images/extjs_icons/delete.png',
+																'<c:url value="/resources/style/images/extjs_icons/delete.png"/>',
 																'删除测试用户信息');
 											}
 											return str;
@@ -89,7 +89,7 @@
 					title : "添加测试用户",
 					width : 450,
 					height : 150,
-					href : '${pageContext.request.contextPath}/userTestListController/addPage.action',
+					href : '${pageContext.request.contextPath}/userTestListController/addPage',
 					buttons : [ {
 						text : '添加',
 						handler : function() {
@@ -133,7 +133,7 @@
 									}
 									$
 											.ajax({
-												url : '${pageContext.request.contextPath}/userTestListController/delete.action',
+												url : '${pageContext.request.contextPath}/userTestListController/delete',
 												data : {
 													ids : seId.join(',')
 												},
@@ -170,7 +170,7 @@
 					title : "导入测试用户",
 					width : 520,
 					height : 350,
-					href : '${pageContext.request.contextPath}/userTestListController/importPage.action',
+					href : '${pageContext.request.contextPath}/userTestListController/importPage',
 					buttons : [ {
 						text : '导入',
 						handler : function() {
@@ -218,17 +218,17 @@
 					</tr>
 					<tr>
 						<td><c:if
-								test="${fn:contains(sessionInfo.resourceSet, '/userTestListController/addPage.action')}">
+								test="${fn:contains(sessionInfo.resourceSet, '/userTestListController/addPage')}">
 								<a onclick="addFun();" href="javascript:void(0);"
 									class="easyui-linkbutton"
 									data-options="plain:true,iconCls:'edit_add'">添加</a>
 							</c:if> <c:if
-								test="${fn:contains(sessionInfo.resourceSet, '/userTestListController/delete.action')}">
+								test="${fn:contains(sessionInfo.resourceSet, '/userTestListController/delete')}">
 								<a onclick="removeFun();" href="javascript:void(0);"
 									class="easyui-linkbutton"
 									data-options="plain:true,iconCls:'delete'">批量删除</a>
 							</c:if> <c:if
-								test="${fn:contains(sessionInfo.resourceSet, '/userTestListController/importPage.action')}">
+								test="${fn:contains(sessionInfo.resourceSet, '/userTestListController/importPage')}">
 								<a onclick="importFun();" href="javascript:void(0);"
 									class="easyui-linkbutton"
 									data-options="plain:true,iconCls:'import'">批量导入</a>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <script type="text/javascript"
-    src="${pageContext.request.contextPath}/jslib/jquery.radio.js"
+    src="<c:url value="/resources/jslib/jquery.radio.js"/>"
     charset="utf-8"></script>
 <script type="text/javascript">
 	$(function() {
@@ -10,7 +10,7 @@
 		$('#userBlackListAddForm')
 				.form(
 						{
-							url : '${pageContext.request.contextPath}/userBlackListController/add.action',
+							url : '${pageContext.request.contextPath}/userBlackListController/add',
 							onSubmit : function() {
 								parent.$.messager.progress({
 									title : "提示",

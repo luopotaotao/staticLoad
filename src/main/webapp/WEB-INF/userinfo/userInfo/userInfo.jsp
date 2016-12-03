@@ -9,13 +9,13 @@
 <title>用户信息</title>
 <jsp:include page="/inc.jsp"></jsp:include>
 <c:if
-	test="${fn:contains(sessionInfo.resourceSet, '/userInfoController/searchPage.action')}">
+	test="${fn:contains(sessionInfo.resourceSet, '/userInfoController/searchPage')}">
 	<script type="text/javascript">
 		$.canSearch = true;
 	</script>
 </c:if>
 <c:if
-	test="${fn:contains(sessionInfo.resourceSet, '/userAppletInfoController/searchPage.action')}">
+	test="${fn:contains(sessionInfo.resourceSet, '/userAppletInfoController/searchPage')}">
 	<script type="text/javascript">
 		$.canSearchApp = true;
 	</script>
@@ -27,7 +27,7 @@
 		userInfoGrid = $("#userInfoGrid")
 				.datagrid(
 						{
-							url : "${pageContext.request.contextPath}/userInfoController/datagrid.action",
+							url : "${pageContext.request.contextPath}/userInfoController/datagrid",
 							fit : true,
 							fitColumns : true,
 							border : false,
@@ -88,7 +88,7 @@
 																'<img onclick="searchFun(\'{0}\', \'{1}\');" src="{2}" title="{3}"/>',
 																row.seid,
 																row.seTsmId,
-																'${pageContext.request.contextPath}/style/images/extjs_icons/search.png',
+																'<c:url value="/resources/style/images/extjs_icons/search.png"/>',
 																'查看应用详情');
 											}
 											return str;
@@ -158,7 +158,7 @@
 																						row.seid,
 																						row.seTsmId,
 																						row.instanceAid,
-																						'${pageContext.request.contextPath}/style/images/extjs_icons/search.png',
+																						'<c:url value="/resources/style/images/extjs_icons/search.png"/>',
 																						'查看应用版本信息');
 																	}
 																	return str;

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script type="text/javascript" src="<c:url value="/jslib/DateUtil.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/jslib/DateUtil.js"/>"></script>
 <div class="easyui-layout" style="width: 100%;height: 97%;border: none;">
     <div class="easyui-tabs" data-options="region:'center',closable:false,collapsible:false"
          style="width: 100%;height: 97%; overflow: hidden;">
@@ -168,7 +168,7 @@
             }
 
             function loadData(prg, stzh) {
-                $.get('${pageContext.request.contextPath}/moduleInspectDataController/query/' + prg + '/' + stzh + '.action', function (data) {
+                $.get('${pageContext.request.contextPath}/moduleInspectDataController/query/' + prg + '/' + stzh, function (data) {
                     $('#tb_source').datagrid({'data': data.source});
                     $('#tb_load').datagrid({'data': data.source});
 
@@ -415,7 +415,7 @@
 
             function getCurrentData(prg, stzh) {
                 var time = new Date();
-                $.get('<c:url value="/moduleInspectDataController/loadLatestData/"/>' + prg + '/' + stzh + '.action', function (ret) {
+                $.get('<c:url value="/moduleInspectDataController/loadLatestData/"/>' + prg + '/' + stzh, function (ret) {
                     if ($.isPlainObject(ret)) {
                         $('#current_data_msg').text($.DateUtil.format(time,'刷新时间:yyyy-MM-dd/hh:mm:ss'));
                         $('#current_data_form').show();

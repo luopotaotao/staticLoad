@@ -80,7 +80,7 @@ public class ResourceController extends BaseController {
      */
     @RequestMapping("/manager")
     public String manager() {
-        String url = "/resourceController/treeGrid.action";
+        String url = "/resourceController/treeGrid";
         getSessionInfo().addToResourceSet(url, "资源表格");
         return "/admin/resource/resource";
     }
@@ -96,7 +96,7 @@ public class ResourceController extends BaseController {
         request.setAttribute("resourceTypeList", resourceTypeService.getResourceTypeList());
         Resource r = new Resource();
         r.setId(UUID.randomUUID().toString());
-        String url = "/resourceController/add.action";
+        String url = "/resourceController/add";
         getSessionInfo().addToResourceSet(url, "资源添加功能");
         request.setAttribute("resource", r);
         return "/admin/resource/resourceAdd";
@@ -149,7 +149,7 @@ public class ResourceController extends BaseController {
         if (r == null) {
             return "/error/noInfo";
         }
-        String url = "/resourceController/edit.action";
+        String url = "/resourceController/edit";
         getSessionInfo().addToResourceSet(url, "资源修改功能");
         request.setAttribute("resource", r);
         return "/admin/resource/resourceEdit";

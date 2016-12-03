@@ -6,8 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div style="width:100%;max-width:600px;padding:30px 60px;">
-    <form class="easyui-form" method="post" data-options="novalidate:true" action="${pageContext.request.contextPath}/moduleProjectManageController/post.action">
+    <form class="easyui-form" method="post" data-options="novalidate:true" action="<c:url value="/moduleProjectManageController/post"/>">
         <div style="margin-bottom:20px;display: none">
             <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'企业编号:'">
         </div>
@@ -21,14 +22,14 @@
             <select id="project_province_id" class="easyui-combobox" name="province.id" style="width:45%"
                     data-options="label:'所在省份:',
             labelAlign:'right',
-            url:'${pageContext.request.contextPath}/moduleBasicAreaController/area/0.action',
+            url:'${pageContext.request.contextPath}/moduleBasicAreaController/area/0',
             method:'get',
             valueField: 'id',
             textField: 'text',
             onSelect:function(rec){
                 var $city = $('#project_add_project_city_id');
                 $city.combobox('clear');
-                $city.combobox('reload','${pageContext.request.contextPath}/moduleBasicAreaController/area/'+rec.id+'.action');
+                $city.combobox('reload','<c:url value="/moduleBasicAreaController/area/"/>'+rec.id);
             }
             ">
 
@@ -53,16 +54,16 @@
             <input id="project_add_project_select_coordinate" class="easyui-textbox" style="width:45%;height:32px;">
             <input id="select_constructor" class="easyui-textbox select" name="constructor.id" style="width:45%"
                    data-options="label:'建设单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial.action?typ=1">
+                   buttonIcon:'icon-search'" url="<c:url value="/moduleBasicCompanyController/partial?typ=1"/>">
         </div>
         <div style="margin-bottom:20px">
             <input id="project_add_project_select_builder" class="easyui-textbox select" name="builder.id" style="width:45%"
                    data-options="label:'施工单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial.action?typ=2">
+                   buttonIcon:'icon-search'" url="<c:url value="/moduleBasicCompanyController/partial?typ=2"/>">
 
             <input id="project_add_project_select_user" class="easyui-textbox select" name="user.id" style="width:45%"
                    data-options="label:'监理单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial.action?typ=3">
+                   buttonIcon:'icon-search'" url="<c:url value="/moduleBasicCompanyController/partial?typ=3"/>">
         </div>
         <div style="margin-bottom:20px">
             <input class="easyui-textbox" name="note" style="width:90%"
@@ -73,8 +74,8 @@
 <div id="project_selectCoordinateDiv" style="display: none">
     <div id="project_map_div"></div>
 </div>
-<script type="text/javascript" src="${pageContext.request.contextPath}/jslib/baiduMap/map_api.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/jslib/baiduMap/AreaRestriction_min.js"></script>
+<script type="text/javascript" src="<c:url value="/resources/jslib/baiduMap/map_api.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/jslib/baiduMap/AreaRestriction_min.js"/>"></script>
 <script>
     $(window).on('resize', function () {
         $('#div_map').width(document.body.clientWidth).height(document.body.clientHeight);
@@ -217,7 +218,7 @@
                 title: '请选择',
                 closed: false,
                 cache: false,
-//                href: '${pageContext.request.contextPath}/moduleProjectManageController/selectCoordinate.action',
+//                href: '${pageContext.request.contextPath}/moduleProjectManageController/selectCoordinate',
                 modal: true,
                 buttons: [{
                     text: '确定',

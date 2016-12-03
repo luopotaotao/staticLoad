@@ -16,7 +16,7 @@
 
 <table id="project_dg" style="width:100%"></table>
 <div id="project_dlg_edit" style="width:80%;max-width:800px;padding:10px 60px;">
-    <form id="project_ff" class="easyui-form" method="post" data-options="novalidate:true" action="${baseUrl}/post.action">
+    <form id="project_ff" class="easyui-form" method="post" data-options="novalidate:true" action="${baseUrl}/post">
         <div style="margin-bottom:20px;display: none">
             <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'企业编号:',required:true">
         </div>
@@ -30,14 +30,14 @@
             <select id="project_province_id" class="easyui-combobox" name="province.id" style="width:45%"
                     data-options="label:'所在省份:',
             labelAlign:'right',
-            url:'${pageContext.request.contextPath}/moduleBasicAreaController/area/0.action',
+            url:'${pageContext.request.contextPath}/moduleBasicAreaController/area/0',
             method:'get',
             valueField: 'id',
             textField: 'text',
             onSelect:function(rec){
                 var $city = $('#project_city_id');
                 $city.combobox('clear');
-                $city.combobox('reload','${pageContext.request.contextPath}/moduleBasicAreaController/area/'+rec.id+'.action');
+                $city.combobox('reload','${pageContext.request.contextPath}/moduleBasicAreaController/area/'+rec.id);
             }
             ">
 
@@ -62,16 +62,16 @@
             <input id="project_select_coordinate" class="easyui-textbox" style="width:45%;height:32px;">
             <input id="select_constructor" class="easyui-textbox select" name="constructor.id" style="width:45%"
                    data-options="label:'建设单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial.action">
+                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial">
         </div>
         <div style="margin-bottom:20px">
             <input id="project_select_builder" class="easyui-textbox select" name="builder.id" style="width:45%"
                    data-options="label:'施工单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial.action">
+                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial">
 
             <input id="project_select_user" class="easyui-textbox select" name="user.id" style="width:45%"
                    data-options="label:'监理单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial.action">
+                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial">
         </div>
         <div style="margin-bottom:20px">
             <input class="easyui-textbox" name="note" style="width:90%"
@@ -84,8 +84,8 @@
 </div>
 
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/jslib/baiduMap/map_api.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/jslib/baiduMap/AreaRestriction_min.js"></script>
+<script type="text/javascript" src="<c:url value="/resources/jslib/baiduMap/map_api.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/jslib/baiduMap/AreaRestriction_min.js"/>"></script>
 <script>
     $(window).on('resize', function () {
         $('#div_map').width(document.body.clientWidth).height(document.body.clientHeight);
@@ -152,7 +152,7 @@
     $(function () {
         var baseUrl = '/';
         $('#project_dg').datagrid({
-            url: '${pageContext.request.contextPath}/${baseUrl}/query.action',
+            url: '${pageContext.request.contextPath}/${baseUrl}/query',
             method: 'get',
             iconCls: 'icon-save',
 //            width: 700,
@@ -341,7 +341,7 @@
                 title: '请选择',
                 closed: false,
                 cache: false,
-//                href: '${pageContext.request.contextPath}/moduleProjectManageController/selectCoordinate.action',
+//                href: '${pageContext.request.contextPath}/moduleProjectManageController/selectCoordinate',
                 modal: true,
                 buttons: [{
                     text: '确定',
@@ -403,9 +403,9 @@
                     $('#project_select_user').textbox('setText',data.user.name);
                 }
 
-                $ff.form({url: 'put.action'});
+                $ff.form({url: 'put'});
             } else {
-                $ff.form({url: 'post.action'});
+                $ff.form({url: 'post'});
             }
             $('#project_dlg_edit').dialog('open');
         }
@@ -443,7 +443,7 @@
 
         function remove(ids) {
             $.ajax({
-                url: '${pageContext.request.contextPath}/${baseUrl}/delete.action',
+                url: '${pageContext.request.contextPath}/${baseUrl}/delete',
                 data: {ids: ids},
                 type: 'post',
                 dataType: 'json'

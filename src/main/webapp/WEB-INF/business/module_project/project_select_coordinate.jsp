@@ -8,8 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div id="map_div"></div>
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/jslib/baiduMap/map_api.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/jslib/baiduMap/AreaRestriction_min.js"></script>
+<script type="text/javascript" src="<c:url value="/resources/jslib/baiduMap/map_api.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/jslib/baiduMap/AreaRestriction_min.js"/>"></script>
 <script>
     $(window).on('resize', function () {
         $('#div_map').width(document.body.clientWidth).height(document.body.clientHeight);

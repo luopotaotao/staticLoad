@@ -8,6 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div data-options="region:'center'" title="欢迎使用智能无线静荷载试验检测云平台" style="overflow: hidden;">
     <div title="首页" data-options="border:false" style="overflow: hidden; " align="center">
-        <img src="${pageContext.request.contextPath}/style/images/pic1.png" style="height:100%; cursor:default">
+        <img src="<c:url value="/resources/style/images/pic1.png"/>" style="height:100%; cursor:default">
     </div>
 </div>

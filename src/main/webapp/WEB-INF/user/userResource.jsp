@@ -9,7 +9,7 @@
 			onLoadSuccess : function() {
 				parent.$.messager.progress('close');
 				if (data.length < 1) {
-					$('#userResources').append('<div style="text-align:center; height:300px; line-height:300px"><div style="font-weight:bold"><img src="${pageContext.request.contextPath}/style/images/blue_face/bluefaces_35.png" alt="您没有任何权限" />您没有任何权限</div></div>');
+					$('#userResources').append('<div style="text-align:center; height:300px; line-height:300px"><div style="font-weight:bold"><img src="<c:url value="/resources/style/images/blue_face/bluefaces_35.png"/>" alt="您没有任何权限" />您没有任何权限</div></div>');
 				}
 			}
 		});

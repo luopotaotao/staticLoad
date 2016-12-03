@@ -2,43 +2,29 @@
          contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/laserCoreCss.css">
+<link type="text/css" rel="stylesheet" href="<c:url value="/resources/style/laserCoreCss.css"/>">
 <link id="easyuiTheme" rel="stylesheet"
-      href="${pageContext.request.contextPath}/jslib/jquery-easyui-1.3.6/themes/default/easyui.css" type="text/css">
+      href="<c:url value="/resources/jslib/jquery-easyui-1.3.6/themes/default/easyui.css"/>" type="text/css">
 <link rel="stylesheet" type="text/css"
-      href="${pageContext.request.contextPath}/jslib/jquery-easyui-1.3.6/themes/icon.css">
-<script type="text/javascript" src="${pageContext.request.contextPath}/jslib/jquery-1.11.3.js" type="text/javascript"
+      href="<c:url value="/resources/jslib/jquery-easyui-1.3.6/themes/icon.css"/>">
+<script type="text/javascript" src="<c:url value="/resources/jslib/jquery-1.11.3.js"/>" type="text/javascript"
         charset="utf-8"></script>
 <script type="text/javascript"
-        src="${pageContext.request.contextPath}/jslib/jquery-easyui-1.3.6/jquery.easyui.min.js"
+        src="<c:url value="/resources/jslib/jquery-easyui-1.3.6/jquery.easyui.min.js"/>"
         charset="utf-8"></script>
 <script type="text/javascript"
-        src="${pageContext.request.contextPath}/jslib/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js"
+        src="<c:url value="/resources/jslib/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js"/>"
         charset="utf-8"></script>
-<%--<style type="text/css">--%>
-<%--#bannerbg{--%>
-<%--background-color: #b6c6f5;--%>
-<%--background-image:url(${pageContext.request.contextPath}/style/themes/default.jpg);--%>
-<%--background-repeat:repeat-y;--%>
-<%----%>
-<%--}--%>
-<%--</style>--%>
+
 <script type="text/javascript" charset="utf-8">
     $(function () {
-
-        <%--$('#bannerbg').css('background-color', '#b6c6f5');--%>
-        <%--$('#bannerbg').css('background-image', 'url(${pageContext.request.contextPath}/style/themes/default.jpg)');--%>
-        <%--$('#bannerbg').css('background-repeat', 'repeat-y');--%>
-        <%--$('#logoimg').attr("src", "${pageContext.request.contextPath}/style/themes/opentsm_logo_d.png");--%>
-        <%--$('#bannerbg').css('background-position', '50% 0%');--%>
-
         var count = 0;
         var timeout1;
         monitoronline();
         timeout1 = setInterval(monitoronline, 60000);
         function monitoronline() {
             $.ajax({
-                url: "${pageContext.request.contextPath}/monitorController/monitoronline.action",
+                url: "${pageContext.request.contextPath}/monitorController/monitoronline",
                 timeout: 60000,
                 success: function () {
 
@@ -56,7 +42,7 @@
             })
         }
 
-        openModule('${pageContext.request.contextPath}/moduleOverviewController/index.action');
+        openModule('${pageContext.request.contextPath}/moduleOverviewController/index');
     });
 
     function logoutFun() {
@@ -68,7 +54,7 @@
                             if (c) {
                                 $
                                         .ajax({
-                                            url: '${pageContext.request.contextPath}/userController/logout.action',
+                                            url: '${pageContext.request.contextPath}/userController/logout',
                                             type: 'POST',
                                             timeout: 1000,
                                             success: function (result) {
@@ -83,7 +69,7 @@
     }
     function showUserInfo() {
         $.ajax({
-            url:'${pageContext.request.contextPath}/userController/userInfo.action',
+            url:'${pageContext.request.contextPath}/userController/userInfo',
             type:'get',
             dataType:'json'
         }).done(function (ret) {
@@ -95,7 +81,7 @@
     }
     <%--function showAbout() {--%>
         <%--$.ajax({--%>
-            <%--url:'${pageContext.request.contextPath}/userController/platformInfo.action',--%>
+            <%--url:'${pageContext.request.contextPath}/userController/platformInfo',--%>
             <%--type:'get',--%>
             <%--dataType:'json'--%>
         <%--}).done(function (ret) {--%>
@@ -112,7 +98,7 @@
                     title: '修改密码',
                     width: 330,
                     height: 280,
-                    href: '${pageContext.request.contextPath}/userController/editCurrentUserPwdPage.action',
+                    href: '${pageContext.request.contextPath}/userController/editCurrentUserPwdPage',
                     buttons: [{
                         text: '修改',
                         handler: function () {
@@ -130,7 +116,7 @@
                     title: '我可以访问的资源',
                     width: 300,
                     height: 350,
-                    href: '${pageContext.request.contextPath}/userController/currentUserResourcePage.action'
+                    href: '${pageContext.request.contextPath}/userController/currentUserResourcePage'
                 });
     }
     function openModule(url) {
@@ -141,8 +127,8 @@
         }
     }
     function switchDept(id) {
-        var base_url = '${pageContext.request.contextPath}/logo/';
-        var href = 'userController/switchDept/' + id + '.action';
+        var base_url = '<c:url value="/resources/upload/"/>';
+        var href = 'userController/switchDept/' + id;
         $.ajax({
             url: href,
             type: 'get',
@@ -156,7 +142,7 @@
                     logo = '<h2 style="color:white;margin: 5px;">智能无线静荷载试验检测云平台</h2>';
                 }
                 $('#logo_div').empty().append(logo);
-                openModule('${pageContext.request.contextPath}/moduleOverviewController/index.action');
+                openModule('${pageContext.request.contextPath}/moduleOverviewController/index');
             }
         }).fail(function () {
             $.messager.alert('提示', '操作失败，请重新尝试或联系管理员！');
@@ -192,33 +178,33 @@
         <c:choose>
             <c:when test="${sessionInfo.dept.logo eq ''}"><h2 style="color:white;margin: 5px;">
                 智能无线静荷载试验检测云平台</h2></c:when>
-            <c:otherwise><img src="${pageContext.request.contextPath}/logo/${sessionInfo.dept.logo}"></c:otherwise>
+            <c:otherwise><img src="<c:url value="/resources/upload/${sessionInfo.dept.logo}"/>"></c:otherwise>
         </c:choose>
     </div>
     <div style="float: left;width: 48%;height: 59px;min-width: 500px;">
 
         <ul class="topul">
             <li>
-                <a href="javascript:openModule('${pageContext.request.contextPath}/moduleOverviewController/index.action');"
+                <a href="javascript:openModule('${pageContext.request.contextPath}/moduleOverviewController/index');"
                    id="16" class="menus"><img
-                        src="${pageContext.request.contextPath}/style/images/icons/icon_monitor.png"
+                        src="<c:url value="/resources/style/images/icons/icon_monitor.png"/>"
                         class="module_icon">工程概览</a>
             </li>
 
             <li>
-                <a href="javascript:openModule('${pageContext.request.contextPath}/moduleProjectController/index.action');"
+                <a href="javascript:openModule('${pageContext.request.contextPath}/moduleProjectController/index');"
                    id="19" class="menus"><img
-                        src="${pageContext.request.contextPath}/style/images/icons/icon_report.png"
+                        src="<c:url value="/resources/style/images/icons/icon_report.png"/>"
                         class="module_icon">工程管理</a>
             </li>
-            <li><a href="javascript:openModule('${pageContext.request.contextPath}/moduleBasicController/index.action')"
+            <li><a href="javascript:openModule('${pageContext.request.contextPath}/moduleBasicController/index')"
                    id="18"
-                   class="menus"><img src="${pageContext.request.contextPath}/style/images/icons/icon_config.png"
+                   class="menus"><img src="<c:url value="/resources/style/images/icons/icon_config.png"/>"
                                       class="module_icon">平台设置</a>
             </li>
-            <li><a href="javascript:openModule('${pageContext.request.contextPath}/userController/platformInfo.action')"
+            <li><a href="javascript:openModule('${pageContext.request.contextPath}/userController/platformInfo')"
                    id="20"
-                   class="menus"><img src="${pageContext.request.contextPath}/style/images/icons/icon_about.png"
+                   class="menus"><img src="<c:url value="/resources/style/images/icons/icon_about.png"/>"
                                       class="module_icon">关于平台</a>
             </li>
         </ul>
@@ -236,10 +222,10 @@
             <div style="margin-top: 10px">
                 <a href="javascript:;" onclick="showUserInfo()"
                    style="color: white;"><img
-                        src="${pageContext.request.contextPath}/style/images/icons/icon_user_sm.png"
+                        src="<c:url value="/resources/style/images/icons/icon_user_sm.png"/>"
                         style="width: 18px;height: 18px;vertical-align: -5px;">账号信息</a>&nbsp;
                 <a href="javascript:;" onclick="logoutFun();" style="color: white;"><img
-                        src="${pageContext.request.contextPath}/style/images/icons/icon_logout.png"
+                        src="<c:url value="/resources/style/images/icons/icon_logout.png"/>"
                         style="width: 18px;height: 18px;vertical-align: -5px;">退出系统</a>
             </div>
         </div>
@@ -264,7 +250,7 @@
             }]
         ">
     <form id="ff_user_info" class="easyui-form" method="post" data-options="novalidate:true"
-          action="../${baseUrl}/post.action">
+          action="../${baseUrl}/post">
         <div style="margin-bottom:20px">
             <input class="easyui-textbox" name="name" style="width:100%"
                    data-options="label:'账号:',editable:false">

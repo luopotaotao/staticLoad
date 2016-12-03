@@ -60,7 +60,7 @@
         init();
         function init() {
             $('#tree_menu').tree({
-                url: '${pageContext.request.contextPath}/moduleInspectDataController/keys.action',
+                url: '${pageContext.request.contextPath}/moduleInspectDataController/keys',
                 method: 'get',
                 formatter: function (node) {
                     return '工程:' + node.prg + ';桩号:' + node.stzh;
@@ -79,7 +79,7 @@
                 {key: 'qjx', title: '4'},
                 {key: 'ndsj', title: '5'}
             ];
-            $.get('${pageContext.request.contextPath}/moduleInspectDataController/query/' + prg + '/' + stzh + '.action', function (data) {
+            $.get('${pageContext.request.contextPath}/moduleInspectDataController/query/' + prg + '/' + stzh, function (data) {
                 var ret = filterData(data, fields);
                 var source = ret.source;
                 var statistic = ret.statistic;

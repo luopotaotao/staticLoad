@@ -16,51 +16,40 @@
     </div>
 
     <table id="dg" style="width:100%"></table>
-    <div id="dlg_edit" style="width:100%;max-width:400px;padding:30px 60px;">
-        <form id="ff" class="easyui-form" method="post" data-options="novalidate:true" action="${baseUrl}/post.action">
+    <div id="dlg_edit" style="width:100%;max-width:800px;padding:30px 60px;">
+        <form id="ff" class="easyui-form" method="post" data-options="novalidate:true" action="${baseUrl}/post">
             <div style="margin-bottom:20px;display: none">
-                <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'记录编号:',required:true">
-            </div>
-            <div style="margin-bottom:20px">
-                <input class="easyui-textbox" name="code" style="width:100%"
+                <input class="easyui-textbox" name="id" style="width:45%" data-options="label:'记录编号:',required:true">
+                <input class="easyui-textbox" name="code" style="width:45%"
                        data-options="label:'机构编号:',required:true">
             </div>
             <div style="margin-bottom:20px">
-                <input class="easyui-textbox" name="name" style="width:100%"
-                       data-options="label:'机构名称:'">
-            </div>
-            <div style="margin-bottom:20px">
-                <select class="easyui-combobox" data-options="editable:false" name="economy_typ" label="经济性质:"
-                        style="width:100%">
+                <input class="easyui-textbox" name="name" style="width:45%"
+                       data-options="label:'机构名称:',labelAlign:'right'">
+                <select class="easyui-combobox" data-options="editable:false,labelAlign:'right'" name="economy_typ" label="经济性质:"
+                        style="width:45%">
                     <option value="1">经济性质1</option>
                     <option value="2">经济性质2</option>
                     <option value="3">经济性质3</option>
                 </select>
             </div>
             <div style="margin-bottom:20px">
-                <input class="easyui-textbox" name="certificate_code" style="width:100%"
-                       data-options="label:'电话号码:'">
-            </div>
-
-            <div style="margin-bottom:20px">
-                <select class="easyui-combobox" data-options="editable:false" name="register_type" label="注册类型:"
-                        style="width:100%">
+                <input class="easyui-textbox" name="certificate_code" style="width:45%"
+                       data-options="label:'电话号码:',labelAlign:'right'">
+                <select class="easyui-combobox" data-options="editable:false,labelAlign:'right'" name="register_type" label="注册类型:"
+                        style="width:45%">
                     <option value="1">建设单位</option>
                     <option value="2">施工单位</option>
                     <option value="3">监理单位</option>
                 </select>
             </div>
-            <div style="margin-bottom:20px">
-                <input class="easyui-textbox" name="note" style="width:100%"
-                       data-options="label:'备注信息:',multiline:true,height:120">
-            </div>
+
             <div style="margin-bottom:20px;display: none">
                 <input class="easyui-textbox" id="dept_logo" name="logo" style="width:100%"
-                       data-options="label:'logo:'">
+                       data-options="label:'logo:',labelAlign:'right'">
             </div>
-            <div id="img_div" style="margin-bottom:20px;overflow: hidden">
-                <img id="img" class="resumable-browse" style="width: 300px;height: 59px"/>
-                <input type="button" class="resumable-browse">
+            <div id="img_div" style="margin-bottom:20px;margin-left:87px;overflow: hidden"  class="resumable-browse">
+                <img id="img" style="width: 300px;height: 59px"/>
             </div>
             <div class="resumable-progress">
                 <table>
@@ -74,6 +63,10 @@
                     </tr>
                 </table>
             </div>
+            <div style="margin-bottom:20px">
+                <input class="easyui-textbox" name="note" style="width:90%"
+                       data-options="label:'备注信息:',labelAlign:'right',multiline:true,height:120">
+            </div>
         </form>
     </div>
     <div id="details"></div>
@@ -82,7 +75,7 @@
         $(function () {
             var baseUrl = '/';
             $('#dg').datagrid({
-                url: '../${baseUrl}/query.action',
+                url: '../${baseUrl}/query',
                 method: 'get',
                 iconCls: 'icon-save',
 //            width: 700,
@@ -140,7 +133,8 @@
                     {
                         field: 'logo', title: '公司Logo', width: 80, align: 'right',
                         formatter: function (val, row) {
-                            return '<img style="width:300px;height:59px;" src="${pageContext.request.contextPath}/logo/' + (val || 'blank.png') + '">';
+                            debugger;
+                            return '<img style="width:300px;height:59px;" src="<c:url value="/resources/upload/"/>' + (val || 'blank.png') + '">';
                         }
                     },
                     {field: 'note', title: '备注'},
@@ -183,7 +177,7 @@
                     {
                         field: 'logo', title: '公司Logo', width: 80, align: 'right',
                         formatter: function (val, row) {
-                            return '<img style="width:300px;height:59px;" src="${pageContext.request.contextPath}/logo/' + (val || 'blank.png') + '">';
+                            return '<img style="width:300px;height:59px;" src="<c:url value="/resources/upload/"/>' + (val || 'blank.png') + '">';
                         }
                     },
                     {field: 'note', title: '备注'},
@@ -279,14 +273,14 @@
                         name = 'blank.png';
                 if (data) {
                     $ff.form('load', data);
-                    $ff.form({url: 'put.action'});
+                    $ff.form({url: 'put'});
                     if (data.logo) {
                         name = data.logo;
                     }
                 } else {
-                    $ff.form({url: 'post.action'});
+                    $ff.form({url: 'post'});
                 }
-                $img.attr('src', '${pageContext.request.contextPath}/logo/' + name);
+                $img.attr('src', '<c:url value="/resources/upload/"/>' + name);
 
                 $('#dlg_edit').dialog('open');
             }
@@ -324,7 +318,7 @@
 
             function remove(ids) {
                 $.ajax({
-                    url: '../${baseUrl}/delete.action',
+                    url: '../${baseUrl}/delete',
                     data: {ids: ids},
                     type: 'post',
                     dataType: 'json'
@@ -344,7 +338,7 @@
             $('#details').dialog({
                 title: title,
                 width: $('body').width() * 0.8,
-                height: $(document).height(),
+                height: $(document).height()*0.8,
                 closed: false,
                 cache: false,
                 href: href,
@@ -354,22 +348,22 @@
 
 
         function manageTUsers(id) {
-            var href = '../moduleBasicUserController/index/' + id + '.action';
+            var href = '../moduleBasicUserController/index/' + id;
             openDialog('账号管理', href);
         }
         function manageEquipments(id){
-            var href = '../moduleBasicEquipmentController/index/'+id+'.action';
+            var href = '../moduleBasicEquipmentController/index/'+id;
             openDialog('设备管理',href);
         }
         var r = null;
         function initResumable() {
             r = $.getResumble({
-                url: '<c:url value="/file/upload"/>',
+                url: '<c:url value="/inspect_file/upload"/>',
                 fileType: ['png'],
                 successHandler: function (uuid) {
                     alert('成功保存文件:' + uuid);
-                    $('#dept_logo').textbox('setValue', message.uuid);
-                    $('#img').attr('src', '<c:url value="/file/upload"/>' + message.uuid);
+                    $('#dept_logo').textbox('setValue', uuid);
+                    $('#img').attr('src', '<c:url value="/resources/upload/"/>' + uuid);
                 },
                 fileTypeErrorHandler: function () {
                     alert("文件类型错误...");
@@ -378,7 +372,7 @@
         }
         $('#btn_save').on('click', function () {
             $.ajax({
-                url: '../fileController/save.action',
+                url: '../fileController/save',
                 type: 'post',
                 dataType: 'json',
                 data: {fileName: $('#fileName').val()}
@@ -394,9 +388,9 @@
         })
 
     </script>
-    <script type="text/javascript" src="<c:url value="/jslib/resumable.js"/>" type="text/javascript"
+    <script type="text/javascript" src="<c:url value="/resources/jslib/resumable.js"/>" type="text/javascript"
             charset="utf-8"></script>
-    <script type="text/javascript" src="<c:url value="/jslib/my_resumble.js"/>" type="text/javascript"
+    <script type="text/javascript" src="<c:url value="/resources/jslib/my_resumble.js"/>" type="text/javascript"
             charset="utf-8"></script>
     </body>
 </c:if>
@@ -412,7 +406,7 @@
     <table id="dg_user" style="width:100%"></table>
     <div id="dlg_user_edit" style="width:100%;max-width:400px;padding:30px 60px;">
         <form id="ff_user" class="easyui-form" method="post" data-options="novalidate:true"
-              action="../${baseUrl}/post.action">
+              action="../${baseUrl}/post">
             <div style="margin-bottom:20px;display: none">
                 <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'企业编号:',required:true">
             </div>
@@ -446,7 +440,7 @@
             var dept_id = '${dept_id}';
             var baseUrl = '${pageContext.request.contextPath}/moduleBasicUserController';
             $('#dg_user').datagrid({
-                url: '../moduleBasicUserController/queryAll.action',
+                url: '../moduleBasicUserController/queryAll',
                 method: 'get',
 //                title: '人员管理',
 //                iconCls: 'icon-save',
@@ -533,9 +527,9 @@
                 var $ff = $('#ff_user');
                 if (data) {
                     $ff.form('load', data);
-                    $ff.form({url: '../moduleBasicUserController/put.action'});
+                    $ff.form({url: '../moduleBasicUserController/put'});
                 } else {
-                    $ff.form({url: '../moduleBasicUserController/post.action'});
+                    $ff.form({url: '../moduleBasicUserController/post'});
                 }
                 $('#user_dept_id').textbox('setValue', dept_id);
                 $('#dlg_user_edit').dialog('open');
@@ -575,7 +569,7 @@
 
             function remove(ids) {
                 $.ajax({
-                    url: baseUrl + '/delete.action',
+                    url: baseUrl + '/delete',
                     data: {ids: ids},
                     type: 'post',
                     dataType: 'json'

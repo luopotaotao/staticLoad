@@ -135,15 +135,4 @@ public class ProjectServiceImpl implements ProjectServiceI {
     public List<String> listStzh(String prg) {
         return projectDao.queryStzhByProjectCode(prg);
     }
-
-
-    public static void main(String[] args) {
-        List<Integer> list= new LinkedList<>();
-        list.add(1);
-        list.add(2);
-
-        List ret = list.stream().map(item->item*2).collect(Collectors.toList());
-        System.out.println(ret.size());
-        ret.stream().forEach(item-> System.out.println(item));
-    }
 }

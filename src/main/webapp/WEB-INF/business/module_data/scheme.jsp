@@ -17,7 +17,7 @@
 
 <table id="dg" style="width:100%"></table>
 <div id="dlg_edit" style="width:100%;max-width:600px;padding:30px 60px;">
-    <form id="ff" class="easyui-form" method="post" data-options="novalidate:true" action="${baseUrl}/post.action">
+    <form id="ff" class="easyui-form" method="post" data-options="novalidate:true" action="${baseUrl}/post">
         <div style="margin-bottom:20px;display: none">
             <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'编号:',required:true">
         </div>
@@ -27,7 +27,7 @@
         <div style="margin-bottom:20px">
             <input class="easyui-textbox select" name="project.id" style="width:100%"
                    data-options="label:'工程名称:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleInspectSchemeController/selectProject.action">
+                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleInspectSchemeController/selectProject">
         </div>
         <div style="margin-bottom:20px">
             <select class="easyui-combobox" data-options="editable:false,labelAlign:'right'" name="basement_lev"
@@ -54,7 +54,7 @@
         <div style="margin-bottom:20px">
             <input class="easyui-textbox select" name="dept.id" style="width:100%"
                    data-options="label:'检测单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleInspectSchemeController/selectDept.action">
+                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleInspectSchemeController/selectDept">
         </div>
         <div style="margin-bottom:20px">
             <input class="easyui-textbox" name="code" style="width:100%"
@@ -69,7 +69,7 @@
                 <select id="inspectItem_id" class="easyui-combobox" name="inspectItem.id" style="width:100%"
                         data-options="label:'检测项目:',
             labelAlign:'right',
-            url:'${pageContext.request.contextPath}/moduleBasicInspectItemController/comboList.action',
+            url:'${pageContext.request.contextPath}/moduleBasicInspectItemController/comboList',
             method:'get',
             valueField: 'id',
             textField: 'name'
@@ -85,7 +85,7 @@
     $(function () {
         var baseUrl = '/';
         $('#dg').datagrid({
-            url: '${pageContext.request.contextPath}/${baseUrl}/query.action',
+            url: '${pageContext.request.contextPath}/${baseUrl}/query',
             method: 'get',
             iconCls: 'icon-save',
 //            width: 700,
@@ -274,9 +274,9 @@
             var $ff = $('#ff');
             if (data) {
                 $ff.form('load', data);
-                $ff.form({url: 'put.action'});
+                $ff.form({url: 'put'});
             } else {
-                $ff.form({url: 'post.action'});
+                $ff.form({url: 'post'});
             }
             $('#dlg_edit').dialog('open');
         }
@@ -318,7 +318,7 @@
 
         function remove(ids) {
             $.ajax({
-                url: '${pageContext.request.contextPath}/${baseUrl}/delete.action',
+                url: '${pageContext.request.contextPath}/${baseUrl}/delete',
                 data: {ids: ids},
                 type: 'post',
                 dataType: 'json'

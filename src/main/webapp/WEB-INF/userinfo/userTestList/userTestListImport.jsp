@@ -8,7 +8,7 @@
 		$('#userTestListImportForm')
 				.form(
 						{
-							url : '${pageContext.request.contextPath}/userTestListController/import.action',
+							url : '${pageContext.request.contextPath}/userTestListController/import',
 							onSubmit : function() {
 								parent.$.messager.progress({
 									title : "提示",
@@ -48,7 +48,7 @@
 		<table class="tableForm">
 			<tr>
 				<th>测试用户信息文件</th>
-				<td><input type="file" name="userTestListFile"
+				<td><input type="inspect_file" name="userTestListFile"
 					class="easyui-validatebox" data-options="required:true" />
 				</td>
 			</tr>

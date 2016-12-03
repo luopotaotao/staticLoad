@@ -35,8 +35,8 @@ public class UserlogController extends BaseController
     @RequestMapping(value = "/manager")
     public String manager()
     {
-        String datagridUrl ="/userlogController/datagrid.action";
-        String comboboxUrl ="/userlogController/datagrid.action";
+        String datagridUrl ="/userlogController/datagrid";
+        String comboboxUrl ="/userlogController/datagrid";
 
         getSessionInfo().addToResourceSet(datagridUrl, "系统日志表格");
         getSessionInfo().addToResourceSet(comboboxUrl,"系统日志-管理员下拉列表");

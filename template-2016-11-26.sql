@@ -314,7 +314,7 @@ CREATE TABLE `b_inspect_scheme` (
   `safety_lev` tinyint(4) DEFAULT NULL COMMENT '建筑安全等级(一级,二级,三级)',
   `pile_count` int(11) DEFAULT NULL COMMENT '总桩数',
   `dept_id` int(11) DEFAULT NULL COMMENT '检测单位',
-  `approval_file_id` int(11) DEFAULT NULL COMMENT '检测方案审批表(attachment_id)',
+  `approval_file` int(11) DEFAULT NULL COMMENT '检测方案审批表(attachment_id)',
   `inspect_file_id` int(11) DEFAULT NULL COMMENT '检测方案附件(attachment_id)',
   `deleted` tinyint(1) DEFAULT '0' COMMENT '删除标志位',
   `dept_id` int(11) DEFAULT NULL COMMENT '所属公司',
@@ -514,56 +514,56 @@ CREATE TABLE `t_resource` (
 -- ----------------------------
 -- Records of t_resource
 -- ----------------------------
-INSERT INTO `t_resource` VALUES ('0eeb6e4a-5900-41e1-8026-bd8a3b35df8b', 'wrench', '系统参数管理', '', '4', '/systemConfigController/manager.action', 'xtgl', '1');
-INSERT INTO `t_resource` VALUES ('105f9e02-0c0d-4bd4-92ea-2a35079a8c5a', null, '站点管理删除', '', '3', '/tagController/delete.action', '200ee674-e4b4-4c6e-be8f-3b61cc147150', '2');
-INSERT INTO `t_resource` VALUES ('1127f1c9-df69-4637-9680-f597ef7fa423', null, '巡更计划修改页面', '', '5', '/patrolPlanController/editPage.action', 'ec2840db-5e25-4743-b699-f50ed3e6c791', '2');
-INSERT INTO `t_resource` VALUES ('1e3c419b-204a-4a61-af77-1699da10d737', null, '巡更计划修改', '', '2', '/patrolPlanController/edit.action', 'ec2840db-5e25-4743-b699-f50ed3e6c791', '2');
-INSERT INTO `t_resource` VALUES ('200ee674-e4b4-4c6e-be8f-3b61cc147150', 'folderlink', '巡更站点管理', '', '1', '/tagController/manager.action', '3c403869-e149-4b1d-b03e-8c509f659644', '1');
-INSERT INTO `t_resource` VALUES ('25a6df1d-69a0-4a05-b600-d893ee8898e5', 'folderlink', '巡更人员管理', '', '4', '/patrolPersonController/manager.action', '3c403869-e149-4b1d-b03e-8c509f659644', '1');
-INSERT INTO `t_resource` VALUES ('298313bc-9c8c-4457-a9f7-b270f4d4b2f2', null, '巡更计划添加页面', '', '4', '/patrolPlanController/addPage.action', 'ec2840db-5e25-4743-b699-f50ed3e6c791', '2');
-INSERT INTO `t_resource` VALUES ('37fc2e08-9bba-4fe3-a3dd-3a5cde265dab', 'folderlink', '巡更路线修改', '', '2', '/patrolRouteController/editPage.action', 'a7d7c1ff-0c4a-4e5e-a7ea-013c91a8bce7', '2');
+INSERT INTO `t_resource` VALUES ('0eeb6e4a-5900-41e1-8026-bd8a3b35df8b', 'wrench', '系统参数管理', '', '4', '/systemConfigController/manager', 'xtgl', '1');
+INSERT INTO `t_resource` VALUES ('105f9e02-0c0d-4bd4-92ea-2a35079a8c5a', null, '站点管理删除', '', '3', '/tagController/delete', '200ee674-e4b4-4c6e-be8f-3b61cc147150', '2');
+INSERT INTO `t_resource` VALUES ('1127f1c9-df69-4637-9680-f597ef7fa423', null, '巡更计划修改页面', '', '5', '/patrolPlanController/editPage', 'ec2840db-5e25-4743-b699-f50ed3e6c791', '2');
+INSERT INTO `t_resource` VALUES ('1e3c419b-204a-4a61-af77-1699da10d737', null, '巡更计划修改', '', '2', '/patrolPlanController/edit', 'ec2840db-5e25-4743-b699-f50ed3e6c791', '2');
+INSERT INTO `t_resource` VALUES ('200ee674-e4b4-4c6e-be8f-3b61cc147150', 'folderlink', '巡更站点管理', '', '1', '/tagController/manager', '3c403869-e149-4b1d-b03e-8c509f659644', '1');
+INSERT INTO `t_resource` VALUES ('25a6df1d-69a0-4a05-b600-d893ee8898e5', 'folderlink', '巡更人员管理', '', '4', '/patrolPersonController/manager', '3c403869-e149-4b1d-b03e-8c509f659644', '1');
+INSERT INTO `t_resource` VALUES ('298313bc-9c8c-4457-a9f7-b270f4d4b2f2', null, '巡更计划添加页面', '', '4', '/patrolPlanController/addPage', 'ec2840db-5e25-4743-b699-f50ed3e6c791', '2');
+INSERT INTO `t_resource` VALUES ('37fc2e08-9bba-4fe3-a3dd-3a5cde265dab', 'folderlink', '巡更路线修改', '', '2', '/patrolRouteController/editPage', 'a7d7c1ff-0c4a-4e5e-a7ea-013c91a8bce7', '2');
 INSERT INTO `t_resource` VALUES ('3c403869-e149-4b1d-b03e-8c509f659644', 'folder09', '巡更管理', '', '4', '', null, '1');
-INSERT INTO `t_resource` VALUES ('3ec341d3-e4f5-42b6-b3a6-f9b05d314387', 'folderlink', '巡更任务详情', '', '2', '/patrolTaskController/search.action', '410582bb-7ca2-43b9-ae95-d8cb3c833405', '2');
-INSERT INTO `t_resource` VALUES ('40d98aa9-6621-4aa3-8c3d-daa991c95285', null, '人员管理修改', '', '2', '/patrolPersonController/edit.action', '25a6df1d-69a0-4a05-b600-d893ee8898e5', '2');
-INSERT INTO `t_resource` VALUES ('410582bb-7ca2-43b9-ae95-d8cb3c833405', 'folderlink', '巡更任务管理', '', '4', '/patrolTaskController/manager.action', '3c403869-e149-4b1d-b03e-8c509f659644', '1');
-INSERT INTO `t_resource` VALUES ('6bd6b64d-f394-49d3-9793-fa5ac41d0658', 'folderlink', '系统操作日志', '', '1', '/userlogController/manager.action', '833eb4c0-2f00-4e9c-b5a2-9f4935a4c5c3', '1');
-INSERT INTO `t_resource` VALUES ('6c6f6e82-ae0d-4481-8dcb-c9dd0bc1bc61', null, '巡更计划删除', '', '3', '/patrolPlanController/delete.action', 'ec2840db-5e25-4743-b699-f50ed3e6c791', '2');
-INSERT INTO `t_resource` VALUES ('6dfa0a5a-14a2-4f81-8858-8e1bd4030417', null, '站点管理添加', '', '1', '/tagController/add.action', '200ee674-e4b4-4c6e-be8f-3b61cc147150', '2');
-INSERT INTO `t_resource` VALUES ('6dfa66d1-3ed8-4dd4-825e-e21f7eae3a4c', null, '站点管理添加', '', '4', '/tagController/addPage.action', '200ee674-e4b4-4c6e-be8f-3b61cc147150', '2');
-INSERT INTO `t_resource` VALUES ('704ba7bc-3717-436f-bba0-24ae1e901e58', null, '人员管理添加', '', '1', '/patrolPersonController/add.action', '25a6df1d-69a0-4a05-b600-d893ee8898e5', '2');
-INSERT INTO `t_resource` VALUES ('71c58564-ac29-4681-a55c-4dd61349f2fe', 'wrench', '系统参数修改', '', '2', '/systemConfigController/editPage.action', '0eeb6e4a-5900-41e1-8026-bd8a3b35df8b', '2');
-INSERT INTO `t_resource` VALUES ('7d82e9ea-2711-4fe9-ac64-f142d8d9b81a', null, '人员管理删除', '', '3', '/patrolPersonController/delete.action', '25a6df1d-69a0-4a05-b600-d893ee8898e5', '2');
-INSERT INTO `t_resource` VALUES ('8097abd8-e20b-47d9-b3a7-d4a5cd73caef', null, '站点管理修改', '', '5', '/tagController/editPage.action', '200ee674-e4b4-4c6e-be8f-3b61cc147150', '2');
+INSERT INTO `t_resource` VALUES ('3ec341d3-e4f5-42b6-b3a6-f9b05d314387', 'folderlink', '巡更任务详情', '', '2', '/patrolTaskController/search', '410582bb-7ca2-43b9-ae95-d8cb3c833405', '2');
+INSERT INTO `t_resource` VALUES ('40d98aa9-6621-4aa3-8c3d-daa991c95285', null, '人员管理修改', '', '2', '/patrolPersonController/edit', '25a6df1d-69a0-4a05-b600-d893ee8898e5', '2');
+INSERT INTO `t_resource` VALUES ('410582bb-7ca2-43b9-ae95-d8cb3c833405', 'folderlink', '巡更任务管理', '', '4', '/patrolTaskController/manager', '3c403869-e149-4b1d-b03e-8c509f659644', '1');
+INSERT INTO `t_resource` VALUES ('6bd6b64d-f394-49d3-9793-fa5ac41d0658', 'folderlink', '系统操作日志', '', '1', '/userlogController/manager', '833eb4c0-2f00-4e9c-b5a2-9f4935a4c5c3', '1');
+INSERT INTO `t_resource` VALUES ('6c6f6e82-ae0d-4481-8dcb-c9dd0bc1bc61', null, '巡更计划删除', '', '3', '/patrolPlanController/delete', 'ec2840db-5e25-4743-b699-f50ed3e6c791', '2');
+INSERT INTO `t_resource` VALUES ('6dfa0a5a-14a2-4f81-8858-8e1bd4030417', null, '站点管理添加', '', '1', '/tagController/add', '200ee674-e4b4-4c6e-be8f-3b61cc147150', '2');
+INSERT INTO `t_resource` VALUES ('6dfa66d1-3ed8-4dd4-825e-e21f7eae3a4c', null, '站点管理添加', '', '4', '/tagController/addPage', '200ee674-e4b4-4c6e-be8f-3b61cc147150', '2');
+INSERT INTO `t_resource` VALUES ('704ba7bc-3717-436f-bba0-24ae1e901e58', null, '人员管理添加', '', '1', '/patrolPersonController/add', '25a6df1d-69a0-4a05-b600-d893ee8898e5', '2');
+INSERT INTO `t_resource` VALUES ('71c58564-ac29-4681-a55c-4dd61349f2fe', 'wrench', '系统参数修改', '', '2', '/systemConfigController/editPage', '0eeb6e4a-5900-41e1-8026-bd8a3b35df8b', '2');
+INSERT INTO `t_resource` VALUES ('7d82e9ea-2711-4fe9-ac64-f142d8d9b81a', null, '人员管理删除', '', '3', '/patrolPersonController/delete', '25a6df1d-69a0-4a05-b600-d893ee8898e5', '2');
+INSERT INTO `t_resource` VALUES ('8097abd8-e20b-47d9-b3a7-d4a5cd73caef', null, '站点管理修改', '', '5', '/tagController/editPage', '200ee674-e4b4-4c6e-be8f-3b61cc147150', '2');
 INSERT INTO `t_resource` VALUES ('833eb4c0-2f00-4e9c-b5a2-9f4935a4c5c3', 'folder09', '日志管理', '', '3', '', null, '1');
-INSERT INTO `t_resource` VALUES ('87bd5cf0-3071-46e9-8b9f-be80e9db1f11', 'wrench', '重置用户密码', '', '4', '/userController/resetPwd.action', 'yhgl', '2');
-INSERT INTO `t_resource` VALUES ('89699dcf-7a15-4c11-8799-a4e1e39f1cca', 'folderlink', '巡更任务删除', '', '2', '/patrolTaskController/delete.action', '410582bb-7ca2-43b9-ae95-d8cb3c833405', '2');
-INSERT INTO `t_resource` VALUES ('8ecd66a3-e5a1-4dd3-baa7-f017fc50dc60', 'wrench', '系统参数添加', '', '1', '/systemConfigController/addPage.action', '0eeb6e4a-5900-41e1-8026-bd8a3b35df8b', '2');
-INSERT INTO `t_resource` VALUES ('a7d7c1ff-0c4a-4e5e-a7ea-013c91a8bce7', 'folderlink', '巡更路线管理', '', '2', '/patrolRouteController/manager.action', '3c403869-e149-4b1d-b03e-8c509f659644', '1');
-INSERT INTO `t_resource` VALUES ('ad457a51-7a25-4288-b37d-686cc8e32a8d', 'folderlink', '巡更路线添加', '', '1', '/patrolRouteController/addPage.action', 'a7d7c1ff-0c4a-4e5e-a7ea-013c91a8bce7', '2');
-INSERT INTO `t_resource` VALUES ('af341173-02a8-44d8-8a38-95a492fb7f90', null, '站点管理修改', '', '2', '/tagController/edit.action', '200ee674-e4b4-4c6e-be8f-3b61cc147150', '2');
-INSERT INTO `t_resource` VALUES ('bff4bb97-2d90-4104-a463-06be60d2174b', null, '人员管理修改', '', '5', '/patrolPersonController/editPage.action', '25a6df1d-69a0-4a05-b600-d893ee8898e5', '2');
-INSERT INTO `t_resource` VALUES ('c6229b60-bcdd-4302-84c2-8c49614ee00b', 'folderlink', '查看系统操作日志详情', '', '1', '/userlogController/search.action', '6bd6b64d-f394-49d3-9793-fa5ac41d0658', '2');
-INSERT INTO `t_resource` VALUES ('c86bf4a0-1767-4da6-a0fc-07242c180b67', 'wrench', '系统参数删除', '', '3', '/systemConfigController/delete.action', '0eeb6e4a-5900-41e1-8026-bd8a3b35df8b', '2');
-INSERT INTO `t_resource` VALUES ('e2f124a1-7256-4fc2-a4ef-a6f8da21d813', null, '人员管理添加', '', '4', '/patrolPersonController/addPage.action', '25a6df1d-69a0-4a05-b600-d893ee8898e5', '2');
-INSERT INTO `t_resource` VALUES ('e7465120-7f19-4e0e-bf96-23a5239171a0', 'folderlink', '巡更路线删除', '', '3', '/patrolRouteController/delete.action', 'a7d7c1ff-0c4a-4e5e-a7ea-013c91a8bce7', '2');
-INSERT INTO `t_resource` VALUES ('e83effde-6a73-4a32-9269-27a63ef1ba73', 'folderlink', '巡更任务修改', '', '1', '/patrolTaskController/editPage.action', '410582bb-7ca2-43b9-ae95-d8cb3c833405', '2');
-INSERT INTO `t_resource` VALUES ('ec2840db-5e25-4743-b699-f50ed3e6c791', 'folderlink', '巡更计划管理', '', '3', '/patrolPlanController/manager.action', '3c403869-e149-4b1d-b03e-8c509f659644', '1');
-INSERT INTO `t_resource` VALUES ('ff4ce28d-c5c1-4322-92a2-7680fe2513c4', null, '巡更计划添加', '', '1', '/patrolPlanController/add.action', 'ec2840db-5e25-4743-b699-f50ed3e6c791', '2');
-INSERT INTO `t_resource` VALUES ('jsgl', 'tux', '角色管理', null, '2', '/roleController/manager.action', 'xtgl', '1');
-INSERT INTO `t_resource` VALUES ('jsglAdd', 'wrench', '添加角色', '', '1', '/roleController/addPage.action', 'jsgl', '2');
-INSERT INTO `t_resource` VALUES ('jsglDelete', 'wrench', '删除角色', '', '3', '/roleController/delete.action', 'jsgl', '2');
-INSERT INTO `t_resource` VALUES ('jsglEdit', 'wrench', '编辑角色', '', '2', '/roleController/editPage.action', 'jsgl', '2');
-INSERT INTO `t_resource` VALUES ('jsglGrant', 'wrench', '角色授权', '', '4', '/roleController/grantPage.action', 'jsgl', '2');
-INSERT INTO `t_resource` VALUES ('sjygl', 'server_database', '数据源管理', null, '5', '/druidController/druid.action', 'xtgl', '1');
+INSERT INTO `t_resource` VALUES ('87bd5cf0-3071-46e9-8b9f-be80e9db1f11', 'wrench', '重置用户密码', '', '4', '/userController/resetPwd', 'yhgl', '2');
+INSERT INTO `t_resource` VALUES ('89699dcf-7a15-4c11-8799-a4e1e39f1cca', 'folderlink', '巡更任务删除', '', '2', '/patrolTaskController/delete', '410582bb-7ca2-43b9-ae95-d8cb3c833405', '2');
+INSERT INTO `t_resource` VALUES ('8ecd66a3-e5a1-4dd3-baa7-f017fc50dc60', 'wrench', '系统参数添加', '', '1', '/systemConfigController/addPage', '0eeb6e4a-5900-41e1-8026-bd8a3b35df8b', '2');
+INSERT INTO `t_resource` VALUES ('a7d7c1ff-0c4a-4e5e-a7ea-013c91a8bce7', 'folderlink', '巡更路线管理', '', '2', '/patrolRouteController/manager', '3c403869-e149-4b1d-b03e-8c509f659644', '1');
+INSERT INTO `t_resource` VALUES ('ad457a51-7a25-4288-b37d-686cc8e32a8d', 'folderlink', '巡更路线添加', '', '1', '/patrolRouteController/addPage', 'a7d7c1ff-0c4a-4e5e-a7ea-013c91a8bce7', '2');
+INSERT INTO `t_resource` VALUES ('af341173-02a8-44d8-8a38-95a492fb7f90', null, '站点管理修改', '', '2', '/tagController/edit', '200ee674-e4b4-4c6e-be8f-3b61cc147150', '2');
+INSERT INTO `t_resource` VALUES ('bff4bb97-2d90-4104-a463-06be60d2174b', null, '人员管理修改', '', '5', '/patrolPersonController/editPage', '25a6df1d-69a0-4a05-b600-d893ee8898e5', '2');
+INSERT INTO `t_resource` VALUES ('c6229b60-bcdd-4302-84c2-8c49614ee00b', 'folderlink', '查看系统操作日志详情', '', '1', '/userlogController/search', '6bd6b64d-f394-49d3-9793-fa5ac41d0658', '2');
+INSERT INTO `t_resource` VALUES ('c86bf4a0-1767-4da6-a0fc-07242c180b67', 'wrench', '系统参数删除', '', '3', '/systemConfigController/delete', '0eeb6e4a-5900-41e1-8026-bd8a3b35df8b', '2');
+INSERT INTO `t_resource` VALUES ('e2f124a1-7256-4fc2-a4ef-a6f8da21d813', null, '人员管理添加', '', '4', '/patrolPersonController/addPage', '25a6df1d-69a0-4a05-b600-d893ee8898e5', '2');
+INSERT INTO `t_resource` VALUES ('e7465120-7f19-4e0e-bf96-23a5239171a0', 'folderlink', '巡更路线删除', '', '3', '/patrolRouteController/delete', 'a7d7c1ff-0c4a-4e5e-a7ea-013c91a8bce7', '2');
+INSERT INTO `t_resource` VALUES ('e83effde-6a73-4a32-9269-27a63ef1ba73', 'folderlink', '巡更任务修改', '', '1', '/patrolTaskController/editPage', '410582bb-7ca2-43b9-ae95-d8cb3c833405', '2');
+INSERT INTO `t_resource` VALUES ('ec2840db-5e25-4743-b699-f50ed3e6c791', 'folderlink', '巡更计划管理', '', '3', '/patrolPlanController/manager', '3c403869-e149-4b1d-b03e-8c509f659644', '1');
+INSERT INTO `t_resource` VALUES ('ff4ce28d-c5c1-4322-92a2-7680fe2513c4', null, '巡更计划添加', '', '1', '/patrolPlanController/add', 'ec2840db-5e25-4743-b699-f50ed3e6c791', '2');
+INSERT INTO `t_resource` VALUES ('jsgl', 'tux', '角色管理', null, '2', '/roleController/manager', 'xtgl', '1');
+INSERT INTO `t_resource` VALUES ('jsglAdd', 'wrench', '添加角色', '', '1', '/roleController/addPage', 'jsgl', '2');
+INSERT INTO `t_resource` VALUES ('jsglDelete', 'wrench', '删除角色', '', '3', '/roleController/delete', 'jsgl', '2');
+INSERT INTO `t_resource` VALUES ('jsglEdit', 'wrench', '编辑角色', '', '2', '/roleController/editPage', 'jsgl', '2');
+INSERT INTO `t_resource` VALUES ('jsglGrant', 'wrench', '角色授权', '', '4', '/roleController/grantPage', 'jsgl', '2');
+INSERT INTO `t_resource` VALUES ('sjygl', 'server_database', '数据源管理', null, '5', '/druidController/druid', 'xtgl', '1');
 INSERT INTO `t_resource` VALUES ('xtgl', 'plugin', '系统管理', null, '0', null, null, '1');
-INSERT INTO `t_resource` VALUES ('yhgl', 'status_online', '用户管理', null, '3', '/userController/manager.action', 'xtgl', '1');
-INSERT INTO `t_resource` VALUES ('yhglAdd', 'wrench', '添加用户', '', '1', '/userController/addPage.action', 'yhgl', '2');
-INSERT INTO `t_resource` VALUES ('yhglDelete', 'wrench', '删除用户', '', '3', '/userController/delete.action', 'yhgl', '2');
-INSERT INTO `t_resource` VALUES ('yhglEdit', 'wrench', '编辑用户', '', '2', '/userController/editPage.action', 'yhgl', '2');
-INSERT INTO `t_resource` VALUES ('zygl', 'database_gear', '资源管理', '管理系统中所有的菜单或功能', '1', '/resourceController/manager.action', 'xtgl', '1');
-INSERT INTO `t_resource` VALUES ('zyglAdd', 'wrench', '添加资源', '', '1', '/resourceController/addPage.action', 'zygl', '2');
-INSERT INTO `t_resource` VALUES ('zyglDelete', 'wrench', '删除资源', '', '3', '/resourceController/delete.action', 'zygl', '2');
-INSERT INTO `t_resource` VALUES ('zyglEdit', 'wrench', '编辑资源', '', '2', '/resourceController/editPage.action', 'zygl', '2');
+INSERT INTO `t_resource` VALUES ('yhgl', 'status_online', '用户管理', null, '3', '/userController/manager', 'xtgl', '1');
+INSERT INTO `t_resource` VALUES ('yhglAdd', 'wrench', '添加用户', '', '1', '/userController/addPage', 'yhgl', '2');
+INSERT INTO `t_resource` VALUES ('yhglDelete', 'wrench', '删除用户', '', '3', '/userController/delete', 'yhgl', '2');
+INSERT INTO `t_resource` VALUES ('yhglEdit', 'wrench', '编辑用户', '', '2', '/userController/editPage', 'yhgl', '2');
+INSERT INTO `t_resource` VALUES ('zygl', 'database_gear', '资源管理', '管理系统中所有的菜单或功能', '1', '/resourceController/manager', 'xtgl', '1');
+INSERT INTO `t_resource` VALUES ('zyglAdd', 'wrench', '添加资源', '', '1', '/resourceController/addPage', 'zygl', '2');
+INSERT INTO `t_resource` VALUES ('zyglDelete', 'wrench', '删除资源', '', '3', '/resourceController/delete', 'zygl', '2');
+INSERT INTO `t_resource` VALUES ('zyglEdit', 'wrench', '编辑资源', '', '2', '/resourceController/editPage', 'zygl', '2');
 
 -- ----------------------------
 -- Table structure for `t_resource_type`
@@ -838,7 +838,7 @@ CREATE TABLE `t_user_log` (
 -- ----------------------------
 INSERT INTO `t_user_log` VALUES ('10cb91f0-6b59-4cf3-8b6b-d335e316ad14', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-27 09:20:04', 'Not a normal exit', null);
 INSERT INTO `t_user_log` VALUES ('10ee46de-c91f-4059-a02e-ed1596626e6c', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 17:50:52', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('15a4f985-41d5-468a-9330-0f312866487a', null, 'admin', '用户正常退出', '2016-11-26 16:58:02', '/userController/logout.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('15a4f985-41d5-468a-9330-0f312866487a', null, 'admin', '用户正常退出', '2016-11-26 16:58:02', '/userController/logout', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('21aa4175-ff58-44b5-a349-29d771bbe282', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 20:30:00', 'Not a normal exit', null);
 INSERT INTO `t_user_log` VALUES ('25660248-cc90-40d4-a73d-b870b2823bb8', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 16:40:40', 'Not a normal exit', null);
 INSERT INTO `t_user_log` VALUES ('26df1215-8bf4-4bb2-8a6b-3e3d82e68591', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 17:50:26', 'Not a normal exit', null);
@@ -848,13 +848,13 @@ INSERT INTO `t_user_log` VALUES ('31af32f8-4c3d-46c5-a4a9-23106d77bfbd', null, '
 INSERT INTO `t_user_log` VALUES ('364b6b30-591d-4b99-8b13-a9ec05970a40', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 16:20:00', 'Not a normal exit', null);
 INSERT INTO `t_user_log` VALUES ('3b137d63-5606-4bdf-998b-b04800bd7eef', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 19:50:00', 'Not a normal exit', null);
 INSERT INTO `t_user_log` VALUES ('3f6c649d-c03f-4268-8c1a-471b2eec5a6a', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 18:30:57', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('3fc095f9-6401-4d08-aabd-f7ead0efcc87', null, 'admin', '用户登录', '2016-11-26 19:00:21', '/userController/login.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('3fc095f9-6401-4d08-aabd-f7ead0efcc87', null, 'admin', '用户登录', '2016-11-26 19:00:21', '/userController/login', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('41d73a6f-d968-42a1-a146-0f00b42da228', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 20:10:52', 'Not a normal exit', null);
 INSERT INTO `t_user_log` VALUES ('528b0397-568e-4994-b630-5761ecc836a2', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 18:50:00', 'Not a normal exit', null);
 INSERT INTO `t_user_log` VALUES ('555c9513-6a36-4b16-a3bf-6b8f5df3c7fe', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 18:00:52', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('5599b2cd-367a-454f-8ff0-eec4e011e23f', null, 'admin', '用户登录', '2016-11-26 17:32:29', '/userController/login.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('5599b2cd-367a-454f-8ff0-eec4e011e23f', null, 'admin', '用户登录', '2016-11-26 17:32:29', '/userController/login', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('586d7bb1-aedf-4efc-89de-3fabff85df30', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 20:00:52', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('58a2fa1d-d210-4751-84de-be2b9301cfef', null, 'admin', '用户登录', '2016-11-26 17:42:01', '/userController/login.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('58a2fa1d-d210-4751-84de-be2b9301cfef', null, 'admin', '用户登录', '2016-11-26 17:42:01', '/userController/login', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('676fc1c9-d08a-407a-bf78-34e4f4b983a8', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 17:50:00', 'Not a normal exit', null);
 INSERT INTO `t_user_log` VALUES ('82099c4d-96e3-4587-b796-9eb688bc3a29', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 17:20:17', 'Not a normal exit', null);
 INSERT INTO `t_user_log` VALUES ('8270c104-12e1-4c26-8ca9-0c33fe05d902', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 19:50:52', 'Not a normal exit', null);
@@ -874,20 +874,20 @@ INSERT INTO `t_user_log` VALUES ('b0db6270-cd3d-4569-a6f7-138475562c80', null, '
 INSERT INTO `t_user_log` VALUES ('b7d96704-e0ef-4029-b0b1-4a979d1d63e1', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 16:50:27', 'Not a normal exit', null);
 INSERT INTO `t_user_log` VALUES ('b952c111-340c-4637-b6b3-722756cdb9b2', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 19:30:00', 'Not a normal exit', null);
 INSERT INTO `t_user_log` VALUES ('c27042f4-ef97-4ae1-afd8-27a02c843eca', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 18:40:52', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('c2d8aff8-04c4-4766-aa71-35b9f587a173', null, 'admin', '用户登录', '2016-11-27 09:17:41', '/userController/login.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('c2d8aff8-04c4-4766-aa71-35b9f587a173', null, 'admin', '用户登录', '2016-11-27 09:17:41', '/userController/login', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('cc2b973b-1305-43a7-871e-d0c3ee0d1b5e', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 18:30:06', 'Not a normal exit', null);
 INSERT INTO `t_user_log` VALUES ('cd113edc-bd0c-4371-9808-8f109fbeace7', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 19:30:52', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('cd21046e-3fe0-40b3-8554-b633feaa1ac7', null, 'admin', '用户登录', '2016-11-26 16:43:40', '/userController/login.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('cd21046e-3fe0-40b3-8554-b633feaa1ac7', null, 'admin', '用户登录', '2016-11-26 16:43:40', '/userController/login', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('d04d71be-c5f5-481d-854e-889a5c66c543', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 19:10:52', 'Not a normal exit', null);
 INSERT INTO `t_user_log` VALUES ('d29f7249-667b-4298-93f4-f4c3c8c47352', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 19:00:52', 'Not a normal exit', null);
 INSERT INTO `t_user_log` VALUES ('db1f40bf-cc45-4340-a6a4-77d64ef1ad44', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 20:10:00', 'Not a normal exit', null);
 INSERT INTO `t_user_log` VALUES ('e4a4f0b7-f7fb-4b5e-a339-bd6febd2c0ac', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 20:20:52', 'Not a normal exit', null);
 INSERT INTO `t_user_log` VALUES ('e7553081-2239-4a00-96a6-27e1ce2e94ef', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 19:40:00', 'Not a normal exit', null);
 INSERT INTO `t_user_log` VALUES ('f1cfbfb1-a9a9-4b21-90a4-e5dac66fd8c1', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 16:30:00', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('f7737b21-e50f-431c-a996-5ccb11759200', null, 'admin', '用户正常退出', '2016-11-26 18:59:40', '/userController/logout.action', '127.0.0.1');
-INSERT INTO `t_user_log` VALUES ('f9c5b9fa-8472-4d20-895f-2b2b52a2ffbf', null, 'admin', '用户登录', '2016-11-26 17:12:16', '/userController/login.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('f7737b21-e50f-431c-a996-5ccb11759200', null, 'admin', '用户正常退出', '2016-11-26 18:59:40', '/userController/logout', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('f9c5b9fa-8472-4d20-895f-2b2b52a2ffbf', null, 'admin', '用户登录', '2016-11-26 17:12:16', '/userController/login', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('fbdd0423-cfb7-443d-9850-463f3780013a', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 17:40:00', 'Not a normal exit', null);
-INSERT INTO `t_user_log` VALUES ('fc95fe43-e39f-45cc-a648-292a4b180cdc', null, 'admin', '用户登录', '2016-11-26 17:23:09', '/userController/login.action', '127.0.0.1');
+INSERT INTO `t_user_log` VALUES ('fc95fe43-e39f-45cc-a648-292a4b180cdc', null, 'admin', '用户登录', '2016-11-26 17:23:09', '/userController/login', '127.0.0.1');
 INSERT INTO `t_user_log` VALUES ('fcfcda0e-b51a-452f-a0a9-16662d24971f', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 19:10:00', 'Not a normal exit', null);
 INSERT INTO `t_user_log` VALUES ('fff2af67-a14f-475f-b134-de48d37b1faf', null, 'admin', '用户可能是关闭浏览器等方式非正常退出', '2016-11-26 18:00:00', 'Not a normal exit', null);
 

@@ -9,19 +9,19 @@
 <jsp:include page="/inc.jsp"></jsp:include>
 
 <c:if
-	test="${fn:contains(sessionInfo.resourceSet, '/userController/delete.action')}">
+	test="${fn:contains(sessionInfo.resourceSet, '/userController/delete')}">
 	<script type="text/javascript">
 		$.canDelete = true;
 	</script>
 </c:if>
 <c:if
-	test="${fn:contains(sessionInfo.resourceSet, '/userController/editPage.action')}">
+	test="${fn:contains(sessionInfo.resourceSet, '/userController/editPage')}">
 	<script type="text/javascript">
 		$.canEditUser = true;
 	</script>
 </c:if>
 <c:if
-	test="${fn:contains(sessionInfo.resourceSet, '/userController/resetPwd.action')}">
+	test="${fn:contains(sessionInfo.resourceSet, '/userController/resetPwd')}">
 	<script type="text/javascript">
 		$.canEditPwd = true;
 	</script>
@@ -32,7 +32,7 @@
 		dataGrid = $('#dataGrid')
 				.datagrid(
 						{
-							url : '${pageContext.request.contextPath}/userController/dataGrid.action',
+							url : '${pageContext.request.contextPath}/userController/dataGrid',
 							fit : true,
 							fitColumns : true,
 							border : false,
@@ -113,7 +113,7 @@
 														.formatString(
 																'<img onclick="editFun(\'{0}\');" src="{1}" title="授权"/>',
 																row.id,
-																'${pageContext.request.contextPath}/style/images/extjs_icons/key.png');
+																'<c:url value="/resources/style/images/extjs_icons/key.png"/>');
 											}
 											str += '&nbsp;';
 											if ($.canEditPwd) {
@@ -121,7 +121,7 @@
 														.formatString(
 																'<img onclick="editPwdFun(\'{0}\');" src="{1}" title="重置密码"/>',
 																row.id,
-																'${pageContext.request.contextPath}/style/images/extjs_icons/lock/lock_edit.png');
+																'<c:url value="/resources/style/images/extjs_icons/lock/lock_edit.png"/>');
 											}
 											str += '&nbsp;';
 											if ($.canDelete) {
@@ -129,7 +129,7 @@
 														.formatString(
 																'<img onclick="deleteFun(\'{0}\');" src="{1}" title="删除"/>',
 																row.id,
-																'${pageContext.request.contextPath}/style/images/extjs_icons/delete.png');
+																'<c:url value="/resources/style/images/extjs_icons/delete.png"/>');
 											}
 											if(row.id==0){
 												str="系统用户";				
@@ -177,7 +177,7 @@
                                     });
                                     $
                                             .post(
-                                                    '${pageContext.request.contextPath}/userController/resetPwd.action',
+                                                    '${pageContext.request.contextPath}/userController/resetPwd',
                                                     {
                                                         id : id
                                                     },
@@ -221,7 +221,7 @@
 									});
 									$
 											.post(
-													'${pageContext.request.contextPath}/userController/delete.action',
+													'${pageContext.request.contextPath}/userController/delete',
 													{
 														id : id
 													},
@@ -275,7 +275,7 @@
 									}
 									$
 											.post(
-													'${pageContext.request.contextPath}/userController/batchDelete.action',
+													'${pageContext.request.contextPath}/userController/batchDelete',
 													{
 														ids : ids.join(',')
 													},
@@ -319,7 +319,7 @@
 			title : '添加用户',
 			width : 370,
 			height : 220,
-			href : '${pageContext.request.contextPath}/userController/addPage.action',
+			href : '${pageContext.request.contextPath}/userController/addPage',
 			buttons : [ {
 				text : '添加',
 				handler : function() {
@@ -418,7 +418,7 @@
 								<tbody>
 									<tr>
 										<td><c:if
-												test="${fn:contains(sessionInfo.resourceSet, '/userController/addPage.action')}">
+												test="${fn:contains(sessionInfo.resourceSet, '/userController/addPage')}">
 												<a onclick="addFun();" href="javascript:void(0);"
 													class="easyui-linkbutton"
 													data-options="plain:true,iconCls:'edit_add'">添加</a>

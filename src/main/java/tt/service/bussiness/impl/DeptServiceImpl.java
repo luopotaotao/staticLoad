@@ -21,13 +21,13 @@ public class DeptServiceImpl implements DeptServiceI {
 
     @Override
     public Dept get(Serializable id, Integer dept_id) {
-        return deptDao.getById(id,dept_id);
+        return deptDao.getById(id);
     }
 
     @Override
     public List<Dept> list(Map<String,Object> params, Integer page, Integer PageSize, Integer dept_id) {
-        StringBuilder hql = new StringBuilder("from Dept WHERE dept_id=:dept_id");
-        params.put("dept_id",dept_id);
+        StringBuilder hql = new StringBuilder("from Dept WHERE 1=1 ");
+//        params.put("dept_id",dept_id);
         Object typ =  params.get("typ");
         Object name =  params.get("name");
         if(typ!=null&&(Byte)typ!=0){
@@ -44,8 +44,8 @@ public class DeptServiceImpl implements DeptServiceI {
 
     @Override
     public long count(Map<String,Object> params, Integer dept_id) {
-        StringBuilder hql = new StringBuilder("select count(*) from Dept WHERE dept_id=:dept_id");
-        params.put("dept_id",dept_id);
+        StringBuilder hql = new StringBuilder("select count(*) from Dept WHERE 1=1 ");
+//        params.put("dept_id",dept_id);
         Byte typ = (Byte) params.get("typ");
         Byte name = (Byte) params.get("name");
         if(typ!=null&&typ!=0){
@@ -61,7 +61,6 @@ public class DeptServiceImpl implements DeptServiceI {
 
     @Override
     public Dept add(Dept dept, Integer dept_id) {
-        dept.setDept_id(dept_id);
         deptDao.save(dept);
         return dept;
     }
@@ -72,14 +71,13 @@ public class DeptServiceImpl implements DeptServiceI {
             return 0;
         }
         Map<String, Object> params = new HashMap<String, Object>();
-        params.put("dept_id",dept_id);
+//        params.put("dept_id",dept_id);
         params.put("ids", ids);
-        return deptDao.executeHql("delete from Dept where id in (:ids) and dept_id=:dept_id", params);
+        return deptDao.executeHql("delete from Dept where id in (:ids)", params);
     }
 
     @Override
     public Dept update(Dept dept, Integer dept_id) {
-        dept.setDept_id(dept_id);
         deptDao.update(dept);
         return dept;
     }

@@ -105,7 +105,7 @@ inspect_scheme(
 	safety_lev --建筑安全等级(一级,二级,三级),
 	pile_count --总桩数,
 	dept_id --检测单位,
-	approval_file_id --检测方案审批表(attachement_id)
+	approval_file --检测方案审批表(attachement_id)
 	inspect_file_id --检测方案附件(attachement_id)
 
 )

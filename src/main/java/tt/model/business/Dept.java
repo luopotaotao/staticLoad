@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "b_dept")
 @NeedDept
-public class Dept extends BaseModel implements java.io.Serializable {
+public class Dept implements java.io.Serializable {
     private Integer id;
     private String code;
     private String name;
@@ -16,6 +16,7 @@ public class Dept extends BaseModel implements java.io.Serializable {
     private Byte register_type;
     private String logo;
     private String note;
+    private boolean isDeleted;
 
     @Id
     @Column(name = "id")
@@ -96,5 +97,15 @@ public class Dept extends BaseModel implements java.io.Serializable {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    @Basic
+    @Column(name = "deleted")
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 }

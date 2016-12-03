@@ -6,12 +6,12 @@
 <head>
 <title>资源管理</title>
 <jsp:include page="/inc.jsp"></jsp:include>
-<c:if test="${fn:contains(sessionInfo.resourceSet, '/resourceController/editPage.action')}">
+<c:if test="${fn:contains(sessionInfo.resourceSet, '/resourceController/editPage')}">
 	<script type="text/javascript">
 		$.canEdit = true;
 	</script>
 </c:if>
-<c:if test="${fn:contains(sessionInfo.resourceSet, '/resourceController/delete.action')}">
+<c:if test="${fn:contains(sessionInfo.resourceSet, '/resourceController/delete')}">
 	<script type="text/javascript">
 		$.canDelete = true;
 	</script>
@@ -20,7 +20,7 @@
 	var treeGrid;
 	$(function() {
 		treeGrid = $('#treeGrid').treegrid({
-			url : '${pageContext.request.contextPath}/resourceController/treeGrid.action',
+			url : '${pageContext.request.contextPath}/resourceController/treeGrid',
 			idField : 'id',
 			treeField : 'name',
 			parentField : 'pid',
@@ -75,11 +75,11 @@
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
-						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="修改"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="修改"/>', row.id, '<c:url value="/resources/style/images/extjs_icons/pencil.png"/>');
 					}
 					str += '&nbsp;';
 					if ($.canDelete) {
-						str += $.formatString('<img onclick="deleteFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/delete.png');
+						str += $.formatString('<img onclick="deleteFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '<c:url value="/resources/style/images/extjs_icons/delete.png"/>');
 					}
 					return str;
 				}
@@ -105,7 +105,7 @@
 						title : '提示',
 						text : '数据处理中，请稍后....'
 					});
-					$.post('${pageContext.request.contextPath}/resourceController/delete.action', {
+					$.post('${pageContext.request.contextPath}/resourceController/delete', {
 						id : node.id
 					}, function(result) {
 						if (result.success) {
@@ -148,7 +148,7 @@
 			title : '添加资源',
 			width : 330,
 			height : 400,
-			href : '${pageContext.request.contextPath}/resourceController/addPage.action',
+			href : '${pageContext.request.contextPath}/resourceController/addPage',
 			buttons : [ {
 				text : '添加',
 				handler : function() {
@@ -177,7 +177,7 @@
 		</div>
 	</div>
  <div id="toolbar" style="display: none;">
-		<c:if test="${fn:contains(sessionInfo.resourceSet, '/resourceController/addPage.action')}">
+		<c:if test="${fn:contains(sessionInfo.resourceSet, '/resourceController/addPage')}">
 			<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'edit_add'">添加</a>
 		</c:if>
 	</div> 

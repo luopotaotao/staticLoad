@@ -54,7 +54,7 @@
 <div id="tt" class="easyui-panel" data-options="region:'center'" style="width: 1000px;height: 500px">
     <div class="info_form_hidden">
         <form class="easyui-form" method="post" data-options="novalidate:true"
-              action="${baseUrl}/post.action">
+              action="${baseUrl}/post">
 
             <div style="margin-bottom:20px;display: none">
                 <input class="easyui-textbox" name="id" style="width:500px" data-options="label:'工程编号:',required:true">
@@ -69,14 +69,14 @@
                 <select id="project_province_id" class="easyui-combobox" name="province.id" style="width:250px"
                         data-options="label:'所在省份:',
             labelAlign:'right',
-            url:'${pageContext.request.contextPath}/moduleBasicAreaController/area/0.action',
+            url:'${pageContext.request.contextPath}/moduleBasicAreaController/area/0',
             method:'get',
             valueField: 'id',
             textField: 'text',
             onSelect:function(rec){
                 var $city = $('#project_city_id');
                 $city.combobox('clear');
-                $city.combobox('reload','${pageContext.request.contextPath}/moduleBasicAreaController/area/'+rec.id+'.action');
+                $city.combobox('reload','${pageContext.request.contextPath}/moduleBasicAreaController/area/'+rec.id);
             }
             ">
 
@@ -112,11 +112,11 @@
                        style="width:250px"
                        data-options="label:'建设单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
                    buttonIcon:'icon-search'"
-                       url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial.action">
+                       url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial">
                 <input id="project_select_builder" class="easyui-textbox select" name="builder.id" style="width:250px"
                        data-options="label:'施工单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
                    buttonIcon:'icon-search'"
-                       url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial.action">
+                       url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial">
 
             </div>
             <div style="margin-bottom:20px">
@@ -124,7 +124,7 @@
                        style="width:250px"
                        data-options="label:'监理单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
                    buttonIcon:'icon-search'"
-                       url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial.action">
+                       url="${pageContext.request.contextPath}/moduleBasicCompanyController/partial">
             </div>
             <div style="margin-bottom:20px">
                 <input class="easyui-textbox" name="note" style="width:500px"
@@ -134,7 +134,7 @@
     </div>
     <div class="info_form_hidden">
         <form class="easyui-form" method="post" data-options="novalidate:true"
-              action="${baseUrl}/post.action">
+              action="${baseUrl}/post">
             <div style="margin-bottom:20px;display: none">
                 <input class="easyui-textbox" name="id" style="width:500px" data-options="label:'编号:',required:true">
             </div>
@@ -169,7 +169,7 @@
                        style="width:500px"
                        data-options="label:'检测单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
                    buttonIcon:'icon-search'"
-                       url="${pageContext.request.contextPath}/moduleInspectSchemeController/selectDept.action">
+                       url="${pageContext.request.contextPath}/moduleInspectSchemeController/selectDept">
             </div>
             <div style="margin-bottom:20px">
                 <input class="easyui-textbox" name="code" style="width:500px"
@@ -184,7 +184,7 @@
                     <select id="inspectItem_id" class="easyui-combobox" name="inspectItem.id" style="width:500px"
                             data-options="label:'检测项目:',
             labelAlign:'right',
-            url:'${pageContext.request.contextPath}/moduleBasicInspectItemController/comboList.action',
+            url:'${pageContext.request.contextPath}/moduleBasicInspectItemController/comboList',
             method:'get',
             valueField: 'id',
             textField: 'name'
@@ -209,7 +209,7 @@
          }">
         <div title="检测计划">
             <form class="easyui-form" method="post" data-options="novalidate:true"
-                  action="${baseUrl}/post.action">
+                  action="${baseUrl}/post">
                 <div style="margin-bottom:20px;display: none">
                     <input class="easyui-textbox" name="id" style="width:500px"
                            data-options="label:'编号:',required:true">
@@ -234,7 +234,7 @@
                            style="width:500px"
                            data-options="label:'检测设备:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
                    buttonIcon:'icon-search'"
-                           url="${pageContext.request.contextPath}/moduleInspectSchemeController/selectProject.action">
+                           url="${pageContext.request.contextPath}/moduleInspectSchemeController/selectProject">
                 </div>
                 <div style="margin-bottom:20px">
                     <input id="project_scheme_plan_equipment_code" class="easyui-textbox select" name="equipment.code"
@@ -281,7 +281,7 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="${pageContext.request.contextPath}/jslib/Highcharts-4.1.3/js/highcharts.js"
+<script type="text/javascript" src="<c:url value="/resources/jslib/Highcharts-4.1.3/js/highcharts.js"/>"
         type="text/javascript"
         charset="utf-8"></script>
 <script>
@@ -316,7 +316,7 @@
 
         function initUI() {
             $tree_menu.tree({
-                url: '${pageContext.request.contextPath}/moduleProjectManageController/tree.action',
+                url: '${pageContext.request.contextPath}/moduleProjectManageController/tree',
                 method: 'get',
                 idField: 'id',
                 textField: 'name',
@@ -364,7 +364,7 @@
         function addProject() {
             showAddDialog({
                 title: '添加工程'
-            }, '${pageContext.request.contextPath}/moduleProjectManageController/addProject.action');
+            }, '${pageContext.request.contextPath}/moduleProjectManageController/addProject');
         }
 
         function showProject(data) {
@@ -379,7 +379,7 @@
             showAddDialog({
                 title: '添加方案',
                 params: [{name: 'project.id', value: node.id}]
-            }, '${pageContext.request.contextPath}/moduleProjectManageController/addScheme.action');
+            }, '${pageContext.request.contextPath}/moduleProjectManageController/addScheme');
         }
 
         function showScheme(data) {
@@ -396,12 +396,12 @@
                     {name: 'inspectScheme.id', value: node.id},
                     {name: 'dept.id', value: node.dept ? node.dept.id : null}
                 ]
-            }, '${pageContext.request.contextPath}/moduleProjectManageController/addPlan.action');
+            }, '${pageContext.request.contextPath}/moduleProjectManageController/addPlan');
         }
 
 
         function showPlan(plan) {
-            $('#project_scheme_plan_show_data_div').panel('refresh', '${pageContext.request.contextPath}/moduleInspectPlanController/showData/' + plan.prg + '/' + plan.id + '.action');
+            $('#project_scheme_plan_show_data_div').panel('refresh', '${pageContext.request.contextPath}/moduleInspectPlanController/showData/' + plan.prg + '/' + plan.id);
             if ($.isNumeric(plan.start_time)) {
                 plan.start_time = new Date(plan.start_time);
             }
@@ -415,16 +415,16 @@
         function linkData() {
             var node = getNode();
             var plan_id = node.id;
-            var url = '${pageContext.request.contextPath}/moduleInspectPlanController/selectData/' + plan_id + '.action';
+            var url = '${pageContext.request.contextPath}/moduleInspectPlanController/selectData/' + plan_id;
             selectChild(url, function (data) {
                 $.ajax({
-                    url: '${pageContext.request.contextPath}/moduleInspectDataController/linkData/' + plan_id + '.action',
+                    url: '${pageContext.request.contextPath}/moduleInspectDataController/linkData/' + plan_id,
                     type: 'post',
                     dataType: 'json',
                     data: JSON.stringify(data),
                     contentType: "application/json"
                 }).done(function (ret) {
-                    $('#project_scheme_plan_show_data_div').panel('refresh', '${pageContext.request.contextPath}/moduleInspectPlanController/showData/' + plan_id + '.action');
+                    $('#project_scheme_plan_show_data_div').panel('refresh', '${pageContext.request.contextPath}/moduleInspectPlanController/showData/' + plan_id);
                 }).fail(function () {
                     $.messager.alert('提示', '关联数据失败!');
                 });
@@ -580,9 +580,9 @@
             var node = getNode();
             var msg = ['是否确认删除:', node.text, '?'].join('');
             var url = [
-                '${pageContext.request.contextPath}/moduleProjectManageController/delete.action',
-                '${pageContext.request.contextPath}/moduleInspectSchemeController/delete.action',
-                '${pageContext.request.contextPath}/moduleInspectPlanController/delete.action'
+                '${pageContext.request.contextPath}/moduleProjectManageController/delete',
+                '${pageContext.request.contextPath}/moduleInspectSchemeController/delete',
+                '${pageContext.request.contextPath}/moduleInspectPlanController/delete'
             ][node.level];
             $.messager.confirm('提示', msg, function (r) {
                 if (r) {

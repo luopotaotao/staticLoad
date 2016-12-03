@@ -8,7 +8,7 @@
 <title>用户日志信息</title>
 <jsp:include page="/inc.jsp"></jsp:include>
 <c:if
-	test="${fn:contains(sessionInfo.resourceSet, '/userlogController/search.action')}">
+	test="${fn:contains(sessionInfo.resourceSet, '/userlogController/search')}">
 	<script type="text/javascript">
 		$.canSearch = true;
 	</script>
@@ -19,7 +19,7 @@
 		dataGrid = $('#dataGrid')
 				.datagrid(
 						{
-							url : '${pageContext.request.contextPath}/userlogController/datagrid.action',
+							url : '${pageContext.request.contextPath}/userlogController/datagrid',
 							fit : true,
 							fitColumns : true,
 							border : false,
@@ -67,7 +67,7 @@
 														.formatString(
 																'<img onclick="detailFun(\'{0}\');" src="{1}" title="{2}"/>',
 																row.userLogId,
-																'${pageContext.request.contextPath}/jslib/jquery-easyui-1.3.6/themes/icons/search.png',
+																'<c:url value="/resources/jslib/jquery-easyui-1.3.6/themes/icons/search.png"/>',
 																'查看系统操作日志信息');
 											}
 											return str;
@@ -83,7 +83,7 @@
 		$('#adminName')
 				.combobox(
 						{
-							url : '${pageContext.request.contextPath}/userlogController/combobox.action',
+							url : '${pageContext.request.contextPath}/userlogController/combobox',
 							valueField : 'adminName',
 							textField : 'adminName',
 							editable : false,
