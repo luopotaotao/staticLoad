@@ -9,7 +9,7 @@ import java.util.Map;
  * Created by tt on 2016/10/2.
  */
 public interface InspectDataServiceI {
-    List<InspectData> list(String PRG,String STZH,Integer dept_id);
+    List<InspectData> list(String PRG,String STZH,boolean loadFlag,Integer dept_id);
     Map<String, Object> calcChart0(List<InspectData> list);
     Map<String, Object> calcChart1(List<InspectData> list);
     Map<String, Object> calcChart2(List<InspectData> list);

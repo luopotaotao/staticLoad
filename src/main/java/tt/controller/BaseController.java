@@ -164,7 +164,7 @@ public class BaseController<T>
     protected JSONObject listResponse(List list){
         JSONObject ret = new JSONObject();
         ret.put("total",list!=null?list.size():0);
-        ret.put("rows",list);
+        ret.put("rows",list!=null?list:new LinkedList<>());
         return ret;
     }
 

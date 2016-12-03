@@ -133,7 +133,6 @@
                     {
                         field: 'logo', title: '公司Logo', width: 80, align: 'right',
                         formatter: function (val, row) {
-                            debugger;
                             return '<img style="width:300px;height:59px;" src="<c:url value="/resources/upload/"/>' + (val || 'blank.png') + '">';
                         }
                     },

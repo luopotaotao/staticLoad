@@ -22,4 +22,9 @@ public class InspectMethodDaoImpl extends BaseDaoImpl<InspectMethod> implements 
         }
         return c.list();
     }
+
+    @Override
+    public List<InspectMethod> findByIds(List<Integer> ids) {
+        return getCriteria().add(Restrictions.in("id",ids)).list();
+    }
 }

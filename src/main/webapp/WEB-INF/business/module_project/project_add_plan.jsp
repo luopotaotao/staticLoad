@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: tt
@@ -46,9 +47,10 @@
         </div>
         <div style="margin-bottom:20px">
             <div style="margin-bottom:20px">
-                <select id="inspect_method" class="easyui-combobox" name="inspectMethods" style="width:45%"
+                <select id="inspect_method" class="easyui-combobox" name="inspectMethods.id" style="width:45%"
                         data-options="label:'检测项目:',
             labelAlign:'right',
+            url:'<c:url value="/moduleBasicInspectMethodController/${inspectItemId}/comboList"/> ',
             method:'get',
             valueField: 'id',
             textField: 'name'

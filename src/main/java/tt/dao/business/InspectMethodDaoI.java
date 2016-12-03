@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface InspectMethodDaoI extends BaseDaoI<InspectMethod> {
     List<InspectMethod> list(Integer inspect_item_id,String name,Integer dept_id);
+    List<InspectMethod> findByIds(List<Integer> ids);
+
 }

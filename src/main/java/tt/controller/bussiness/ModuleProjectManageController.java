@@ -109,7 +109,8 @@ public class ModuleProjectManageController extends BaseController<Project> {
         return "business/module_project/project_add_scheme";
     }
     @RequestMapping("addPlan")
-    public String addPlan(){
+    public String addPlan(@RequestParam(value = "inspectItemId") Integer inspectItemId,Model model){
+        model.addAttribute("inspectItemId",inspectItemId);
         return "business/module_project/project_add_plan";
     }
 }

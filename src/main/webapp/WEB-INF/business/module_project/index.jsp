@@ -383,8 +383,8 @@
         }
 
         function showScheme(data) {
-            console.log(JSON.stringify(data));
             $('#project_scheme_dept').textbox('setText', data.dept ? data.dept.name : '');
+            $('#inspectItem_id').combobox('setValue',data.inspectItem?data.inspectItem.id:null);
             setFileField('approval_file');
             setFileField('inspect_file');
 
@@ -405,6 +405,7 @@
         function addPlan() {
             var node = getNode();
             var root = getRoot();
+
             showAddDialog({
                 title: '添加计划',
                 params: [
@@ -412,7 +413,7 @@
                     {name: 'inspectScheme.id', value: node.id},
                     {name: 'dept.id', value: node.dept ? node.dept.id : null}
                 ]
-            }, '${pageContext.request.contextPath}/moduleProjectManageController/addPlan');
+            }, '${pageContext.request.contextPath}/moduleProjectManageController/addPlan?inspectItemId='+node.inspectItem.id);
         }
 
 
@@ -499,13 +500,14 @@
             var $target = $forms.eq(level);
             $target.css('display', 'block');
             $target.show();
-            [showProject, showScheme, showPlan][level](obj);
 
             try {
+                $target.form('clear');
                 $target.form('load', obj);
             } catch (e) {
                 console.log(e);
             }
+            [showProject, showScheme, showPlan][level](obj);
         }
 
         function openTab(title, url) {

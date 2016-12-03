@@ -146,7 +146,6 @@
                         min_lat = 91, min_lng = 181;
 
                 $.each(markers, function (i, item) {
-                    console.log(JSON.stringify(item));
                     max_lat = item.lat > max_lat ? item.lat : max_lat;
                     max_lng = item.lng > max_lng ? item.lng : max_lng;
                     min_lat = item.lat < min_lat ? item.lat : min_lat;

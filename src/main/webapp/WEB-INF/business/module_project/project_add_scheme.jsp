@@ -64,12 +64,13 @@
             <div style="margin-bottom:20px">
                 <select id="inspectItem_id" class="easyui-combobox" name="inspectItem.id" style="width:100%"
                         data-options="label:'检测项目:',
-            labelAlign:'right',
-            url:'<c:url value="/moduleBasicInspectItemController/comboList"/>',
-            method:'get',
-            valueField: 'id',
-            textField: 'name'
-            ">
+                        editable:false,
+                        labelAlign:'right',
+                        url:'<c:url value="/moduleBasicInspectItemController/comboList"/>',
+                        method:'get',
+                        valueField: 'id',
+                        textField: 'name'
+                        ">
                 </select>
             </div>
         </div>
@@ -88,8 +89,6 @@
                 fileType: ['doc', 'docx', 'ppt', 'xls', 'xlsx'],
                 selectors:['#approval_file_id_div'],
                 successHandler: function (ret) {
-                    console.log(ret.uuid);
-                    debugger
                     $(input).textbox('setValue', ret.uuid);
                     $(input).textbox('setText', ret.fileName);
                 },

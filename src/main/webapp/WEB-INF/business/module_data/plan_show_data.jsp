@@ -4,35 +4,8 @@
 <div class="easyui-layout" style="width: 100%;height: 97%;border: none;">
     <div class="easyui-tabs" data-options="region:'center',closable:false,collapsible:false"
          style="width: 100%;height: 97%; overflow: hidden;">
-        <div title="加压数据">
-            <table id="tb_source" class="easyui-datagrid" style="height: 98%;width: 100%;"
-                   data-options="
-       singleSelect:true,
-       rownumbers:true,
-       method:'get',
-       fitColumns:true,
-    ">
-                <thead>
-                <tr>
-                    <th data-options="field:'devnb',align:'center',width:80">设备编号</th>
-                    <th data-options="field:'prs_str',align:'center',width:80">压力</th>
-                    <th data-options="field:'hzjc_str',align:'center',width:80">荷载</th>
-                    <th data-options="field:'wyjc_str',align:'center',width:80">位移</th>
-                    <th data-options="field:'gps',align:'center',formatter:function(obj,row){return row.lat+','+row.lng},width:100">
-                        GPS信息
-                    </th>
-                    <th data-options="field:'devstr',align:'center',width:80">设备代号</th>
-                    <th data-options="field:'time',align:'center',width:120">数据上传时间</th>
-                    <th data-options="field:'interval',align:'center',width:30">时间间隔</th>
-                    <th data-options="field:'qjx_str',align:'center',width:80">倾角数据</th>
-                    <th data-options="field:'ndsj_str',align:'center',width:80">挠度数据</th>
-                    <th data-options="field:'devst',align:'center',width:80">设备状态</th>
-                </tr>
-                </thead>
-            </table>
-        </div>
-        <div title="统计数据">
-            <table id="tb_load" class="easyui-datagrid" style="height: 98%;width: 100%;"
+        <div title="汇总数据">
+            <table id="tb_all" class="easyui-datagrid" style="height: 98%;width: 100%;"
                    data-options="
        singleSelect:true,
        rownumbers:true,
@@ -64,14 +37,32 @@
             </table>
         </div>
 
-        <div title="s-lgt曲线">
-            <div id="slgt_chart" style="width: 50%; height: 400px;"></div>
-        </div>
-        <div title="s-lgQ曲线">
-            <div id="slgQ_chart" style="width: 50%; height: 400px;"></div>
-        </div>
-        <div title="Q-s曲线">
-            <div id="qs_chart" style="width: 50%; height: 400px"></div>
+        <div title="加压数据">
+            <table id="tb_source_press" class="easyui-datagrid" style="height: 98%;width: 100%;"
+                   data-options="
+       singleSelect:true,
+       rownumbers:true,
+       method:'get',
+       fitColumns:true,
+    ">
+                <thead>
+                <tr>
+                    <th data-options="field:'devnb',align:'center',width:80">设备编号</th>
+                    <th data-options="field:'prs_str',align:'center',width:80">压力</th>
+                    <th data-options="field:'hzjc_str',align:'center',width:80">荷载</th>
+                    <th data-options="field:'wyjc_str',align:'center',width:80">位移</th>
+                    <th data-options="field:'gps',align:'center',formatter:function(obj,row){return row.lat+','+row.lng},width:100">
+                        GPS信息
+                    </th>
+                    <th data-options="field:'devstr',align:'center',width:80">设备代号</th>
+                    <th data-options="field:'time',align:'center',width:120">数据上传时间</th>
+                    <th data-options="field:'interval',align:'center',width:30">时间间隔</th>
+                    <th data-options="field:'qjx_str',align:'center',width:80">倾角数据</th>
+                    <th data-options="field:'ndsj_str',align:'center',width:80">挠度数据</th>
+                    <th data-options="field:'devst',align:'center',width:80">设备状态</th>
+                </tr>
+                </thead>
+            </table>
         </div>
         <div title="减压数据">
             <table id="tb_source_release" class="easyui-datagrid" style="height: 98%;width: 100%;"
@@ -99,6 +90,16 @@
                 </tr>
                 </thead>
             </table>
+        </div>
+
+        <div title="s-lgt曲线">
+            <div id="slgt_chart" style="width: 50%; height: 400px;"></div>
+        </div>
+        <div title="s-lgQ曲线">
+            <div id="slgQ_chart" style="width: 50%; height: 400px;"></div>
+        </div>
+        <div title="Q-s曲线">
+            <div id="qs_chart" style="width: 50%; height: 400px"></div>
         </div>
 
         <div title="实时数据">
@@ -169,8 +170,9 @@
 
             function loadData(prg, stzh) {
                 $.get('${pageContext.request.contextPath}/moduleInspectDataController/query/' + prg + '/' + stzh, function (data) {
-                    $('#tb_source').datagrid({'data': data.source});
-                    $('#tb_load').datagrid({'data': data.source});
+                    $('#tb_all').datagrid({'data': data.source_press});
+                    $('#tb_source_press').datagrid({'data': data.source_press});
+                    $('#tb_source_release').datagrid({'data': data.source_release});
 
                     initChart0(data.chart0);
                     initChart1(data.chart1);

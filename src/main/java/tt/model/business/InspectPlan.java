@@ -23,6 +23,7 @@ public class InspectPlan extends BaseModel {
     private User assistantUser;
     private String note;
     private Project project;
+    private List<InspectMethod> inspectMethods;
 
     @Id
     @Column(name = "id")
@@ -165,5 +166,15 @@ public class InspectPlan extends BaseModel {
 
     public void setStzh(String stzh) {
         this.stzh = stzh;
+    }
+
+    @ManyToMany
+    @JoinTable(name="b_r_inspect_plan_method",joinColumns = @JoinColumn(name="plan_id"),inverseJoinColumns=@JoinColumn(name="method_id"))
+    public List<InspectMethod> getInspectMethods() {
+        return inspectMethods;
+    }
+
+    public void setInspectMethods(List<InspectMethod> inspectMethods) {
+        this.inspectMethods = inspectMethods;
     }
 }

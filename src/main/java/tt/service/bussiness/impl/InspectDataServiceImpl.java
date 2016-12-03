@@ -20,12 +20,13 @@ public class InspectDataServiceImpl implements InspectDataServiceI {
     private InspectDataDaoI inspectDataDao;
 
     @Override
-    public List<InspectData> list(String PRG,String STZH, Integer dept_id) {
-        String hql = "from InspectData WHERE PRG=:PRG and STZH=:STZH and dept_id=:dept_id order by SETprs ASC,totalTime ASC";
+    public List<InspectData> list(String PRG,String STZH,boolean loadFlag, Integer dept_id) {
+        String hql = "from InspectData WHERE PRG=:PRG and STZH=:STZH and loadFlag=:loadFlag and dept_id=:dept_id order by SETprs ASC,totalTime ASC";
         Map<String,Object> params = new HashMap<>();
         params.put("dept_id",dept_id);
         params.put("PRG",PRG);
         params.put("STZH",STZH);
+        params.put("loadFlag",loadFlag);
         List<InspectData> ret = inspectDataDao.find(hql, params);
         return calcDurationAndCurWyjc(ret);
     }

@@ -134,7 +134,6 @@
                         }
                         item.Delay = delay;
                     });
-                    console.log(JSON.stringify(statistic));
                 }
             }
             return {source: data, statistic: generateStatisticInfo(statistic, fields)};

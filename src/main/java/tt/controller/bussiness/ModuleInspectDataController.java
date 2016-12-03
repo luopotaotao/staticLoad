@@ -36,10 +36,12 @@ public class ModuleInspectDataController extends BaseController<InspectData> {
     @RequestMapping(value = "query/{PRG}/{STZH}", method = RequestMethod.GET)
     @ResponseBody
     public JSONObject queryData(@PathVariable String PRG, @PathVariable String STZH) {
-        List<InspectData> list = inspectDataService.list(PRG, STZH,getDeptId());
-        Map<String,Object> data = sortData(list);
+        List<InspectData> list_press = inspectDataService.list(PRG, STZH,true,getDeptId());
+        List<InspectData> list_release = inspectDataService.list(PRG, STZH,false,getDeptId());
+        Map<String,Object> data = sortData(list_press);
         JSONObject ret = new JSONObject();
-        ret.put("source",listResponse(list));
+        ret.put("source_press",listResponse(list_press));
+        ret.put("source_release",listResponse(list_release));
         ret.put("statistic","");
         for(Map.Entry<String,Object> entry:data.entrySet()){
             ret.put(entry.getKey(),entry.getValue());
