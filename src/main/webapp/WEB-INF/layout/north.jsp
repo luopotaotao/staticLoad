@@ -176,8 +176,9 @@
 <div style="background: rgb(38,150,203); height: 59px">
     <div id="logo_div" style="float: left;width: 36%;height: 59px;max-width: 460px;">
         <c:choose>
-            <c:when test="${sessionInfo.dept.logo eq ''}"><h2 style="color:white;margin: 5px;">
-                智能无线静荷载试验检测云平台</h2></c:when>
+            <c:when test="${empty sessionInfo.dept.logo}">
+                <h2 style="color:white;margin: 5px;">智能无线静荷载试验检测云平台</h2>
+            </c:when>
             <c:otherwise><img src="<c:url value="/resources/upload/${sessionInfo.dept.logo}"/>"></c:otherwise>
         </c:choose>
     </div>
