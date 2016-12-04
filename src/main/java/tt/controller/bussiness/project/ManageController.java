@@ -1,4 +1,4 @@
-package tt.controller.bussiness;
+package tt.controller.bussiness.project;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,15 +17,15 @@ import java.util.*;
  * Created by taotao on 2016/9/27.
  */
 @Controller
-@RequestMapping("moduleProjectManageController")
-public class ModuleProjectManageController extends BaseController<Project> {
+@RequestMapping("project/manage")
+public class ManageController extends BaseController<Project> {
     @Autowired
     private ProjectServiceI projectService;
 
     @RequestMapping("index")
-    public String index(Model model){
-        model.addAttribute("baseUrl","/moduleProjectManageController");
-        return "business/module_project/project";
+    public String index(@RequestParam(name = "project_id", required = false) String project_id, Model model) {
+        model.addAttribute("project_id", project_id != null ? project_id : "null");
+        return "business/module_project/index";
     }
     @RequestMapping("selectCoordinate")
     public String selectCoordinate(){

@@ -21,12 +21,11 @@
     <div class="menu_item" onclick="operate('collapse')">收起</div>
 </div>
 <script type="text/javascript">
-    var baseUrl = '${pageContext.request.contextPath}/moduleBasicAreaController';
     initUI();
     function initUI() {
 
         $('#tree_area').tree({
-            url: baseUrl + '/query/0',
+            url: '<c:url value="/basic/area/query/0"/>',
             method: 'get',
             animate: true,
             dnd: false,
@@ -35,7 +34,7 @@
                     if (txt) {
 //                        $(this).tree('beginEdit', node.target);
                         $.ajax({
-                            url: baseUrl + '/put',
+                            url: '<c:url value="/basic/area/put"/>',
                             type: 'post',
                             dataType: 'json',
                             data: {
@@ -85,7 +84,7 @@
                 var $tree = $('#tree_area');
                 var node = $tree.tree('getSelected');
                 $.ajax({
-                    url: baseUrl + '/post',
+                    url: '<c:url value="/basic/area/post"/>',
                     type: 'post',
                     dataType: 'json',
                     data: {'parent.id': node ? node.id : null, text: txt}
@@ -121,7 +120,7 @@
         var node = $('#tree_area').tree('getSelected');
 
         $.ajax({
-            url: baseUrl + '/delete/' + node.id,
+            url: '<c:url value="/basic/area/delete/"/>' + node.id,
             type: 'post',
             dateType: 'json'
         }).done(function () {

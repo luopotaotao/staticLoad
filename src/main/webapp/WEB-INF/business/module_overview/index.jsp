@@ -24,17 +24,16 @@
 <script>
     $(function () {
         var selectedProject = ${selectedProject};
-        var baseUrl = '${pageContext.request.contextPath}/${baseUrl}';
         var tree_data = [{
             "id": 1,
             "text": "基础信息",
-            "url": '${pageContext.request.contextPath}/moduleOverviewController/index'
+            "url": '<c:url value="/project/manage/index"/>'
         }];
 
         initUI();
         function initUI() {
             $('#tree_menu').tree({
-                url: '${pageContext.request.contextPath}/moduleOverviewController/queryAll',
+                url: '<c:url value="/overview/main/queryAll"/>',
                 method: 'get',
                 textField: 'name',
                 animate: true,
@@ -58,14 +57,14 @@
         }
 
         function getProjectsAndShow(area_id) {
-            var url = '${pageContext.request.contextPath}/moduleOverviewController/' + area_id + '/queryProjects';
+            var url = '<c:url value="/overview/main/"/>' + area_id + '/queryProjects';
             $.getJSON(url, function (ret) {
                 showMarkers(ret, function (marker) {
                     var template_arr = [
                         '<p>工程名称:{name}</p>',
                         '<p>工程编码:{code}</p>',
                         '<p>地址:{city}{address}</p>',
-                        '<div><button onclick="top.openModule(\'${pageContext.request.contextPath}/moduleProjectController/index.action?project_id={id}\')"> 工程详情</button> </div>'];
+                        '<div><button onclick="top.openModule(\'<c:url value="/project/manage/index"/>?project_id={id}\')"> 工程详情</button> </div>'];
                     var info = marker.info;
                     map.centerAndZoom(marker.M, 11);
                     showInfo(marker.M, template_arr.join(''), {
@@ -195,7 +194,7 @@
 
         if (selectedProject && selectedProject.id) {
             showMarkers([selectedProject], function (marker) {
-                var template = '<p><a href="javascript:top.openModule(\'${pageContext.request.contextPath}/moduleProjectController/index.action?project_id={id}\');">工程名称:{name}</a></p><p>工程编码:{code}</p><p>地址:{city}{address}</p>';
+                var template = '<p><a href="javascript:top.openModule(\'<c:url value="/project/manage/index"/>?project_id={id}\');">工程名称:{name}</a></p><p>工程编码:{code}</p><p>地址:{city}{address}</p>';
                 var info = marker.info;
                 map.centerAndZoom(marker.M, 11);
                 showInfo(marker.M, template, {

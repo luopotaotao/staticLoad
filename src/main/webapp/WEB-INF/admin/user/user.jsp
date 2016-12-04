@@ -32,7 +32,7 @@
 		dataGrid = $('#dataGrid')
 				.datagrid(
 						{
-							url : '${pageContext.request.contextPath}/userController/dataGrid',
+							url : '<c:url value="/userController/dataGrid"/>',
 							fit : true,
 							fitColumns : true,
 							border : false,
@@ -154,7 +154,7 @@
 					title : '修改用户密码',
 					width : 350,
 					height : 220,
-					href : '${pageContext.request.contextPath}/userController/editPwdPage?id='
+					href : '<c:url value="/userController/editPwdPage"/>?id='
 							+ id,
 					buttons : [ {
 						text : '修改',
@@ -177,7 +177,7 @@
                                     });
                                     $
                                             .post(
-                                                    '${pageContext.request.contextPath}/userController/resetPwd',
+                                                    '<c:url value="/userController/resetPwd"/>',
                                                     {
                                                         id : id
                                                     },
@@ -221,7 +221,7 @@
 									});
 									$
 											.post(
-													'${pageContext.request.contextPath}/userController/delete',
+													'<c:url value="/userController/delete"/>',
 													{
 														id : id
 													},
@@ -275,7 +275,7 @@
 									}
 									$
 											.post(
-													'${pageContext.request.contextPath}/userController/batchDelete',
+													'<c:url value="/userController/batchDelete"/>',
 													{
 														ids : ids.join(',')
 													},
@@ -319,7 +319,7 @@
 			title : '添加用户',
 			width : 370,
 			height : 220,
-			href : '${pageContext.request.contextPath}/userController/addPage',
+			href : '<c:url value="/userController/addPage"/>',
 			buttons : [ {
 				text : '添加',
 				handler : function() {
@@ -347,7 +347,7 @@
 						title : '用户授权',
 						width : 300,
 						height : 200,
-						href : '${pageContext.request.contextPath}/userController/grantPage.action?ids='
+						href : '<c:url value="/userController/grantPage"/>?ids='
 								+ ids.join(','),
 						buttons : [ {
 							text : '授权',
@@ -374,7 +374,7 @@
 					title : '修改用户',
 					width : 370,
 					height : 320,
-					href : '${pageContext.request.contextPath}/userController/editPage.action?id='
+					href : '<c:url value="/userController/editPage"/>?id='
 							+ id,
 					buttons : [ {
 						text : '修改',

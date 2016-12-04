@@ -7,7 +7,7 @@ $(function() {
 	parent.$.messager.progress('close');
 	addrequeired();
 	$('#form').form( {
-		url : '${pageContext.request.contextPath}/userController/editPwd',
+		url : '<c:url value="/userController/editPwd"/>',
 		onSubmit : function() {
 			parent.$.messager.progress( {
 				title : '提示',

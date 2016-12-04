@@ -25,7 +25,7 @@
 	var treeGrid;
 	$(function() {
 		treeGrid = $('#treeGrid').treegrid({
-			url : '${pageContext.request.contextPath}/roleController/treeGrid',
+			url : '<c:url value="/roleController/treeGrid"/>',
 			idField : 'id',
 			treeField : 'name',
 			parentField : 'pid',
@@ -115,7 +115,7 @@
 						title : '提示',
 						text : '数据处理中，请稍后....'
 					});
-					$.post('${pageContext.request.contextPath}/roleController/delete', {
+					$.post('<c:url value="/roleController/delete"/>', {
 						id : node.id
 					}, function(result) {
 						if (result.success) {
@@ -139,7 +139,7 @@
 				title : '修改角色',
 				width : 330,
 				height : 250,
-				href : '${pageContext.request.contextPath}/roleController/editPage.action?id=' + node.id,
+				href : '<c:url value="/roleController/editPage"/>?id=' + node.id,
 				buttons : [ {
 					text : '修改',
 					handler : function() {
@@ -157,7 +157,7 @@
 			title : '添加角色',
 			width : 330,
 			height : 250,
-			href : '${pageContext.request.contextPath}/roleController/addPage',
+			href : '<c:url value="/roleController/addPage"/>',
 			buttons : [ {
 				text : '添加',
 				handler : function() {
@@ -180,7 +180,7 @@
 				title : '角色授权',
 				width : 600,
 				height : 500,
-				href : '${pageContext.request.contextPath}/roleController/grantPage.action?id=' + node.id,
+				href : '<c:url value="/roleController/grantPage"/>?id=' + node.id,
 				buttons : [ {
 					text : '授权',
 					handler : function() {

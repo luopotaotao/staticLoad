@@ -1,4 +1,4 @@
-package tt.controller.bussiness;
+package tt.controller.bussiness.basic;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +20,13 @@ import java.util.*;
  */
 
 @Controller
-@RequestMapping("moduleBasicInspectItemController")
-public class ModuleBasicInspectItemController extends BaseController<InspectItem> {
+@RequestMapping("basic/inspectItem")
+public class InspectItemController extends BaseController<InspectItem> {
     @Autowired
     private InspectItemServiceI inspectItemService;
 
     @RequestMapping("index")
     public String index(Model model) {
-        model.addAttribute("baseUrl", "moduleBasicInspectItemController");
         return "business/module_basic/inspect_item";
     }
 

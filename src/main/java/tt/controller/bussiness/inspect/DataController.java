@@ -1,4 +1,4 @@
-package tt.controller.bussiness;
+package tt.controller.bussiness.inspect;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -17,16 +17,15 @@ import java.util.*;
  * Created by tt on 2016/10/2.
  */
 @Controller
-@RequestMapping("moduleInspectDataController")
-public class ModuleInspectDataController extends BaseController<InspectData> {
+@RequestMapping("inspect/data")
+public class DataController extends BaseController<InspectData> {
     @Autowired
     private InspectDataServiceI inspectDataService;
 
-    @RequestMapping("index")
-    public String index(Model model) {
-        model.addAttribute("baseUrl", "moduleBasicInspectDataController");
-        return "business/module_data/index";
-    }
+//    @RequestMapping("index")
+//    public String index(Model model) {
+//        return "business/module_data/index";
+//    }
 
     /**
      * @param PRG  工程id

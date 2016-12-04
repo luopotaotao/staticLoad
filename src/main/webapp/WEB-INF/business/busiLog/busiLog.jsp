@@ -19,7 +19,7 @@
         busiLogDataGrid = $('#busiLogDataGrid')
                 .datagrid(
                         {
-                            url : '${pageContext.request.contextPath}/busiLogController/datagrid',
+                            url : '<c:url value="/busiLogController/datagrid"/>',
                             fit : true,
                             fitColumns : true,
                             border : false,
@@ -123,7 +123,7 @@
                     title : "业务操作日志详情",
                     width : 520,
                     height : 420,
-                    href : '${pageContext.request.contextPath}/busiLogController/search.action?id='
+                    href : '<c:url value="/busiLogController/search"/>?id='
                             + logId
                 });
     }

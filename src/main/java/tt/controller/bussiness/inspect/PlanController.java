@@ -1,4 +1,4 @@
-package tt.controller.bussiness;
+package tt.controller.bussiness.inspect;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,20 +19,18 @@ import java.util.*;
  * Created by tt on 2016/10/2.
  */
 @Controller
-@RequestMapping("moduleInspectPlanController")
-public class ModuleInspectPlanController extends BaseController<InspectPlan> {
+@RequestMapping("inspect/plan")
+public class PlanController extends BaseController<InspectPlan> {
     @Autowired
     private InspectPlanServiceI inspectPlanService;
 
     @RequestMapping("index")
     public String index(Model model) {
-        model.addAttribute("baseUrl", "/moduleInspectPlanController");
         return "business/module_data/plan";
     }
 
     @RequestMapping("selectScheme")
     public String selectScheme(Model model) {
-        model.addAttribute("baseUrl", "/moduleInspectPlanController");
         return "business/module_data/plan_select_scheme";
     }
 

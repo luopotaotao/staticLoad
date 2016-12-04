@@ -9,7 +9,7 @@
 		$('#editCurrentUserPwdForm')
 				.form(
 						{
-							url : '${pageContext.request.contextPath}/userController/editCurrentUserPwd',
+							url : '<c:url value="/userController/editCurrentUserPwd"/>',
 							onSubmit : function() {
 								parent.$.messager.progress({
 									title : '提示',

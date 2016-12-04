@@ -22,4 +22,5 @@
 	<!--<context:component-scan base-package="tt.dao,tt.service,tt.timingTask" />-->
 
 	<bean id="socketConfig" class="tt.config.SocketConfig"></bean>
+	<bean id="markdownProcessor" class="org.markdown4j.Markdown4jProcessor"></bean>
 </beans>

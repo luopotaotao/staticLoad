@@ -6,7 +6,7 @@
 <title>SyPro Init Database</title>
 <jsp:include page="inc.jsp"></jsp:include>
 <script type="text/javascript">
-	location.replace('${pageContext.request.contextPath}/initController/init');
+	location.replace('<c:url value="/initController/init');
 </script>
 </head>
 <body>init database

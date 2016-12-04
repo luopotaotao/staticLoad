@@ -32,7 +32,7 @@
                 if (true) {//validate(name,pwd,verifycode)) {
                     pwd = $("#pwd").val();
                     $.ajax({
-                        url: "${pageContext.request.contextPath}/userController/login",
+                        url: "<c:url value="/userController/login"/>",
                         dataType: 'json',
                         type: 'post',
                         data: {name: name, pwd: pwd, verifycode: verifycode}

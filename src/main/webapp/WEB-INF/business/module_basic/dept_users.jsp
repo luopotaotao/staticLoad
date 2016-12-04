@@ -27,7 +27,7 @@
             handler: $.closeUserEditDialog
             }]
         ">
-        <form id="ff_user" class="easyui-form" method="post" data-options="novalidate:true" action="../${baseUrl}/post">
+        <form id="ff_user" class="easyui-form" method="post" data-options="novalidate:true" action="<c:url value="/basic/user/post"/>">
             <div style="margin-bottom:20px;display: none">
                 <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'企业编号:',required:true">
             </div>
@@ -58,9 +58,8 @@
     <script type="text/javascript">
         $(function () {
             var dept_id = '${dept_id}';
-            var baseUrl = '${pageContext.request.contextPath}/${baseUrl}';
             $('#dg_user').datagrid({
-                url: '../${baseUrl}/${dept_id}/query',
+                url: '<c:url value="/basic/user/${dept_id}/query"/>',
                 method: 'get',
 //                title: '人员管理',
 //                iconCls: 'icon-save',
@@ -129,9 +128,9 @@
                 var $ff = $('#ff_user');
                 if (data) {
                     $ff.form('load', data);
-                    $ff.form({url: '../${baseUrl}/put'});
+                    $ff.form({url: '<c:url value="/basic/user/put"/>'});
                 } else {
-                    $ff.form({url: '../${baseUrl}/post'});
+                    $ff.form({url: '<c:url value="/basic/user/post"/>'});
                 }
                 $('#user_dept_id').textbox('setValue', dept_id);
                 $('#dlg_user_edit').dialog('open');
@@ -173,7 +172,7 @@
             $.closeUserEditDialog = closeEditDialog;
             function remove(ids) {
                 $.ajax({
-                    url: baseUrl+'/delete',
+                    url: <c:url value="/basic/user/delete"/>,
                     data: {ids: ids},
                     type: 'post',
                     dataType: 'json'

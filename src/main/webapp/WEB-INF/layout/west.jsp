@@ -6,10 +6,10 @@ var layout_west_tree;
 var layout_west_tree_url = '';
 var sessionInfo_userId = '${sessionInfo.id}';
 if (sessionInfo_userId) {
-	layout_west_tree_url = '${pageContext.request.contextPath}/resourceController/tree';
+	layout_west_tree_url = '<c:url value="/resourceController/tree"/>';
 } else {
 	$.messager.alert('操作提示', "您还没有登录或登录已超时，请重新登录！", "info", function() {
-		location.href = '${pageContext.request.contextPath}/';
+		location.href = '<c:url value="/"/>';
 	});
 }
 $(function() {
@@ -77,7 +77,7 @@ var timeout1;
 	timeout1 = setInterval("monitoronline()", 10000);
 function monitoronline() {
 	$.ajax({
-	   url:"${pageContext.request.contextPath}/monitorController/monitoronline",
+	   url:"<c:url value="/monitorController/monitoronline"/>",
 	   timeout : 10000,
 	   success:function(){
 	   

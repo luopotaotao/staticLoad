@@ -15,7 +15,7 @@
 	    addrequeired();
 		parent.$.messager.progress('close');
 		$('#editInvalidPwdForm').form({
-			url : '${pageContext.request.contextPath}/userController/editInvalidPwd',
+			url : '<c:url value="/userController/editInvalidPwd',
 			onSubmit : function() {
 				//parent.$.messager.progress({
 				//	title : '提示',
@@ -121,7 +121,7 @@
                         <td colspan="2"><input type="submit" value="修改"></td>
                     </tr>
                     <tr  style="text-align:center">
-                        <td colspan="2"><a href="${pageContext.request.contextPath}/admin_login_backup.jsp">登录</a></td>
+                        <td colspan="2"><a href="<c:url value="/admin_login_backup.jsp">登录</a></td>
                     </tr>
 				</table>
 			</form>

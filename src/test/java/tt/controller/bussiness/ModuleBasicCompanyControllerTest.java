@@ -54,7 +54,7 @@
 //    public void index() throws Exception {
 //        ResultActions ra =mvc.perform(
 //                MockMvcRequestBuilders
-//                        .get("/moduleBasicCompanyController/index")
+//                        .get("/basic/company/index")
 //                        .param("departmentId", "1")
 //                        .param("staffId", "1"));
 //        final MvcResult result = ra.andReturn();
@@ -70,22 +70,22 @@
 //    public void getTest() throws Exception {
 //        ResultActions ra =mvc.perform(
 //                MockMvcRequestBuilders
-//                        .get("/moduleBasicCompanyController/get/1")).andExpect(jsonPath("id").exists());
+//                        .get("/basic/company/get/1")).andExpect(jsonPath("id").exists());
 ////        final MvcResult result = ra.andReturn();
 ////        System.out.println(result.getResponse().getContentAsString());
 ////        assertThat(result.getResponse().getStatus(), is(200));//判断响应状态是否正常
-////        mvcMock.perform(get("/moduleBasicCompanyController/get/1")).andExpect(jsonPath("id").exists());
+////        mvcMock.perform(get("/basic/company/get/1")).andExpect(jsonPath("id").exists());
 //    }
 //
 //    @Test
 //    public void list() throws Exception {
 ////        ResultActions ra =mvc.perform(
 ////                MockMvcRequestBuilders
-////                        .get("/moduleBasicCompanyController/query.action?page=1&rows=10"));
+////                        .get("/basic/company/query.action?page=1&rows=10"));
 ////        final MvcResult result = ra.andReturn();
 ////        System.out.println(result.getResponse().getContentAsString());
 ////        assertThat(result.getResponse().getStatus(), is(200));//判断响应状态是否正常
-//        mvcMock.perform(get("/moduleBasicCompanyController/query")).andExpect(jsonPath("total").exists());
+//        mvcMock.perform(get("/basic/company/query")).andExpect(jsonPath("total").exists());
 //    }
 //
 //    @Test

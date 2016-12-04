@@ -27,7 +27,7 @@
 		userInfoGrid = $("#userInfoGrid")
 				.datagrid(
 						{
-							url : "${pageContext.request.contextPath}/userInfoController/datagrid",
+							url : "<c:url value="/userInfoController/datagrid",
 							fit : true,
 							fitColumns : true,
 							border : false,
@@ -103,7 +103,7 @@
 								$('#dddv-' + rowIndex)
 										.datagrid(
 												{
-													url : '${pageContext.request.contextPath}/userAppletInfoController/datagrid.action?seid='
+													url : '<c:url value="/userAppletInfoController/datagrid.action?seid='
 															+ rowData.seid
 															+ '&seTsmId='
 															+ rowData.seTsmId,
@@ -204,7 +204,7 @@
 					title : "查看详情",
 					width : 820,
 					height : 420,
-					href : '${pageContext.request.contextPath}/userInfoController/searchPage.action?seid='
+					href : '<c:url value="/userInfoController/searchPage.action?seid='
 							+ seid + '&seTsmId=' + seTsmId,
 
 				});
@@ -217,7 +217,7 @@
 					title : "查看详情",
 					width : 550,
 					height : 350,
-					href : '${pageContext.request.contextPath}/userAppletInfoController/searchPage.action?seid='
+					href : '<c:url value="/userAppletInfoController/searchPage.action?seid='
 							+ seid
 							+ '&seTsmId='
 							+ seTsmId

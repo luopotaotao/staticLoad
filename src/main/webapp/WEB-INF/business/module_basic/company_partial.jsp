@@ -13,7 +13,7 @@
            style="width:100%">
 </div>
 <table id="grid" class="easyui-datagrid" style="width:100%;height:100%"
-       data-options="singleSelect:false,url:'${pageContext.request.contextPath}/moduleBasicCompanyController/query.action?typ=${typ}',method:'get'">
+       data-options="singleSelect:false,url:'<c:url value="/basic/company/query"/>?typ=${typ}',method:'get'">
     <thead>
     <tr>
         <th data-options="field: 'ck', checkbox: true"></th>

@@ -6,7 +6,7 @@
 		parent.$.messager.progress('close');
 		addrequeired();
 		$('#roleIds').combotree({
-			url : '${pageContext.request.contextPath}/roleController/grantRoleTree',
+			url : '<c:url value="/roleController/grantRoleTree"/>',
 			parentField : 'pid',
 			lines : true,
 			panelHeight : '200',
@@ -21,7 +21,7 @@
 		$('#form')
 				.form(
 						{
-							url : '${pageContext.request.contextPath}/userController/edit',
+							url : '<c:url value="/userController/edit"/>',
 							onSubmit : function() {
 								parent.$.messager.progress({
 									title : '提示',

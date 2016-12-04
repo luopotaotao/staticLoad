@@ -23,7 +23,7 @@
 // * Created by taotao on 2016/9/27.
 // */
 //@Controller
-//@RequestMapping("moduleBasicDeptController")
+//@RequestMapping("basic/dept")
 //public class ModuleBasicDeptController_ extends BaseController<Dept> {
 //    public static final String UPLOAD_DIR = "tmp";
 //    public static final String LOGO_DIR = "logo";
@@ -35,7 +35,7 @@
 //    @RequestMapping("index")
 //    public String index(Model model) {
 //        Dept dept = getOriginDept()!=null?getOriginDept():getDept();
-//        model.addAttribute("baseUrl", "moduleBasicDeptController");
+//        model.addAttribute("baseUrl", "basic/dept");
 //        model.addAttribute("dept_id", dept.getId());
 //        return "business/module_basic/dept_";
 //    }

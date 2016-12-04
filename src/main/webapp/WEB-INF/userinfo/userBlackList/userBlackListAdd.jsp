@@ -10,7 +10,7 @@
 		$('#userBlackListAddForm')
 				.form(
 						{
-							url : '${pageContext.request.contextPath}/userBlackListController/add',
+							url : '<c:url value="/userBlackListController/add',
 							onSubmit : function() {
 								parent.$.messager.progress({
 									title : "提示",

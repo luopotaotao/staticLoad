@@ -103,7 +103,7 @@
 		$
 				.ajax({
 					data : $.serializeObject($('#userRegStatisticsSearchform')),
-					url : "${pageContext.request.contextPath}/userRegStatisticsController/userRegStatistics",
+					url : "<c:url value="/userRegStatisticsController/userRegStatistics",
 					method : "post",
 					dataType : "json",
 					async : false,

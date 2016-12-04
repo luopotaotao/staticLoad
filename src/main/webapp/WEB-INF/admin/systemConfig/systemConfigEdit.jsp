@@ -8,7 +8,7 @@
 		$('#systemConfigEditForm')
 				.form(
 						{
-							url : '${pageContext.request.contextPath}/systemConfigController/edit',
+							url : '<c:url value="/systemConfigController/edit"/>',
 							onSubmit : function() {
 								parent.$.messager.progress({
 									title : "提示",

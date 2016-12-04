@@ -16,7 +16,7 @@
 			</ul>
 		</div>
 		<p>
-			<a class="btn btn-primary btn-large" href="${pageContext.request.contextPath}/index.jsp" target="_blank"> 进入(里面有源码下载哦) </a>
+			<a class="btn btn-primary btn-large" href="<c:url value="/index.jsp" target="_blank"> 进入(里面有源码下载哦) </a>
 		</p>
 	</div>
 	<div class="hero-unit">

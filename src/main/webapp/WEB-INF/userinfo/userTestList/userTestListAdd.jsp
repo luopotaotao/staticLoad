@@ -7,7 +7,7 @@
 		$('#userTestListAddForm')
 				.form(
 						{
-							url : '${pageContext.request.contextPath}/userTestListController/add',
+							url : '<c:url value="/userTestListController/add',
 							onSubmit : function() {
 								parent.$.messager.progress({
 									title : "提示",

@@ -8,7 +8,7 @@
 		$('#userBlackListImportForm')
 				.form(
 						{
-							url : '${pageContext.request.contextPath}/userBlackListController/import',
+							url : '<c:url value="/userBlackListController/import',
 							onSubmit : function() {
 								parent.$.messager.progress({
 									title : "提示",

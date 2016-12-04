@@ -19,7 +19,7 @@
 		dataGrid = $('#dataGrid')
 				.datagrid(
 						{
-							url : '${pageContext.request.contextPath}/userlogController/datagrid',
+							url : '<c:url value="/userlogController/datagrid"/>',
 							fit : true,
 							fitColumns : true,
 							border : false,
@@ -83,7 +83,7 @@
 		$('#adminName')
 				.combobox(
 						{
-							url : '${pageContext.request.contextPath}/userlogController/combobox',
+							url : '<c:url value="/userlogController/combobox"/>',
 							valueField : 'adminName',
 							textField : 'adminName',
 							editable : false,
@@ -104,7 +104,7 @@
 					title : "系统日志详情",
 					width : 520,
 					height : 350,
-					href : '${pageContext.request.contextPath}/userlogController/search.action?id='
+					href : '<c:url value="/userlogController/search"/>?id='
 							+ id
 				});
 	}

@@ -1,4 +1,4 @@
-package tt.controller.bussiness;
+package tt.controller.bussiness.overview;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -22,8 +22,8 @@ import java.util.List;
  * Created by tt on 2016/10/1.
  */
 @Controller
-@RequestMapping("moduleOverviewController")
-public class ModuleOverviewController extends BaseController<Overview>{
+@RequestMapping("overview/main")
+public class OverviewController extends BaseController<Overview>{
 
     @Autowired
     private OverviewServiceI overviewServiceI;
@@ -52,7 +52,6 @@ public class ModuleOverviewController extends BaseController<Overview>{
         }else{
             model.addAttribute("selectedProject","null");
         }
-        model.addAttribute("baseUrl", "/moduleProjectController");
         return "business/module_overview/index";
     }
 

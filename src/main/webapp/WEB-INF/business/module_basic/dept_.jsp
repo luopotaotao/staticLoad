@@ -17,7 +17,7 @@
 
     <table id="dg" style="width:100%"></table>
     <div id="dlg_edit" style="width:100%;max-width:800px;padding:30px 60px;">
-        <form id="ff" class="easyui-form" method="post" data-options="novalidate:true" action="${baseUrl}/post">
+        <form id="ff" class="easyui-form" method="post" data-options="novalidate:true" action="<c:url value="/basic/dept/post"/>">
             <div style="margin-bottom:20px;display: none">
                 <input class="easyui-textbox" name="id" style="width:45%" data-options="label:'记录编号:',required:true">
                 <input class="easyui-textbox" name="code" style="width:45%"
@@ -73,9 +73,8 @@
 
     <script type="text/javascript">
         $(function () {
-            var baseUrl = '/';
             $('#dg').datagrid({
-                url: '../${baseUrl}/query',
+                url: '<c:url value="/basic/dept/query"/>',
                 method: 'get',
                 iconCls: 'icon-save',
 //            width: 700,
@@ -317,7 +316,7 @@
 
             function remove(ids) {
                 $.ajax({
-                    url: '../${baseUrl}/delete',
+                    url: '<c:url value="/basic/dept/delete"/>',
                     data: {ids: ids},
                     type: 'post',
                     dataType: 'json'
@@ -347,11 +346,11 @@
 
 
         function manageTUsers(id) {
-            var href = '../moduleBasicUserController/index/' + id;
+            var href = '../basic/user/index/' + id;
             openDialog('账号管理', href);
         }
         function manageEquipments(id){
-            var href = '../moduleBasicEquipmentController/index/'+id;
+            var href = '../basic/equipment/index/'+id;
             openDialog('设备管理',href);
         }
         var r = null;
@@ -405,7 +404,7 @@
     <table id="dg_user" style="width:100%"></table>
     <div id="dlg_user_edit" style="width:100%;max-width:400px;padding:30px 60px;">
         <form id="ff_user" class="easyui-form" method="post" data-options="novalidate:true"
-              action="../${baseUrl}/post">
+              action="<c:url value="/basic/dept/post"/>">
             <div style="margin-bottom:20px;display: none">
                 <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'企业编号:',required:true">
             </div>
@@ -437,9 +436,8 @@
     <script type="text/javascript">
         $(function () {
             var dept_id = '${dept_id}';
-            var baseUrl = '${pageContext.request.contextPath}/moduleBasicUserController';
             $('#dg_user').datagrid({
-                url: '../moduleBasicUserController/queryAll',
+                url: '<c:url value="/basic/user/queryAll"/>',
                 method: 'get',
 //                title: '人员管理',
 //                iconCls: 'icon-save',
@@ -526,9 +524,9 @@
                 var $ff = $('#ff_user');
                 if (data) {
                     $ff.form('load', data);
-                    $ff.form({url: '../moduleBasicUserController/put'});
+                    $ff.form({url: '../basic/user/put'});
                 } else {
-                    $ff.form({url: '../moduleBasicUserController/post'});
+                    $ff.form({url: '../basic/user/post'});
                 }
                 $('#user_dept_id').textbox('setValue', dept_id);
                 $('#dlg_user_edit').dialog('open');
@@ -566,9 +564,10 @@
                 $('#dlg_user_edit').dialog('close');
             }
 
+            //TODO 删除用户与删除dept冲突
             function remove(ids) {
                 $.ajax({
-                    url: baseUrl + '/delete',
+                    url: '<c:url value="/basic/user/delete"/>',
                     data: {ids: ids},
                     type: 'post',
                     dataType: 'json'

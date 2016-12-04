@@ -17,7 +17,7 @@
 
 <table id="dg" style="width:100%"></table>
 <div id="dlg_edit" style="width:100%;max-width:600px;padding:10px 60px;">
-    <form id="ff" class="easyui-form" method="post" data-options="novalidate:true" action="${baseUrl}/post">
+    <form id="ff" class="easyui-form" method="post" data-options="novalidate:true" action="<c:url value="/inspect/plan/post"/>">
         <div style="margin-bottom:20px;display: none">
             <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'编号:',required:true">
         </div>
@@ -27,7 +27,7 @@
         <div style="margin-bottom:20px">
             <input class="easyui-textbox select-scheme" name="inspectScheme.id" style="width:100%"
                    data-options="label:'方案名称:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="${baseUrl}/selectScheme">
+                   buttonIcon:'icon-search'" url="<c:url value="/inspect/plan/selectScheme"/>/">
         </div>
         <div style="margin-bottom:20px">
             <input class="easyui-textbox select-user" name="user.id" style="width:100%"
@@ -37,7 +37,7 @@
         <div style="margin-bottom:20px">
             <input class="easyui-textbox select" name="equipment.id" style="width:100%"
                    data-options="label:'检测设备:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="${pageContext.request.contextPath}/moduleInspectSchemeController/selectProject">
+                   buttonIcon:'icon-search'" url="<c:url value="/inspect/scheme/selectProject"/>">
         </div>
         <div style="margin-bottom:20px">
             <input name="start_time" style="width:100%" type="text" class="easyui-datebox"
@@ -79,9 +79,8 @@
 
 <script type="text/javascript">
     $(function () {
-        var baseUrl = '/';
         $('#dg').datagrid({
-            url: '${pageContext.request.contextPath}/${baseUrl}/query',
+            url: '<c:url value="/inspect/plan/query"/>',
             method: 'get',
             iconCls: 'icon-save',
 //            width: 700,
@@ -250,8 +249,8 @@
                     var item = data[0];
                     $(_this).textbox('setValue', item.id);
                     $(_this).textbox('setText', item.name);
-                    var url_method = '${pageContext.request.contextPath}/moduleBasicInspectMethodController/'+item.inspectItem.id+'/comboList';
-                    var url_user = '${pageContext.request.contextPath}/moduleInspectPlanController/selectUser/'+item.inspectItem.id;
+                    var url_method = '<c:url value="/basic/inspectMethod/'+item.inspectItem.id+'/comboList"/>';
+                    var url_user = '<c:url value="/inspect/plan/selectUser/"/>'+item.inspectItem.id;
                     $('#inspect_method').combobox('reload',url);
                     $('input.select-user').attr('url',url_user);
                 });
@@ -350,7 +349,7 @@
 
         function remove(ids) {
             $.ajax({
-                url: '${pageContext.request.contextPath}/${baseUrl}/delete',
+                url: '<c:url value="/inspect/plan/delete"/>',
                 data: {ids: ids},
                 type: 'post',
                 dataType: 'json'
@@ -411,7 +410,7 @@
         });
     }
     function showData(plan_id) {
-        var url = '${pageContext.request.contextPath}/moduleInspectPlanController/showData/'+plan_id;
+        var url = '<c:url value="/inspect/plan/showData/"/>'+plan_id;
         var $iframe = $('#data_details_iframe');
         $iframe.attr('src',url);
         $('#data_details').dialog({
@@ -423,10 +422,10 @@
         });
     }
     function linkData(plan_id) {
-        var url = '${pageContext.request.contextPath}/moduleInspectPlanController/selectData/'+plan_id;
+        var url = '<c:url value="/inspect/plan/selectData/"/>'+plan_id;
         selectChild(url, function (data) {
             $.ajax({
-                url:'${pageContext.request.contextPath}/moduleInspectDataController/linkData/'+plan_id,
+                url:'<c:url value="/inspect/data/linkData/"/>'+plan_id,
                 type:'post',
                 dataType:'json',
                 data:JSON.stringify(data),

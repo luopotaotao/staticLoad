@@ -20,7 +20,7 @@
 		userTestListGrid = $("#userTestListGrid")
 				.datagrid(
 						{
-							url : "${pageContext.request.contextPath}/userTestListController/datagrid",
+							url : "<c:url value="/userTestListController/datagrid",
 							fit : true,
 							fitColumns : true,
 							border : false,
@@ -89,7 +89,7 @@
 					title : "添加测试用户",
 					width : 450,
 					height : 150,
-					href : '${pageContext.request.contextPath}/userTestListController/addPage',
+					href : '<c:url value="/userTestListController/addPage',
 					buttons : [ {
 						text : '添加',
 						handler : function() {
@@ -133,7 +133,7 @@
 									}
 									$
 											.ajax({
-												url : '${pageContext.request.contextPath}/userTestListController/delete',
+												url : '<c:url value="/userTestListController/delete',
 												data : {
 													ids : seId.join(',')
 												},
@@ -170,7 +170,7 @@
 					title : "导入测试用户",
 					width : 520,
 					height : 350,
-					href : '${pageContext.request.contextPath}/userTestListController/importPage',
+					href : '<c:url value="/userTestListController/importPage',
 					buttons : [ {
 						text : '导入',
 						handler : function() {

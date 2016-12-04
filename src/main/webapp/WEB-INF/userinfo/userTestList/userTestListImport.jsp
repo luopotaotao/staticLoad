@@ -8,7 +8,7 @@
 		$('#userTestListImportForm')
 				.form(
 						{
-							url : '${pageContext.request.contextPath}/userTestListController/import',
+							url : '<c:url value="/userTestListController/import',
 							onSubmit : function() {
 								parent.$.messager.progress({
 									title : "提示",

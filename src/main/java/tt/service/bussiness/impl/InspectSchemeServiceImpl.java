@@ -56,6 +56,7 @@ public class InspectSchemeServiceImpl implements InspectSchemeServiceI {
     @Override
     public InspectScheme add(InspectScheme inspectScheme, Integer dept_id) {
         resetScheme(inspectScheme);
+        inspectScheme.setDept(deptDao.getById(dept_id));
         inspectSchemeDao.save(inspectScheme);
         return inspectScheme;
     }
@@ -80,7 +81,7 @@ public class InspectSchemeServiceImpl implements InspectSchemeServiceI {
     private void resetScheme(InspectScheme inspectScheme){
         inspectScheme.setProject(projectDao.getById(inspectScheme.getProject().getId()));
         inspectScheme.setInspectItem(inspectItemDao.getById(inspectScheme.getInspectItem().getId()));
-        inspectScheme.setDept(deptDao.getById(inspectScheme.getDept().getId()));
+
         File approval_file = inspectScheme.getApproval_file();
         if(approval_file!=null&&approval_file.getUuid()!=null){
             inspectScheme.setApproval_file(fileDao.getById(approval_file.getUuid()));
@@ -89,7 +90,7 @@ public class InspectSchemeServiceImpl implements InspectSchemeServiceI {
         }
         File inspect_file = inspectScheme.getInspect_file();
         if(inspect_file!=null&&inspect_file.getUuid()!=null){
-            inspectScheme.setInspect_file(fileDao.getById(approval_file.getUuid()));
+            inspectScheme.setInspect_file(fileDao.getById(inspect_file.getUuid()));
         }else{
             inspectScheme.setInspect_file(null);
         }

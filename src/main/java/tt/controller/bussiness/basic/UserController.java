@@ -1,4 +1,4 @@
-package tt.controller.bussiness;
+package tt.controller.bussiness.basic;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +19,13 @@ import java.util.*;
  * Created by tt on 2016/10/2.
  */
 @Controller
-@RequestMapping("moduleBasicUserController")
-public class ModuleBasicUserController extends BaseController<User> {
+@RequestMapping("basic/user")
+public class UserController extends BaseController<User> {
     @Autowired
     private UserServiceI userService;
 
     @RequestMapping("index/{dept_id}")
     public String index(@PathVariable Integer dept_id, Model model) {
-        model.addAttribute("baseUrl", "moduleBasicUserController");
         model.addAttribute("dept_id", dept_id);
         return "business/module_basic/dept_users";
     }

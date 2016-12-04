@@ -6,7 +6,7 @@
 		addrequeired();
 	
 		$('#form').form({
-			url : '${pageContext.request.contextPath}/roleController/edit',
+			url : '<c:url value="/roleController/edit"/>',
 			onSubmit : function() {
 				parent.$.messager.progress({
 					title : '提示',

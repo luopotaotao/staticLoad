@@ -13,7 +13,7 @@
         charset="utf-8"></script>
 <div style="width:100%;max-width:600px;padding:30px 60px;">
     <form id="ff" class="easyui-form" method="post" data-options="novalidate:true"
-          action="<c:url value="/moduleInspectSchemeController/post"/>">
+          action="<c:url value="/inspect/scheme/post"/>">
         <div style="margin-bottom:20px;display: none">
             <input class="easyui-textbox" name="id" style="width:100%" data-options="label:'编号:'">
         </div>
@@ -48,14 +48,14 @@
         <div style="margin-bottom:20px">
             <input class="easyui-textbox select" name="dept.id" style="width:100%"
                    data-options="label:'检测单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'" url="<c:url value="/moduleInspectSchemeController/selectDept"/>">
+                   buttonIcon:'icon-search'" url="<c:url value="/inspect/scheme/selectDept"/>">
         </div>
         <div id="approval_file_id_div" style="margin-bottom:20px">
             <input class="easyui-textbox" id="approval_file_id" name="approval_file.uuid" style="width:100%"
                    data-options="label:'检测方案审批表:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
                    buttonIcon:'icon-search'">
         </div>
-        <div style="margin-bottom:20px">
+        <div id="inspect_file_id_div" style="margin-bottom:20px">
             <input class="easyui-textbox" id="inspect_file_id" name="inspect_file.uuid" style="width:100%"
                    data-options="label:'检测方案附件:',labelAlign:'right',editable:false,buttonText:'选择',
                    buttonIcon:'icon-search'">
@@ -66,7 +66,7 @@
                         data-options="label:'检测项目:',
                         editable:false,
                         labelAlign:'right',
-                        url:'<c:url value="/moduleBasicInspectItemController/comboList"/>',
+                        url:'<c:url value="/basic/inspectItem/comboList"/>',
                         method:'get',
                         valueField: 'id',
                         textField: 'name'
@@ -81,16 +81,22 @@
     $(function () {
 //        initResumable();
         initResumable('#approval_file_id');
+        initResumable('#inspect_file_id');
 
-        function initResumable(input,selector) {
+        function initResumable(input) {
 
             var r = $.getResumble({
                 url: '<c:url value="/file/upload"/>',
                 fileType: ['doc', 'docx', 'ppt', 'xls', 'xlsx'],
-                selectors:['#approval_file_id_div'],
+                selectors:[input+'_div'],
                 successHandler: function (ret) {
+                    console.log('****************************');
+                    console.log(input);
+                    console.log(JSON.stringify(ret));
                     $(input).textbox('setValue', ret.uuid);
                     $(input).textbox('setText', ret.fileName);
+                    console.log('approval_file_id:'+$('#approval_file_id').textbox('getText')+':'+$('#approval_file_id').textbox('getValue'))
+                    console.log('inspect_file_id:'+$('#inspect_file_id').textbox('getText')+':'+$('#inspect_file_id').textbox('getValue'))
                 },
                 fileTypeErrorHandler: function () {
                     alert("文件类型错误...");

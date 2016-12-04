@@ -13,22 +13,10 @@
          id="bannerbg">
         <jsp:include page="./WEB-INF/layout/north.jsp"></jsp:include>
     </div>
-    <%--<div data-options="region:'west',href:'${pageContext.request.contextPath}/baseController/layout/west',split:true" title="功能导航" style="width: 200px; overflow: hidden;"></div>--%>
-    <%--<div data-options="region:'center'" title="欢迎使用智能无线静荷载试验检测云平台" style="overflow: hidden;">--%>
-    <%--<div id="index_tabs" style="overflow: hidden;">--%>
-    <%--<div title="首页" data-options="border:false" style="overflow: hidden; " align="center">--%>
-    <%--<img src="style/images/pic1.png" style="height:100%; cursor:default">--%>
-    <%--<!-- <iframe src="${pageContext.request.contextPath}/baseController/portal/index" frameborder="0" style="border: 0; width: 100%; height: 98%;"></iframe>  -->--%>
-    <%--</div>--%>
-    <%--</div>--%>
-    <%--</div>--%>
-    <%--<div data-options="region:'east',href:'${pageContext.request.contextPath}/baseController/layout/east'" title="日历" style="width: 230px; overflow: hidden;"></div>--%>
-    <%----%>
+
     <div data-options="region:'center'" style="overflow: hidden;width: 100%;height: 100%">
-        <%--<iframe src="${pageContext.request.contextPath}/moduleBasicController/index" style="width: 100%;height: 100%"></iframe>--%>
         <iframe id="panel_main" style="height: 100%;width: 100%;" scrolling="no"
-                src="${pageContext.request.contextPath}/baseController/portal/index"></iframe>
-        <%--<iframe id="panel_main" style="height: 100%;width: 100%;" scrolling="no" src="${pageContext.request.contextPath}/moduleBasicController/index"></iframe>--%>
+                src="<c:url value="/baseController/portal/index"/>"></iframe>
     </div>
 
 
@@ -143,12 +131,6 @@
                 }
             }
         });
-
-        <%--var url = '${pageContext.request.contextPath}/moduleBasicController/index';--%>
-        <%--$.get(url,function (html) {--%>
-        <%--$('#panel_main').html(html);--%>
-        <%--});--%>
-        <%--$('#panel_main').attr('src','${pageContext.request.contextPath}/moduleBasicController/index');--%>
     });
 </script>
 </body>

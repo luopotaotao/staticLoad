@@ -47,9 +47,9 @@
 <script type="text/javascript">
     $(function () {
         var dept_id = '${dept_id}';
-        var baseUrl = '${pageContext.request.contextPath}/${baseUrl}';
+        var baseUrl = '<c:url value="/${baseUrl}"/>';
         $('#dg_user').datagrid({
-            url: '../moduleBasicUserController/queryAll',
+            url: '../basic/user/queryAll',
             method: 'get',
 //                title: '人员管理',
 //                iconCls: 'icon-save',

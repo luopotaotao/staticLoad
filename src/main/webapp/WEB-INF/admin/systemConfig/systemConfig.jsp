@@ -26,7 +26,7 @@
 		systemConfigGrid = $("#systemConfigGrid")
 				.datagrid(
 						{
-							url : "${pageContext.request.contextPath}/systemConfigController/datagrid",
+							url : "<c:url value="/systemConfigController/datagrid"/>",
 							fit : true,
 							fitColumns : true,
 							border : false,
@@ -103,7 +103,7 @@
 					title : "修改系统参数",
 					width : 600,
 					height : 350,
-					href : '${pageContext.request.contextPath}/systemConfigController/editPage.action?id='
+					href : '<c:url value="/systemConfigController/editPage"/>?id='
 							+ id,
 					buttons : [ {
 						text : '修改',
@@ -139,7 +139,7 @@
 									}
 									$
 											.ajax({
-												url : '${pageContext.request.contextPath}/systemConfigController/delete',
+												url : '<c:url value="/systemConfigController/delete"/>',
 												data : {
 													ids : ids.join(',')
 												},
@@ -184,7 +184,7 @@
 					title : "添加系统参数",
 					width : 600,
 					height : 250,
-					href : '${pageContext.request.contextPath}/systemConfigController/addPage',
+					href : '<c:url value="/systemConfigController/addPage"/>',
 					buttons : [ {
 						text : '添加',
 						handler : function() {

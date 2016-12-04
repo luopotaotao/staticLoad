@@ -20,7 +20,7 @@
 		userBlackListGrid = $("#userBlackListGrid")
 				.datagrid(
 						{
-							url : "${pageContext.request.contextPath}/userBlackListController/datagrid",
+							url : "<c:url value="/userBlackListController/datagrid",
 							fit : true,
 							fitColumns : true,
 							border : false,
@@ -94,7 +94,7 @@
 					title : "添加用户黑名单信息",
 					width : 520,
 					height : 250,
-					href : '${pageContext.request.contextPath}/userBlackListController/addPage',
+					href : '<c:url value="/userBlackListController/addPage',
 					buttons : [ {
 						text : '添加',
 						handler : function() {
@@ -138,7 +138,7 @@
 									}
 									$
 											.ajax({
-												url : '${pageContext.request.contextPath}/userBlackListController/delete',
+												url : '<c:url value="/userBlackListController/delete',
 												data : {
 													ids : userId.join(',')
 												},
@@ -175,7 +175,7 @@
 					title : "导入用户黑名单信息",
 					width : 520,
 					height : 350,
-					href : '${pageContext.request.contextPath}/userBlackListController/importPage',
+					href : '<c:url value="/userBlackListController/importPage',
 					buttons : [ {
 						text : '导入',
 						handler : function() {

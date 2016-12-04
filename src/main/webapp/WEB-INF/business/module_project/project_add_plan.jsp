@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div style="width:100%;max-width:600px;padding:30px 60px;">
     <input id="project_add_plan_dept_id" type="hidden" name="dept.id">
-    <form class="easyui-form" method="post" data-options="novalidate:true" action="${pageContext.request.contextPath}/moduleInspectPlanController/post">
+    <form class="easyui-form" method="post" data-options="novalidate:true" action="<c:url value="/inspect/plan/post"/>">
         <div style="margin-bottom:20px;display: none">
             <input class="easyui-textbox" name="id" style="display: none" data-options="label:'编号:'">
         </div>
@@ -50,7 +50,7 @@
                 <select id="inspect_method" class="easyui-combobox" name="inspectMethods.id" style="width:45%"
                         data-options="label:'检测项目:',
             labelAlign:'right',
-            url:'<c:url value="/moduleBasicInspectMethodController/${inspectItemId}/comboList"/> ',
+            url:'<c:url value="/basic/inspectMethod/${inspectItemId}/comboList"/> ',
             method:'get',
             valueField: 'id',
             textField: 'name'
@@ -67,7 +67,7 @@
             onClickButton: function () {
                 var _this = this;
                 var dept_id = $('#project_add_plan_dept_id').val();
-                var  url="${pageContext.request.contextPath}/moduleInspectPlanController/selectEquipment/"+dept_id;
+                var  url="<c:url value="/inspect/plan/selectEquipment/"/>"+dept_id;
                 selectChild(url, function (data) {
                     var names = [];
                     var ids = [];
@@ -84,7 +84,7 @@
             onClickButton: function () {
                 var _this = this;
                 var dept_id = $('#project_add_plan_dept_id').val();
-                var  url="${pageContext.request.contextPath}/moduleInspectPlanController/selectUser/"+dept_id;
+                var  url="<c:url value="/inspect/plan/selectUser/"/>"+dept_id;
                 selectChild(url, function (data) {
                     var names = [];
                     var ids = [];

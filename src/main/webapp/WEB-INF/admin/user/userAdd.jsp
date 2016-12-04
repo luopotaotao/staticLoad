@@ -6,7 +6,7 @@
 		parent.$.messager.progress('close');
 		addrequeired();
 		$('#form').form({
-			url : '${pageContext.request.contextPath}/userController/add',
+			url : '<c:url value="/userController/add"/>',
 			onSubmit : function() {
 				parent.$.messager.progress({
 					title : '提示',

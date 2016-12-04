@@ -169,7 +169,7 @@
             }
 
             function loadData(prg, stzh) {
-                $.get('${pageContext.request.contextPath}/moduleInspectDataController/query/' + prg + '/' + stzh, function (data) {
+                $.get('<c:url value="/inspect/data/query/"/>' + prg + '/' + stzh, function (data) {
                     $('#tb_all').datagrid({'data': data.source_press});
                     $('#tb_source_press').datagrid({'data': data.source_press});
                     $('#tb_source_release').datagrid({'data': data.source_release});
@@ -417,7 +417,7 @@
 
             function getCurrentData(prg, stzh) {
                 var time = new Date();
-                $.get('<c:url value="/moduleInspectDataController/loadLatestData/"/>' + prg + '/' + stzh, function (ret) {
+                $.get('<c:url value="/inspect/data/loadLatestData/"/>' + prg + '/' + stzh, function (ret) {
                     if ($.isPlainObject(ret)) {
                         $('#current_data_msg').text($.DateUtil.format(time,'刷新时间:yyyy-MM-dd/hh:mm:ss'));
                         $('#current_data_form').show();

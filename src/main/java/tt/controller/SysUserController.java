@@ -37,8 +37,8 @@ import java.util.*;
  */
 @Controller
 @RequestMapping("/userController")
-public class UserController extends BaseController {
-    private static final Logger logger = Logger.getLogger(UserController.class);
+public class SysUserController extends BaseController {
+    private static final Logger logger = Logger.getLogger(SysUserController.class);
 
     @Autowired
     private UserServiceI userService;

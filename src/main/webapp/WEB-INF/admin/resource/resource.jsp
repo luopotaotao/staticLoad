@@ -20,7 +20,7 @@
 	var treeGrid;
 	$(function() {
 		treeGrid = $('#treeGrid').treegrid({
-			url : '${pageContext.request.contextPath}/resourceController/treeGrid',
+			url : '<c:url value="/resourceController/treeGrid"/>',
 			idField : 'id',
 			treeField : 'name',
 			parentField : 'pid',
@@ -105,7 +105,7 @@
 						title : '提示',
 						text : '数据处理中，请稍后....'
 					});
-					$.post('${pageContext.request.contextPath}/resourceController/delete', {
+					$.post('<c:url value="/resourceController/delete"/>', {
 						id : node.id
 					}, function(result) {
 						if (result.success) {
@@ -130,7 +130,7 @@
 				title : '修改资源',
 				width : 330,
 				height : 400,
-				href : '${pageContext.request.contextPath}/resourceController/editPage.action?id=' + node.id,
+				href : '<c:url value="/resourceController/editPage"/>?id=' + node.id,
 				buttons : [ {
 					text : '修改',
 					handler : function() {
@@ -148,7 +148,7 @@
 			title : '添加资源',
 			width : 330,
 			height : 400,
-			href : '${pageContext.request.contextPath}/resourceController/addPage',
+			href : '<c:url value="/resourceController/addPage"/>',
 			buttons : [ {
 				text : '添加',
 				handler : function() {

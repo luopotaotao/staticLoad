@@ -24,7 +24,7 @@
         timeout1 = setInterval(monitoronline, 60000);
         function monitoronline() {
             $.ajax({
-                url: "${pageContext.request.contextPath}/monitorController/monitoronline",
+                url: "<c:url value="/monitorController/monitoronline"/>",
                 timeout: 60000,
                 success: function () {
 
@@ -42,7 +42,7 @@
             })
         }
 
-        openModule('${pageContext.request.contextPath}/moduleOverviewController/index');
+        openModule('<c:url value="/overview/main/index"/>');
     });
 
     function logoutFun() {
@@ -54,14 +54,14 @@
                             if (c) {
                                 $
                                         .ajax({
-                                            url: '${pageContext.request.contextPath}/userController/logout',
+                                            url: '<c:url value="/userController/logout"/>',
                                             type: 'POST',
                                             timeout: 1000,
                                             success: function (result) {
-                                                location.href = '${pageContext.request.contextPath}/';
+                                                location.href = '<c:url value="/"/>';
                                             },
                                             error: function () {
-                                                location.href = '${pageContext.request.contextPath}/';
+                                                location.href = '<c:url value="/"/>';
                                             }
                                         });
                             }
@@ -69,7 +69,7 @@
     }
     function showUserInfo() {
         $.ajax({
-            url:'${pageContext.request.contextPath}/userController/userInfo',
+            url:'<c:url value="/userController/userInfo"/>',
             type:'get',
             dataType:'json'
         }).done(function (ret) {
@@ -81,7 +81,7 @@
     }
     <%--function showAbout() {--%>
         <%--$.ajax({--%>
-            <%--url:'${pageContext.request.contextPath}/userController/platformInfo',--%>
+            <%--url:'<c:url value="/userController/platformInfo"/>',--%>
             <%--type:'get',--%>
             <%--dataType:'json'--%>
         <%--}).done(function (ret) {--%>
@@ -98,7 +98,7 @@
                     title: '修改密码',
                     width: 330,
                     height: 280,
-                    href: '${pageContext.request.contextPath}/userController/editCurrentUserPwdPage',
+                    href: '<c:url value="/userController/editCurrentUserPwdPage"/>',
                     buttons: [{
                         text: '修改',
                         handler: function () {
@@ -116,7 +116,7 @@
                     title: '我可以访问的资源',
                     width: 300,
                     height: 350,
-                    href: '${pageContext.request.contextPath}/userController/currentUserResourcePage'
+                    href: '<c:url value="/userController/currentUserResourcePage"/>'
                 });
     }
     function openModule(url) {
@@ -142,7 +142,7 @@
                     logo = '<h2 style="color:white;margin: 5px;">智能无线静荷载试验检测云平台</h2>';
                 }
                 $('#logo_div').empty().append(logo);
-                openModule('${pageContext.request.contextPath}/moduleOverviewController/index');
+                openModule('<c:url value="/overview/main/index"/>');
             }
         }).fail(function () {
             $.messager.alert('提示', '操作失败，请重新尝试或联系管理员！');
@@ -185,24 +185,24 @@
 
         <ul class="topul">
             <li>
-                <a href="javascript:openModule('${pageContext.request.contextPath}/moduleOverviewController/index');"
+                <a href="javascript:openModule('<c:url value="/overview/main/index"/>');"
                    id="16" class="menus"><img
                         src="<c:url value="/resources/style/images/icons/icon_monitor.png"/>"
                         class="module_icon">工程概览</a>
             </li>
 
             <li>
-                <a href="javascript:openModule('${pageContext.request.contextPath}/moduleProjectController/index');"
+                <a href="javascript:openModule('<c:url value="/project/manage/index"/>');"
                    id="19" class="menus"><img
                         src="<c:url value="/resources/style/images/icons/icon_report.png"/>"
                         class="module_icon">工程管理</a>
             </li>
-            <li><a href="javascript:openModule('${pageContext.request.contextPath}/moduleBasicController/index')"
+            <li><a href="javascript:openModule('<c:url value="/basic/index/index"/>')"
                    id="18"
                    class="menus"><img src="<c:url value="/resources/style/images/icons/icon_config.png"/>"
                                       class="module_icon">平台设置</a>
             </li>
-            <li><a href="javascript:openModule('${pageContext.request.contextPath}/userController/platformInfo')"
+            <li><a href="javascript:openModule('<c:url value="/about/index"/>')"
                    id="20"
                    class="menus"><img src="<c:url value="/resources/style/images/icons/icon_about.png"/>"
                                       class="module_icon">关于平台</a>
@@ -265,7 +265,7 @@
             }]
         ">
     <form id="ff_user_info" class="easyui-form" method="post" data-options="novalidate:true"
-          action="../${baseUrl}/post">
+          action="<c:url value="/basic/user/post"/>"/>
         <div style="margin-bottom:20px">
             <input class="easyui-textbox" name="name" style="width:100%"
                    data-options="label:'账号:',editable:false">

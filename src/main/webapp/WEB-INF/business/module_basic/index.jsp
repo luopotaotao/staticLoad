@@ -19,21 +19,28 @@
         var tree_data = [{
             "id": 11,
             "text": "单位管理",
-            "url": "${pageContext.request.contextPath}/moduleBasicCompanyController/index"
+            "url": "<c:url value="/basic/company/index"/>"
         }, {
             "id": 13,
             "text": "检测项目",
-            "url": "${pageContext.request.contextPath}/moduleBasicInspectItemController/index"
+            "url": "<c:url value="/basic/inspectItem/index"/>"
         }, {
             "id": 14,
             "text": "行政区划",
-            "url": "${pageContext.request.contextPath}/moduleBasicAreaController/index"
+            "url": "<c:url value="/basic/area/index"/>"
         }
             <c:if test="${sessionScope.sessionInfo.role < 2}">
             , {
                 "id": 15,
                 "text": "检测机构",
-                "url": "${pageContext.request.contextPath}/moduleBasicDeptController/index"
+                "url": "<c:url value="/basic/dept/index"/>"
+            }
+            </c:if>
+            <c:if test="${sessionScope.sessionInfo.role == 0}">
+            , {
+                "id": 16,
+                "text": "关于平台",
+                "url": "<c:url value="/about/edit"/>"
             }
             </c:if>
         ];
