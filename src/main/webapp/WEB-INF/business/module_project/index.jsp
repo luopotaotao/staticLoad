@@ -52,22 +52,36 @@
     </div>
 </div>
 <div id="tt" class="easyui-panel" data-options="region:'center'" style="width: 1000px;height: 500px">
-    <div class="info_form_hidden">
-        <form class="easyui-form" method="post" data-options="novalidate:true"
-              action="<c:url value="/project/manage/post"/>">
+    <div class="easyui-tabs info_form_hidden" style="width:100%;height:100%;"
+         data-options="onSelect:function(title,index){
+            if(index==1){
+                if(!$(this).data('inited')){
+                try{
+                    $(this).data('inited',true);
+                    $('#project_scheme_list_div').panel('refresh');
+                    }catch(e){
+                        console.log(e);
+                    }
+                }
+            }
+         }">
+        <div title="工程详情">
+            <form class="easyui-form" method="post" data-options="novalidate:true"
+                  action="<c:url value="/project/manage/post"/>">
 
-            <div style="margin-bottom:20px;display: none">
-                <input class="easyui-textbox" name="id" style="width:500px" data-options="label:'工程编号:',required:true">
-            </div>
-            <div style="margin-bottom:20px">
-                <input class="easyui-textbox" name="code" style="width:250px"
-                       data-options="label:'工程编码:',labelAlign:'right',required:true">
-                <input class="easyui-textbox" name="name" style="width:250px"
-                       data-options="label:'工程名称:',labelAlign:'right'">
-            </div>
-            <div style="margin-bottom:20px">
-                <select id="project_province_id" class="easyui-combobox" name="province.id" style="width:250px"
-                        data-options="label:'所在省份:',
+                <div style="margin-bottom:20px;display: none">
+                    <input class="easyui-textbox" name="id" style="width:500px"
+                           data-options="label:'工程编号:',required:true">
+                </div>
+                <div style="margin-bottom:20px">
+                    <input class="easyui-textbox" name="code" style="width:250px"
+                           data-options="label:'工程编码:',labelAlign:'right',required:true">
+                    <input class="easyui-textbox" name="name" style="width:250px"
+                           data-options="label:'工程名称:',labelAlign:'right'">
+                </div>
+                <div style="margin-bottom:20px">
+                    <select id="project_province_id" class="easyui-combobox" name="province.id" style="width:250px"
+                            data-options="label:'所在省份:',
             labelAlign:'right',
             url:'<c:url value="/basic/area/area/0"/>',
             method:'get',
@@ -80,119 +94,167 @@
             }
             ">
 
-                </select>
-                <select id="project_city_id" class="easyui-combobox" name="city.id" style="width:250px"
-                        data-options="label:'所在城市:',labelAlign:'right', method:'get',valueField: 'id',textField: 'text'">
-                </select>
-            </div>
-            <div style="margin-bottom:20px">
-                <input class="easyui-textbox" name="address" style="width:500px"
-                       data-options="label:'具体地址:',labelAlign:'right'">
-            </div>
-            <div style="margin-bottom:20px;display: none">
-                <input id="project_input_lat" class="easyui-textbox" name="lat" style="width:100%"
-                       data-options="label:'纬度:'">
-            </div>
-            <div style="margin-bottom:20px;display: none">
-                <input id="project_input_lng" class="easyui-textbox" name="lng" style="width:100%"
-                       data-options="label:'经度:'">
-            </div>
-            <div style="margin-bottom:20px">
-                <input id="project_select_coordinate" class="easyui-textbox" style="width:250px;height:32px;">
-                <a id="view_map" class="easyui-linkbutton" style="width: 165px; height: 30px;margin-left:85px;"
-                   data-options="iconCls:'icon-search',
+                    </select>
+                    <select id="project_city_id" class="easyui-combobox" name="city.id" style="width:250px"
+                            data-options="label:'所在城市:',labelAlign:'right', method:'get',valueField: 'id',textField: 'text'">
+                    </select>
+                </div>
+                <div style="margin-bottom:20px">
+                    <input class="easyui-textbox" name="address" style="width:500px"
+                           data-options="label:'具体地址:',labelAlign:'right'">
+                </div>
+                <div style="margin-bottom:20px;display: none">
+                    <input id="project_input_lat" class="easyui-textbox" name="lat" style="width:100%"
+                           data-options="label:'纬度:'">
+                </div>
+                <div style="margin-bottom:20px;display: none">
+                    <input id="project_input_lng" class="easyui-textbox" name="lng" style="width:100%"
+                           data-options="label:'经度:'">
+                </div>
+                <div style="margin-bottom:20px">
+                    <input id="project_select_coordinate" class="easyui-textbox" style="width:250px;height:32px;">
+                    <a id="view_map" class="easyui-linkbutton" style="width: 165px; height: 30px;margin-left:85px;"
+                       data-options="iconCls:'icon-search',
             onClick:function () {
                 var id = $('form').eq(0).find('input[name=\'id\']').val();
             top.openModule('<c:url value="/overview/main/index"/>?project_id='+id);
             }
 ">查看地图</a>
-            </div>
-            <div style="margin-bottom:20px">
-                <input id="project_select_constructor" class="easyui-textbox select" name="constructor.id"
-                       style="width:250px"
-                       data-options="label:'建设单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'"
-                       url="<c:url value="/basic/company/partial"/>">
-                <input id="project_select_builder" class="easyui-textbox select" name="builder.id" style="width:250px"
-                       data-options="label:'施工单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'"
-                       url="<c:url value="/basic/company/partial"/>">
-
-            </div>
-            <div style="margin-bottom:20px">
-                <input id="project_select_user" class="easyui-textbox select" name="user.id"
-                       style="width:250px"
-                       data-options="label:'监理单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'"
-                       url="<c:url value="/basic/company/partial"/>">
-            </div>
-            <div style="margin-bottom:20px">
-                <input class="easyui-textbox" name="note" style="width:500px"
-                       data-options="label:'备注信息:',labelAlign:'right',multiline:true,height:120">
-            </div>
-        </form>
-    </div>
-    <div class="info_form_hidden">
-        <form class="easyui-form" method="post" data-options="novalidate:true"
-              action="<c:url value="/project/manage/post"/>">
-            <div style="margin-bottom:20px;display: none">
-                <input class="easyui-textbox" name="id" style="width:500px" data-options="label:'编号:',required:true">
-            </div>
-            <div style="margin-bottom:20px">
-                <input class="easyui-textbox" name="name" style="width:500px"
-                       data-options="label:'方案名称:',labelAlign:'right',required:true">
-            </div>
-            <div style="margin-bottom:20px">
-                <select class="easyui-combobox" data-options="editable:false,labelAlign:'right'" name="basement_lev"
-                        label="低级基础设计等级:"
-                        style="width:500px">
-                    <option value="1">甲级</option>
-                    <option value="2">乙级</option>
-                    <option value="3">丙级</option>
-                </select>
-            </div>
-            <div style="margin-bottom:20px">
-                <select class="easyui-combobox" data-options="editable:false,labelAlign:'right'" name="safety_lev"
-                        label="建筑安全等级:"
-                        style="width:500px">
-                    <option value="1">一级</option>
-                    <option value="2">二级</option>
-                    <option value="3">三级</option>
-                </select>
-            </div>
-            <div style="margin-bottom:20px">
-                <input class="easyui-numberbox" name="pile_count" style="width:500px"
-                       data-options="label:'总桩数:',labelAlign:'right',required:true">
-            </div>
-            <div style="margin-bottom:20px">
-                <input id="project_scheme_dept" class="easyui-textbox select" name="dept.id"
-                       style="width:500px"
-                       data-options="label:'检测单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
-                   buttonIcon:'icon-search'"
-                       url="<c:url value="/inspect/scheme/selectDept"/>"/>
-            </div>
-            <div style="margin-bottom:20px">
-                <input class="easyui-textbox" id="approval_file_uuid" name="approval_file.uuid" style="width:500px"
-                       data-options="label:'检测方案审批表:',labelAlign:'right',required:true"><a id="approval_file_uuid_download">下载</a>
-            </div>
-            <div style="margin-bottom:20px">
-                <input class="easyui-textbox" id="inspect_file_uuid" name="inspect_file.uuid" style="width:500px"
-                       data-options="label:'检测方案附件:',labelAlign:'right'"><a id="inspect_file_uuid_download">下载</a>
-            </div>
-            <div style="margin-bottom:20px">
+                </div>
                 <div style="margin-bottom:20px">
-                    <select id="inspectItem_id" class="easyui-combobox" name="inspectItem.id" style="width:500px"
-                            data-options="label:'检测项目:',
+                    <input id="project_select_constructor" class="easyui-textbox select" name="constructor.id"
+                           style="width:250px"
+                           data-options="label:'建设单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
+                   buttonIcon:'icon-search'"
+                           url="<c:url value="/basic/company/partial"/>">
+                    <input id="project_select_builder" class="easyui-textbox select" name="builder.id"
+                           style="width:250px"
+                           data-options="label:'施工单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
+                   buttonIcon:'icon-search'"
+                           url="<c:url value="/basic/company/partial"/>">
+
+                </div>
+                <div style="margin-bottom:20px">
+                    <input id="project_select_user" class="easyui-textbox select" name="user.id"
+                           style="width:250px"
+                           data-options="label:'监理单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
+                   buttonIcon:'icon-search'"
+                           url="<c:url value="/basic/company/partial"/>">
+                </div>
+                <div style="margin-bottom:20px">
+                    <input class="easyui-textbox" name="note" style="width:500px"
+                           data-options="label:'备注信息:',labelAlign:'right',multiline:true,height:120">
+                </div>
+            </form>
+        </div>
+        <div id="project_scheme_list_div" title="方案列表" data-options="closable:false" style="overflow:auto">
+            <table id="project_scheme_list_dg" class="easyui-datagrid" data-options="method:'get',rownumbers:true">
+                <thead>
+                <tr>
+                    <th data-options="field:'name',align:'center',width:80">方案名称</th>
+                    <th data-options="field:'basement_lev',align:'center',width:80,formatter:function(val,row){return val?['甲级','乙级','丙级'][val]:'';}">建筑等级</th>
+                    <th data-options="field:'pile_count',align:'center',width:80">总桩数</th>
+                    <th data-options="field:'inspectItem',align:'center',width:80,formatter:function(val,row){return val?val.name:'';}">检测项目</th>
+                    <th data-options="field:'project',align:'center',width:80,formatter:function(val,row){return '<a href=\'javascript:$.project.clickNode('+val.id+','+row.id+')\'>查看</a>';}">查看</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <div class="easyui-tabs info_form_hidden" style="width:100%;height:100%;"
+         data-options="onSelect:function(title,index){
+            if(index==1){
+                if(!$(this).data('inited')){
+                try{
+                    $(this).data('inited',true);
+                    $('#project_scheme_plan_list_div').panel('refresh');
+                    }catch(e){
+                        console.log(e);
+                    }
+                }
+            }
+         }">
+        <div title="方案详情">
+            <form class="easyui-form" method="post" data-options="novalidate:true"
+                  action="<c:url value="/project/manage/post"/>">
+                <div style="margin-bottom:20px;display: none">
+                    <input class="easyui-textbox" name="id" style="width:500px"
+                           data-options="label:'编号:',required:true">
+                </div>
+                <div style="margin-bottom:20px">
+                    <input class="easyui-textbox" name="name" style="width:500px"
+                           data-options="label:'方案名称:',labelAlign:'right',required:true">
+                </div>
+                <div style="margin-bottom:20px">
+                    <select class="easyui-combobox" data-options="editable:false,labelAlign:'right'" name="basement_lev"
+                            label="低级基础设计等级:"
+                            style="width:500px">
+                        <option value="1">甲级</option>
+                        <option value="2">乙级</option>
+                        <option value="3">丙级</option>
+                    </select>
+                </div>
+                <div style="margin-bottom:20px">
+                    <select class="easyui-combobox" data-options="editable:false,labelAlign:'right'" name="safety_lev"
+                            label="建筑安全等级:"
+                            style="width:500px">
+                        <option value="1">一级</option>
+                        <option value="2">二级</option>
+                        <option value="3">三级</option>
+                    </select>
+                </div>
+                <div style="margin-bottom:20px">
+                    <input class="easyui-numberbox" name="pile_count" style="width:500px"
+                           data-options="label:'总桩数:',labelAlign:'right',required:true">
+                </div>
+                <div style="margin-bottom:20px">
+                    <input id="project_scheme_dept" class="easyui-textbox select" name="dept.id"
+                           style="width:500px"
+                           data-options="label:'检测单位:',labelAlign:'right',required:true,editable:false,buttonText:'选择',
+                   buttonIcon:'icon-search'"
+                           url="<c:url value="/inspect/scheme/selectDept"/>"/>
+                </div>
+                <div style="margin-bottom:20px">
+                    <input class="easyui-textbox" id="approval_file_uuid" name="approval_file.uuid" style="width:500px"
+                           data-options="label:'检测方案审批表:',labelAlign:'right',required:true"><a
+                        id="approval_file_uuid_download">下载</a>
+                </div>
+                <div style="margin-bottom:20px">
+                    <input class="easyui-textbox" id="inspect_file_uuid" name="inspect_file.uuid" style="width:500px"
+                           data-options="label:'检测方案附件:',labelAlign:'right'"><a id="inspect_file_uuid_download">下载</a>
+                </div>
+                <div style="margin-bottom:20px">
+                    <div style="margin-bottom:20px">
+                        <select id="inspectItem_id" class="easyui-combobox" name="inspectItem.id" style="width:500px"
+                                data-options="label:'检测项目:',
             labelAlign:'right',
             url:'<c:url value="/basic/inspectItem/comboList"/>',
             method:'get',
             valueField: 'id',
             textField: 'name'
             ">
-                    </select>
+                        </select>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
+        <div id="project_scheme_plan_list_div" title="计划列表" data-options="closable:false" style="overflow:auto">
+            <table id="project_scheme_plan_list_dg" class="easyui-datagrid" data-options="method:'get'">
+                <thead>
+                <tr>
+                    <th data-options="field:'name',align:'center',width:80">计划名称</th>
+                    <th data-options="field:'stzh',align:'center',width:80">桩号</th>
+                    <th data-options="field:'user',align:'center',width:80,formatter:function(val,row){return val?val.name:'';}">检测负责人</th>
+                    <th data-options="field:'equipment',align:'center',width:80,formatter:function(val,row){return val?val.name:'';}">设备编号</th>
+                    <th data-options="field:'start_time',align:'center',width:80,formatter:function(val,row){return $.isNumeric(val)?$.DateUtil.format(new Date(val),'yyyy-MM-dd'):'';}">开始日期</th>
+                    <th data-options="field:'end_time',align:'center',width:80,formatter:function(val,row){return $.isNumeric(val)?$.DateUtil.format(new Date(val),'yyyy-MM-dd'):'';}">结束日期</th>
+                    <th data-options="field:'devstr',align:'center',width:80">最大加载值</th>
+                    <th data-options="field:'devstr',align:'center',width:80">最大位移值</th>
+                    <th data-options="field:'project',align:'center',width:80,formatter:function(val,row){return '<a href=\'javascript:$.project.clickNode('+val.id+','+row.inspectScheme.id+','+row.id+')\'>查看</a>';}">查看</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
     </div>
     <div class="easyui-tabs info_form_hidden" style="width:100%;height:100%;"
          data-options="onSelect:function(title,index){
@@ -207,7 +269,7 @@
                 }
             }
          }">
-        <div title="检测计划">
+        <div title="计划详情">
             <form class="easyui-form" method="post" data-options="novalidate:true"
                   action="<c:url value="/inspect/plan/post"/>">
                 <div style="margin-bottom:20px;display: none">
@@ -281,7 +343,8 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="<c:url value="/resources/jslib/Highcharts-4.1.3/js/highcharts.js"/>" charset="utf-8"></script>
+<script type="text/javascript" src="<c:url value="/resources/jslib/Highcharts-4.1.3/js/highcharts.js"/>"
+        charset="utf-8"></script>
 <script>
     $(function () {
         //初始化工程编辑内容
@@ -318,9 +381,10 @@
                 textField: 'name',
                 animate: true,
                 onSelect: function (node) {
-                    var root = $tree_menu.tree('getRoot');
+                    var root = getRoot(node);
                     node.prg = root.code;
                     showInfo(node.level, node);
+
                 },
                 onLoadSuccess: function (node, data) {
                     if ($.isNumeric(project_id)) {
@@ -368,6 +432,8 @@
             $('#project_city_id').combobox('select', data.city.id);
             $('#project_select_coordinate').textbox('setText', [data.lng, data.lat].join(','));
             setValues('project_select_', ['constructor', 'builder', 'user'], data);
+            $('#project_scheme_list_dg').datagrid("reload",'<c:url value="/inspect/scheme/queryByProjectId?id="/>'+data.id);
+
         }
 
         function addScheme() {
@@ -380,29 +446,28 @@
 
         function showScheme(data) {
             $('#project_scheme_dept').textbox('setText', data.dept ? data.dept.name : '');
-            $('#inspectItem_id').combobox('setValue',data.inspectItem?data.inspectItem.id:null);
+            $('#inspectItem_id').combobox('setValue', data.inspectItem ? data.inspectItem.id : null);
             setFileField('approval_file');
             setFileField('inspect_file');
-
+            $('#project_scheme_plan_list_dg').datagrid("reload",'<c:url value="/inspect/plan/queryBySchemeId?id="/>'+data.id);
             function setFileField(field) {
 
                 var file = data[field];
-                console.log(JSON.stringify(file));
-                var name = file?file.name:'';
-                var uuid = file?file.uuid:'';
-                if(name&&uuid){
-                    $('#'+field+'_uuid').textbox('setText',name);
-                    $('#'+field+'_uuid_download').attr('href','<c:url value="/file/download/"/>'+uuid );
-                    $('#'+field+'_uuid_download').show();
-                }else{
-                    $('#'+field+'_uuid_download').hide();
+                var name = file ? file.name : '';
+                var uuid = file ? file.uuid : '';
+                if (name && uuid) {
+                    $('#' + field + '_uuid').textbox('setText', name);
+                    $('#' + field + '_uuid_download').attr('href', '<c:url value="/file/download/"/>' + uuid);
+                    $('#' + field + '_uuid_download').show();
+                } else {
+                    $('#' + field + '_uuid_download').hide();
                 }
             }
         }
 
         function addPlan() {
             var node = getNode();
-            var root = getRoot();
+            var root = getRoot(node);
 
             showAddDialog({
                 title: '添加计划',
@@ -411,7 +476,7 @@
                     {name: 'inspectScheme.id', value: node.id},
                     {name: 'dept.id', value: node.dept ? node.dept.id : null}
                 ]
-            }, '<c:url value="/project/manage/addPlan?"/>inspectItemId='+node.inspectItem.id);
+            }, '<c:url value="/project/manage/addPlan?"/>inspectItemId=' + node.inspectItem.id);
         }
 
 
@@ -588,10 +653,16 @@
             return $tree_menu.tree('getSelected');
         }
 
-        function getRoot() {
-            return $tree_menu.tree('getRoot');
+//        function getRoot() {
+//            return $tree_menu.tree('getRoot');
+//        }
+        function getRoot(node){
+            if($.isNumeric(node.level)&&node.level>0){
+                return getRoot($tree_menu.tree('getParent',node.target));
+            }else{
+                return node;
+            }
         }
-
         function remove() {
             var node = getNode();
             var msg = ['是否确认删除:', node.text, '?'].join('');
@@ -620,7 +691,43 @@
                 }
             });
         }
-
+        function clickNode(projectId,schemeId,planId){
+            var prg = null,scheme = null,plan=null,node = null;
+            var projects = $tree_menu.tree('getRoots');
+            if(projects.length>0){
+                for(var i=0;i<projects.length;i++){
+                    if(projects[i].id==projectId){
+                        prg = projects[i];
+                        break;
+                    }
+                }
+            }
+            //只有工程Id的时候说明选择的是工程
+            if(schemeId==null){
+                node = prg;
+            }else{
+                var children = $tree_menu.tree('getChildren',prg.target);
+                if(children==null||children.length<1){
+                    return;
+                }
+                //因为获取的scheme和plan节点都算在的root的children中,因此需要根据level和id来过滤到底是哪个层级哪个节点
+                var level = 1,id = schemeId;
+                if(planId!=null){
+                    level = 2;
+                    id = planId;
+                }
+                for(var i=0;i<children.length;i++){
+                    var child=children[i];
+                    if(child.id==id&&child.level == level){
+                        node = child;
+                        break;
+                    }
+                }
+            }
+            if(node!=null){
+                $(node.target).click();
+            }
+        }
         $.extend({
             project: {
                 addProject: addProject,
@@ -631,9 +738,10 @@
                 showPlan: showPlan,
                 linkData: linkData,
                 expandNode: expandNode,
-                remove: remove
+                remove: remove,
+                clickNode:clickNode
             }
-        })
+        });
     });
 </script>
 

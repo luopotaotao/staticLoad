@@ -172,7 +172,7 @@
             $.closeUserEditDialog = closeEditDialog;
             function remove(ids) {
                 $.ajax({
-                    url: <c:url value="/basic/user/delete"/>,
+                    url: '<c:url value="/basic/user/delete"/>',
                     data: {ids: ids},
                     type: 'post',
                     dataType: 'json'

@@ -15,14 +15,16 @@
     <script type="text/javascript" src="<c:url value="/resources/jslib/markdown/simplemde.min.js"/>"></script>
     <jsp:include page="../../layout/common.jsp"></jsp:include>
 </head>
-<body style="background: rgb(247, 250, 255);">
-<div style="height: 30%;">
-    <button id="about_btn_save"> 保存</button>
+<body>
+<div class="easyui-panel" title="编辑" style="padding:10px;"
+     data-options="iconCls:'icon-edit',closable:false,tools:'#tt'">
     <textarea>
         ${about}
     </textarea>
 </div>
-
+<div id="tt">
+    <a  id="about_btn_save" href="javascript:void(0)" class="icon-save" style="width:80px;text-align: right">保存</a>
+</div>
 <script>
     $(function () {
         var simplemde = new SimpleMDE();

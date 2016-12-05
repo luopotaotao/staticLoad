@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserServiceI {
     @Autowired
     private DeptServiceI deptService;
 
-    public User get(String id, Integer dept_id) {
+    public User get(Integer id, Integer dept_id) {
         return userDao.getById(id,dept_id);
     }
 
@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserServiceI {
     }
 
     @Override
-    public int del(List<String> ids) {
+    public int del(List<Integer> ids) {
         if (ids == null || ids.size() < 1) {
             return 0;
         }

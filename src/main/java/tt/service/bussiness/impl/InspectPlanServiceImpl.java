@@ -38,22 +38,19 @@ public class InspectPlanServiceImpl implements InspectPlanServiceI {
     }
 
     @Override
-    public List<InspectPlan> list(Map<String,Object> params, Integer page, Integer PageSize, Integer dept_id) {
-        String name = (String) params.get("name");
-        List<InspectPlan> ret = inspectPlanDao.list(name, page, PageSize,dept_id);
+    public List<InspectPlan> list(Map<String,Object> params) {
+        List<InspectPlan> ret = inspectPlanDao.find(params);
         return ret;
     }
 
     @Override
     public long count(Map<String,Object> params, Integer dept_id) {
-        StringBuilder hql = new StringBuilder("select count(*) from InspectPlan WHERE dept_id=:dept_id");
-        params.put("dept_id",dept_id);
         String name = (String) params.get("name");
-        if(name!=null){
-            params.put("name","%"+name+"%");
-            hql.append(" AND name like :name ");
+//        params.put("dept_id", dept_id);
+        if (name != null) {
+            params.put("name", "%" + name + "%");
         }
-        long ret = inspectPlanDao.count(hql.toString(), params);
+        long ret = inspectPlanDao.count(params);
         return ret;
     }
 

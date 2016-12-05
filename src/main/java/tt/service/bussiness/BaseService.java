@@ -16,6 +16,9 @@ public interface BaseService<T> {
     default List<T> list(Map<String,Object> params,Integer page,Integer pageSize, Integer dept_id){
         throw new NotImplementedException();
     }
+    default List<T> list(Map<String,Object> params){
+        throw new NotImplementedException();
+    }
     default long count(Map<String,Object> params,Integer dept_id){
         throw new NotImplementedException();
     }

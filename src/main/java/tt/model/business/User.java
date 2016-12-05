@@ -13,6 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "t_user", uniqueConstraints = @UniqueConstraint(columnNames = "NAME"))
+@JsonIgnoreProperties(value = {"pwd"})
 public class User implements java.io.Serializable {
     private Integer id;
 

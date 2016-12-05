@@ -160,6 +160,14 @@ public interface BaseDaoI<T>
      * @return long
      */
     public Long count(String hql);
+    /**
+     * 统计数目
+     *
+     * @param params
+     *            HQL语句(select count(*) from T)
+     * @return long
+     */
+    public Long count(Map<String,Object> params);
 
     /**
      * 统计数目

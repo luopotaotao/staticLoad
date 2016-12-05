@@ -28,28 +28,26 @@ public class InspectSchemeServiceImpl implements InspectSchemeServiceI {
 
     @Autowired
     private FileDaoI fileDao;
+
     @Override
     public InspectScheme get(Serializable id, Integer dept_id) {
-        return inspectSchemeDao.getById(id,dept_id);
+        return inspectSchemeDao.getById(id, dept_id);
     }
 
     @Override
-    public List<InspectScheme> list( Map<String,Object> params, Integer page, Integer PageSize,Integer dept_id) {
-        String name= (String) params.get("name");
-        List<InspectScheme> ret = inspectSchemeDao.list(name, page, PageSize,dept_id);
+    public List<InspectScheme> list(Map<String, Object> params) {
+        List<InspectScheme> ret = inspectSchemeDao.find(params);
         return ret;
     }
 
     @Override
-    public long count( Map<String,Object> params, Integer dept_id) {
-        StringBuilder hql = new StringBuilder("select count(*) from InspectScheme WHERE dept_id=:dept_id");
-        String name= (String) params.get("name");
-        params.put("dept_id",dept_id);
-        if(name!=null){
-            params.put("name","%"+name+"%");
-            hql.append(" AND name like :name ");
+    public long count(Map<String, Object> params, Integer dept_id) {
+        String name = (String) params.get("name");
+//        params.put("dept_id", dept_id);
+        if (name != null) {
+            params.put("name", "%" + name + "%");
         }
-        long ret = inspectSchemeDao.count(hql.toString(), params);
+        long ret = inspectSchemeDao.count(params);
         return ret;
     }
 
@@ -63,11 +61,11 @@ public class InspectSchemeServiceImpl implements InspectSchemeServiceI {
 
     @Override
     public int del(List<Integer> ids, Integer dept_id) {
-        if(ids==null||ids.size()<1){
+        if (ids == null || ids.size() < 1) {
             return 0;
         }
         Map<String, Object> params = new HashMap<>();
-        params.put("dept_id",dept_id);
+        params.put("dept_id", dept_id);
         params.put("ids", ids);
         return inspectSchemeDao.executeHql("delete from InspectScheme where id in (:ids) and dept_id=:dept_id", params);
     }
@@ -78,20 +76,21 @@ public class InspectSchemeServiceImpl implements InspectSchemeServiceI {
         inspectSchemeDao.update(inspectScheme);
         return inspectScheme;
     }
-    private void resetScheme(InspectScheme inspectScheme){
+
+    private void resetScheme(InspectScheme inspectScheme) {
         inspectScheme.setProject(projectDao.getById(inspectScheme.getProject().getId()));
         inspectScheme.setInspectItem(inspectItemDao.getById(inspectScheme.getInspectItem().getId()));
 
         File approval_file = inspectScheme.getApproval_file();
-        if(approval_file!=null&&approval_file.getUuid()!=null){
+        if (approval_file != null && approval_file.getUuid() != null) {
             inspectScheme.setApproval_file(fileDao.getById(approval_file.getUuid()));
-        }else{
+        } else {
             inspectScheme.setApproval_file(null);
         }
         File inspect_file = inspectScheme.getInspect_file();
-        if(inspect_file!=null&&inspect_file.getUuid()!=null){
+        if (inspect_file != null && inspect_file.getUuid() != null) {
             inspectScheme.setInspect_file(fileDao.getById(inspect_file.getUuid()));
-        }else{
+        } else {
             inspectScheme.setInspect_file(null);
         }
     }

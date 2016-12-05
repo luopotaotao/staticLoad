@@ -346,11 +346,11 @@
 
 
         function manageTUsers(id) {
-            var href = '../basic/user/index/' + id;
+            var href = '<c:url value="/basic/user/index/"/>' + id;
             openDialog('账号管理', href);
         }
         function manageEquipments(id){
-            var href = '../basic/equipment/index/'+id;
+            var href = '<c:url value="/basic/equipment/index/"/>'+id;
             openDialog('设备管理',href);
         }
         var r = null;

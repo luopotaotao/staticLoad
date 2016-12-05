@@ -13,6 +13,7 @@ import java.util.Map;
 
 import org.hibernate.*;
 import org.hibernate.criterion.CriteriaQuery;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.SimpleExpression;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -31,7 +32,6 @@ import javax.servlet.http.HttpSession;
 
 public class BaseDaoImpl<T> implements BaseDaoI<T> {
     private Class<T> entityClass;
-    private static final String like_prefix  = ":like_";
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -53,31 +53,61 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
     public Criteria getCriteria() {
         return getCurrentSession().createCriteria(entityClass);
     }
+    public Criteria getCriteria(Map<String, Object> params){
+        Criteria c = getCriteria();
+        if(params!=null&&!params.isEmpty()){
+            params.forEach((key,val) -> {
+                if (val instanceof String) {
+                    String str = (String) val;
+                    if (str.startsWith("%") || str.endsWith("%")) {
+                        c.add(like(key, str));
+                    } else {
+                        c.add(Restrictions.eq(key, str));
+                    }
+                }else if(val instanceof Collection) {
+                    c.add(Restrictions.in(key,(Collection)val));
+                } else {
+                    c.add(Restrictions.eq(key, val));
+                }
+
+            });
+        }
+
+        return c;
+    }
+
 
     public Criteria getCriteria(Integer page, Integer pageSize) {
         //TODO 在这获取用用户信息
 
-        HttpSession session = ((ServletRequestAttributes) RequestContextHolder
-                .getRequestAttributes()).getRequest().getSession();
-        SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.getSessionInfoName());
-        if(sessionInfo!=null){
-            System.out.println(String.format("sessionInfo is not null:%s", sessionInfo.getName()));
-        }
-        boolean flag = entityClass.isAnnotationPresent(NeedDept.class);
-        Annotation[] annotations = entityClass.getAnnotations();
-        System.out.println(annotations.length);
-        if(flag){
-            NeedDept item = entityClass.getAnnotation(NeedDept.class);
-            System.out.println(String.format("annotation:%s,value:%s", item.toString(),item.needUser()));
-        }
+//        HttpSession session = ((ServletRequestAttributes) RequestContextHolder
+//                .getRequestAttributes()).getRequest().getSession();
+//        SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.getSessionInfoName());
+//        if(sessionInfo!=null){
+//            System.out.println(String.format("sessionInfo is not null:%s", sessionInfo.getName()));
+//        }
+//        boolean flag = entityClass.isAnnotationPresent(NeedDept.class);
+//        Annotation[] annotations = entityClass.getAnnotations();
+//        System.out.println(annotations.length);
+//        if(flag){
+//            NeedDept item = entityClass.getAnnotation(NeedDept.class);
+//            System.out.println(String.format("annotation:%s,value:%s", item.toString(),item.needUser()));
+//        }
 
-        Criteria c = getCurrentSession().createCriteria(entityClass);
+        Criteria c = getCriteria();
         if (page != null && pageSize != null) {
             c.setFirstResult((page - 1) * pageSize).setMaxResults(pageSize);
         }
         return c;
     }
 
+    public Criteria getCriteria(Map<String,Object> params,Integer page,Integer pageSize){
+        Criteria c = getCriteria(params);
+        if (page != null && pageSize != null) {
+            c.setFirstResult((page - 1) * pageSize).setMaxResults(pageSize);
+        }
+        return c;
+    }
     public Criteria getCriteria(Integer page, Integer pageSize, Integer dept_id) {
         return getCriteria(page, pageSize).add(Restrictions.eq("dept_id", dept_id));
     }
@@ -175,23 +205,6 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
         return q.list();
     }
 
-    private Criteria getCriteria(Map<String, Object> params){
-        Criteria c = getCriteria();
-        if(params!=null&&params.size()>0){
-            params.forEach((k,v) -> {
-                if (v instanceof Collection){
-                    c.add(Restrictions.in(k,(Collection)v));
-                }else {
-                    if(k.startsWith(like_prefix)){
-                        c.add(like(k.substring(like_prefix.length()),(String) v));
-                    }else {
-                        c.add(Restrictions.eq(k,v));
-                    }
-                }
-            });
-        }
-        return c;
-    }
     @Override
     public List<T> find(Map<String, Object> params) {
         return getCriteria(params).list();
@@ -256,6 +269,9 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
         return (Long) q.uniqueResult();
     }
 
+    public Long count(Map<String, Object> params){
+        return (Long) getCriteria().setProjection(Projections.rowCount()).uniqueResult();
+    }
     @Override
     public int executeHql(String hql) {
         Query q = this.getCurrentSession().createQuery(hql);

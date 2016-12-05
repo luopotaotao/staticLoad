@@ -16,7 +16,7 @@ import java.util.List;
 public class InspectMethodDaoImpl extends BaseDaoImpl<InspectMethod> implements InspectMethodDaoI {
     @Override
     public List<InspectMethod> list(Integer inspect_item_id, String name,Integer dept_id) {
-        Criteria c = getCriteria(null,null,dept_id).add(Restrictions.eq("inspect_item_id",inspect_item_id));
+        Criteria c = getCriteria(dept_id).add(Restrictions.eq("inspect_item_id",inspect_item_id));
         if(!isEmpty(name)){
             c.add(like("name","%"+name+"%"));
         }

@@ -8,10 +8,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "b_inspect_plan")
-@JsonIgnoreProperties(value = {"inspectScheme", "project"})
+@JsonIgnoreProperties(value = {"dept"})
 public class InspectPlan extends BaseModel {
     private Integer id;
     private String name;
+    @JsonIgnoreProperties(value = {"project","basement_lev","safety_lev","pile_count","dept","approval_file","inspect_file","inspectItem","children","isDeleted"})
     private InspectScheme inspectScheme;
     //    private List<InspectMethod> inspectMethods;
     private User user;
@@ -22,6 +23,7 @@ public class InspectPlan extends BaseModel {
     private User majorUser;
     private User assistantUser;
     private String note;
+    @JsonIgnoreProperties(value = {"name","province","city","address","lat","lng","constructor","builder","user","note","status","children"})
     private Project project;
     private List<InspectMethod> inspectMethods;
 

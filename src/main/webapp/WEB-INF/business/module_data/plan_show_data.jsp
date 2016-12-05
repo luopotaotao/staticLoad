@@ -2,8 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript" src="<c:url value="/resources/jslib/DateUtil.js"/>"></script>
 <div class="easyui-layout" style="width: 100%;height: 97%;border: none;">
-    <div class="easyui-tabs" data-options="region:'center',closable:false,collapsible:false"
+    <div class="easyui-tabs" data-options="region:'center',closable:false,collapsible:false,tools:'#tab-tools'"
          style="width: 100%;height: 97%; overflow: hidden;">
+
         <div title="汇总数据">
             <table id="tb_all" class="easyui-datagrid" style="height: 98%;width: 100%;"
                    data-options="
@@ -37,7 +38,7 @@
             </table>
         </div>
 
-        <div title="加压数据">
+        <div title="加载数据">
             <table id="tb_source_press" class="easyui-datagrid" style="height: 98%;width: 100%;"
                    data-options="
        singleSelect:true,
@@ -64,7 +65,7 @@
                 </thead>
             </table>
         </div>
-        <div title="减压数据">
+        <div title="卸载数据">
             <table id="tb_source_release" class="easyui-datagrid" style="height: 98%;width: 100%;"
                    data-options="
        singleSelect:true,
@@ -152,7 +153,9 @@
         </div>
 
     </div>
-
+    <div id="tab-tools">
+        <a id="plan_data_export_btn" href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-redo'">导出</a>
+    </div>
     <script>
 
         $(function () {
@@ -166,6 +169,9 @@
                         getCurrentData(prg, stzh);
                     });
                 }
+                $('#plan_data_export_btn').bind('click',function () {
+                    exportData(prg,stzh);
+                });
             }
 
             function loadData(prg, stzh) {
@@ -180,7 +186,9 @@
 
                 }, 'json');
             }
-
+            function exportData(prg,stzh) {
+                alert("待完成导出!");
+            }
             function initChart0(data) {
                 var tick = data.tick;
                 var tickPositions = $.map(tick, function (val, key) {

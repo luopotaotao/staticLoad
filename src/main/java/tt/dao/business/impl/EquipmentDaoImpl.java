@@ -17,7 +17,7 @@ import java.util.List;
 public class EquipmentDaoImpl extends BaseDaoImpl<Equipment> implements EquipmentDaoI {
     @Override
     public List<Equipment> list( String name,Integer dept_id) {
-        Criteria criteria = getCriteria(null,null,dept_id)
+        Criteria criteria = getCriteria(dept_id)
                 .add(Restrictions.eq("dept_id",dept_id)).addOrder(Order.asc("id"));
         if(name!=null&&!name.trim().isEmpty()){
             criteria.add(like("name",name));

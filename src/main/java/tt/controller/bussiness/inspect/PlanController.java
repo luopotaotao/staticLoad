@@ -82,6 +82,21 @@ public class PlanController extends BaseController<InspectPlan> {
         return listResponse(count, list);
     }
 
+    @RequestMapping(value = "queryBySchemeId",method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject queryBySchemeId(@RequestParam(value = "id") Integer id){
+        Map<String,Object> params = new HashMap<>();
+        params.put("inspectScheme.id",id);
+        long count = inspectPlanService.count(params,getDeptId());
+        List<InspectPlan> list;
+        if(count>0){
+            list = inspectPlanService.list(params);
+        }else{
+            list = new LinkedList<>();
+        }
+        return listResponse(count, list);
+    }
+
     @RequestMapping(value = "post", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject add(@ModelAttribute InspectPlan plan, BindingResult result) {

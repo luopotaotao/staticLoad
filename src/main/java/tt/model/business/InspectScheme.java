@@ -8,19 +8,22 @@ import java.util.List;
 
 @Entity
 @Table(name = "b_inspect_scheme")
-@JsonIgnoreProperties(value = {"project" })
+//@JsonIgnoreProperties(value = {"dept" })
 @NeedDept
 public class InspectScheme {
     private Integer id;
     private String name;
+    @JsonIgnoreProperties(value = {"children" })
     private Project project;
     private Byte basement_lev;
     private Byte safety_lev;
     private Integer pile_count;
+
     private Dept dept;
     private File approval_file;
     private File inspect_file;
     private InspectItem inspectItem;
+    @JsonIgnoreProperties(value = {"user","majorUser","assistantUser" ,"project" })
     private List<InspectPlan> children;
     private boolean isDeleted;
 

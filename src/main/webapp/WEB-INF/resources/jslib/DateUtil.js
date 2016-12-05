@@ -3,6 +3,9 @@
  */
 $(function () {
     function format(date,fmt) { //author: meizz
+        if(!fmt){
+            fmt = 'yyyy-MM-dd/hh:mm:ss';
+        }
         var o = {
             "M+": date.getMonth() + 1, //月份
             "d+": date.getDate(), //日

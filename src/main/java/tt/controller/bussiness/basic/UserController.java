@@ -87,10 +87,12 @@ public class UserController extends BaseController<User> {
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject delete(@RequestParam(value = "ids[]") String[] ids) {
-        List<String> list = new LinkedList<>();
-        Arrays.stream(ids).forEach(id -> list.add(id));
-        int ret = userService.del(list);
+    public JSONObject delete(@RequestParam(value = "ids[]") Integer[] ids) {
+        int ret = userService.del(Arrays.asList(ids));
         return flagResponse(ret);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Arrays.asList(new String[]{"1","2"}));
     }
 }
