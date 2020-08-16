@@ -1,1 +1,13 @@
-<mxfile host="app.diagrams.net" modified="2020-08-16T06:48:15.417Z" agent="5.0 (Windows)" etag="kliUaADO8X_BKOzCbgXo" version="13.6.2" type="github"><diagram id="zX0iqw9rr6U1q8cWcGFv" name="Page-1">jZNbT4MwFMc/zXlcwsVBeRToXExcTKbx8mIqVGhSKHZlbH56C7RjRBd9aU5/59L2nH/BT6rDjSRNeSdyysFz8gP4KXhehFy99uA4gqUXjKCQLB+RO4Et+6IGOoa2LKe7WaASgivWzGEm6ppmasaIlKKbh30IPj+1IQX9AbYZ4T/pE8tVOVLkhRNfU1aU9mQ3iEZPRWywecmuJLnozpCPwU+kEGq0qkNCed8725cxb3XBe7qYpLX6T8JRRavqTb43t/cvy9Qv2Tp7XZgqe8Jb82DwAq7rxTnba7PoTYt2Dal1MCd1McQGn21/+RhvFo/baWvTNvj5wabqa43Zv1U0DC8h9iAKAV9BnAJKAQdw7QAKe5deUTDEJICcgawgcodgBAgDRhA5faJ2RQnEzh9nazx74zAjdbSDl6Ktc9r3ztXurmSKbhuS9d5OK12zUlXcuE0XqVT0cHE87mno+rNQUVEljzrEJPieEY75KKGRTTepzrWsPFOcbxgxQi9OlSctaMPIwW4n2Q2+s7/r428=</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2020-08-16T06:50:48.828Z" agent="5.0 (Windows)" etag="WsW1W0-lKWXojX6pR_QY" version="13.6.2" type="github">
+  <diagram id="zX0iqw9rr6U1q8cWcGFv" name="Page-1">
+    <mxGraphModel dx="1422" dy="763" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="yt9Fm_rbpJPY5D3hiHcZ-1" value="&lt;div&gt;&lt;span lang=&quot;EN-US&quot;&gt;NEXT&lt;/span&gt;&lt;span&gt;岗位标准开发与落地&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="329" y="70" width="170" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
